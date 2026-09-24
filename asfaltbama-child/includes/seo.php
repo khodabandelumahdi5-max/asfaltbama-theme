@@ -75,7 +75,18 @@ add_filter(
  * Rank Math: drop the Slack "Written by: admin / Time to read" labels.
  * They are rendered in English and expose the admin username.
  */
-add_filter( 'rank_math/opengraph/slack_enhanced_sharing', '__return_false' );
+add_filter( 'rank_math/opengraph/slack_enhanced_data', '__return_empty_array' );
+
+/**
+ * Rank Math: inLanguage on every schema entity, including the Article
+ * rich snippet that is added after the rank_math/json_ld filter runs.
+ */
+add_filter(
+	'rank_math/schema/language',
+	function () {
+		return asfaltbama_content_lang();
+	}
+);
 
 /**
  * Business details added to Rank Math's Organization entity when missing.
