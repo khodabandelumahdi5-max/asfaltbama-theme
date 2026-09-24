@@ -76,12 +76,18 @@ function asfaltbama_importer_find( $slug, $post_type ) {
  * @param string $slug      Slug.
  * @param array  $fields    wp_insert_post fields.
  * @param array  $log       Log lines, appended to.
+ * @param bool   $update    Whether to update an item that already exists.
  *
- * @return int Post ID, 0 on failure.
+ * @return int Post ID, 0 on failure or when an existing item is skipped.
  */
-function asfaltbama_importer_upsert( $post_type, $slug, $fields, &$log ) {
+function asfaltbama_importer_upsert( $post_type, $slug, $fields, &$log, $update = true ) {
 	$existing = asfaltbama_importer_find( $slug, $post_type );
 	$fields   = array_merge( $fields, [ 'post_type' => $post_type, 'post_name' => $slug ] );
+
+	if ( $existing && ! $update ) {
+		$log[] = sprintf( '✅ /%s/ از قبل وجود دارد؛ دست نخورد', $slug );
+		return 0;
+	}
 
 	if ( $existing ) {
 		unset( $fields['post_status'], $fields['post_author'] );
@@ -127,11 +133,14 @@ function asfaltbama_importer_seo( $post_id, $item ) {
 /**
  * Run the import.
  *
- * @param array $manifest Manifest.
+ * @param array $manifest        Manifest.
+ * @param bool  $update_existing Overwrite items that already exist. The
+ *                               automatic run passes false, so edits made
+ *                               in WordPress are never reset.
  *
  * @return string[] Log lines.
  */
-function asfaltbama_importer_run( $manifest ) {
+function asfaltbama_importer_run( $manifest, $update_existing = true ) {
 	$log = [];
 
 	// 1. About page -> /about-us/.
@@ -166,7 +175,8 @@ function asfaltbama_importer_run( $manifest ) {
 			'post_content' => '',
 			'post_status'  => 'publish',
 		],
-		$log
+		$log,
+		$update_existing
 	);
 	if ( $articles_id ) {
 		asfaltbama_importer_seo( $articles_id, $pp );
@@ -187,7 +197,8 @@ function asfaltbama_importer_run( $manifest ) {
 				'post_excerpt' => $item['excerpt'] ?? '',
 				'post_status'  => 'publish',
 			],
-			$log
+			$log,
+			$update_existing
 		);
 		if ( $id ) {
 			asfaltbama_importer_seo( $id, $item );
@@ -208,7 +219,8 @@ function asfaltbama_importer_run( $manifest ) {
 				'post_author'   => get_current_user_id(),
 				'post_category' => $category ? [ $category->term_id ] : [],
 			],
-			$log
+			$log,
+			$update_existing
 		);
 		if ( $id ) {
 			asfaltbama_importer_seo( $id, $item );
@@ -246,6 +258,31 @@ function asfaltbama_importer_media_alt( $manifest ) {
 }
 
 /**
+ * Set Rank Math title/description on existing pages (by slug; the key
+ * "__front__" means the static front page). Overwrites on purpose: the
+ * manifest holds the optimized values.
+ *
+ * @param array $manifest Manifest.
+ *
+ * @return string[] Log lines.
+ */
+function asfaltbama_importer_page_seo( $manifest ) {
+	$log = [];
+	foreach ( (array) ( $manifest['page_seo'] ?? [] ) as $slug => $seo ) {
+		$page = '__front__' === $slug ? get_post( (int) get_option( 'page_on_front' ) ) : asfaltbama_importer_find( $slug, 'page' );
+		$name = '__front__' === $slug ? 'صفحه‌ی اصلی' : '/' . $slug . '/';
+		if ( ! $page ) {
+			$log[] = '⚠️ ' . $name . ' پیدا نشد';
+			continue;
+		}
+		asfaltbama_importer_seo( $page->ID, $seo );
+		$log[] = '✅ عنوان و توضیحات ' . $name . ' به‌روز شد';
+	}
+
+	return $log;
+}
+
+/**
  * Run the import automatically, once per content_version, when an
  * administrator loads the dashboard.
  *
@@ -271,12 +308,17 @@ function asfaltbama_importer_auto_run() {
 	// failure cannot re-run on every admin page load.
 	if ( ! empty( $manifest['content_version'] ) && get_option( 'asfaltbama_content_version' ) !== $manifest['content_version'] ) {
 		update_option( 'asfaltbama_content_version', $manifest['content_version'], false );
-		$log = array_merge( $log, asfaltbama_importer_run( $manifest ) );
+		$log = array_merge( $log, asfaltbama_importer_run( $manifest, false ) );
 	}
 
 	if ( ! empty( $manifest['media_alt_version'] ) && get_option( 'asfaltbama_media_alt_version' ) !== $manifest['media_alt_version'] ) {
 		update_option( 'asfaltbama_media_alt_version', $manifest['media_alt_version'], false );
 		$log = array_merge( $log, asfaltbama_importer_media_alt( $manifest ) );
+	}
+
+	if ( ! empty( $manifest['page_seo_version'] ) && get_option( 'asfaltbama_page_seo_version' ) !== $manifest['page_seo_version'] ) {
+		update_option( 'asfaltbama_page_seo_version', $manifest['page_seo_version'], false );
+		$log = array_merge( $log, asfaltbama_importer_page_seo( $manifest ) );
 	}
 
 	if ( $log ) {

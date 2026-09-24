@@ -331,3 +331,83 @@ function asfaltbama_hide_duplicate_page_title( $show ) {
 	return asfaltbama_elementor_has_h1( get_queried_object_id() ) ? false : $show;
 }
 add_filter( 'hello_elementor_page_title', 'asfaltbama_hide_duplicate_page_title', 20 );
+
+/**
+ * Service definitions for the service pages, keyed by page slug.
+ *
+ * @return array
+ */
+function asfaltbama_service_pages() {
+	return apply_filters(
+		'asfaltbama_service_pages',
+		[
+			'asphalt-paving'         => [ 'آسفالت‌کاری و تراشه', 'اجرای آسفالت', 'پخش آسفالت گرم توپکا، بیندر و تراشه با فینیشر و غلتک برای حیاط، پارکینگ، محوطه و معابر.' ],
+			'excavation-and-grading' => [ 'خاکبرداری و گودبرداری', 'خاکبرداری', 'خاکبرداری، گودبرداری ساختمانی، تسطیح و رگلاژ بستر، بارگیری و حمل نخاله.' ],
+			'demolition-scrap'       => [ 'تخریب ساختمان و خرید ضایعات آهن', 'تخریب ساختمان', 'تخریب ساختمان کلنگی، بتنی و فلزی به روش دستی و مکانیکی، حمل نخاله و خرید ضایعات آهن.' ],
+			'isogam-waterproofing'   => [ 'اجرای ایزوگام و قیرگونی', 'عایق‌کاری بام', 'نصب ایزوگام فویل‌دار و قیرگونی با تست آب‌بندی و ضمانت کتبی.' ],
+			'asphalt-joint-sealing'  => [ 'درزگیری و ماستیک گرم آسفالت', 'درزگیری آسفالت', 'درزگیری ترک‌های طولی و عرضی آسفالت با ماستیک گرم پلیمری.' ],
+			'machinery-rental'       => [ 'اجاره ماشین‌آلات راه‌سازی', 'اجاره ماشین‌آلات', 'اجاره بابکت، مینی‌بیل، بیل مکانیکی، فینیشر و غلتک با اپراتور.' ],
+		]
+	);
+}
+
+/**
+ * Whether a page's Elementor content already contains Service JSON-LD.
+ *
+ * @param int $post_id Post ID.
+ *
+ * @return bool
+ */
+function asfaltbama_page_has_service_schema( $post_id ) {
+	$data = get_post_meta( $post_id, '_elementor_data', true );
+	return is_string( $data ) && (bool) preg_match( '/@type[\\\\"\s:]+Service\b/', $data );
+}
+
+/**
+ * Add a Service entity to Rank Math's graph on service pages.
+ *
+ * @param array $data Schema entities.
+ *
+ * @return array
+ */
+function asfaltbama_service_schema( $data ) {
+	if ( ! is_array( $data ) || ! is_page() ) {
+		return $data;
+	}
+
+	$page     = get_queried_object();
+	$services = asfaltbama_service_pages();
+	if ( ! $page || ! isset( $services[ $page->post_name ] ) || asfaltbama_page_has_service_schema( $page->ID ) ) {
+		return $data;
+	}
+
+	list( $name, $type, $description ) = $services[ $page->post_name ];
+	$url = get_permalink( $page );
+
+	$data['asfaltbamaService'] = [
+		'@type'       => 'Service',
+		'@id'         => $url . '#service',
+		'name'        => $name,
+		'serviceType' => $type,
+		'description' => $description,
+		'url'         => $url,
+		'provider'    => [ '@id' => home_url( '/#organization' ) ],
+		'areaServed'  => [
+			[
+				'@type' => 'City',
+				'name'  => 'تهران',
+			],
+			[
+				'@type' => 'City',
+				'name'  => 'کرج',
+			],
+			[
+				'@type' => 'AdministrativeArea',
+				'name'  => 'استان البرز',
+			],
+		],
+	];
+
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'asfaltbama_service_schema', 20 );
