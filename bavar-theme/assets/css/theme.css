@@ -147,11 +147,11 @@ body.bavar {
 .bv-hero__portrait {
 	margin: 0;
 	width: min(560px, 100%);
-	aspect-ratio: 4 / 5;
+	aspect-ratio: 3 / 4;
 	overflow: hidden;
 	background: var(--bv-soft);
 }
-.bv-hero__portrait img { width: 100%; height: 112%; object-fit: cover; object-position: 50% 30%; display: block; will-change: transform; }
+.bv-hero__portrait img { width: 100%; height: 112%; object-fit: cover; object-position: 50% 12%; display: block; will-change: transform; }
 .bv-hero__scroll { position: absolute; left: 50%; bottom: 28px; width: 1px; height: 56px; background: var(--bv-line); overflow: hidden; }
 .bv-hero__scroll span { position: absolute; top: -50%; left: 0; width: 1px; height: 50%; background: var(--bv-white); animation: bv-line 2.4s var(--bv-ease) infinite; }
 @keyframes bv-line { to { top: 100%; } }

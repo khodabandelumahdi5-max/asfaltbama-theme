@@ -19,7 +19,7 @@ define( 'BAVAR_THEME_VERSION', '1.0.0' );
 function bavar_theme_defaults() {
 	$img = get_stylesheet_directory_uri() . '/assets/images/';
 	return [
-		'hero_image'       => $img . 'founder-portrait.webp',
+		'hero_image'       => $img . 'founder-portrait.webp?v=2',
 		'founder_image'    => $img . 'founder-office.webp',
 		'founder_image_2'  => $img . 'founder-city.webp',
 		'about_text'       => "گروه توسعه کسب‌وکار باور، به مؤسسی و مدیریت آرش الطافیان، با هدف رشد و توسعه‌ی کسب‌وکارهای ایران بنیان‌گذاری شد و به‌عنوان مجموعه‌ای برای ارتباطات، شبکه‌سازی، افزایش فروش و توسعه‌ی سریع کسب‌وکار فعالیت می‌کند.\n\nاین مجموعه دارای دوره‌های آموزشی حضوری، از جمله «آشیانه سیمرغ‌ها»، و دوره‌های غیرحضوری، از جمله «کتاب مقدس گروه باور»، و همچنین مجموعه‌ای گسترده از کتاب‌ها، آموزش‌ها، چک‌لیست‌ها و تمرین‌های کاربردی است.",

@@ -29,7 +29,7 @@ $bavar_what    = [
 			<?php bavar_wordmark( 'h1', 'bv-wordmark--hero' ); ?>
 		</div>
 		<figure class="bv-hero__portrait bv-reveal bv-reveal--image">
-			<img src="<?php echo esc_url( bavar_opt( 'hero_image' ) ); ?>" alt="Arash Altafian — Founder of BAVAR GROUP" width="1203" height="1307" fetchpriority="high" data-bv-parallax>
+			<img src="<?php echo esc_url( bavar_opt( 'hero_image' ) ); ?>" alt="Arash Altafian — Founder of BAVAR GROUP" width="941" height="1672" fetchpriority="high" data-bv-parallax>
 		</figure>
 		<a class="bv-hero__scroll" href="#about" aria-label="ادامه"><span></span></a>
 	</section>
