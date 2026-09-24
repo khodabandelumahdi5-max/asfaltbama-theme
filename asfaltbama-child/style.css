@@ -1,11 +1,11 @@
 /*
 	Theme Name: Asfaltbama Child
 	Theme URI: https://asfaltbama.com/
-	Description: Child theme for Hello Elementor used on asfaltbama.com. Holds site-specific shortcodes and SEO adjustments so they survive parent theme updates.
+	Description: Child theme for Hello Elementor used on asfaltbama.com. Holds site-specific shortcodes, SEO adjustments, the articles design and the self-hosted Vazirmatn font so they survive parent theme updates.
 	Author: Asfaltbama
 	Author URI: https://asfaltbama.com/
 	Template: hello-elementor
-	Version: 1.3.0
+	Version: 1.4.0
 	Requires at least: 6.0
 	Requires PHP: 7.4
 	License: GNU General Public License v3 or later.
@@ -13,93 +13,29 @@
 	Text Domain: asfaltbama-child
 */
 
+/*
+ * Vazirmatn (SIL Open Font License 1.1, see assets/fonts/OFL.txt),
+ * self-hosted as one variable file covering weights 100–900.
+ */
+@font-face {
+	font-family: "Vazirmatn";
+	src: url("assets/fonts/Vazirmatn-Variable.woff2") format("woff2-variations"),
+		url("assets/fonts/Vazirmatn-Variable.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+/*
+ * Vazirmatn everywhere, overriding Elementor's per-widget fonts
+ * (YekanBakh etc.). <i> elements and icon-font classes are left alone so
+ * eicons, Font Awesome and dashicons keep working.
+ */
+html body,
+body :where(h1, h2, h3, h4, h5, h6, p, a, span, strong, b, em, small, li, dt, dd, td, th, caption, label, legend, blockquote, figcaption, cite, time, summary, button, input, select, textarea, div, section, article, aside, nav, header, footer, main):not([class*="eicon-"]):not([class^="fa"]):not([class*=" fa"]):not(.dashicons):not(.ab-icon) {
+	font-family: "Vazirmatn", Tahoma, "Segoe UI", sans-serif !important;
+}
+
+/* Articles pages and cards: assets/css/blog.css */
+
 /* Add custom styles below this line. */
-
-/* [asfaltbama_latest_posts] */
-.abm-latest-posts {
-	direction: rtl;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 48px 16px;
-}
-
-.abm-latest-posts__title {
-	margin: 0 0 24px;
-	color: #0f172a;
-	text-align: center;
-}
-
-.abm-latest-posts__grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-	gap: 24px;
-}
-
-.abm-latest-posts__card {
-	display: flex;
-	flex-direction: column;
-	padding: 20px;
-	border: 1px solid #cbd5e1;
-	border-radius: 12px;
-	background: #ffffff;
-}
-
-.abm-latest-posts__card img {
-	width: calc(100% + 40px);
-	max-width: none;
-	height: 180px;
-	margin: -20px -20px 16px;
-	border-radius: 12px 12px 0 0;
-	object-fit: cover;
-}
-
-.abm-latest-posts__card h3 {
-	margin: 0 0 8px;
-	font-size: 1.1rem;
-	line-height: 1.6;
-}
-
-.abm-latest-posts__card h3 a {
-	color: #0f172a;
-	text-decoration: none;
-}
-
-.abm-latest-posts__card p {
-	flex: 1;
-	margin: 0 0 16px;
-	color: #334155;
-	line-height: 1.9;
-}
-
-.abm-latest-posts__more,
-.abm-latest-posts__links a {
-	color: #E36F00;
-	font-weight: 700;
-	text-decoration: none;
-}
-
-.abm-latest-posts__links {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 24px;
-	margin: 32px 0 0;
-}
-
-/* Tables in posts and non-Elementor pages */
-.page-content table {
-	width: 100%;
-	margin: 0 0 24px;
-	border-collapse: collapse;
-}
-
-.page-content th,
-.page-content td {
-	padding: 10px 12px;
-	border: 1px solid #cbd5e1;
-	text-align: right;
-}
-
-.page-content th {
-	background: #FFF3E6;
-}

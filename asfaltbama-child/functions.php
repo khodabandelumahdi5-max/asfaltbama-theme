@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'ASFALTBAMA_CHILD_VERSION', '1.3.0' );
+define( 'ASFALTBAMA_CHILD_VERSION', '1.4.0' );
 define( 'ASFALTBAMA_CHILD_PATH', get_stylesheet_directory() );
 
 /**
@@ -30,6 +30,7 @@ add_action( 'wp_enqueue_scripts', 'asfaltbama_child_enqueue_styles', 20 );
 require ASFALTBAMA_CHILD_PATH . '/includes/shortcodes.php';
 require ASFALTBAMA_CHILD_PATH . '/includes/seo.php';
 require ASFALTBAMA_CHILD_PATH . '/includes/redirects.php';
+require ASFALTBAMA_CHILD_PATH . '/includes/blog.php';
 
 if ( is_admin() ) {
 	require ASFALTBAMA_CHILD_PATH . '/includes/content-importer.php';

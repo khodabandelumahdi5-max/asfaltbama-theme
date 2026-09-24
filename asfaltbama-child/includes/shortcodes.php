@@ -47,19 +47,14 @@ function asfaltbama_reading_time_shortcode() {
 		return '';
 	}
 
-	$content = wp_strip_all_tags( strip_shortcodes( $post->post_content ) );
-	$words   = asfaltbama_count_words( $content );
-
-	// Reading speed in words per minute.
-	$wpm     = (int) apply_filters( 'asfaltbama_reading_time_wpm', 200 );
-	$minutes = max( 1, (int) ceil( $words / max( 1, $wpm ) ) );
+	$minutes = asfaltbama_reading_minutes( $post );
 
 	return '<div class="webrra-reading-time">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <circle cx="12" cy="12" r="10"/>
                     <polyline points="12,6 12,12 16,14"/>
                 </svg>
-                <span>' . esc_html( number_format_i18n( $minutes ) ) . ' دقیقه مطالعه</span>
+                <span>' . esc_html( asfaltbama_fa_digits( $minutes ) ) . ' دقیقه مطالعه</span>
             </div>';
 }
 
@@ -109,32 +104,20 @@ function asfaltbama_latest_posts_shortcode( $atts ) {
 		return '';
 	}
 
-	$posts_page   = (int) get_option( 'page_for_posts' );
-	$articles_url = $posts_page ? get_permalink( $posts_page ) : home_url( '/articles/' );
-	$about        = get_page_by_path( 'about-us' );
-	$about_url    = $about ? get_permalink( $about ) : home_url( '/about-us/' );
+	$about     = get_page_by_path( 'about-us' );
+	$about_url = $about ? get_permalink( $about ) : home_url( '/about-us/' );
 
-	$html  = '<section class="abm-latest-posts" aria-labelledby="abm-latest-posts-title">';
-	$html .= '<h2 id="abm-latest-posts-title" class="abm-latest-posts__title">' . esc_html( $atts['title'] ) . '</h2>';
-	$html .= '<div class="abm-latest-posts__grid">';
-
+	$html  = '<section class="abm-latest" aria-labelledby="abm-latest-title"><div class="abm-wrap">';
+	$html .= '<h2 id="abm-latest-title" class="abm-section-title">' . esc_html( $atts['title'] ) . '</h2>';
+	$html .= '<div class="abm-grid">';
 	foreach ( $posts as $post ) {
-		$url   = get_permalink( $post );
-		$html .= '<article class="abm-latest-posts__card">';
-		if ( has_post_thumbnail( $post ) ) {
-			$html .= '<a href="' . esc_url( $url ) . '" tabindex="-1" aria-hidden="true">' . get_the_post_thumbnail( $post, 'medium_large', [ 'loading' => 'lazy' ] ) . '</a>';
-		}
-		$html .= '<h3><a href="' . esc_url( $url ) . '">' . esc_html( get_the_title( $post ) ) . '</a></h3>';
-		$html .= '<p>' . esc_html( wp_trim_words( get_the_excerpt( $post ), 28 ) ) . '</p>';
-		$html .= '<a class="abm-latest-posts__more" href="' . esc_url( $url ) . '">ادامه‌ی مطلب</a>';
-		$html .= '</article>';
+		$html .= asfaltbama_post_card( $post, 'h3' );
 	}
-
 	$html .= '</div>';
-	$html .= '<p class="abm-latest-posts__links">';
-	$html .= '<a href="' . esc_url( $articles_url ) . '">همه‌ی مقالات</a>';
-	$html .= '<a href="' . esc_url( $about_url ) . '">درباره‌ی آسفالت با ما</a>';
-	$html .= '</p></section>';
+	$html .= '<p class="abm-latest__links">';
+	$html .= '<a class="abm-btn abm-btn--dark" href="' . esc_url( asfaltbama_articles_url() ) . '">همه‌ی مقالات</a>';
+	$html .= '<a class="abm-btn abm-btn--amber" href="' . esc_url( $about_url ) . '">درباره‌ی آسفالت با ما</a>';
+	$html .= '</p></div></section>';
 
 	return $html;
 }
