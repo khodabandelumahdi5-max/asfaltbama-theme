@@ -247,7 +247,9 @@ function asfaltbama_importer_page() {
 	$manifest = asfaltbama_importer_manifest();
 	$log      = [];
 
-	if ( $manifest && isset( $_POST['asfaltbama_import'] ) ) {
+	// A nonce-protected link rather than a POST form: on this host the form
+	// submission arrived without its fields, so the import never ran.
+	if ( $manifest && isset( $_REQUEST['asfaltbama_import'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 		check_admin_referer( 'asfaltbama_import' );
 		$log = asfaltbama_importer_run( $manifest );
 	}
@@ -294,8 +296,16 @@ function asfaltbama_importer_page() {
 	echo '</tbody></table>';
 
 	echo '<p>همچنین صفحه‌ی «درباره ما» به <code>/' . esc_html( $manifest['about_page']['new_slug'] ) . '/</code> منتقل می‌شود و «' . esc_html( $manifest['posts_page']['title'] ) . '» برگه‌ی نوشته‌ها می‌شود. مقاله‌ها به نام شما منتشر می‌شوند.</p>';
-	echo '<form method="post">';
-	wp_nonce_field( 'asfaltbama_import' );
-	echo '<p><button type="submit" name="asfaltbama_import" value="1" class="button button-primary button-hero">انتشار محتوا</button></p>';
-	echo '</form></div>';
+	$url = wp_nonce_url(
+		add_query_arg(
+			[
+				'page'              => 'asfaltbama-content',
+				'asfaltbama_import' => 1,
+			],
+			admin_url( 'tools.php' )
+		),
+		'asfaltbama_import'
+	);
+	echo '<p><a href="' . esc_url( $url ) . '" class="button button-primary button-hero">انتشار محتوا</a></p>';
+	echo '</div>';
 }

@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'ASFALTBAMA_CHILD_VERSION', '1.2.0' );
+define( 'ASFALTBAMA_CHILD_VERSION', '1.2.1' );
 define( 'ASFALTBAMA_CHILD_PATH', get_stylesheet_directory() );
 
 /**
