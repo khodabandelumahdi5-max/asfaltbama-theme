@@ -212,3 +212,72 @@ function asfaltbama_rank_math_json_ld( $data ) {
 	return asfaltbama_fix_in_language( $data );
 }
 add_filter( 'rank_math/json_ld', 'asfaltbama_rank_math_json_ld', 99 );
+
+/**
+ * Whether a JSON-LD block describes the business itself.
+ *
+ * Such blocks were pasted into Elementor HTML widgets and duplicate Rank
+ * Math's organization entity. Blocks for Service, FAQPage etc. are kept.
+ *
+ * @param string $json JSON-LD source.
+ *
+ * @return bool
+ */
+function asfaltbama_is_business_json_ld( $json ) {
+	$data = json_decode( $json, true );
+	if ( ! is_array( $data ) ) {
+		return false;
+	}
+
+	$entities = isset( $data['@graph'] ) && is_array( $data['@graph'] ) ? $data['@graph'] : [ $data ];
+	$business = apply_filters(
+		'asfaltbama_duplicate_business_types',
+		[ 'HomeAndConstructionBusiness', 'LocalBusiness', 'GeneralContractor', 'Organization' ]
+	);
+
+	foreach ( $entities as $entity ) {
+		$types = isset( $entity['@type'] ) ? (array) $entity['@type'] : [];
+		if ( ! array_intersect( $types, $business ) ) {
+			return false;
+		}
+	}
+
+	return ! empty( $entities );
+}
+
+/**
+ * Remove head-only SEO tags from Elementor HTML widgets.
+ *
+ * Several pages and the header template contain HTML widgets with
+ * <title>, <meta name="description">, Open Graph tags, a rel=canonical
+ * (one pointing to a 404) and a copy of the business schema. In <body>
+ * these are invalid, and they conflict with Rank Math. Microdata
+ * (<meta itemprop>) and other JSON-LD blocks are left alone.
+ *
+ * @param string                 $content Widget HTML.
+ * @param \Elementor\Widget_Base $widget  Widget instance.
+ *
+ * @return string
+ */
+function asfaltbama_strip_widget_seo_tags( $content, $widget ) {
+	if ( ! apply_filters( 'asfaltbama_strip_widget_seo_tags', true ) ) {
+		return $content;
+	}
+
+	if ( 'html' !== $widget->get_name() ) {
+		return $content;
+	}
+
+	$content = preg_replace( '#<title\b[^>]*>.*?</title>#is', '', $content );
+	$content = preg_replace( '#<meta\b(?![^>]*\bitemprop=)[^>]*>#i', '', $content );
+	$content = preg_replace( '#<link\b[^>]*\brel=["\']?canonical\b[^>]*>#i', '', $content );
+
+	return preg_replace_callback(
+		'#<script\b[^>]*application/ld\+json[^>]*>(.*?)</script>#is',
+		function ( $m ) {
+			return asfaltbama_is_business_json_ld( $m[1] ) ? '' : $m[0];
+		},
+		$content
+	);
+}
+add_filter( 'elementor/widget/render_content', 'asfaltbama_strip_widget_seo_tags', 10, 2 );
