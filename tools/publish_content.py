@@ -30,7 +30,7 @@ import urllib.request
 
 SITE = os.environ.get("WP_SITE", "https://asfaltbama.com").rstrip("/")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CONTENT = os.path.join(ROOT, "content")
+CONTENT = os.path.join(ROOT, "asfaltbama-child", "content")
 ALL_STATUSES = "publish,draft,pending,private,future"
 
 
