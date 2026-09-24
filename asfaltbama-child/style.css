@@ -5,7 +5,7 @@
 	Author: Asfaltbama
 	Author URI: https://asfaltbama.com/
 	Template: hello-elementor
-	Version: 1.0.1
+	Version: 1.1.0
 	Requires at least: 6.0
 	Requires PHP: 7.4
 	License: GNU General Public License v3 or later.
@@ -14,3 +14,92 @@
 */
 
 /* Add custom styles below this line. */
+
+/* [asfaltbama_latest_posts] */
+.abm-latest-posts {
+	direction: rtl;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 48px 16px;
+}
+
+.abm-latest-posts__title {
+	margin: 0 0 24px;
+	color: #0f172a;
+	text-align: center;
+}
+
+.abm-latest-posts__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 24px;
+}
+
+.abm-latest-posts__card {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	border: 1px solid #cbd5e1;
+	border-radius: 12px;
+	background: #ffffff;
+}
+
+.abm-latest-posts__card img {
+	width: calc(100% + 40px);
+	max-width: none;
+	height: 180px;
+	margin: -20px -20px 16px;
+	border-radius: 12px 12px 0 0;
+	object-fit: cover;
+}
+
+.abm-latest-posts__card h3 {
+	margin: 0 0 8px;
+	font-size: 1.1rem;
+	line-height: 1.6;
+}
+
+.abm-latest-posts__card h3 a {
+	color: #0f172a;
+	text-decoration: none;
+}
+
+.abm-latest-posts__card p {
+	flex: 1;
+	margin: 0 0 16px;
+	color: #334155;
+	line-height: 1.9;
+}
+
+.abm-latest-posts__more,
+.abm-latest-posts__links a {
+	color: #E36F00;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.abm-latest-posts__links {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 24px;
+	margin: 32px 0 0;
+}
+
+/* Tables in posts and non-Elementor pages */
+.page-content table {
+	width: 100%;
+	margin: 0 0 24px;
+	border-collapse: collapse;
+}
+
+.page-content th,
+.page-content td {
+	padding: 10px 12px;
+	border: 1px solid #cbd5e1;
+	text-align: right;
+}
+
+.page-content th {
+	background: #FFF3E6;
+}

@@ -79,6 +79,67 @@ function asfaltbama_article_category_badge_shortcode() {
 }
 
 /**
+ * [asfaltbama_latest_posts count="3" title="..."] – latest articles as
+ * cards, with links to the articles and about pages. Meant for the home
+ * page (Elementor "Shortcode" widget).
+ *
+ * @param array $atts Shortcode attributes.
+ *
+ * @return string
+ */
+function asfaltbama_latest_posts_shortcode( $atts ) {
+	$atts = shortcode_atts(
+		[
+			'count' => 3,
+			'title' => 'آخرین مقالات',
+		],
+		$atts,
+		'asfaltbama_latest_posts'
+	);
+
+	$posts = get_posts(
+		[
+			'numberposts'      => max( 1, min( 12, (int) $atts['count'] ) ),
+			'post_status'      => 'publish',
+			'suppress_filters' => false,
+		]
+	);
+
+	if ( empty( $posts ) ) {
+		return '';
+	}
+
+	$posts_page   = (int) get_option( 'page_for_posts' );
+	$articles_url = $posts_page ? get_permalink( $posts_page ) : home_url( '/articles/' );
+	$about        = get_page_by_path( 'about-us' );
+	$about_url    = $about ? get_permalink( $about ) : home_url( '/about-us/' );
+
+	$html  = '<section class="abm-latest-posts" aria-labelledby="abm-latest-posts-title">';
+	$html .= '<h2 id="abm-latest-posts-title" class="abm-latest-posts__title">' . esc_html( $atts['title'] ) . '</h2>';
+	$html .= '<div class="abm-latest-posts__grid">';
+
+	foreach ( $posts as $post ) {
+		$url   = get_permalink( $post );
+		$html .= '<article class="abm-latest-posts__card">';
+		if ( has_post_thumbnail( $post ) ) {
+			$html .= '<a href="' . esc_url( $url ) . '" tabindex="-1" aria-hidden="true">' . get_the_post_thumbnail( $post, 'medium_large', [ 'loading' => 'lazy' ] ) . '</a>';
+		}
+		$html .= '<h3><a href="' . esc_url( $url ) . '">' . esc_html( get_the_title( $post ) ) . '</a></h3>';
+		$html .= '<p>' . esc_html( wp_trim_words( get_the_excerpt( $post ), 28 ) ) . '</p>';
+		$html .= '<a class="abm-latest-posts__more" href="' . esc_url( $url ) . '">ادامه‌ی مطلب</a>';
+		$html .= '</article>';
+	}
+
+	$html .= '</div>';
+	$html .= '<p class="abm-latest-posts__links">';
+	$html .= '<a href="' . esc_url( $articles_url ) . '">همه‌ی مقالات</a>';
+	$html .= '<a href="' . esc_url( $about_url ) . '">درباره‌ی آسفالت با ما</a>';
+	$html .= '</p></section>';
+
+	return $html;
+}
+
+/**
  * Register shortcodes.
  *
  * @return void
@@ -86,5 +147,6 @@ function asfaltbama_article_category_badge_shortcode() {
 function asfaltbama_register_shortcodes() {
 	add_shortcode( 'reading_time', 'asfaltbama_reading_time_shortcode' );
 	add_shortcode( 'article_category_badge', 'asfaltbama_article_category_badge_shortcode' );
+	add_shortcode( 'asfaltbama_latest_posts', 'asfaltbama_latest_posts_shortcode' );
 }
 add_action( 'init', 'asfaltbama_register_shortcodes' );
