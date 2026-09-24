@@ -460,3 +460,66 @@ function asfaltbama_related_posts( $count = 3 ) {
 
 	return $related;
 }
+
+/**
+ * FAQPage schema built from an article's «سؤالات متداول» section: the H3
+ * questions and the paragraphs that follow them, up to the next H2.
+ *
+ * Google only shows FAQ rich results for a few authoritative sites now,
+ * but the markup still states the questions the article answers. Skipped
+ * when the graph already has a FAQPage.
+ *
+ * @param array $data Schema entities.
+ *
+ * @return array
+ */
+function asfaltbama_faq_schema( $data ) {
+	if ( ! is_array( $data ) || ! is_singular( 'post' ) ) {
+		return $data;
+	}
+
+	foreach ( $data as $entity ) {
+		if ( is_array( $entity ) && isset( $entity['@type'] ) && in_array( 'FAQPage', (array) $entity['@type'], true ) ) {
+			return $data;
+		}
+	}
+
+	$html = get_post_field( 'post_content', get_queried_object_id() );
+	if ( ! preg_match( '#<h2[^>]*>[^<]*سؤالات متداول[^<]*</h2>(.*?)(?=<h2|$)#su', $html, $section ) ) {
+		return $data;
+	}
+
+	preg_match_all( '#<h3[^>]*>(.*?)</h3>(.*?)(?=<h3|$)#su', $section[1], $pairs, PREG_SET_ORDER );
+
+	$questions = [];
+	foreach ( $pairs as $pair ) {
+		$question = trim( wp_strip_all_tags( $pair[1] ) );
+		// The answer is the question's own paragraphs, not the closing call to action.
+		preg_match_all( '#<p[^>]*>(.*?)</p>#su', $pair[2], $paras );
+		$answer = trim( wp_strip_all_tags( implode( ' ', array_slice( $paras[1], 0, 1 ) ) ) );
+		if ( '' === $question || '' === $answer ) {
+			continue;
+		}
+		$questions[] = [
+			'@type'          => 'Question',
+			'name'           => $question,
+			'acceptedAnswer' => [
+				'@type' => 'Answer',
+				'text'  => $answer,
+			],
+		];
+	}
+
+	if ( count( $questions ) < 2 ) {
+		return $data;
+	}
+
+	$data['asfaltbamaFaq'] = [
+		'@type'      => 'FAQPage',
+		'@id'        => get_permalink() . '#faq',
+		'mainEntity' => $questions,
+	];
+
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'asfaltbama_faq_schema', 20 );

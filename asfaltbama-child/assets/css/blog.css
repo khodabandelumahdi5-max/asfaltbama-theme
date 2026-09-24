@@ -1045,3 +1045,49 @@
 		flex: none;
 	}
 }
+
+/* ------------------------------------------------ Article summary box */
+/* Uses literal colours so it also works inside the Asphalt Business Suite
+   single-post template, outside the .abm-post wrapper. */
+
+.abm-summary {
+	direction: rtl;
+	margin: 0 0 28px;
+	padding: 18px 22px 12px;
+	border: 1px solid #0f172a;
+	border-right: 5px solid #f59e0b;
+	border-radius: 12px;
+	background: #fffbeb;
+	text-align: right;
+}
+
+.abm-summary__title {
+	margin: 0 0 8px !important;
+	color: #0f172a;
+	font-size: 16px;
+	font-weight: 900;
+}
+
+.abm-summary ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.abm-summary li {
+	position: relative;
+	margin: 0 0 8px;
+	padding-right: 22px;
+	color: #1e293b;
+	font-size: 15px;
+	line-height: 1.9;
+}
+
+.abm-summary li::before {
+	content: "✓";
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: #d97706;
+	font-weight: 900;
+}
