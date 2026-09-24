@@ -219,6 +219,33 @@ function asfaltbama_importer_run( $manifest ) {
 }
 
 /**
+ * Fill empty image alt texts listed in the manifest (attachment ID => alt).
+ * Never overwrites an alt text that is already set.
+ *
+ * @param array $manifest Manifest.
+ *
+ * @return string[] Log lines.
+ */
+function asfaltbama_importer_media_alt( $manifest ) {
+	$log = [];
+	foreach ( (array) ( $manifest['media_alt'] ?? [] ) as $id => $alt ) {
+		$id = (int) $id;
+		if ( ! $id || 'attachment' !== get_post_type( $id ) ) {
+			$log[] = '⚠️ تصویر #' . $id . ' پیدا نشد';
+			continue;
+		}
+		if ( '' !== trim( (string) get_post_meta( $id, '_wp_attachment_image_alt', true ) ) ) {
+			$log[] = '✅ تصویر #' . $id . ' از قبل متن جایگزین دارد';
+			continue;
+		}
+		update_post_meta( $id, '_wp_attachment_image_alt', wp_slash( sanitize_text_field( $alt ) ) );
+		$log[] = '✅ متن جایگزین تصویر #' . $id . ' ثبت شد: ' . $alt;
+	}
+
+	return $log;
+}
+
+/**
  * Run the import automatically, once per content_version, when an
  * administrator loads the dashboard.
  *
@@ -234,18 +261,28 @@ function asfaltbama_importer_auto_run() {
 	}
 
 	$manifest = asfaltbama_importer_manifest();
-	if ( ! $manifest || empty( $manifest['content_version'] ) ) {
+	if ( ! $manifest ) {
 		return;
 	}
 
-	if ( get_option( 'asfaltbama_content_version' ) === $manifest['content_version'] ) {
-		return;
+	$log = [];
+
+	// Each step is versioned separately, and marked before it runs so a
+	// failure cannot re-run on every admin page load.
+	if ( ! empty( $manifest['content_version'] ) && get_option( 'asfaltbama_content_version' ) !== $manifest['content_version'] ) {
+		update_option( 'asfaltbama_content_version', $manifest['content_version'], false );
+		$log = array_merge( $log, asfaltbama_importer_run( $manifest ) );
 	}
 
-	// Mark first so a failing import cannot re-run on every admin page load.
-	update_option( 'asfaltbama_content_version', $manifest['content_version'], false );
-	update_option( 'asfaltbama_content_log', asfaltbama_importer_run( $manifest ), false );
-	set_transient( 'asfaltbama_content_notice', 1, HOUR_IN_SECONDS );
+	if ( ! empty( $manifest['media_alt_version'] ) && get_option( 'asfaltbama_media_alt_version' ) !== $manifest['media_alt_version'] ) {
+		update_option( 'asfaltbama_media_alt_version', $manifest['media_alt_version'], false );
+		$log = array_merge( $log, asfaltbama_importer_media_alt( $manifest ) );
+	}
+
+	if ( $log ) {
+		update_option( 'asfaltbama_content_log', $log, false );
+		set_transient( 'asfaltbama_content_notice', 1, HOUR_IN_SECONDS );
+	}
 }
 add_action( 'admin_init', 'asfaltbama_importer_auto_run' );
 

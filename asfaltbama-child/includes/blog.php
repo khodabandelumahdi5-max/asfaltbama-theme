@@ -358,14 +358,7 @@ function asfaltbama_post_card( $post, $heading = 'h2' ) {
 
 	$html .= '<a class="abm-card__media" href="' . esc_url( $url ) . '" tabindex="-1" aria-hidden="true">';
 	if ( has_post_thumbnail( $post ) ) {
-		$html .= get_the_post_thumbnail(
-			$post,
-			'medium_large',
-			[
-				'loading' => 'lazy',
-				'alt'     => '',
-			]
-		);
+		$html .= get_the_post_thumbnail( $post, 'medium_large', [ 'loading' => 'lazy' ] );
 	} else {
 		$html .= '<span class="abm-card__placeholder"><span>' . esc_html( $cat ? $cat->name : 'آسفالت با ما' ) . '</span></span>';
 	}

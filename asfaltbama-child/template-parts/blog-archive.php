@@ -75,13 +75,7 @@ $categories = get_categories(
 					<a class="abm-feature__media" href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
 						<?php
 						if ( has_post_thumbnail() ) {
-							the_post_thumbnail(
-								'large',
-								[
-									'fetchpriority' => 'high',
-									'alt'           => '',
-								]
-							);
+							the_post_thumbnail( 'large', [ 'fetchpriority' => 'high' ] );
 						} else {
 							echo '<span class="abm-card__placeholder"><span>' . esc_html( $featured_cat ? $featured_cat->name : 'آسفالت با ما' ) . '</span></span>';
 						}
