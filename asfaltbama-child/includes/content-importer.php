@@ -219,6 +219,56 @@ function asfaltbama_importer_run( $manifest ) {
 }
 
 /**
+ * Run the import automatically, once per content_version, when an
+ * administrator loads the dashboard.
+ *
+ * Both the POST form and the nonce link reached WordPress without their
+ * parameters on this host, so the import never ran. This path needs no
+ * request data at all. The result is shown as an admin notice.
+ *
+ * @return void
+ */
+function asfaltbama_importer_auto_run() {
+	if ( wp_doing_ajax() || ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	$manifest = asfaltbama_importer_manifest();
+	if ( ! $manifest || empty( $manifest['content_version'] ) ) {
+		return;
+	}
+
+	if ( get_option( 'asfaltbama_content_version' ) === $manifest['content_version'] ) {
+		return;
+	}
+
+	// Mark first so a failing import cannot re-run on every admin page load.
+	update_option( 'asfaltbama_content_version', $manifest['content_version'], false );
+	update_option( 'asfaltbama_content_log', asfaltbama_importer_run( $manifest ), false );
+	set_transient( 'asfaltbama_content_notice', 1, HOUR_IN_SECONDS );
+}
+add_action( 'admin_init', 'asfaltbama_importer_auto_run' );
+
+/**
+ * Show the result of the automatic import once.
+ *
+ * @return void
+ */
+function asfaltbama_importer_notice() {
+	if ( ! current_user_can( 'manage_options' ) || ! get_transient( 'asfaltbama_content_notice' ) ) {
+		return;
+	}
+	delete_transient( 'asfaltbama_content_notice' );
+
+	echo '<div class="notice notice-success is-dismissible" dir="rtl" style="text-align:right"><p><strong>محتوای آسفالت با ما منتشر شد:</strong></p><ul>';
+	foreach ( (array) get_option( 'asfaltbama_content_log', [] ) as $line ) {
+		echo '<li>' . esc_html( $line ) . '</li>';
+	}
+	echo '</ul></div>';
+}
+add_action( 'admin_notices', 'asfaltbama_importer_notice' );
+
+/**
  * Register the admin page under Tools.
  *
  * @return void
