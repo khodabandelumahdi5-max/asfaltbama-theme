@@ -292,3 +292,42 @@ function asfaltbama_strip_widget_seo_tags( $content, $widget ) {
 	);
 }
 add_filter( 'elementor/widget/render_content', 'asfaltbama_strip_widget_seo_tags', 10, 2 );
+
+/**
+ * Whether a page's Elementor content contains its own <h1>.
+ *
+ * Checks the stored Elementor data for a Heading/Animated Headline set to
+ * H1, or a literal <h1> in an HTML or text widget.
+ *
+ * @param int $post_id Post ID.
+ *
+ * @return bool
+ */
+function asfaltbama_elementor_has_h1( $post_id ) {
+	$data = get_post_meta( $post_id, '_elementor_data', true );
+	if ( ! is_string( $data ) || '' === $data ) {
+		return false;
+	}
+
+	return (bool) preg_match( '/"(?:header_size|tag|title_tag)"\s*:\s*"h1"|<h1[\s>]|\\\\u003ch1/i', $data );
+}
+
+/**
+ * Hide Hello's automatic page title (an <h1>) on Elementor pages that
+ * already have their own H1, so each page has exactly one.
+ *
+ * Several service pages showed two H1s: the WordPress page title (one of
+ * them still reading «عنوان: …») and the Elementor hero heading.
+ *
+ * @param bool $show Whether to show the title.
+ *
+ * @return bool
+ */
+function asfaltbama_hide_duplicate_page_title( $show ) {
+	if ( ! $show || ! is_page() ) {
+		return $show;
+	}
+
+	return asfaltbama_elementor_has_h1( get_queried_object_id() ) ? false : $show;
+}
+add_filter( 'hello_elementor_page_title', 'asfaltbama_hide_duplicate_page_title', 20 );
