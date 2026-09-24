@@ -56,7 +56,7 @@ class Bavar_Checkout {
 			]
 		);
 		$fields['billing']['billing_job'] = [
-			'label'    => 'شغل / حوزه‌ی فعالیت',
+			'label'    => 'شغل',
 			'required' => true,
 			'priority' => 40,
 			'class'    => [ 'form-row-wide' ],
@@ -67,7 +67,7 @@ class Bavar_Checkout {
 			$fields['billing']['billing_email']['priority'] = 50;
 		}
 		if ( isset( $fields['account']['account_password'] ) ) {
-			$fields['account']['account_password']['label'] = 'رمز عبور برای ورود به MY BAVAR';
+			$fields['account']['account_password']['label'] = 'رمز عبور برای ورود به حساب کاربری';
 		}
 		unset( $fields['order']['order_comments'] );
 		return $fields;
@@ -88,18 +88,13 @@ class Bavar_Checkout {
 		if ( ! $person ) {
 			return $value;
 		}
-		$parts = preg_split( '/\s+/u', trim( $person['name'] ), 2 );
-		switch ( $input ) {
-			case 'billing_first_name':
-				return $parts[0] ?? '';
-			case 'billing_last_name':
-				return $parts[1] ?? '';
-			case 'billing_phone':
-				return $person['phone'];
-			case 'billing_job':
-				return $person['job'];
-		}
-		return $value;
+		$map = [
+			'billing_first_name' => 'first_name',
+			'billing_last_name'  => 'last_name',
+			'billing_phone'      => 'phone',
+			'billing_job'        => 'job',
+		];
+		return isset( $map[ $input ] ) && '' !== $person[ $map[ $input ] ] ? $person[ $map[ $input ] ] : $value;
 	}
 
 	/**

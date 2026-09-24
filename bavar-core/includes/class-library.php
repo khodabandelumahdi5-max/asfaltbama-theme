@@ -57,7 +57,7 @@ class Bavar_Library {
 				if ( $product->get_image_id() ) {
 					echo wp_get_attachment_image( $product->get_image_id(), 'woocommerce_thumbnail', false, [ 'loading' => 'lazy' ] );
 				} else {
-					echo '<span class="bv-pack__ph" dir="ltr">BAVAR<br>LIBRARY</span>';
+					echo '<span class="bv-pack__ph">پک کتاب<br>گروه باور</span>';
 				}
 				?>
 			</span>

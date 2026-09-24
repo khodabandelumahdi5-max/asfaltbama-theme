@@ -13,14 +13,14 @@ if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_
 	$bavar_library = class_exists( 'Bavar_Settings' ) ? (int) Bavar_Settings::get( 'page_library' ) : 0;
 	$bavar_links   = array_filter(
 		[
-			'About'     => home_url( '/#about' ),
-			'Courses'   => home_url( '/#paths' ),
-			'Library'   => $bavar_library ? get_permalink( $bavar_library ) : '',
-			'Contact'   => '#contact',
-			'Terms'     => bavar_opt( 'terms_url' ),
-			'Privacy'   => bavar_opt( 'privacy_url' ),
-			'Instagram' => bavar_opt( 'instagram' ),
-			'Telegram'  => bavar_opt( 'telegram' ),
+			'درباره'      => home_url( '/#about' ),
+			'دوره‌ها'      => home_url( '/#paths' ),
+			'پک‌های کتاب'  => $bavar_library ? get_permalink( $bavar_library ) : '',
+			'تماس'        => '#contact',
+			'قوانین'      => bavar_opt( 'terms_url' ),
+			'حریم خصوصی'  => bavar_opt( 'privacy_url' ),
+			'اینستاگرام'  => bavar_opt( 'instagram' ),
+			'تلگرام'      => bavar_opt( 'telegram' ),
 		]
 	);
 	$bavar_phone = bavar_opt( 'phone' );
@@ -41,13 +41,13 @@ if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_
 				</p>
 			<?php endif; ?>
 
-			<nav class="bv-footer__links" dir="ltr" aria-label="Footer">
+			<nav class="bv-footer__links" aria-label="پیوندهای پایین صفحه">
 				<?php foreach ( $bavar_links as $label => $url ) : ?>
-					<a href="<?php echo esc_url( $url ); ?>" <?php echo in_array( $label, [ 'Instagram', 'Telegram' ], true ) ? 'target="_blank" rel="noopener"' : ''; ?>><?php echo esc_html( $label ); ?></a>
+					<a href="<?php echo esc_url( $url ); ?>" <?php echo in_array( $label, [ 'اینستاگرام', 'تلگرام' ], true ) ? 'target="_blank" rel="noopener"' : ''; ?>><?php echo esc_html( $label ); ?></a>
 				<?php endforeach; ?>
 			</nav>
 
-			<p class="bv-footer__copy" dir="ltr">© <?php echo esc_html( gmdate( 'Y' ) ); ?> BAVAR GROUP. All rights reserved.</p>
+			<p class="bv-footer__copy">© <?php echo esc_html( bavar_fa_num_safe( wp_date( 'Y' ) ) ); ?> گروه توسعه کسب‌وکار باور. تمامی حقوق محفوظ است.</p>
 		</div>
 	</footer>
 <?php endif; ?>

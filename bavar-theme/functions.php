@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BAVAR_THEME_VERSION', '1.0.0' );
+define( 'BAVAR_THEME_VERSION', '1.1.0' );
 
 /**
  * Editable defaults (Appearance → Customize → BAVAR GROUP).
@@ -24,7 +24,7 @@ function bavar_theme_defaults() {
 		'founder_image_2'  => $img . 'founder-city.webp',
 		'about_text'       => "گروه توسعه کسب‌وکار باور، به مؤسسی و مدیریت آرش الطافیان، با هدف رشد و توسعه‌ی کسب‌وکارهای ایران بنیان‌گذاری شد و به‌عنوان مجموعه‌ای برای ارتباطات، شبکه‌سازی، افزایش فروش و توسعه‌ی سریع کسب‌وکار فعالیت می‌کند.\n\nاین مجموعه دارای دوره‌های آموزشی حضوری، از جمله «آشیانه سیمرغ‌ها»، و دوره‌های غیرحضوری، از جمله «کتاب مقدس گروه باور»، و همچنین مجموعه‌ای گسترده از کتاب‌ها، آموزش‌ها، چک‌لیست‌ها و تمرین‌های کاربردی است.",
 		'philosophy_title' => 'رشد کسب‌وکار از رشد انسان آغاز می‌شود.',
-		'philosophy_text'  => 'در BAVAR باور داریم که فروش، شبکه و ثروت نتیجه‌ی انسانی است که آگاهانه یاد می‌گیرد، درست تصمیم می‌گیرد و پیوسته عمل می‌کند. هر دوره، هر کتاب و هر تمرین برای ساختن همین انسان طراحی شده است.',
+		'philosophy_text'  => 'در گروه باور معتقدیم که فروش، شبکه و ثروت نتیجه‌ی انسانی است که آگاهانه یاد می‌گیرد، درست تصمیم می‌گیرد و پیوسته عمل می‌کند. هر دوره، هر کتاب و هر تمرین برای ساختن همین انسان طراحی شده است.',
 		'founder_bio'      => 'مؤسس و مدیر گروه توسعه کسب‌وکار باور. هدف او رشد و توسعه‌ی کسب‌وکارهای ایران از مسیر آموزش، ارتباطات، شبکه‌سازی و افزایش فروش است.',
 		'phone'            => '',
 		'email'            => '',
@@ -67,7 +67,7 @@ add_action(
 		add_theme_support( 'woocommerce' );
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails' );
-		register_nav_menus( [ 'bavar-primary' => 'منوی اصلی BAVAR' ] );
+		register_nav_menus( [ 'bavar-primary' => 'منوی اصلی' ] );
 	},
 	20
 );
@@ -105,7 +105,7 @@ add_action(
 		$c->add_section(
 			'bavar_theme',
 			[
-				'title'    => 'BAVAR GROUP',
+				'title'    => 'گروه باور',
 				'priority' => 25,
 			]
 		);
@@ -113,8 +113,8 @@ add_action(
 		$fields   = [
 			'hero_image'       => [ 'تصویر اصلی (زیر لوگو)', 'image' ],
 			'about_text'       => [ 'متن معرفی برند', 'textarea' ],
-			'philosophy_title' => [ 'BAVAR PHILOSOPHY — جمله‌ی اصلی', 'text' ],
-			'philosophy_text'  => [ 'BAVAR PHILOSOPHY — توضیح', 'textarea' ],
+			'philosophy_title' => [ 'فلسفه‌ی باور — جمله‌ی اصلی', 'text' ],
+			'philosophy_text'  => [ 'فلسفه‌ی باور — توضیح', 'textarea' ],
 			'founder_image'    => [ 'تصویر بخش مؤسس', 'image' ],
 			'founder_image_2'  => [ 'تصویر دوم بخش مؤسس', 'image' ],
 			'founder_bio'      => [ 'معرفی کوتاه مؤسس', 'textarea' ],
@@ -170,12 +170,12 @@ add_action(
 function bavar_default_menu() {
 	$library = class_exists( 'Bavar_Settings' ) ? (int) Bavar_Settings::get( 'page_library' ) : 0;
 	$items   = [
-		'HOME'        => home_url( '/' ),
-		'BAVAR GROUP' => home_url( '/#about' ),
-		'COURSES'     => home_url( '/#paths' ),
-		'LIBRARY'     => $library ? get_permalink( $library ) : home_url( '/#library' ),
-		'ABOUT'       => home_url( '/#founder' ),
-		'CONTACT'     => '#contact',
+		'خانه'       => home_url( '/' ),
+		'گروه باور'  => home_url( '/#about' ),
+		'دوره‌ها'     => home_url( '/#paths' ),
+		'پک‌های کتاب' => $library ? get_permalink( $library ) : home_url( '/#library' ),
+		'درباره'     => home_url( '/#founder' ),
+		'تماس'       => '#contact',
 	];
 	echo '<ul class="bv-menu">';
 	foreach ( $items as $label => $url ) {
@@ -197,4 +197,14 @@ function bavar_wordmark( $tag = 'p', $class = '' ) {
 		esc_attr( $class ),
 		$tag // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- whitelisted above.
 	);
+}
+
+/**
+ * Persian digits (works even when BAVAR Core is inactive).
+ *
+ * @param string|int $n Number.
+ * @return string
+ */
+function bavar_fa_num_safe( $n ) {
+	return function_exists( 'bavar_fa_num' ) ? bavar_fa_num( $n ) : str_replace( range( 0, 9 ), [ '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' ], (string) $n );
 }

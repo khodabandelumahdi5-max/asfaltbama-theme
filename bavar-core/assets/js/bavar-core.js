@@ -1,4 +1,4 @@
-/* BAVAR Core — entry gate, three-question modal, request forms. */
+/* BAVAR Core — entry form, section forms, page-view tracking. */
 ( function () {
 	'use strict';
 
@@ -13,16 +13,21 @@
 	};
 
 	var person = cfg.person || store.get( 'bavar_person' );
-	var answered = store.get( 'bavar_answered' ) || {};
+	if ( person && ! person.phone ) { person = null; }
 	var hasCookie = document.cookie.indexOf( 'bavar_ok=1' ) !== -1;
+	var known = !! person || hasCookie;
 	var lastFocus = null;
 
 	function $( sel, root ) { return ( root || document ).querySelector( sel ); }
 	function $$( sel, root ) { return Array.prototype.slice.call( ( root || document ).querySelectorAll( sel ) ); }
 
+	function post( data ) {
+		return fetch( cfg.ajax, { method: 'POST', body: data, credentials: 'same-origin' } ).then( function ( r ) { return r.json(); } );
+	}
+
 	function fillPerson( form ) {
 		if ( ! person ) { return; }
-		[ 'name', 'phone', 'job' ].forEach( function ( k ) {
+		[ 'first_name', 'last_name', 'phone', 'job' ].forEach( function ( k ) {
 			var input = form.querySelector( '[name="' + k + '"]' );
 			if ( input && ! input.value && person[ k ] ) { input.value = person[ k ]; }
 		} );
@@ -36,7 +41,9 @@
 		if ( close ) { close.hidden = ! closable; }
 		document.documentElement.classList.add( 'bv-locked' );
 		window.requestAnimationFrame( function () { modal.classList.add( 'is-open' ); } );
-		var first = $( 'textarea, input:not([type=hidden]):not(.bv-hp)', modal );
+		var first = $$( 'textarea, input:not([type=hidden]):not(.bv-hp)', modal ).filter( function ( el ) {
+			return ! el.closest( '[hidden]' ) && ! el.value;
+		} )[ 0 ];
 		if ( first ) { setTimeout( function () { first.focus( { preventScroll: true } ); }, 250 ); }
 	}
 
@@ -59,29 +66,46 @@
 		$$( '.bv-modal.is-open' ).forEach( function ( m ) { if ( m.dataset.closable ) { closeModal( m ); } } );
 	} );
 
-	/* Entry gate */
-	var gate = $( '#bv-gate' );
-	if ( gate && cfg.gate && 'off' !== cfg.gate && ! person && ! hasCookie ) {
-		openModal( gate, 'dismissible' === cfg.gate );
-	}
-
-	/* Path cards → three questions */
+	/* Section form (modal) */
 	var qModal = $( '#bv-questions' );
-	function openPath( key, productId ) {
+
+	function openPath( key, productId, required ) {
 		var path = cfg.paths && cfg.paths[ key ];
 		if ( ! path || ! qModal ) { return false; }
 		var form = $( 'form', qModal );
 		form.reset();
 		form.path.value = key;
 		form.product_id.value = productId || '';
+		form.fields.value = path.fields.join( ',' );
+		form.dataset.redirect = required ? '' : '1';
 		$( '[data-bv-q-title]', qModal ).textContent = path.title;
-		$( '[data-bv-q-subtitle]', qModal ).textContent = path.subtitle;
+
+		var box = $( '[data-bv-questions]', qModal );
+		box.innerHTML = '';
 		path.questions.forEach( function ( q, i ) {
-			$( '[data-bv-q="' + ( i + 1 ) + '"]', qModal ).textContent = q;
+			var label = document.createElement( 'label' );
+			label.className = 'bv-field bv-field--q';
+			var span = document.createElement( 'span' );
+			var b = document.createElement( 'b' );
+			b.textContent = q;
+			span.appendChild( b );
+			var ta = document.createElement( 'textarea' );
+			ta.name = 'a' + ( i + 1 );
+			ta.rows = 2;
+			ta.required = true;
+			label.appendChild( span );
+			label.appendChild( ta );
+			box.appendChild( label );
+		} );
+
+		$$( '[data-bv-field]', qModal ).forEach( function ( el ) {
+			var on = path.fields.indexOf( el.getAttribute( 'data-bv-field' ) ) !== -1;
+			el.hidden = ! on;
+			$( 'input', el ).required = on;
 		} );
 		fillPerson( form );
 		showError( form, '' );
-		openModal( qModal, true );
+		openModal( qModal, ! required );
 		return true;
 	}
 
@@ -89,11 +113,33 @@
 		var link = e.target.closest( '[data-bv-path]' );
 		if ( ! link ) { return; }
 		var key = link.getAttribute( 'data-bv-path' );
-		if ( answered[ key ] ) { return; } // Already answered: follow the link.
-		if ( openPath( key, link.getAttribute( 'data-bv-product' ) ) ) { e.preventDefault(); }
+		var path = cfg.paths && cfg.paths[ key ];
+		// Known visitors go straight in unless the section has its own questions.
+		if ( ! path || ( known && ! path.questions.length ) ) { return; }
+		if ( openPath( key, link.getAttribute( 'data-bv-product' ), false ) ) { e.preventDefault(); }
 	} );
 
-	/* Forms */
+	/* Entry form, or the section form on course / Ashiane Simorgh pages */
+	var gate = $( '#bv-gate' );
+	var view = cfg.view;
+	if ( ! known && ! cfg.admin ) {
+		if ( view && view.require && cfg.paths[ view.path ] ) {
+			openPath( view.path, view.product_id, true );
+		} else if ( gate && cfg.gate && 'off' !== cfg.gate ) {
+			openModal( gate, 'dismissible' === cfg.gate );
+		}
+	}
+
+	/* Page-view tracking */
+	if ( view && ( view.path || view.product_id ) ) {
+		var t = new FormData();
+		t.append( 'action', 'bavar_track' );
+		t.append( 'path', view.path || '' );
+		t.append( 'product_id', view.product_id || 0 );
+		post( t ).catch( function () {} );
+	}
+
+	/* Submitting */
 	function showError( form, msg ) {
 		var el = $( '.bv-form__error', form );
 		if ( ! el ) { return; }
@@ -106,7 +152,9 @@
 		form.addEventListener( 'submit', function ( e ) {
 			e.preventDefault();
 			var kind = form.getAttribute( 'data-bv-form' );
-			var missing = $$( '[required]', form ).filter( function ( el ) { return ! el.value.trim(); } );
+			var missing = $$( '[required]', form ).filter( function ( el ) {
+				return ! el.closest( '[hidden]' ) && ! el.value.trim();
+			} );
 			if ( missing.length ) {
 				showError( form, 'لطفاً همه‌ی موارد را کامل کنید.' );
 				missing[ 0 ].focus();
@@ -115,34 +163,31 @@
 			var button = $( 'button[type=submit]', form );
 			var data = new FormData( form );
 			data.append( 'action', 'gate' === kind ? 'bavar_lead' : 'bavar_path' );
-			data.append( 'page', window.location.href );
 			button.disabled = true;
-			button.classList.add( 'is-loading' );
 			showError( form, '' );
 
-			fetch( cfg.ajax, { method: 'POST', body: data, credentials: 'same-origin' } )
-				.then( function ( r ) { return r.json(); } )
+			post( data )
 				.then( function ( res ) {
 					if ( ! res || ! res.success ) {
 						throw new Error( res && res.data && res.data.message ? res.data.message : 'خطا در ثبت اطلاعات.' );
 					}
 					person = res.data.lead;
+					known = true;
 					store.set( 'bavar_person', person );
-					if ( 'gate' === kind ) {
-						closeModal( gate );
-						$$( '[data-bv-form]' ).forEach( fillPerson );
+					$$( '[data-bv-form]' ).forEach( fillPerson );
+
+					var modal = form.closest( '.bv-modal' );
+					if ( 'gate' === kind || ( modal && ! form.dataset.redirect ) ) {
+						closeModal( modal );
 						return;
 					}
-					answered[ form.path.value ] = 1;
-					store.set( 'bavar_answered', answered );
-					window.location.href = res.data.redirect;
+					window.location.href = res.data.redirect + ( form.hasAttribute( 'data-bv-inline' ) ? '#bv-request' : '' );
 				} )
 				.catch( function ( err ) {
 					showError( form, err.message || 'خطا در ارتباط. دوباره تلاش کنید.' );
 				} )
 				.then( function () {
 					button.disabled = false;
-					button.classList.remove( 'is-loading' );
 				} );
 		} );
 	} );

@@ -21,7 +21,7 @@ class Bavar_Account {
 		add_action( 'init', [ __CLASS__, 'endpoint' ] );
 		add_filter( 'woocommerce_get_query_vars', [ __CLASS__, 'query_vars' ] );
 		add_filter( 'woocommerce_account_menu_items', [ __CLASS__, 'menu' ] );
-		add_filter( 'woocommerce_endpoint_' . self::ENDPOINT . '_title', fn() => 'کتابخانه من' );
+		add_filter( 'woocommerce_endpoint_' . self::ENDPOINT . '_title', fn() => 'محتوای خریداری‌شده من' );
 		add_action( 'woocommerce_account_' . self::ENDPOINT . '_endpoint', [ __CLASS__, 'render' ] );
 		add_action( 'woocommerce_account_dashboard', [ __CLASS__, 'dashboard' ], 5 );
 	}
@@ -53,7 +53,7 @@ class Bavar_Account {
 	public static function menu( $items ) {
 		$labels = [
 			'dashboard'       => 'پروفایل',
-			self::ENDPOINT    => 'کتابخانه من',
+			self::ENDPOINT    => 'محتوای خریداری‌شده من',
 			'orders'          => 'خریدها',
 			'downloads'       => 'دانلودها',
 			'edit-account'    => 'حساب کاربری',
@@ -110,14 +110,42 @@ class Bavar_Account {
 	public static function dashboard() {
 		$count = count( self::purchases( get_current_user_id() ) );
 		printf(
-			'<div class="bv-account-hello"><p class="bv-account-hello__mark" dir="ltr">MY BAVAR</p><p>شما %s محصول در کتابخانه‌ی خود دارید.</p><a class="bv-button" href="%s">ورود به کتابخانه من</a></div>',
+			'<div class="bv-account-hello"><p class="bv-account-hello__mark">حساب کاربری من</p><p>شما %s محصول خریداری‌شده دارید.</p><a class="bv-button" href="%s">محتوای خریداری‌شده من</a></div>',
 			esc_html( bavar_fa_num( $count ) ),
 			esc_url( wc_get_account_endpoint_url( self::ENDPOINT ) )
 		);
 	}
 
 	/**
-	 * "My library" tab.
+	 * Persian label for a file by extension.
+	 *
+	 * @param string $file File URL or path.
+	 * @return string
+	 */
+	public static function file_type( $file ) {
+		$ext = strtolower( pathinfo( (string) wp_parse_url( $file, PHP_URL_PATH ), PATHINFO_EXTENSION ) );
+		$map = [
+			'pdf'  => 'پی‌دی‌اف',
+			'mp3'  => 'صوت',
+			'm4a'  => 'صوت',
+			'wav'  => 'صوت',
+			'ogg'  => 'صوت',
+			'aac'  => 'صوت',
+			'mp4'  => 'ویدیو',
+			'mov'  => 'ویدیو',
+			'mkv'  => 'ویدیو',
+			'webm' => 'ویدیو',
+			'zip'  => 'فایل فشرده',
+			'rar'  => 'فایل فشرده',
+			'epub' => 'کتاب',
+			'docx' => 'سند',
+			'xlsx' => 'سند',
+		];
+		return $map[ $ext ] ?? 'فایل';
+	}
+
+	/**
+	 * "Purchased content" tab.
 	 */
 	public static function render() {
 		$user_id   = get_current_user_id();
@@ -131,7 +159,7 @@ class Bavar_Account {
 			echo '<div class="bv-empty"><p>هنوز محصولی خریداری نکرده‌اید.</p>';
 			$library = (int) Bavar_Settings::get( 'page_library' );
 			if ( $library ) {
-				echo '<a class="bv-button" href="' . esc_url( get_permalink( $library ) ) . '">مشاهده‌ی کتابخانه‌ی باور</a>';
+				echo '<a class="bv-button" href="' . esc_url( get_permalink( $library ) ) . '">مشاهده‌ی پک‌های کتاب</a>';
 			}
 			echo '</div>';
 			return;
@@ -151,12 +179,12 @@ class Bavar_Account {
 					if ( $product->get_image_id() ) {
 						echo wp_get_attachment_image( $product->get_image_id(), 'woocommerce_thumbnail' );
 					} else {
-						echo '<span class="bv-mylib__ph" dir="ltr">BAVAR</span>';
+						echo '<span class="bv-mylib__ph">باور</span>';
 					}
 					?>
 				</div>
 				<div class="bv-mylib__body">
-					<p class="bv-mylib__kind" dir="ltr"><?php echo esc_html( 'course' === $kind ? 'COURSE' : ( 'pack' === $kind ? 'LIBRARY PACK' : 'PRODUCT' ) ); ?></p>
+					<p class="bv-mylib__kind"><?php echo esc_html( 'course' === $kind ? 'دوره' : ( 'pack' === $kind ? 'پک کتاب' : 'محصول' ) ); ?></p>
 					<h3><a href="<?php echo esc_url( $product->get_permalink() ); ?>"><?php echo esc_html( $product->get_name() ); ?></a></h3>
 
 					<?php if ( 'on-hold' === $p['status'] ) : ?>
@@ -180,8 +208,9 @@ class Bavar_Account {
 							<ul class="bv-mylib__files">
 								<?php foreach ( $downloads[ $pid ] as $d ) : ?>
 									<li>
-										<span><?php echo esc_html( $d['download_name'] ?: $d['file']['name'] ); ?></span>
-										<a class="bv-button bv-button--solid" href="<?php echo esc_url( $d['download_url'] ); ?>">دانلود PDF</a>
+										<?php $bavar_type = self::file_type( $d['file']['file'] ?? '' ); ?>
+										<span><em class="bv-mylib__type"><?php echo esc_html( $bavar_type ); ?></em> <?php echo esc_html( $d['download_name'] ?: $d['file']['name'] ); ?></span>
+										<a class="bv-button bv-button--solid" href="<?php echo esc_url( $d['download_url'] ); ?>">دانلود</a>
 									</li>
 								<?php endforeach; ?>
 							</ul>

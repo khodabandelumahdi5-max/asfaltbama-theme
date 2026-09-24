@@ -14,71 +14,79 @@ class Bavar_Settings {
 	const OPTION = 'bavar_settings';
 
 	/**
-	 * Default questions used by every path until the admin changes them.
-	 *
-	 * @return string[]
+	 * Person fields every section asks for by default.
 	 */
-	public static function default_questions() {
-		return [
-			'در حال حاضر در چه مرحله‌ای از مسیر کسب‌وکار خود قرار دارید؟',
-			'مهم‌ترین چالش فعلی شما چیست؟',
-			'از BAVAR GROUP چه نتیجه‌ای می‌خواهید؟',
-		];
-	}
+	const DEFAULT_FIELDS = 'first_name,last_name,phone,job';
 
 	/**
-	 * The four entry paths shown on the home page.
+	 * The four sections shown on the home page. Every text is Persian and
+	 * editable in BAVAR → Settings.
 	 *
 	 * @return array
 	 */
 	public static function default_paths() {
-		$q = self::default_questions();
 		return [
 			'course'  => [
-				'en'       => 'Book of Bavar',
-				'title'    => 'خرید دوره اصلی و جامع غیرحضوری گروه باور',
-				'subtitle' => 'کتاب مقدس گروه باور',
-				'desc'     => 'صوتی + نوشتاری + تصویری',
-				'cta'      => 'مشاهده و خرید',
-				'q1'       => $q[0],
-				'q2'       => $q[1],
-				'q3'       => $q[2],
-				'target'   => '',
+				'label'     => 'کتاب مقدس گروه باور',
+				'title'     => 'خرید دوره اصلی و جامع غیرحضوری گروه باور، کتاب مقدس گروه باور',
+				'desc'      => '',
+				'cta'       => 'مشاهده و خرید',
+				'questions' => '',
+				'fields'    => self::DEFAULT_FIELDS,
+				'target'    => '',
 			],
 			'library' => [
-				'en'       => 'Bavar Library',
-				'title'    => 'خرید پک‌های برتر کتاب و آموزش گروه باور',
-				'subtitle' => 'کتاب‌های منتخب جهان',
-				'desc'     => 'خلاصه و توسعه‌ی محتوایی + چک‌لیست + تمرین‌های کاربردی',
-				'cta'      => 'مشاهده پک‌ها',
-				'q1'       => $q[0],
-				'q2'       => $q[1],
-				'q3'       => $q[2],
-				'target'   => '',
+				'label'     => 'پک‌های کتاب',
+				'title'     => 'خرید پک‌های برتر کتاب و آموزش گروه باور',
+				'desc'      => 'خرید پک‌های کتاب به صورت دسته‌ای بر اساس نیاز شما',
+				'cta'       => 'مشاهده پک‌ها',
+				'questions' => '',
+				'fields'    => self::DEFAULT_FIELDS,
+				'target'    => '',
 			],
 			'simorgh' => [
-				'en'       => 'Ashiane Simorgh',
-				'title'    => 'شرکت در دوره حضوری',
-				'subtitle' => 'آشیانه سیمرغ‌ها',
-				'desc'     => 'دوره‌ی حضوری گروه باور',
-				'cta'      => 'درخواست شرکت',
-				'q1'       => $q[0],
-				'q2'       => $q[1],
-				'q3'       => $q[2],
-				'target'   => '',
+				'label'     => 'آشیانه سیمرغ',
+				'title'     => 'دوره حضوری آشیانه سیمرغ',
+				'desc'      => 'ثبت‌نام در دوره‌ی حضوری گروه باور',
+				'cta'       => 'مشاهده و ثبت‌نام',
+				'questions' => '',
+				'fields'    => self::DEFAULT_FIELDS,
+				'target'    => '',
 			],
 			'consult' => [
-				'en'       => 'Consulting',
-				'title'    => 'مشاوره غیرحضوری با مدیریت مجموعه',
-				'subtitle' => 'آرش الطافیان',
-				'desc'     => 'جلسه‌ی مشاوره‌ی اختصاصی',
-				'cta'      => 'درخواست مشاوره',
-				'q1'       => $q[0],
-				'q2'       => $q[1],
-				'q3'       => $q[2],
-				'target'   => '',
+				'label'     => 'مشاوره',
+				'title'     => 'مشاوره',
+				'desc'      => 'یک ساعت مشاوره‌ی حضوری با مدیریت مجموعه',
+				'cta'       => 'درخواست مشاوره',
+				'questions' => '',
+				'fields'    => self::DEFAULT_FIELDS,
+				'target'    => '',
 			],
 		];
+	}
+
+	/**
+	 * Optional extra questions of a section (one per line in the settings).
+	 *
+	 * @param string $key Path key.
+	 * @return string[]
+	 */
+	public static function questions( $key ) {
+		$path = self::path( $key );
+		return $path ? array_slice( bavar_lines( $path['questions'] ), 0, 5 ) : [];
+	}
+
+	/**
+	 * Person fields a section asks for.
+	 *
+	 * @param string $key Path key.
+	 * @return string[]
+	 */
+	public static function fields( $key ) {
+		$path  = self::path( $key );
+		$valid = [ 'first_name', 'last_name', 'phone', 'job' ];
+		$list  = array_intersect( $valid, array_map( 'trim', explode( ',', $path ? $path['fields'] : self::DEFAULT_FIELDS ) ) );
+		return array_values( array_unique( array_merge( $list, [ 'phone' ] ) ) );
 	}
 
 	/**
@@ -89,7 +97,7 @@ class Bavar_Settings {
 	public static function defaults() {
 		return [
 			'gate_mode'     => 'required', // required | dismissible | off.
-			'gate_title'    => 'برای ورود به مسیر BAVAR GROUP اطلاعات خود را وارد کنید',
+			'gate_title'    => 'برای ورود به گروه باور اطلاعات خود را وارد کنید',
 			'gate_text'     => 'اطلاعات شما محرمانه می‌ماند و فقط برای ارتباط تیم باور با شما استفاده می‌شود.',
 			'paths'         => self::default_paths(),
 			'spot_api_key'  => '',
@@ -113,10 +121,27 @@ class Bavar_Settings {
 
 		$paths = [];
 		foreach ( $defaults['paths'] as $key => $def ) {
-			$paths[ $key ] = array_merge( $def, isset( $saved['paths'][ $key ] ) && is_array( $saved['paths'][ $key ] ) ? array_filter( $saved['paths'][ $key ], 'strlen' ) : [] );
+			$paths[ $key ] = array_merge( $def, isset( $saved['paths'][ $key ] ) && is_array( $saved['paths'][ $key ] ) ? self::filled( $saved['paths'][ $key ] ) : [] );
 		}
 		$out['paths'] = $paths;
 		return $out;
+	}
+
+	/**
+	 * Keep saved values, but fall back to defaults for emptied required texts.
+	 *
+	 * @param array $values Saved path values.
+	 * @return array
+	 */
+	private static function filled( array $values ) {
+		$optional = [ 'desc', 'questions', 'target' ];
+		return array_filter(
+			$values,
+			function ( $value, $key ) use ( $optional ) {
+				return in_array( $key, $optional, true ) || '' !== (string) $value;
+			},
+			ARRAY_FILTER_USE_BOTH
+		);
 	}
 
 	/**

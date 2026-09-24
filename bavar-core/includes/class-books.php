@@ -25,7 +25,7 @@ class Bavar_Books {
 			'author'    => [ 'نویسنده', 'text' ],
 			'topic'     => [ 'موضوع', 'text' ],
 			'why'       => [ 'چرا این کتاب انتخاب شده؟', 'textarea' ],
-			'summary'   => [ 'خلاصه / محتوای BAVAR', 'textarea' ],
+			'summary'   => [ 'خلاصه و محتوای گروه باور', 'textarea' ],
 			'checklist' => [ 'چک‌لیست (هر مورد در یک خط)', 'textarea' ],
 			'exercise'  => [ 'تمرین', 'textarea' ],
 		];

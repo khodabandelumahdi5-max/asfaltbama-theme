@@ -16,7 +16,7 @@ while ( have_posts() ) :
 	<main id="content" class="bv-page">
 		<header class="bv-page__head">
 			<div class="bv-wrap">
-				<p class="bv-eyebrow" dir="ltr">BAVAR GROUP</p>
+				<p class="bv-eyebrow">گروه باور</p>
 				<h1 class="bv-page__title<?php echo preg_match( '/\p{Arabic}/u', get_the_title() ) ? '' : ' bv-page__title--en'; ?>"><?php the_title(); ?></h1>
 			</div>
 		</header>

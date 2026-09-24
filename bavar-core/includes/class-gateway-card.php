@@ -17,7 +17,7 @@ class Bavar_Gateway_Card extends WC_Payment_Gateway {
 	 */
 	public function __construct() {
 		$this->id                 = 'bavar_card';
-		$this->method_title       = 'کارت به کارت + ارسال فیش (BAVAR)';
+		$this->method_title       = 'کارت به کارت + ارسال فیش (گروه باور)';
 		$this->method_description = 'خریدار مبلغ را کارت‌به‌کارت می‌کند و تصویر فیش را از طریق لینک اختصاصی ارسال می‌کند. پس از بررسی، وضعیت سفارش را «تکمیل‌شده» کنید تا دسترسی خریدار خودکار فعال شود.';
 		$this->has_fields         = false;
 		$this->supports           = [ 'products' ];

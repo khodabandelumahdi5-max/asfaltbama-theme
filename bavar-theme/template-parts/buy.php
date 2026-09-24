@@ -1,6 +1,6 @@
 <?php
 /**
- * Buy button (or "in your library" when already owned).
+ * Buy button (or "already yours" when owned).
  *
  * @package BavarTheme
  *
@@ -16,13 +16,13 @@ $bavar_owned   = class_exists( 'Bavar_Products' ) && Bavar_Products::owned( $bav
 
 if ( $bavar_owned ) {
 	printf(
-		'<a class="bv-button" href="%s">در کتابخانه‌ی شماست — مشاهده</a>',
+		'<a class="bv-button" href="%s">خریداری کرده‌اید — مشاهده‌ی محتوا</a>',
 		esc_url( wc_get_account_endpoint_url( 'bavar-library' ) )
 	);
 } elseif ( $bavar_product->is_purchasable() && $bavar_product->is_in_stock() ) {
 	printf(
 		'<a class="bv-button bv-button--solid" rel="nofollow" href="%s">%s</a>',
-		esc_url( add_query_arg( 'add-to-cart', $bavar_product->get_id(), $bavar_product->get_permalink() ) ),
+		esc_url( class_exists( 'Bavar_Products' ) ? Bavar_Products::buy_url( $bavar_product ) : add_query_arg( 'add-to-cart', $bavar_product->get_id(), $bavar_product->get_permalink() ) ),
 		esc_html( $args['label'] )
 	);
 } else {

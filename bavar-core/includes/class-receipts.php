@@ -71,10 +71,9 @@ class Bavar_Receipts {
 		$flash = sanitize_key( wp_unslash( $_GET['receipt'] ?? '' ) );
 		?>
 		<section class="bv-receipt">
-			<p class="bv-receipt__mark" dir="ltr">PAYMENT</p>
 			<?php if ( $done ) : ?>
 				<h3>پرداخت شما تأیید شد</h3>
-				<p>دسترسی شما فعال است. <a href="<?php echo esc_url( wc_get_account_endpoint_url( Bavar_Account::ENDPOINT ) ); ?>">ورود به کتابخانه من</a></p>
+				<p>دسترسی شما فعال است. <a href="<?php echo esc_url( wc_get_account_endpoint_url( Bavar_Account::ENDPOINT ) ); ?>">مشاهده‌ی محتوای خریداری‌شده</a></p>
 			<?php else : ?>
 				<h3>مبلغ <?php echo wp_kses_post( $order->get_formatted_order_total() ); ?> را به کارت زیر واریز کنید</h3>
 				<?php if ( $gw ) : ?>

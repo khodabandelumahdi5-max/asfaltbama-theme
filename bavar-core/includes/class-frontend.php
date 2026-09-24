@@ -1,6 +1,7 @@
 <?php
 /**
- * Front-end: entry gate, three-question modal, path cards and request forms.
+ * Front-end: entry form, section form modal, section cards, request forms
+ * and the page-view beacon.
  *
  * @package BavarCore
  */
@@ -22,18 +23,15 @@ class Bavar_Frontend {
 	}
 
 	/**
-	 * Known visitor details (cookie or logged-in customer).
+	 * Known visitor (cookie or logged-in customer).
 	 *
-	 * @return array|null
+	 * @return array|null { first_name, last_name, phone, job }
 	 */
 	public static function known_person() {
-		$lead = Bavar_Leads::current();
+		$lead = Bavar_CRM::current();
 		if ( $lead ) {
-			return [
-				'name'  => $lead['full_name'],
-				'phone' => $lead['phone'],
-				'job'   => $lead['job'],
-			];
+			unset( $lead['id'] );
+			return $lead;
 		}
 		$user_id = get_current_user_id();
 		if ( $user_id ) {
@@ -41,10 +39,41 @@ class Bavar_Frontend {
 			if ( $phone ) {
 				$user = wp_get_current_user();
 				return [
-					'name'  => trim( $user->first_name . ' ' . $user->last_name ) ?: $user->display_name,
-					'phone' => $phone,
-					'job'   => (string) get_user_meta( $user_id, 'billing_job', true ),
+					'first_name' => (string) $user->first_name,
+					'last_name'  => (string) $user->last_name,
+					'phone'      => $phone,
+					'job'        => (string) get_user_meta( $user_id, 'billing_job', true ),
 				];
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Which section / product the current page belongs to (for tracking and
+	 * for asking the visitor's number before showing course details).
+	 *
+	 * @return array|null { path, product_id, require }
+	 */
+	private static function view_context() {
+		if ( function_exists( 'is_product' ) && is_product() ) {
+			$id = get_queried_object_id();
+			return [
+				'path'       => Bavar_CRM::path_of_product( $id ),
+				'product_id' => $id,
+				'require'    => 'course' === bavar_product_kind( $id ),
+			];
+		}
+		if ( is_page() ) {
+			$id = get_queried_object_id();
+			foreach ( [ 'library', 'simorgh', 'consult' ] as $key ) {
+				if ( $id && (int) Bavar_Settings::get( 'page_' . $key ) === $id ) {
+					return [
+						'path'       => $key,
+						'product_id' => 0,
+						'require'    => 'simorgh' === $key,
+					];
+				}
 			}
 		}
 		return null;
@@ -61,8 +90,9 @@ class Bavar_Frontend {
 		foreach ( Bavar_Settings::get( 'paths' ) as $key => $path ) {
 			$paths[ $key ] = [
 				'title'     => $path['title'],
-				'subtitle'  => $path['subtitle'],
-				'questions' => [ $path['q1'], $path['q2'], $path['q3'] ],
+				'desc'      => $path['desc'],
+				'questions' => Bavar_Settings::questions( $key ),
+				'fields'    => Bavar_Settings::fields( $key ),
 				'target'    => Bavar_Settings::path_target( $key ),
 			];
 		}
@@ -81,52 +111,59 @@ class Bavar_Frontend {
 				'gate'   => $gate,
 				'person' => self::known_person(),
 				'paths'  => $paths,
+				'view'   => self::view_context(),
+				'admin'  => current_user_can( 'manage_options' ),
 			]
 		);
 	}
 
 	/**
-	 * Person fields shared by every form.
+	 * Person inputs.
 	 *
-	 * @param string $prefix Unique id prefix.
+	 * @param string   $prefix Unique id prefix.
+	 * @param string[] $only   Fields to render (all when empty).
 	 */
-	private static function person_fields( $prefix ) {
-		$fields = [
-			'name'  => [ 'نام و نام خانوادگی', 'text', 'name' ],
-			'phone' => [ 'شماره تماس', 'tel', 'tel' ],
-			'job'   => [ 'شغل / حوزه‌ی فعالیت', 'text', 'organization-title' ],
+	public static function person_inputs( $prefix, array $only = [] ) {
+		$meta = [
+			'first_name' => [ 'text', 'given-name', '' ],
+			'last_name'  => [ 'text', 'family-name', '' ],
+			'phone'      => [ 'tel', 'tel', 'inputmode="tel" dir="ltr" placeholder="۰۹۱۲ ۱۲۳ ۴۵۶۷"' ],
+			'job'        => [ 'text', 'organization-title', '' ],
 		];
-		foreach ( $fields as $name => $f ) {
+		echo '<div class="bv-form__person">';
+		foreach ( Bavar_CRM::person_fields() as $name => $conf ) {
+			if ( $only && ! in_array( $name, $only, true ) ) {
+				continue;
+			}
 			printf(
-				'<label class="bv-field"><span>%1$s</span><input type="%2$s" name="%3$s" id="%4$s-%3$s" autocomplete="%5$s" %6$s required></label>',
-				esc_html( $f[0] ),
-				esc_attr( $f[1] ),
+				'<label class="bv-field bv-field--%3$s" data-bv-field="%3$s"><span>%1$s</span><input type="%2$s" name="%3$s" id="%4$s-%3$s" autocomplete="%5$s" %6$s required></label>',
+				esc_html( $conf[0] ),
+				esc_attr( $meta[ $name ][0] ),
 				esc_attr( $name ),
 				esc_attr( $prefix ),
-				esc_attr( $f[2] ),
-				'phone' === $name ? 'inputmode="tel" dir="ltr" placeholder="09xx xxx xxxx"' : ''
+				esc_attr( $meta[ $name ][1] ),
+				$meta[ $name ][2] // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static attributes.
 			);
 		}
-		echo '<input type="text" name="website" class="bv-hp" tabindex="-1" autocomplete="off" aria-hidden="true">';
+		echo '</div><input type="text" name="website" class="bv-hp" tabindex="-1" autocomplete="off" aria-hidden="true">';
 	}
 
 	/**
-	 * Entry gate + questions modal markup.
+	 * Entry form + section form markup.
 	 */
 	public static function modals() {
-		$title = Bavar_Settings::get( 'gate_title' );
-		$text  = Bavar_Settings::get( 'gate_text' );
 		?>
 		<div class="bv-modal" id="bv-gate" role="dialog" aria-modal="true" aria-labelledby="bv-gate-title" hidden>
 			<div class="bv-modal__panel">
 				<button type="button" class="bv-modal__close" data-bv-close aria-label="بستن" hidden>&times;</button>
 				<p class="bv-modal__mark" dir="ltr">BAVAR GROUP</p>
-				<h2 id="bv-gate-title" class="bv-modal__title"><?php echo esc_html( $title ); ?></h2>
-				<p class="bv-modal__text"><?php echo esc_html( $text ); ?></p>
+				<h2 id="bv-gate-title" class="bv-modal__title"><?php echo esc_html( Bavar_Settings::get( 'gate_title' ) ); ?></h2>
+				<p class="bv-modal__text"><?php echo esc_html( Bavar_Settings::get( 'gate_text' ) ); ?></p>
 				<form class="bv-form" data-bv-form="gate" novalidate>
-					<?php self::person_fields( 'bv-gate' ); ?>
+					<input type="hidden" name="fields" value="<?php echo esc_attr( Bavar_Settings::DEFAULT_FIELDS ); ?>">
+					<?php self::person_inputs( 'bv-gate' ); ?>
 					<p class="bv-form__error" role="alert" hidden></p>
-					<button type="submit" class="bv-button bv-button--solid">ورود به BAVAR</button>
+					<button type="submit" class="bv-button bv-button--solid">ورود</button>
 				</form>
 			</div>
 		</div>
@@ -134,19 +171,15 @@ class Bavar_Frontend {
 		<div class="bv-modal" id="bv-questions" role="dialog" aria-modal="true" aria-labelledby="bv-q-title" hidden>
 			<div class="bv-modal__panel bv-modal__panel--wide">
 				<button type="button" class="bv-modal__close" data-bv-close aria-label="بستن">&times;</button>
-				<p class="bv-modal__mark" data-bv-q-subtitle></p>
+				<p class="bv-modal__mark" dir="ltr">BAVAR GROUP</p>
 				<h2 id="bv-q-title" class="bv-modal__title" data-bv-q-title></h2>
-				<p class="bv-modal__text">برای اینکه مسیر مناسب شما را پیشنهاد دهیم، به سه سؤال کوتاه پاسخ دهید.</p>
+				<p class="bv-modal__text">برای ادامه، اطلاعات خود را وارد کنید.</p>
 				<form class="bv-form" data-bv-form="path" novalidate>
 					<input type="hidden" name="path" value="">
 					<input type="hidden" name="product_id" value="">
-					<?php foreach ( [ 1, 2, 3 ] as $i ) : ?>
-						<label class="bv-field bv-field--q">
-							<span><em><?php echo esc_html( bavar_fa_num( '0' . $i ) ); ?></em> <b data-bv-q="<?php echo esc_attr( $i ); ?>"></b></span>
-							<textarea name="a<?php echo esc_attr( $i ); ?>" rows="2" required></textarea>
-						</label>
-					<?php endforeach; ?>
-					<div class="bv-form__person"><?php self::person_fields( 'bv-q' ); ?></div>
+					<input type="hidden" name="fields" value="">
+					<div class="bv-form__questions" data-bv-questions></div>
+					<?php self::person_inputs( 'bv-q' ); ?>
 					<p class="bv-form__error" role="alert" hidden></p>
 					<button type="submit" class="bv-button bv-button--solid">ثبت و ادامه</button>
 				</form>
@@ -156,7 +189,7 @@ class Bavar_Frontend {
 	}
 
 	/**
-	 * [bavar_paths] — the four entry cards.
+	 * [bavar_paths] — the four section cards.
 	 *
 	 * @return string
 	 */
@@ -168,11 +201,11 @@ class Bavar_Frontend {
 			++$i;
 			?>
 			<a class="bv-path" href="<?php echo esc_url( Bavar_Settings::path_target( $key ) ); ?>" data-bv-path="<?php echo esc_attr( $key ); ?>">
-				<span class="bv-path__num" dir="ltr"><?php echo esc_html( sprintf( '%02d', $i ) ); ?></span>
-				<span class="bv-path__en" dir="ltr"><?php echo esc_html( $path['en'] ); ?></span>
+				<span class="bv-path__num"><?php echo esc_html( bavar_fa_num( sprintf( '%02d', $i ) ) ); ?></span>
 				<span class="bv-path__title"><?php echo esc_html( $path['title'] ); ?></span>
-				<span class="bv-path__sub"><?php echo esc_html( $path['subtitle'] ); ?></span>
-				<span class="bv-path__desc"><?php echo esc_html( $path['desc'] ); ?></span>
+				<?php if ( $path['desc'] ) : ?>
+					<span class="bv-path__desc"><?php echo esc_html( $path['desc'] ); ?></span>
+				<?php endif; ?>
 				<span class="bv-path__cta"><?php echo esc_html( $path['cta'] ); ?> <i aria-hidden="true">←</i></span>
 			</a>
 			<?php
@@ -182,45 +215,59 @@ class Bavar_Frontend {
 	}
 
 	/**
-	 * [bavar_request path="simorgh|consult"] — inline request form.
+	 * [bavar_request path="simorgh|consult" fields="phone" title="…" button="…"]
 	 *
 	 * @param array $atts Attributes.
 	 * @return string
 	 */
 	public static function shortcode_request( $atts ) {
-		$atts = shortcode_atts( [ 'path' => 'consult' ], $atts );
+		$atts = shortcode_atts(
+			[
+				'path'   => 'consult',
+				'fields' => '',
+				'title'  => '',
+				'button' => '',
+			],
+			$atts
+		);
 		$key  = sanitize_key( $atts['path'] );
 		$path = Bavar_Settings::path( $key );
 		if ( ! $path ) {
 			return '';
 		}
+		$fields = $atts['fields'] ? array_values( array_intersect( array_keys( Bavar_CRM::person_fields() ), array_map( 'trim', explode( ',', $atts['fields'] ) ) ) ) : Bavar_Settings::fields( $key );
+		if ( ! in_array( 'phone', $fields, true ) ) {
+			$fields[] = 'phone';
+		}
+		$questions = Bavar_Settings::questions( $key );
+
 		ob_start();
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( ! empty( $_GET['bavar_sent'] ) ) {
 			?>
-			<div class="bv-request bv-request--done">
-				<p class="bv-request__mark" dir="ltr">THANK YOU</p>
+			<div class="bv-request bv-request--done" id="bv-request">
 				<h3>درخواست شما ثبت شد</h3>
-				<p>تیم BAVAR GROUP به‌زودی با شما تماس می‌گیرد.</p>
+				<p>تیم گروه باور به‌زودی با شما تماس می‌گیرد.</p>
 			</div>
 			<?php
 			return ob_get_clean();
 		}
 		?>
-		<div class="bv-request">
-			<p class="bv-request__mark" dir="ltr"><?php echo esc_html( $path['en'] ); ?></p>
-			<h3><?php echo esc_html( $path['cta'] ); ?></h3>
+		<div class="bv-request" id="bv-request">
+			<h3><?php echo esc_html( $atts['title'] ?: $path['cta'] ); ?></h3>
 			<form class="bv-form" data-bv-form="path" data-bv-inline novalidate>
 				<input type="hidden" name="path" value="<?php echo esc_attr( $key ); ?>">
-				<?php foreach ( [ 1, 2, 3 ] as $i ) : ?>
+				<input type="hidden" name="inline" value="1">
+				<input type="hidden" name="fields" value="<?php echo esc_attr( implode( ',', $fields ) ); ?>">
+				<?php foreach ( $questions as $i => $question ) : ?>
 					<label class="bv-field bv-field--q">
-						<span><em><?php echo esc_html( bavar_fa_num( '0' . $i ) ); ?></em> <b><?php echo esc_html( $path[ 'q' . $i ] ); ?></b></span>
-						<textarea name="a<?php echo esc_attr( $i ); ?>" rows="2" required></textarea>
+						<span><b><?php echo esc_html( $question ); ?></b></span>
+						<textarea name="a<?php echo esc_attr( $i + 1 ); ?>" rows="2" required></textarea>
 					</label>
 				<?php endforeach; ?>
-				<div class="bv-form__person"><?php self::person_fields( 'bv-r-' . $key ); ?></div>
+				<?php self::person_inputs( 'bv-r-' . $key, $fields ); ?>
 				<p class="bv-form__error" role="alert" hidden></p>
-				<button type="submit" class="bv-button bv-button--solid">ثبت درخواست</button>
+				<button type="submit" class="bv-button bv-button--solid"><?php echo esc_html( $atts['button'] ?: 'ثبت درخواست' ); ?></button>
 			</form>
 		</div>
 		<?php
