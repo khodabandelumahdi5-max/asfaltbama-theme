@@ -208,6 +208,13 @@ function asfaltbama_importer_run( $manifest, $update_existing = true ) {
 	// 4. Posts.
 	foreach ( $manifest['posts'] as $item ) {
 		$category = get_category_by_slug( $item['category'] );
+		if ( ! $category && ! empty( $item['category_name'] ) ) {
+			$term = wp_insert_term( $item['category_name'], 'category', [ 'slug' => $item['category'] ] );
+			if ( ! is_wp_error( $term ) ) {
+				$category = get_term( $term['term_id'], 'category' );
+				$log[]    = '✅ دسته‌بندی «' . $item['category_name'] . '» ساخته شد';
+			}
+		}
 		$id       = asfaltbama_importer_upsert(
 			'post',
 			$item['slug'],

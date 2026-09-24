@@ -283,10 +283,26 @@ function asfaltbama_strip_widget_seo_tags( $content, $widget ) {
 	$content = preg_replace( '#<meta\b(?![^>]*\bitemprop=)[^>]*>#i', '', $content );
 	$content = preg_replace( '#<link\b[^>]*\brel=["\']?canonical\b[^>]*>#i', '', $content );
 
+	// The same JSON-LD pasted into two widgets on one page (e.g. the Service
+	// schema on /asphalt-joint-sealing/): keep the first. Kept here, not in
+	// the closure: each closure instance would get its own fresh statics.
+	static $seen = [];
+
 	return preg_replace_callback(
 		'#<script\b[^>]*application/ld\+json[^>]*>(.*?)</script>#is',
-		function ( $m ) {
-			return asfaltbama_is_business_json_ld( $m[1] ) ? '' : $m[0];
+		function ( $m ) use ( &$seen ) {
+			if ( asfaltbama_is_business_json_ld( $m[1] ) ) {
+				return '';
+			}
+
+			$decoded     = json_decode( $m[1], true );
+			$key         = md5( null === $decoded ? trim( $m[1] ) : wp_json_encode( $decoded ) );
+			if ( isset( $seen[ $key ] ) ) {
+				return '';
+			}
+			$seen[ $key ] = true;
+
+			return $m[0];
 		},
 		$content
 	);
