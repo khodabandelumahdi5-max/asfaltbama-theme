@@ -269,42 +269,4 @@ if ( ! function_exists( 'hello_elementor_body_open' ) ) {
 }
 
 require HELLO_THEME_PATH . '/theme.php';
-/* Dynamic Reading Time Shortcode */
-function webrra_reading_time_shortcode() {
-
-    if ( ! is_singular() ) {
-        return '';
-    }
-
-    global $post;
-
-    $content = strip_shortcodes( $post->post_content );
-    $content = wp_strip_all_tags( $content );
-
-    $words = str_word_count( wp_strip_all_tags( $content ) );
-
-    // سرعت مطالعه (کلمات در دقیقه)
-    $wpm = 200;
-
-    $minutes = max(1, ceil($words / $wpm));
-
-    return '<div class="webrra-reading-time">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12,6 12,12 16,14"/>
-                </svg>
-                <span>'.$minutes.' دقیقه مطالعه</span>
-            </div>';
-}
-function article_category_badge_shortcode() {
-    $categories = get_the_category();
-
-    if (empty($categories)) {
-        return '';
-    }
-
-    return '<div class="card-category-badge">' . esc_html($categories[0]->name) . '</div>';
-}
-add_shortcode('article_category_badge', 'article_category_badge_shortcode');
-add_shortcode('reading_time','webrra_reading_time_shortcode');
 HelloTheme\Theme::instance();
