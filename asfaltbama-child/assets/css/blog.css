@@ -1091,3 +1091,59 @@
 	color: #d97706;
 	font-weight: 900;
 }
+
+/* ------------------------------------------------ Brand watermark */
+/* The Asfaltbama badge as a faint watermark in the navy hero of the
+   articles pages and in the consultation band. */
+
+.abm-hero > .abm-wrap {
+	position: relative;
+	z-index: 1;
+}
+
+.abm-hero::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: max(16px, calc(50% - 620px));
+	width: 260px;
+	height: 260px;
+	background: url("../images/logo-light.webp") center / contain no-repeat;
+	opacity: 0.09;
+	transform: translateY(-50%) rotate(-12deg);
+	pointer-events: none;
+}
+
+@media (max-width: 899px) {
+	.abm-hero::before {
+		top: auto;
+		bottom: -40px;
+		left: -40px;
+		width: 190px;
+		height: 190px;
+		transform: rotate(-12deg);
+	}
+}
+
+.abm-cta {
+	position: relative;
+	overflow: hidden;
+}
+
+.abm-cta > * {
+	position: relative;
+	z-index: 1;
+}
+
+.abm-cta::after {
+	content: "";
+	position: absolute;
+	bottom: -50px;
+	left: -30px;
+	width: 200px;
+	height: 200px;
+	background: url("../images/logo-light.webp") center / contain no-repeat;
+	opacity: 0.08;
+	transform: rotate(-12deg);
+	pointer-events: none;
+}

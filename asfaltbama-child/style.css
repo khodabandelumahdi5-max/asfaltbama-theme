@@ -5,7 +5,7 @@
 	Author: Asfaltbama
 	Author URI: https://asfaltbama.com/
 	Template: hello-elementor
-	Version: 1.8.0
+	Version: 1.9.0
 	Requires at least: 6.0
 	Requires PHP: 7.4
 	License: GNU General Public License v3 or later.
@@ -34,6 +34,66 @@
 html body,
 body :where(h1, h2, h3, h4, h5, h6, p, a, span, strong, b, em, small, li, dt, dd, td, th, caption, label, legend, blockquote, figcaption, cite, time, summary, button, input, select, textarea, div, section, article, aside, nav, header, footer, main):not([class*="eicon-"]):not([class^="fa"]):not([class*=" fa"]):not(.dashicons):not(.ab-icon) {
 	font-family: "Vazirmatn", Tahoma, "Segoe UI", sans-serif !important;
+}
+
+/*
+ * Brand logo in the header (Elementor HTML widget, .abm-hdr-*): replaces
+ * the 🛣️ emoji tile with the Asfaltbama badge. The light (white disc)
+ * version is used because the header is navy.
+ */
+.abm-hdr-wrap .abm-hdr-logo-icon {
+	flex: none !important;
+	width: 58px !important;
+	height: 58px !important;
+	border-radius: 50% !important;
+	background: transparent url("assets/images/logo-light-128.webp") center / contain no-repeat !important;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+	color: transparent !important;
+	font-size: 0 !important;
+	line-height: 0 !important;
+}
+
+.abm-hdr-wrap .abm-hdr-logo-icon > * {
+	display: none !important;
+}
+
+@media (max-width: 767px) {
+	.abm-hdr-wrap .abm-hdr-logo-icon {
+		width: 42px !important;
+		height: 42px !important;
+	}
+}
+
+/* Phones: keep the brand name on one line and shorten the call button to
+   the icon and number (it wrapped onto two lines before). */
+@media (max-width: 480px) {
+	.abm-hdr-wrap .abm-hdr-brand {
+		gap: 8px !important;
+	}
+
+	.abm-hdr-wrap .abm-hdr-title strong {
+		font-size: 17px !important;
+		white-space: nowrap !important;
+	}
+
+	.abm-hdr-wrap .abm-hdr-title span {
+		font-size: 10.5px !important;
+		white-space: nowrap !important;
+	}
+
+	.abm-hdr-wrap .abm-call-btn {
+		padding: 8px 12px !important;
+		white-space: nowrap !important;
+	}
+
+	.abm-hdr-wrap .abm-call-btn > span:first-child {
+		display: none !important;
+	}
+
+	.abm-hdr-wrap .abm-call-btn::before {
+		content: "📞";
+		margin-left: 6px;
+	}
 }
 
 /* Articles pages and cards: assets/css/blog.css */

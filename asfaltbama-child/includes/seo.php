@@ -103,7 +103,7 @@ function asfaltbama_business_data() {
 		$logo = wp_get_attachment_image_url( $logo_id, 'full' );
 	}
 	if ( ! $logo ) {
-		$logo = get_site_icon_url( 512 );
+		$logo = get_stylesheet_directory_uri() . '/assets/images/logo.png';
 	}
 
 	$data = [
