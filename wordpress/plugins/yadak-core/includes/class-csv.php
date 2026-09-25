@@ -30,8 +30,7 @@ class Yadak_CSV {
 		foreach ( Yadak_Part_Data::fields() as $meta_key => $label ) {
 			$columns[ ltrim( $meta_key, '_' ) ] = array( $meta_key, $label );
 		}
-		foreach ( yadak_price_tiers() as $tier => $label ) {
-			$meta_key                            = Yadak_Pricing::meta_key( $tier );
+		foreach ( Yadak_Pricing::fields() as $meta_key => $label ) {
 			$columns[ ltrim( $meta_key, '_' ) ] = array( $meta_key, $label );
 		}
 		return $columns;

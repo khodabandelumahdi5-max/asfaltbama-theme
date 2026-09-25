@@ -25,6 +25,8 @@ class Yadak_Part_Data {
 			'_yadak_quality'     => __( 'کیفیت', 'yadak-core' ),
 			'_yadak_origin'      => __( 'کشور سازنده', 'yadak-core' ),
 			'_yadak_warranty'    => __( 'گارانتی', 'yadak-core' ),
+			'_yadak_replace_days' => __( 'دوره تعویض (روز)', 'yadak-core' ),
+			'_yadak_moodian_id'  => __( 'شناسه کالا (مودیان)', 'yadak-core' ),
 		);
 	}
 
@@ -106,6 +108,24 @@ class Yadak_Part_Data {
 				'id'          => '_yadak_warranty',
 				'label'       => __( 'گارانتی', 'yadak-core' ),
 				'placeholder' => __( 'مثلاً: ۶ ماه ضمانت اصالت و سلامت', 'yadak-core' ),
+			)
+		);
+		woocommerce_wp_text_input(
+			array(
+				'id'                => '_yadak_replace_days',
+				'label'             => __( 'دوره تعویض (روز)', 'yadak-core' ),
+				'type'              => 'number',
+				'custom_attributes' => array( 'min' => 0 ),
+				'desc_tip'          => true,
+				'description'       => __( 'برای قطعات مصرفی (لنت، فیلتر، روغن، تسمه). این تعداد روز بعد از تحویل سفارش، به مشتری یادآوری تعویض ارسال می‌شود. خالی = بدون یادآوری.', 'yadak-core' ),
+			)
+		);
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_yadak_moodian_id',
+				'label'       => __( 'شناسه کالا (مودیان)', 'yadak-core' ),
+				'desc_tip'    => true,
+				'description' => __( 'شناسه ۱۳ رقمی کالا/خدمت در سامانه مودیان، برای خروجی صورتحساب.', 'yadak-core' ),
 			)
 		);
 		echo '</div></div>';

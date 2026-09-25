@@ -15,16 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 $yadak_has_wc = class_exists( 'WooCommerce' );
-$yadak_makes  = taxonomy_exists( 'yadak_vehicle' ) ? get_terms(
-	array(
-		'taxonomy'   => 'yadak_vehicle',
-		'parent'     => 0,
-		'hide_empty' => false,
-		'number'     => 12,
-		'orderby'    => 'count',
-		'order'      => 'DESC',
-	)
-) : array();
+$yadak_makes  = class_exists( 'Yadak_Fitment' ) ? Yadak_Fitment::makes_by_origin() : array();
+$yadak_origin = class_exists( 'Yadak_Fitment' ) ? Yadak_Fitment::origins() : array();
 $yadak_cats   = $yadak_has_wc ? get_terms(
 	array(
 		'taxonomy'   => 'product_cat',
@@ -43,30 +35,56 @@ $yadak_cats   = $yadak_has_wc ? get_terms(
 			<div class="yadak-hero__copy">
 				<h1><?php echo esc_html( yadak_opt( 'hero_title' ) ); ?></h1>
 				<p><?php echo esc_html( yadak_opt( 'hero_subtitle' ) ); ?></p>
+				<div class="yadak-hero__panel">
+					<?php
+					if ( shortcode_exists( 'yadak_vehicle_selector' ) ) {
+						echo do_shortcode( '[yadak_vehicle_selector]' );
+					}
+					?>
+					<div class="yadak-hero__or"><span><?php esc_html_e( 'یا جستجو با نام یا شماره فنی', 'yadak-child' ); ?></span></div>
+					<?php yadak_search_form( 'yadak-hero-s' ); ?>
+				</div>
 			</div>
-			<div class="yadak-hero__panel">
-				<?php
-				if ( shortcode_exists( 'yadak_vehicle_selector' ) ) {
-					echo do_shortcode( '[yadak_vehicle_selector]' );
-				}
-				?>
-				<div class="yadak-hero__or"><span><?php esc_html_e( 'یا جستجو با نام یا شماره فنی', 'yadak-child' ); ?></span></div>
-				<?php yadak_search_form( 'yadak-hero-s' ); ?>
+			<div class="yadak-stage">
+				<div class="yadak-stage__canvas">
+					<div class="yadak-stage__loading" aria-hidden="true"></div>
+					<div class="yadak-stage__tip" hidden></div>
+				</div>
+				<p class="yadak-stage__hint"><?php esc_html_e( 'خودرو را بچرخانید و روی هر قطعه بزنید', 'yadak-child' ); ?></p>
+				<nav class="yadak-stage__chips" aria-label="<?php esc_attr_e( 'دسته‌های قطعات بدنه و چراغ', 'yadak-child' ); ?>">
+					<?php
+					$yadak_seen = array();
+					foreach ( yadak_3d_parts() as $yadak_key => $yadak_part ) {
+						if ( isset( $yadak_seen[ $yadak_part['label'] ] ) ) {
+							continue;
+						}
+						$yadak_seen[ $yadak_part['label'] ] = true;
+						echo '<a data-part="' . esc_attr( $yadak_key ) . '" href="' . esc_url( $yadak_part['url'] ) . '">' . esc_html( $yadak_part['label'] ) . '</a>';
+					}
+					?>
+				</nav>
 			</div>
 		</div>
 	</section>
 
-	<?php if ( ! is_wp_error( $yadak_makes ) && $yadak_makes ) : ?>
+	<?php if ( $yadak_makes ) : ?>
 		<section class="yadak-section">
 			<div class="yadak-container">
 				<div class="yadak-section__head">
-					<h2><?php esc_html_e( 'خرید بر اساس خودرو', 'yadak-child' ); ?></h2>
+					<h2><?php esc_html_e( 'قطعه بر اساس خودرو', 'yadak-child' ); ?></h2>
 				</div>
-				<ul class="yadak-makes">
-					<?php foreach ( $yadak_makes as $yadak_make ) : ?>
-						<li><a href="<?php echo esc_url( get_term_link( $yadak_make ) ); ?>"><?php echo esc_html( $yadak_make->name ); ?></a></li>
+				<div class="yadak-origins">
+					<?php foreach ( $yadak_makes as $yadak_key => $yadak_group ) : ?>
+						<div class="yadak-origin yadak-origin--<?php echo esc_attr( $yadak_key ); ?>">
+							<h3><?php echo esc_html( $yadak_origin[ $yadak_key ] ); ?></h3>
+							<ul class="yadak-makes">
+								<?php foreach ( $yadak_group as $yadak_make ) : ?>
+									<li><a href="<?php echo esc_url( get_term_link( $yadak_make ) ); ?>"><?php echo esc_html( $yadak_make->name ); ?></a></li>
+								<?php endforeach; ?>
+							</ul>
+						</div>
 					<?php endforeach; ?>
-				</ul>
+				</div>
 			</div>
 		</section>
 	<?php endif; ?>

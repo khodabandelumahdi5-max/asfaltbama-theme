@@ -37,16 +37,29 @@ class Yadak_Pricing {
 		return '_yadak_price_' . $tier;
 	}
 
+	/**
+	 * Extra price fields: meta key => label. Cost price is internal (never shown to customers).
+	 *
+	 * @return array<string,string>
+	 */
+	public static function fields() {
+		$fields = array( '_yadak_cost' => __( 'قیمت خرید / بهای تمام‌شده', 'yadak-core' ) );
+		foreach ( yadak_price_tiers() as $tier => $label ) {
+			$fields[ self::meta_key( $tier ) ] = $label;
+		}
+		return $fields;
+	}
+
 	public static function simple_fields() {
 		echo '<div class="options_group yadak-tier-prices">';
-		foreach ( yadak_price_tiers() as $tier => $label ) {
+		foreach ( self::fields() as $key => $label ) {
 			woocommerce_wp_text_input(
 				array(
-					'id'          => self::meta_key( $tier ),
+					'id'          => $key,
 					'label'       => $label . ' (' . get_woocommerce_currency_symbol() . ')',
 					'data_type'   => 'price',
 					'desc_tip'    => true,
-					'description' => __( 'خالی بگذارید تا این گروه قیمت عادی را ببیند.', 'yadak-core' ),
+					'description' => '_yadak_cost' === $key ? __( 'برای محاسبه سود و ارزش انبار؛ به مشتری نمایش داده نمی‌شود.', 'yadak-core' ) : __( 'خالی بگذارید تا این گروه قیمت عادی را ببیند.', 'yadak-core' ),
 				)
 			);
 		}
@@ -58,22 +71,21 @@ class Yadak_Pricing {
 	 */
 	public static function save_simple( $product ) {
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the product save nonce.
-		foreach ( array_keys( yadak_price_tiers() ) as $tier ) {
-			$key = self::meta_key( $tier );
+		foreach ( array_keys( self::fields() ) as $key ) {
 			if ( isset( $_POST[ $key ] ) ) {
-				$product->update_meta_data( $key, wc_format_decimal( wp_unslash( $_POST[ $key ] ) ) );
+				$product->update_meta_data( $key, wc_format_decimal( yadak_normalize_digits( wp_unslash( $_POST[ $key ] ) ) ) );
 			}
 		}
 		// phpcs:enable
 	}
 
 	public static function variation_fields( $loop, $variation_data, $variation ) {
-		foreach ( yadak_price_tiers() as $tier => $label ) {
+		foreach ( self::fields() as $key => $label ) {
 			woocommerce_wp_text_input(
 				array(
-					'id'            => self::meta_key( $tier ) . '_' . $loop,
-					'name'          => self::meta_key( $tier ) . '[' . $loop . ']',
-					'value'         => wc_format_localized_price( get_post_meta( $variation->ID, self::meta_key( $tier ), true ) ),
+					'id'            => $key . '_' . $loop,
+					'name'          => $key . '[' . $loop . ']',
+					'value'         => wc_format_localized_price( get_post_meta( $variation->ID, $key, true ) ),
 					'label'         => $label . ' (' . get_woocommerce_currency_symbol() . ')',
 					'data_type'     => 'price',
 					'wrapper_class' => 'form-row form-row-first',
@@ -88,10 +100,9 @@ class Yadak_Pricing {
 	 */
 	public static function save_variation( $variation, $i ) {
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the variations nonce.
-		foreach ( array_keys( yadak_price_tiers() ) as $tier ) {
-			$key = self::meta_key( $tier );
+		foreach ( array_keys( self::fields() ) as $key ) {
 			if ( isset( $_POST[ $key ][ $i ] ) ) {
-				$variation->update_meta_data( $key, wc_format_decimal( wp_unslash( $_POST[ $key ][ $i ] ) ) );
+				$variation->update_meta_data( $key, wc_format_decimal( yadak_normalize_digits( wp_unslash( $_POST[ $key ][ $i ] ) ) ) );
 			}
 		}
 		// phpcs:enable
@@ -110,6 +121,20 @@ class Yadak_Pricing {
 		}
 		$value = $product->get_meta( self::meta_key( $tier ), true, 'edit' );
 		return ( '' === $value || null === $value ) ? null : (float) $value;
+	}
+
+	/**
+	 * Price a given customer pays (used for quotes and admin tools, where the
+	 * current user is staff, not the customer).
+	 *
+	 * @param WC_Product $product Product.
+	 * @param int        $user_id Customer.
+	 * @return float
+	 */
+	public static function price_for_user( $product, $user_id ) {
+		$base = (float) $product->get_price( 'edit' );
+		$tier = self::tier_price( $product, yadak_get_price_tier( $user_id ) );
+		return ( null !== $tier && ( ! $base || $tier < $base ) ) ? $tier : $base;
 	}
 
 	/**

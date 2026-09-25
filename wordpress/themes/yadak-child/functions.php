@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'YADAK_CHILD_VERSION', '0.1.0' );
+define( 'YADAK_CHILD_VERSION', '0.2.0' );
 
 /**
  * Theme option with default.
@@ -27,8 +27,8 @@ function yadak_opt( $key ) {
 		'phone'         => '021-00000000',
 		'hours'         => 'شنبه تا پنجشنبه ۹ تا ۱۸',
 		'address'       => 'تهران',
-		'hero_title'    => 'قطعه درست، برای خودروی شما',
-		'hero_subtitle' => 'خودروی‌تان را انتخاب کنید تا فقط قطعات سازگار را ببینید؛ با ضمانت اصالت، فاکتور رسمی و ارسال به سراسر ایران.',
+		'hero_title'    => 'داروخانه تخصصی خودروهای چینی، ژاپنی و کره‌ای',
+		'hero_subtitle' => 'هر قطعه‌ای که خودروی شما لازم دارد، با شماره فنی دقیق و ضمانت اصالت. خودروی‌تان را انتخاب کنید تا فقط قطعات سازگار را ببینید.',
 		'b2b_url'       => '',
 		'trust_seal'    => '',
 	);
@@ -48,6 +48,18 @@ add_action(
 			wp_enqueue_style( 'yadak-shop', get_stylesheet_directory_uri() . '/assets/css/shop.css', array( 'yadak-child' ), YADAK_CHILD_VERSION );
 		}
 		wp_enqueue_script( 'yadak-child', get_stylesheet_directory_uri() . '/assets/js/theme.js', array(), YADAK_CHILD_VERSION, true );
+
+		if ( is_front_page() ) {
+			wp_enqueue_script( 'yadak-hero3d', get_stylesheet_directory_uri() . '/assets/js/hero3d.js', array(), YADAK_CHILD_VERSION, true );
+			wp_localize_script(
+				'yadak-hero3d',
+				'yadak3d',
+				array(
+					'module' => get_stylesheet_directory_uri() . '/assets/vendor/three.module.js',
+					'parts'  => yadak_3d_parts(),
+				)
+			);
+		}
 	},
 	20
 );
@@ -129,6 +141,49 @@ function yadak_sanitize_seal( $html ) {
 			'img' => array( 'src' => true, 'alt' => true, 'style' => true, 'id' => true, 'code' => true, 'referrerpolicy' => true, 'width' => true, 'height' => true ),
 		)
 	);
+}
+
+/**
+ * Clickable parts of the 3D car → category pages. Each part tries its own
+ * category slug, then a parent slug; with a remembered vehicle the link goes
+ * to that vehicle's page for the category. Slugs can be changed with the
+ * `yadak_3d_parts` filter.
+ *
+ * @return array<string,array{url:string,label:string}>
+ */
+function yadak_3d_parts() {
+	$defs = apply_filters(
+		'yadak_3d_parts',
+		array(
+			'headlights'   => array( __( 'چراغ جلو', 'yadak-child' ), array( 'headlights', 'lights' ) ),
+			'taillights'   => array( __( 'چراغ خطر عقب', 'yadak-child' ), array( 'taillights', 'lights' ) ),
+			'fog'          => array( __( 'مه‌شکن', 'yadak-child' ), array( 'fog-lights', 'lights' ) ),
+			'front_bumper' => array( __( 'سپر جلو', 'yadak-child' ), array( 'front-bumper', 'bumpers' ) ),
+			'rear_bumper'  => array( __( 'سپر عقب', 'yadak-child' ), array( 'rear-bumper', 'bumpers' ) ),
+			'grille'       => array( __( 'جلوپنجره', 'yadak-child' ), array( 'grille', 'bumpers' ) ),
+			'mirrors'      => array( __( 'آینه بغل', 'yadak-child' ), array( 'mirrors', 'bumpers' ) ),
+			'accessories'  => array( __( 'باربند', 'yadak-child' ), array( 'racks-steps', 'accessories' ) ),
+			'steps'        => array( __( 'رکاب', 'yadak-child' ), array( 'racks-steps', 'accessories' ) ),
+		)
+	);
+	$vehicle = class_exists( 'Yadak_Fitment' ) ? Yadak_Fitment::current_vehicle() : null;
+	$shop    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/' );
+	$parts   = array();
+	foreach ( $defs as $key => $def ) {
+		$url = $shop;
+		foreach ( $def[1] as $slug ) {
+			$term = get_term_by( 'slug', $slug, 'product_cat' );
+			if ( $term ) {
+				$url = ( $vehicle && class_exists( 'Yadak_SEO' ) ) ? Yadak_SEO::url( $vehicle, $term ) : get_term_link( $term );
+				break;
+			}
+		}
+		$parts[ $key ] = array(
+			'url'   => is_wp_error( $url ) ? $shop : $url,
+			'label' => $def[0],
+		);
+	}
+	return $parts;
 }
 
 /**

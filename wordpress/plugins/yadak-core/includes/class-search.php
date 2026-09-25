@@ -26,6 +26,8 @@ class Yadak_Search {
 		add_filter( 'posts_search', array( __CLASS__, 'posts_search' ), 20, 2 );
 		add_action( 'admin_post_yadak_reindex', array( __CLASS__, 'admin_reindex' ) );
 		add_filter( 'plugin_action_links_' . plugin_basename( YADAK_CORE_FILE ), array( __CLASS__, 'plugin_links' ) );
+		add_action( 'template_redirect', array( __CLASS__, 'maybe_correct' ), 5 );
+		add_action( 'woocommerce_archive_description', array( __CLASS__, 'corrected_notice' ), 1 );
 
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			WP_CLI::add_command(
@@ -78,6 +80,141 @@ class Yadak_Search {
 
 		$index = ' ' . yadak_normalize( implode( ' | ', array_filter( array_map( 'strval', $parts ) ) ) ) . ' ';
 		update_post_meta( $product_id, self::META, $index );
+		delete_transient( 'yadak_search_vocab' );
+	}
+
+	/* ---------- Typo tolerance ---------- */
+
+	/**
+	 * All words in the search index, as a set.
+	 *
+	 * @return array<string,true>
+	 */
+	public static function vocabulary() {
+		$vocab = get_transient( 'yadak_search_vocab' );
+		if ( is_array( $vocab ) ) {
+			return $vocab;
+		}
+		global $wpdb;
+		$vocab = array();
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+		$rows = $wpdb->get_col( $wpdb->prepare( "SELECT meta_value FROM {$wpdb->postmeta} WHERE meta_key = %s", self::META ) );
+		foreach ( $rows as $row ) {
+			foreach ( preg_split( '/[^\p{L}\p{N}]+/u', $row, -1, PREG_SPLIT_NO_EMPTY ) as $word ) {
+				$len = mb_strlen( $word );
+				if ( $len >= 2 && $len <= 30 ) {
+					$vocab[ $word ] = true;
+				}
+			}
+			if ( count( $vocab ) > 60000 ) {
+				break;
+			}
+		}
+		set_transient( 'yadak_search_vocab', $vocab, DAY_IN_SECONDS );
+		return $vocab;
+	}
+
+	/**
+	 * Levenshtein distance on characters (not bytes), for Persian text.
+	 */
+	public static function distance( $a, $b ) {
+		$map = array();
+		$enc = static function ( $str ) use ( &$map ) {
+			$out = '';
+			foreach ( preg_split( '//u', $str, -1, PREG_SPLIT_NO_EMPTY ) as $ch ) {
+				if ( ! isset( $map[ $ch ] ) ) {
+					$map[ $ch ] = chr( count( $map ) % 256 );
+				}
+				$out .= $map[ $ch ];
+			}
+			return $out;
+		};
+		return levenshtein( $enc( $a ), $enc( $b ) );
+	}
+
+	/**
+	 * Closest indexed spelling of a query, or '' when nothing better exists.
+	 *
+	 * @param string $query Raw query.
+	 * @return string
+	 */
+	public static function suggest( $query ) {
+		$vocab   = self::vocabulary();
+		$words   = preg_split( '/\s+/u', yadak_normalize( $query ), -1, PREG_SPLIT_NO_EMPTY );
+		$changed = false;
+		foreach ( $words as $i => $word ) {
+			$len = mb_strlen( $word );
+			if ( isset( $vocab[ $word ] ) || $len < 3 || preg_match( '/^\d+$/', $word ) ) {
+				continue;
+			}
+			$max  = $len <= 5 ? 1 : 2;
+			$best = '';
+			$dist = $max + 1;
+			foreach ( $vocab as $candidate => $unused ) {
+				if ( abs( mb_strlen( $candidate ) - $len ) > $max ) {
+					continue;
+				}
+				$d = self::distance( $word, $candidate );
+				if ( $d < $dist ) {
+					$dist = $d;
+					$best = $candidate;
+					if ( 1 === $d ) {
+						break;
+					}
+				}
+			}
+			if ( $best ) {
+				$words[ $i ] = $best;
+				$changed     = true;
+			}
+		}
+		return $changed ? implode( ' ', $words ) : '';
+	}
+
+	/**
+	 * No results? Retry once with the closest spelling.
+	 */
+	public static function maybe_correct() {
+		global $wp_query;
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! is_search() || isset( $_GET['yadak_from'] ) || $wp_query->found_posts > 0 || 'product' !== get_query_var( 'post_type' ) ) {
+			return;
+		}
+		$query      = get_search_query( false );
+		$suggestion = $query ? self::suggest( $query ) : '';
+		if ( ! $suggestion ) {
+			return;
+		}
+		wp_safe_redirect(
+			add_query_arg(
+				array(
+					's'          => rawurlencode( $suggestion ),
+					'post_type'  => 'product',
+					'yadak_from' => rawurlencode( $query ),
+				),
+				home_url( '/' )
+			)
+		);
+		exit;
+	}
+
+	public static function corrected_notice() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! is_search() || empty( $_GET['yadak_from'] ) ) {
+			return;
+		}
+		$from = sanitize_text_field( wp_unslash( $_GET['yadak_from'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		printf(
+			'<p class="yadak-search-corrected">%s</p>',
+			esc_html(
+				sprintf(
+					/* translators: 1: original query, 2: corrected query */
+					__( 'نتیجه‌ای برای «%1$s» نبود؛ نتایج «%2$s» نمایش داده می‌شود.', 'yadak-core' ),
+					$from,
+					get_search_query( false )
+				)
+			)
+		);
 	}
 
 	/**

@@ -255,7 +255,7 @@ class Yadak_Credit {
 			}
 			if ( $e->due_date ) {
 				/* translators: %s: cheque due date */
-				$desc .= ' — ' . sprintf( __( 'سررسید %s', 'yadak-core' ), wp_date( 'Y/m/d', strtotime( $e->due_date ) ) );
+				$desc .= ' — ' . sprintf( __( 'سررسید %s', 'yadak-core' ), yadak_show_date( $e->due_date ) );
 			}
 			if ( $e->note ) {
 				$desc .= ' — ' . $e->note;
@@ -337,8 +337,8 @@ class Yadak_Credit {
 				</td>
 			</tr>
 			<tr>
-				<th><label for="yadak_payment_due"><?php esc_html_e( 'تاریخ سررسید چک (میلادی)', 'yadak-core' ); ?></label></th>
-				<td><input type="date" name="yadak_payment_due" id="yadak_payment_due" /></td>
+				<th><label for="yadak_payment_due"><?php esc_html_e( 'تاریخ سررسید چک', 'yadak-core' ); ?></label></th>
+				<td><input type="text" name="yadak_payment_due" id="yadak_payment_due" dir="ltr" placeholder="<?php echo esc_attr( yadak_date_input_value( yadak_today( '+30 days' ) ) ); ?>" /></td>
 			</tr>
 			<tr>
 				<th><label for="yadak_payment_note"><?php esc_html_e( 'شرح (شماره چک، بانک، ...)', 'yadak-core' ); ?></label></th>
@@ -360,7 +360,7 @@ class Yadak_Credit {
 			return;
 		}
 		$method = isset( $_POST['yadak_payment_method'] ) ? sanitize_key( $_POST['yadak_payment_method'] ) : 'other';
-		$due    = isset( $_POST['yadak_payment_due'] ) ? sanitize_text_field( wp_unslash( $_POST['yadak_payment_due'] ) ) : '';
+		$due    = yadak_parse_date_input( isset( $_POST['yadak_payment_due'] ) ? sanitize_text_field( wp_unslash( $_POST['yadak_payment_due'] ) ) : '' );
 		self::add_entry(
 			array(
 				'user_id'  => $user_id,

@@ -28,6 +28,107 @@ class Yadak_Fitment {
 		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'fit_notice' ), 25 );
 		add_filter( 'woocommerce_product_tabs', array( __CLASS__, 'product_tab' ) );
 		add_action( 'woocommerce_archive_description', array( __CLASS__, 'archive_notice' ), 5 );
+		add_action( self::TAXONOMY . '_add_form_fields', array( __CLASS__, 'origin_field_add' ) );
+		add_action( self::TAXONOMY . '_edit_form_fields', array( __CLASS__, 'origin_field_edit' ) );
+		add_action( 'created_' . self::TAXONOMY, array( __CLASS__, 'save_origin' ) );
+		add_action( 'edited_' . self::TAXONOMY, array( __CLASS__, 'save_origin' ) );
+		add_filter( 'manage_edit-' . self::TAXONOMY . '_columns', array( __CLASS__, 'origin_column' ) );
+		add_filter( 'manage_' . self::TAXONOMY . '_custom_column', array( __CLASS__, 'origin_column_value' ), 10, 3 );
+	}
+
+	/**
+	 * Countries of origin for car makes. The store specializes in the first
+	 * three; the order here is the order in the selector and on the homepage.
+	 *
+	 * @return array<string,string>
+	 */
+	public static function origins() {
+		return apply_filters(
+			'yadak_vehicle_origins',
+			array(
+				'cn'    => __( 'خودروهای چینی', 'yadak-core' ),
+				'jp'    => __( 'خودروهای ژاپنی', 'yadak-core' ),
+				'kr'    => __( 'خودروهای کره‌ای', 'yadak-core' ),
+				'ir'    => __( 'خودروهای ایرانی', 'yadak-core' ),
+				'eu'    => __( 'خودروهای اروپایی', 'yadak-core' ),
+				'other' => __( 'سایر', 'yadak-core' ),
+			)
+		);
+	}
+
+	/**
+	 * Top-level makes grouped by origin (only groups that have makes).
+	 *
+	 * @return array<string,WP_Term[]>
+	 */
+	public static function makes_by_origin() {
+		$groups = array_fill_keys( array_keys( self::origins() ), array() );
+		$makes  = get_terms(
+			array(
+				'taxonomy'   => self::TAXONOMY,
+				'parent'     => 0,
+				'hide_empty' => false,
+				'orderby'    => 'name',
+			)
+		);
+		if ( is_wp_error( $makes ) ) {
+			return array();
+		}
+		foreach ( $makes as $make ) {
+			$origin = get_term_meta( $make->term_id, 'yadak_origin', true );
+			$groups[ isset( $groups[ $origin ] ) ? $origin : 'other' ][] = $make;
+		}
+		return array_filter( $groups );
+	}
+
+	private static function origin_select( $value ) {
+		echo '<select name="yadak_origin" id="yadak_origin"><option value="">' . esc_html__( '— (فقط برای برند خودرو) —', 'yadak-core' ) . '</option>';
+		foreach ( self::origins() as $key => $label ) {
+			echo '<option value="' . esc_attr( $key ) . '" ' . selected( $value, $key, false ) . '>' . esc_html( $label ) . '</option>';
+		}
+		echo '</select>';
+		wp_nonce_field( 'yadak_origin', 'yadak_origin_nonce' );
+	}
+
+	public static function origin_field_add() {
+		echo '<div class="form-field"><label for="yadak_origin">' . esc_html__( 'کشور سازنده (برای برند خودرو)', 'yadak-core' ) . '</label>';
+		self::origin_select( '' );
+		echo '<p>' . esc_html__( 'برندها در انتخاب خودرو و صفحه اصلی بر اساس این گروه نمایش داده می‌شوند.', 'yadak-core' ) . '</p></div>';
+	}
+
+	public static function origin_field_edit( $term ) {
+		if ( $term->parent ) {
+			return;
+		}
+		echo '<tr class="form-field"><th scope="row"><label for="yadak_origin">' . esc_html__( 'کشور سازنده', 'yadak-core' ) . '</label></th><td>';
+		self::origin_select( get_term_meta( $term->term_id, 'yadak_origin', true ) );
+		echo '</td></tr>';
+	}
+
+	public static function save_origin( $term_id ) {
+		if ( ! isset( $_POST['yadak_origin'], $_POST['yadak_origin_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['yadak_origin_nonce'] ), 'yadak_origin' ) ) {
+			return;
+		}
+		$origin = sanitize_key( $_POST['yadak_origin'] );
+		if ( array_key_exists( $origin, self::origins() ) ) {
+			update_term_meta( $term_id, 'yadak_origin', $origin );
+		} else {
+			delete_term_meta( $term_id, 'yadak_origin' );
+		}
+	}
+
+	public static function origin_column( $columns ) {
+		$columns['yadak_origin'] = __( 'کشور', 'yadak-core' );
+		return $columns;
+	}
+
+	public static function origin_column_value( $value, $column, $term_id ) {
+		if ( 'yadak_origin' !== $column ) {
+			return $value;
+		}
+		$origins = self::origins();
+		$origin  = get_term_meta( $term_id, 'yadak_origin', true );
+		return isset( $origins[ $origin ] ) ? esc_html( $origins[ $origin ] ) : '';
 	}
 
 	public static function register_taxonomy() {
@@ -112,6 +213,22 @@ class Yadak_Fitment {
 	}
 
 	/**
+	 * Vehicle of the current archive (also on "vehicle + category" pages,
+	 * where the queried object may be the category).
+	 *
+	 * @return WP_Term|null
+	 */
+	public static function queried_vehicle() {
+		$slug = get_query_var( self::TAXONOMY );
+		if ( ! $slug || ! is_string( $slug ) ) {
+			$object = get_queried_object();
+			return ( $object instanceof WP_Term && self::TAXONOMY === $object->taxonomy ) ? $object : null;
+		}
+		$term = get_term_by( 'slug', wp_basename( $slug ), self::TAXONOMY );
+		return $term instanceof WP_Term ? $term : null;
+	}
+
+	/**
 	 * Currently selected vehicle term, or null.
 	 *
 	 * @return WP_Term|null
@@ -184,30 +301,51 @@ class Yadak_Fitment {
 	 * @param WP_Query $query Query.
 	 */
 	public static function include_parent_fitment( $query ) {
-		if ( is_admin() || ! $query->is_main_query() || ! $query->is_tax( self::TAXONOMY ) ) {
+		if ( is_admin() || ! $query->is_main_query() || ! $query->get( self::TAXONOMY ) ) {
 			return;
 		}
-		$term = get_queried_object();
+		$slug = $query->get( self::TAXONOMY );
+		$term = is_string( $slug ) ? get_term_by( 'slug', wp_basename( $slug ), self::TAXONOMY ) : null;
 		if ( ! $term instanceof WP_Term ) {
 			return;
 		}
-		$ids = array_merge( array( $term->term_id ), get_ancestors( $term->term_id, self::TAXONOMY, 'taxonomy' ) );
-		$query->set(
-			'tax_query',
+		$ids     = array_merge( array( $term->term_id ), get_ancestors( $term->term_id, self::TAXONOMY, 'taxonomy' ) );
+		$fitment = array(
+			'relation' => 'OR',
 			array(
-				'relation' => 'OR',
-				array(
-					'taxonomy'         => self::TAXONOMY,
-					'terms'            => $ids,
-					'include_children' => false,
-				),
-				array(
-					'taxonomy'         => self::TAXONOMY,
-					'terms'            => array( $term->term_id ),
-					'include_children' => true,
-				),
-			)
+				'taxonomy'         => self::TAXONOMY,
+				'terms'            => $ids,
+				'include_children' => false,
+			),
+			array(
+				'taxonomy'         => self::TAXONOMY,
+				'terms'            => array( $term->term_id ),
+				'include_children' => true,
+			),
 		);
+		$category = $query->get( 'product_cat' );
+		if ( $category ) {
+			// "Category + vehicle" page (/cars/…/part/<category>/).
+			$fitment = array(
+				'relation' => 'AND',
+				$fitment,
+				array(
+					'taxonomy' => 'product_cat',
+					'field'    => 'slug',
+					'terms'    => array( (string) $category ),
+				),
+			);
+		}
+		$query->set( 'tax_query', $fitment );
+	}
+
+	/**
+	 * Is this a vehicle archive (with or without a category)?
+	 *
+	 * @return bool
+	 */
+	public static function is_vehicle_archive() {
+		return is_archive() && null !== self::queried_vehicle() && '' !== (string) get_query_var( self::TAXONOMY );
 	}
 
 	/**
@@ -289,8 +427,18 @@ class Yadak_Fitment {
 							<option value=""><?php echo esc_html( $label ); ?></option>
 							<?php
 							if ( 0 === $i ) {
-								foreach ( self::children( 0 ) as $make ) {
-									printf( '<option value="%1$d">%2$s</option>', (int) $make['id'], esc_html( $make['name'] ) );
+								$groups  = self::makes_by_origin();
+								$origins = self::origins();
+								foreach ( $groups as $origin => $makes ) {
+									if ( count( $groups ) > 1 ) {
+										echo '<optgroup label="' . esc_attr( $origins[ $origin ] ) . '">';
+									}
+									foreach ( $makes as $make ) {
+										printf( '<option value="%1$d">%2$s</option>', (int) $make->term_id, esc_html( $make->name ) );
+									}
+									if ( count( $groups ) > 1 ) {
+										echo '</optgroup>';
+									}
 								}
 							}
 							?>
@@ -377,10 +525,13 @@ class Yadak_Fitment {
 	 * On a vehicle archive, show the full vehicle path and remember it.
 	 */
 	public static function archive_notice() {
-		if ( ! is_tax( self::TAXONOMY ) ) {
+		if ( ! self::is_vehicle_archive() ) {
 			return;
 		}
-		$term = get_queried_object();
+		$term = self::queried_vehicle();
+		if ( ! $term ) {
+			return;
+		}
 		printf(
 			'<p class="yadak-archive-vehicle">%s</p>',
 			esc_html(

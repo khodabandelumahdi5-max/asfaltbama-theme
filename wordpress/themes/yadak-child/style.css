@@ -2,7 +2,7 @@
 Theme Name:   Yadak Child
 Description:  قالب فروشگاه قطعات خودرو — فرزند Hello Elementor؛ راست‌به‌چپ، موبایل‌محور، با انتخاب خودرو و جستجوی شماره فنی. همراه با افزونه Yadak Core.
 Template:     hello-elementor
-Version:      0.1.0
+Version:      0.2.0
 Requires PHP: 7.4
 Text Domain:  yadak-child
 License:      GNU General Public License v3 or later
@@ -210,29 +210,64 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 
 .yadak-hero {
 	background:
-		radial-gradient(circle at 15% 20%, rgb(234 88 12 / 18%), transparent 45%),
+		radial-gradient(ellipse at 70% 60%, rgb(234 88 12 / 22%), transparent 55%),
+		radial-gradient(circle at 10% 10%, rgb(59 130 246 / 14%), transparent 40%),
 		linear-gradient(160deg, var(--y-ink) 0%, #111c33 60%, #0b1222 100%);
 	color: #e2e8f0;
-	padding-block: 40px 48px;
+	padding-block: 32px 40px;
+	overflow: hidden;
 }
-.yadak-hero__inner { display: grid; gap: 28px; align-items: center; }
-.yadak-hero h1 { color: #fff; font-size: clamp(26px, 5vw, 42px); font-weight: 900; margin-bottom: 12px; }
-.yadak-hero__copy p { font-size: 16px; color: #cbd5e1; max-width: 520px; margin: 0; }
+.yadak-hero__inner { display: grid; gap: 20px; align-items: center; }
+.yadak-hero h1 { color: #fff; font-size: clamp(24px, 4.4vw, 40px); font-weight: 900; margin-bottom: 10px; }
+.yadak-hero__copy > p { font-size: 15px; color: #cbd5e1; max-width: 540px; margin: 0 0 20px; }
 
 .yadak-hero__panel {
 	background: #fff; color: var(--y-text);
-	border-radius: 16px; padding: 20px; box-shadow: 0 20px 40px rgb(0 0 0 / 25%);
+	border-radius: 16px; padding: 18px;
+	box-shadow: 0 1px 0 rgb(255 255 255 / 60%) inset, 0 24px 48px -12px rgb(0 0 0 / 45%), 0 8px 16px rgb(0 0 0 / 18%);
 }
 .yadak-hero__or {
-	display: flex; align-items: center; gap: 12px; margin-block: 16px 12px;
+	display: flex; align-items: center; gap: 12px; margin-block: 14px 10px;
 	color: var(--y-muted); font-size: 13px;
 }
 .yadak-hero__or::before, .yadak-hero__or::after { content: ""; flex: 1; height: 1px; background: var(--y-line); }
 
+/* 3D stage */
+.yadak-stage { position: relative; order: -1; }
+.yadak-stage__canvas { position: relative; height: 260px; border-radius: 20px; }
+.yadak-stage__canvas canvas { display: block; width: 100% !important; height: 100% !important; cursor: grab; }
+.yadak-stage__loading {
+	position: absolute; inset: 20% 15%; border-radius: 50%;
+	background: radial-gradient(ellipse at center, rgb(234 88 12 / 25%), transparent 65%);
+	animation: yadak-pulse 1.6s ease-in-out infinite;
+}
+.yadak-stage.is-ready .yadak-stage__loading, .yadak-stage.is-fallback .yadak-stage__loading { display: none; }
+.yadak-stage.is-fallback .yadak-stage__canvas { height: 0; }
+.yadak-stage.is-fallback .yadak-stage__hint { display: none; }
+@keyframes yadak-pulse { 50% { opacity: .4; transform: scale(.94); } }
+@media (prefers-reduced-motion: reduce) { .yadak-stage__loading { animation: none; } }
+.yadak-stage__tip {
+	position: absolute; transform: translate(-50%, -140%); pointer-events: none; white-space: nowrap;
+	padding: 4px 10px; border-radius: 999px; background: #fff; color: var(--y-ink); font-size: 13px; font-weight: 800;
+	box-shadow: 0 6px 16px rgb(0 0 0 / 30%);
+}
+.yadak-stage__hint { text-align: center; font-size: 12px; color: #94a3b8; margin: 4px 0 10px; }
+.yadak-stage__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.yadak-stage__chips a {
+	display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px;
+	background: rgb(255 255 255 / 8%); border: 1px solid rgb(255 255 255 / 16%); color: #e2e8f0; font-size: 13px; font-weight: 700;
+	backdrop-filter: blur(6px); transition: background .15s, border-color .15s, transform .15s;
+}
+.yadak-stage__chips a:hover, .yadak-stage__chips a:focus-visible, .yadak-stage__chips a.is-active {
+	background: var(--y-accent); border-color: var(--y-accent); color: #fff; transform: translateY(-2px);
+}
+
 @media (min-width: 960px) {
-	.yadak-hero { padding-block: 72px 80px; }
-	.yadak-hero__inner { grid-template-columns: 1fr 480px; gap: 56px; }
-	.yadak-hero__panel { padding: 28px; }
+	.yadak-hero { padding-block: 48px 56px; }
+	.yadak-hero__inner { grid-template-columns: 440px 1fr; gap: 40px; }
+	.yadak-stage { order: 0; }
+	.yadak-stage__canvas { height: 440px; }
+	.yadak-hero__panel { padding: 24px; }
 }
 
 /* ---------- Vehicle selector (from Yadak Core) ---------- */
@@ -269,13 +304,19 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 }
 .yadak-makes a:hover { border-color: var(--y-ink); color: var(--y-ink); }
 
+.yadak-origins { display: grid; gap: 12px; grid-template-columns: 1fr; }
+.yadak-origin { padding: 16px; border: 1px solid var(--y-line); border-radius: var(--y-radius); background: var(--y-surface); }
+.yadak-origin h3 { font-size: 15px; margin: 0 0 10px; }
+.yadak-origin .yadak-makes a { min-height: 40px; padding: 0 14px; font-size: 14px; }
+@media (min-width: 900px) { .yadak-origins { grid-template-columns: repeat(3, 1fr); } }
+
 .yadak-cats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .yadak-cats a {
 	display: flex; align-items: center; gap: 12px; height: 100%; box-sizing: border-box;
 	padding: 14px; border: 1px solid var(--y-line); border-radius: var(--y-radius); background: #fff;
-	transition: border-color .15s, box-shadow .15s;
+	transition: border-color .15s, box-shadow .2s, transform .2s;
 }
-.yadak-cats a:hover { border-color: #cbd5e1; box-shadow: var(--y-shadow); }
+.yadak-cats a:hover { border-color: #cbd5e1; box-shadow: 0 14px 28px -10px rgb(15 23 42 / 25%); transform: translateY(-3px); }
 .yadak-cats__media { width: 52px; height: 52px; flex: none; border-radius: 10px; background: var(--y-surface); display: grid; place-items: center; overflow: hidden; }
 .yadak-cats__media img { width: 100%; height: 100%; object-fit: cover; }
 .yadak-cats__initial { font-size: 22px; font-weight: 900; color: var(--y-accent-ink); }

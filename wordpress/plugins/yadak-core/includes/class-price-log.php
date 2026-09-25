@@ -31,10 +31,7 @@ class Yadak_Price_Log {
 			'_regular_price' => __( 'قیمت عادی', 'yadak-core' ),
 			'_sale_price'    => __( 'قیمت حراج', 'yadak-core' ),
 		);
-		foreach ( yadak_price_tiers() as $tier => $label ) {
-			$keys[ Yadak_Pricing::meta_key( $tier ) ] = $label;
-		}
-		return $keys;
+		return $keys + Yadak_Pricing::fields();
 	}
 
 	public static function install() {
@@ -218,7 +215,7 @@ class Yadak_Price_Log {
 			$user = $row->user_id ? get_userdata( (int) $row->user_id ) : null;
 			echo '<tr><td>' . esc_html( wp_date( 'Y/m/d H:i', strtotime( $row->created_at . ' UTC' ) ) ) . '</td>';
 			if ( $show_product ) {
-				echo '<td><a href="' . esc_url( get_edit_post_link( (int) $row->product_id ) ? get_edit_post_link( (int) $row->product_id ) : '#' ) . '">' . esc_html( get_the_title( (int) $row->product_id ) ) . '</a></td>';
+				echo '<td><a href="' . esc_url( (string) get_edit_post_link( (int) $row->product_id ) ? get_edit_post_link( (int) $row->product_id ) : '#' ) . '">' . esc_html( get_the_title( (int) $row->product_id ) ) . '</a></td>';
 			}
 			echo '<td>' . esc_html( isset( $labels[ $row->field ] ) ? $labels[ $row->field ] : $row->field ) . '</td>';
 			echo '<td>' . esc_html( '' === $row->old_value ? '—' : wc_format_localized_price( $row->old_value ) ) . '</td>';

@@ -166,3 +166,40 @@
 .yadak-ledger td:nth-child(n+3), .yadak-ledger th:nth-child(n+3) { white-space: nowrap; }
 .woocommerce-MyAccount-content { overflow-x: auto; }
 .yadak-specs > div:last-child:nth-child(odd) { grid-column: span 2; }
+
+/* ---------- v0.2: gateways, quotes, SEO links, search ---------- */
+
+.yadak-card-box { margin: 8px 0 12px; padding: 12px 14px; border-radius: var(--y-radius-sm); background: var(--y-ink); color: #e2e8f0; }
+.yadak-card-box p { margin: 0; }
+.yadak-card-box__number { font-size: 20px; font-weight: 800; letter-spacing: 2px; color: #fff; font-feature-settings: normal; }
+
+.yadak-cat-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; }
+.yadak-cat-links a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border: 1px solid var(--y-line); border-radius: 999px; background: #fff; font-size: 13px; font-weight: 700; }
+.yadak-cat-links a:hover { border-color: var(--y-ink); }
+
+.yadak-search-corrected { padding: 10px 14px; border-radius: var(--y-radius-sm); background: var(--y-warn-bg); color: var(--y-warn); font-weight: 600; }
+
+.yadak-quote-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.yadak-quote-actions form { display: inline-flex; gap: 8px; margin: 0; }
+.yadak-order-extras { margin: 16px 0; }
+.yadak-wh-availability { font-size: 13px; color: var(--y-muted); margin: 4px 0 12px; }
+
+/* ---------- 3D: product viewer + card depth ---------- */
+
+.yadak-3d-open { display: inline-flex !important; gap: 8px; margin: 4px 0 12px !important; background: #fff !important; color: var(--y-ink) !important; border: 1px solid var(--y-ink) !important; }
+.yadak-3d-open:hover { background: var(--y-ink) !important; color: #fff !important; }
+.yadak-3d-dialog { width: min(900px, calc(100vw - 32px)); max-height: calc(100vh - 32px); border: 0; border-radius: 16px; padding: 16px; box-shadow: 0 30px 80px rgb(0 0 0 / 45%); }
+.yadak-3d-dialog::backdrop { background: rgb(15 23 42 / 70%); backdrop-filter: blur(4px); }
+.yadak-3d-dialog form { display: flex; justify-content: flex-end; margin: 0 0 8px; }
+.yadak-3d-close { width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--y-surface); cursor: pointer; font-size: 18px; }
+.yadak-3d-ar { position: absolute; bottom: 12px; inset-inline-start: 12px; }
+.yadak-3d-help { text-align: center; color: var(--y-muted); font-size: 13px; margin: 8px 0 0; }
+.woocommerce ul.products li.product.has-3d-model a img { outline: 2px solid transparent; }
+.woocommerce ul.products li.product.has-3d-model::after {
+	content: "3D"; position: absolute; top: 18px; inset-inline-end: 18px; padding: 0 8px; border-radius: 6px;
+	background: var(--y-ink); color: #fff; font-size: 11px; font-weight: 800; line-height: 22px; font-feature-settings: normal;
+}
+.woocommerce ul.products li.product { position: relative; transform-style: preserve-3d; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+	.woocommerce ul.products li.product:hover { transform: translateY(-4px); box-shadow: 0 18px 32px -14px rgb(15 23 42 / 30%); }
+}

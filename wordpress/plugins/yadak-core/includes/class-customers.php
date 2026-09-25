@@ -148,6 +148,9 @@ class Yadak_Customers {
 		if ( array_key_exists( $group, yadak_customer_groups() ) ) {
 			$old = yadak_get_customer_group( $user_id );
 			update_user_meta( $user_id, 'yadak_customer_group', $group );
+			if ( get_user_meta( $user_id, 'yadak_group_requested', true ) === $group ) {
+				delete_user_meta( $user_id, 'yadak_group_requested' );
+			}
 			if ( $old !== $group ) {
 				do_action( 'yadak_customer_group_changed', $user_id, $group, $old );
 			}
