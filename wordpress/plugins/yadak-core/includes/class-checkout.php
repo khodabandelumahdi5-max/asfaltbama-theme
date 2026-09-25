@@ -22,6 +22,15 @@ class Yadak_Checkout {
 		add_action( 'woocommerce_after_checkout_validation', array( __CLASS__, 'validate' ), 10, 2 );
 		add_filter( 'wc_get_price_decimals', array( __CLASS__, 'price_decimals' ) );
 		add_filter( 'woocommerce_price_format', array( __CLASS__, 'price_format' ), 10, 2 );
+		add_filter( 'woocommerce_get_terms_page_id', array( __CLASS__, 'published_terms_page' ) );
+	}
+
+	/**
+	 * Ask customers to accept the terms only once that page is published;
+	 * a draft would put a required checkbox next to a 404 link.
+	 */
+	public static function published_terms_page( $id ) {
+		return $id && 'publish' === get_post_status( $id ) ? $id : 0;
 	}
 
 	private static function is_rial_currency() {
@@ -75,6 +84,11 @@ class Yadak_Checkout {
 		if ( isset( $fields['phone'] ) ) {
 			$fields['phone']['required'] = true;
 			$fields['phone']['label']    = __( 'شماره موبایل', 'yadak-core' );
+			$fields['phone']['priority'] = 5; // Mobile first: the key contact in Iran (SMS updates).
+		}
+		unset( $fields['company'] ); // Business details live in the customer profile.
+		if ( isset( $fields['address_2'] ) ) {
+			$fields['address_2']['placeholder'] = __( 'پلاک، واحد (اختیاری)', 'yadak-core' );
 		}
 		return $fields;
 	}
@@ -88,6 +102,20 @@ class Yadak_Checkout {
 				'inputmode' => 'tel',
 				'dir'       => 'ltr',
 			);
+		}
+		if ( isset( $fields['billing']['billing_phone'] ) ) {
+			$fields['billing']['billing_phone']['priority'] = 5;
+			$fields['billing']['billing_phone']['description'] = __( 'وضعیت سفارش و کد رهگیری پیامک می‌شود.', 'yadak-core' );
+		}
+		// Many customers have no e-mail; SMS covers order updates.
+		if ( isset( $fields['billing']['billing_email'] ) ) {
+			$fields['billing']['billing_email']['required'] = false;
+			$fields['billing']['billing_email']['label']    = __( 'ایمیل (اختیاری)', 'yadak-core' );
+			$fields['billing']['billing_email']['priority'] = 120;
+		}
+		unset( $fields['billing']['billing_company'], $fields['shipping']['shipping_company'] );
+		if ( isset( $fields['order']['order_comments'] ) ) {
+			$fields['order']['order_comments']['placeholder'] = __( 'مثلاً: قبل از ارسال تماس بگیرید / VIN خودرو برای تطبیق قطعه', 'yadak-core' );
 		}
 		foreach ( array( 'billing', 'shipping' ) as $group ) {
 			$key = $group . '_postcode';

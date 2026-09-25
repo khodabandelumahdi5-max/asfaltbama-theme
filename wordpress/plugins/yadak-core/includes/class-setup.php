@@ -140,6 +140,17 @@ class Yadak_Setup {
 		foreach ( $options as $key => $value ) {
 			update_option( $key, $value );
 		}
+		// WooCommerce saves these in English at install time, before the Persian
+		// translation loads. Replace only that default, never an edited text.
+		$privacy = array(
+			'woocommerce_checkout_privacy_policy_text'     => 'اطلاعات شما فقط برای پردازش و ارسال سفارش و پشتیبانی استفاده می‌شود؛ جزئیات در [privacy_policy].',
+			'woocommerce_registration_privacy_policy_text' => 'اطلاعات شما فقط برای مدیریت حساب و سفارش‌ها استفاده می‌شود؛ جزئیات در [privacy_policy].',
+		);
+		foreach ( $privacy as $key => $value ) {
+			if ( 0 === strpos( (string) get_option( $key, 'Your personal data' ), 'Your personal data' ) ) {
+				update_option( $key, $value );
+			}
+		}
 		return __( '✔ ووکامرس برای ایران تنظیم شد (تومان، فقط ایران، نظر فقط از خریدار واقعی). مالیات خاموش است؛ اگر مشمول ارزش افزوده هستید، در ووکامرس › مالیات نرخ را وارد کنید.', 'yadak-core' );
 	}
 

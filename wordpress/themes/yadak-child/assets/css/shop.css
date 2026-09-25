@@ -250,3 +250,95 @@
 
 /* Product images sit on the brand surface so mixed photos look consistent. */
 .woocommerce ul.products li.product a img, .woocommerce div.product div.images img { background: var(--y-surface); }
+
+/* ======================================================================
+   Conversion UX: product page, cart, checkout (mobile first)
+   ====================================================================== */
+
+/* Product: delivery promise, trust, expert, copy, quantity. */
+.yadak-ship { display: flex; align-items: center; gap: 8px; margin: 8px 0; padding: 10px 12px; border-radius: var(--y-radius-sm); background: var(--y-ok-bg); color: var(--y-ok); font-weight: 700; font-size: 14px; }
+.yadak-ship .yadak-icon { width: 20px; height: 20px; flex: none; }
+.yadak-ship.is-out { background: var(--y-warn-bg); color: var(--y-warn); }
+.yadak-trustlist { list-style: none; margin: 14px 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.yadak-trustlist li a, .yadak-trustlist li > span, .yadak-trustlist li { font-size: 12px; font-weight: 700; color: var(--y-ink-2); }
+.yadak-trustlist li { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; padding: 10px 4px; border: 1px solid var(--y-line); border-radius: var(--y-radius-sm); background: #fff; }
+.yadak-trustlist li a { display: contents; }
+.yadak-trustlist .yadak-icon { width: 22px; height: 22px; color: var(--y-accent); }
+.yadak-expert { margin: 12px 0 4px; padding: 12px 14px; border-radius: var(--y-radius); border: 1px dashed #cbd5e1; }
+.yadak-expert p { margin: 0 0 8px; font-weight: 700; color: var(--y-ink); font-size: 14px; }
+.yadak-expert div { display: flex; flex-wrap: wrap; gap: 8px; }
+.yadak-expert__btn { display: inline-flex; align-items: center; gap: 6px; min-height: 42px; padding: 0 14px; border-radius: var(--y-radius-sm); background: var(--y-surface); border: 1px solid var(--y-line); font-weight: 700; font-size: 14px; color: var(--y-ink); }
+.yadak-expert__btn .yadak-icon { width: 18px; height: 18px; }
+.yadak-copy { margin-inline-start: 8px; padding: 2px 8px; border: 1px solid var(--y-line); border-radius: 6px; background: #fff; font-size: 11px; font-weight: 700; color: var(--y-muted); cursor: pointer; vertical-align: middle; }
+.yadak-copy:hover, .yadak-copy:focus { border-color: var(--y-ink); background: #fff; color: var(--y-ink); }
+
+.quantity.has-stepper { display: inline-flex !important; align-items: stretch; border: 1px solid var(--y-line); border-radius: var(--y-radius-sm); overflow: hidden; background: #fff; }
+.quantity.has-stepper .qty { border: 0 !important; border-radius: 0 !important; width: 52px !important; text-align: center; -moz-appearance: textfield; font-size: 16px; }
+.quantity.has-stepper .qty::-webkit-inner-spin-button, .quantity.has-stepper .qty::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.yadak-qty { width: 44px; min-height: 44px; border: 0; background: var(--y-surface); font-size: 20px; font-weight: 700; color: var(--y-ink); cursor: pointer; }
+.yadak-qty:hover, .yadak-qty:focus { background: var(--y-line); color: var(--y-ink); }
+
+/* Purchase steps. */
+.yadak-steps { list-style: none; display: flex; gap: 6px; margin: 0 0 16px; padding: 0; counter-reset: none; }
+.yadak-steps li { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; padding: 0 8px; border-radius: 999px; background: var(--y-surface); color: var(--y-muted); font-size: 12px; font-weight: 700; text-align: center; }
+.yadak-steps li span { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 1px solid var(--y-line); font-size: 12px; flex: none; }
+.yadak-steps li.is-current { background: var(--y-ink); color: #fff; }
+.yadak-steps li.is-current span { background: var(--y-accent); border-color: var(--y-accent); color: #fff; }
+.yadak-steps li.is-done { background: var(--y-ok-bg); color: var(--y-ok); }
+
+/* Checkout: summary at top, single column, big inputs (16px = no iOS zoom). */
+.yadak-mini-summary { margin: 0 0 16px; border: 1px solid var(--y-line); border-radius: var(--y-radius); background: #fff; }
+.yadak-mini-summary summary { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 14px 16px; cursor: pointer; font-weight: 700; list-style: none; }
+.yadak-mini-summary summary::-webkit-details-marker { display: none; }
+.yadak-mini-summary summary > span::after { content: " ▾"; color: var(--y-muted); }
+.yadak-mini-summary[open] summary > span::after { content: " ▴"; }
+.yadak-mini-summary ul { list-style: none; margin: 0; padding: 0 16px; }
+.yadak-mini-summary li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid var(--y-line); font-size: 14px; }
+.yadak-mini-summary > a { display: block; padding: 10px 16px 14px; font-size: 13px; color: var(--y-accent-ink); font-weight: 700; }
+
+.woocommerce-checkout .woocommerce form .form-row input.input-text,
+.woocommerce-checkout .woocommerce form .form-row textarea,
+.woocommerce-checkout .woocommerce form .form-row select,
+.woocommerce-checkout .select2-container .select2-selection--single { min-height: 50px; font-size: 16px; }
+.woocommerce-checkout .select2-container .select2-selection--single .select2-selection__rendered { line-height: 48px; }
+.woocommerce form .form-row .description { font-size: 12px; color: var(--y-muted); }
+.woocommerce-checkout #payment ul.payment_methods li { padding: 12px 4px; border-bottom: 1px solid var(--y-line); }
+.woocommerce-checkout #payment ul.payment_methods li label { font-weight: 800; font-size: 15px; }
+.woocommerce-checkout #payment div.payment_box { border-radius: var(--y-radius-sm); }
+@media (max-width: 767px) {
+	.woocommerce .col2-set .col-1, .woocommerce .col2-set .col-2,
+	.woocommerce-page .col2-set .col-1, .woocommerce-page .col2-set .col-2 { float: none; width: 100%; }
+	.woocommerce form .form-row-first, .woocommerce form .form-row-last { float: none; width: 100%; }
+	.yadak-steps li { font-size: 11px; min-height: 36px; }
+	.yadak-steps li:not(.is-current) { font-size: 0; flex: 0 0 auto; padding: 0 6px; }
+	.yadak-steps li:not(.is-current) span { font-size: 12px; }
+}
+
+/* Sticky action bar (mobile) replaces the bottom nav on buy pages. */
+.yadak-actionbar { display: none; }
+@media (max-width: 959px) {
+	body.yadak-actionbar-page .yadak-bottombar { display: none; }
+	.yadak-actionbar:not([hidden]) {
+		position: fixed; inset-inline: 0; bottom: 0; z-index: 40;
+		display: flex; align-items: center; gap: 12px;
+		padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+		background: #fff; border-top: 1px solid var(--y-line); box-shadow: 0 -8px 24px rgb(15 23 42 / 10%);
+	}
+	.yadak-actionbar__info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+	.yadak-actionbar__title { font-size: 12px; color: var(--y-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+	.yadak-actionbar__price { font-weight: 900; color: var(--y-ink); font-size: 16px; white-space: nowrap; }
+	.yadak-actionbar__price del { display: none; }
+	.yadak-actionbar__price ins { text-decoration: none; }
+	.yadak-actionbar__price .yadak-tier-label { display: none; }
+	.yadak-actionbar__btn {
+		flex: none; display: inline-flex; align-items: center; justify-content: center;
+		min-height: 48px; padding: 0 22px; border: 0; border-radius: var(--y-radius-sm);
+		background: var(--y-accent); color: #fff !important; font-weight: 800; font-size: 15px; cursor: pointer;
+	}
+	/* Hello Elementor's reset paints hovered/focused buttons pink (#c36). */
+	.yadak-actionbar__btn:hover, .yadak-actionbar__btn:focus { background: var(--y-accent-ink); }
+}
+/* Terms checkbox the sticky button sent the user to. */
+.yadak-attention { outline: 2px solid var(--y-accent); outline-offset: 4px; border-radius: 6px; animation: yadak-pulse 1s ease 2; }
+@keyframes yadak-pulse { 50% { outline-color: transparent; } }
+@media (prefers-reduced-motion: reduce) { .yadak-attention { animation: none; } }

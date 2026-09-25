@@ -14,9 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'YADAK_CHILD_VERSION', '0.3.0' );
+define( 'YADAK_CHILD_VERSION', '0.4.0' );
 
 require_once get_stylesheet_directory() . '/inc/visuals.php';
+require_once get_stylesheet_directory() . '/inc/ux.php';
 
 /**
  * Theme option with default.

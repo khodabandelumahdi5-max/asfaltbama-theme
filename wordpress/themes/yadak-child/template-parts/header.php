@@ -25,7 +25,7 @@ $yadak_menu     = wp_nav_menu(
 <header id="site-header" class="yadak-header">
 	<div class="yadak-topbar">
 		<div class="yadak-container yadak-topbar__inner">
-			<span><?php echo yadak_icon( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', yadak_opt( 'phone' ) ) ); ?>" dir="ltr"><?php echo esc_html( yadak_opt( 'phone' ) ); ?></a> · <?php echo esc_html( yadak_opt( 'hours' ) ); ?></span>
+			<span><?php echo yadak_icon( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', yadak_opt( 'phone' ) ) ); ?>" dir="ltr"><?php echo esc_html( yadak_opt( 'phone' ) ); ?></a><span class="yadak-topbar__hours"> · <?php echo esc_html( yadak_opt( 'hours' ) ); ?></span></span>
 			<?php if ( yadak_opt( 'b2b_url' ) ) : ?>
 				<a class="yadak-topbar__b2b" href="<?php echo esc_url( yadak_opt( 'b2b_url' ) ); ?>"><?php esc_html_e( 'فروش همکاری و عمده', 'yadak-child' ); ?></a>
 			<?php endif; ?>
