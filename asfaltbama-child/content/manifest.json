@@ -39,7 +39,7 @@
       "seo_description": "اجاره روزانه و ماهانه بابکت، مینی‌بیل، بیل مکانیکی، فینیشر و غلتک با اپراتور ماهر در تهران و البرز. استعلام قیمت: 09191299559"
     }
   },
-  "images_version": "2026-09-25.1",
+  "images_version": "2026-09-25.2",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -58,6 +58,35 @@
         "subgrade-preparation-compaction",
         "bitumen-types"
       ]
+    },
+    {
+      "file": "images/bobcat-bargiri-nakhale-kamyon.jpg",
+      "title": "بارگیری نخاله با بابکت در کامیون",
+      "alt": "بابکت S250 در حال بارگیری نخاله و خاک در کامیون کمپرسی در یک کارگاه شهری؛ آسفالت با ما",
+      "featured_for": [
+        "bobcat-rental-guide"
+      ]
+    },
+    {
+      "file": "images/bargiri-khak-nakhale-bobcat-kargah-shahri.jpg",
+      "title": "بارگیری خاک و نخاله با بابکت در کارگاه شهری",
+      "alt": "بارگیری خاک و نخاله‌ی تخریب با بابکت در کامیون برای حمل به محل مجاز تخلیه",
+      "featured_for": [
+        "excavation-cost-guide",
+        "demolition-cost-guide"
+      ]
+    },
+    {
+      "file": "images/bobcat-bargiri-nakhale-video-poster.jpg",
+      "title": "تصویر ویدیوی بارگیری نخاله با بابکت",
+      "alt": "بابکت در حال بارگیری نخاله در کامیون؛ تصویر ویدیوی کارگاه آسفالت با ما",
+      "featured_for": []
+    },
+    {
+      "file": "images/bobcat-bargiri-nakhale-video.mp4",
+      "title": "ویدیوی بارگیری نخاله با بابکت",
+      "alt": "",
+      "featured_for": []
     }
   ],
   "replace_featured_ids": [
@@ -368,6 +397,18 @@
       "seo_title": "ضمانت نامه آسفالت و ایزوگام؛ پوشش و استثناها | آسفالت با ما",
       "seo_description": "ضمانت‌نامه آسفالت و ایزوگام چه چیزی را پوشش می‌دهد؟ ویژگی‌های ضمانت معتبر، موارد خارج از ضمانت و روش اعلام ایراد.",
       "focus_keyword": "ضمانت نامه آسفالت و ایزوگام"
+    }
+  ],
+  "post_videos": [
+    {
+      "slug": "bobcat-rental-guide",
+      "video": "bobcat-bargiri-nakhale-video.mp4",
+      "poster": "bobcat-bargiri-nakhale-video-poster.jpg",
+      "name": "بارگیری نخاله با بابکت در کارگاه شهری",
+      "caption": "بابکت S250 در حال بارگیری نخاله در کامیون کمپرسی؛ از پروژه‌های آسفالت با ما",
+      "description": "ویدیوی کوتاه از کار بابکت S250 در یک کارگاه شهری: بارگیری خاک و نخاله در کامیون کمپرسی برای حمل به محل مجاز تخلیه.",
+      "upload_date": "2026-09-25",
+      "duration": "PT20S"
     }
   ]
 }

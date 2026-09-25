@@ -1147,3 +1147,29 @@
 	transform: rotate(-12deg);
 	pointer-events: none;
 }
+
+/* ------------------------------------------------ Project video */
+.abm-video {
+	margin: 0 0 28px;
+	overflow: hidden;
+	border: 1px solid #0f172a;
+	border-top: 4px solid #f59e0b;
+	border-radius: 12px;
+	background: #0f172a;
+}
+
+.abm-video video {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 9;
+	background: #0f172a;
+}
+
+.abm-video figcaption {
+	padding: 10px 16px;
+	color: #cbd5e1;
+	font-size: 13.5px;
+	line-height: 1.8;
+	text-align: right;
+}

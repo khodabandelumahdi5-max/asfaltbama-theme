@@ -324,7 +324,7 @@ function asfaltbama_importer_images( $manifest ) {
 			}
 			wp_update_attachment_metadata( $attachment_id, wp_generate_attachment_metadata( $attachment_id, $upload['file'] ) );
 			update_post_meta( $attachment_id, '_asfaltbama_source', $source );
-			$log[] = '✅ عکس «' . $image['title'] . '» به کتابخانه‌ی رسانه اضافه شد';
+			$log[] = '✅ فایل «' . $image['title'] . '» به کتابخانه‌ی رسانه اضافه شد';
 		}
 
 		if ( '' === trim( (string) get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) ) {

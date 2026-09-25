@@ -523,3 +523,123 @@ function asfaltbama_faq_schema( $data ) {
 	return $data;
 }
 add_filter( 'rank_math/json_ld', 'asfaltbama_faq_schema', 20 );
+
+/**
+ * URL of a media file imported from content/images, by its source name.
+ *
+ * @param string $source File name as in the manifest.
+ *
+ * @return string Empty string when not imported yet.
+ */
+function asfaltbama_imported_media_url( $source ) {
+	static $cache = [];
+	if ( ! array_key_exists( $source, $cache ) ) {
+		$ids = get_posts(
+			[
+				'post_type'   => 'attachment',
+				'post_status' => 'inherit',
+				'numberposts' => 1,
+				'fields'      => 'ids',
+				'meta_key'    => '_asfaltbama_source', // phpcs:ignore WordPress.DB.SlowDBQuery
+				'meta_value'  => $source, // phpcs:ignore WordPress.DB.SlowDBQuery
+			]
+		);
+		$cache[ $source ] = $ids ? (string) wp_get_attachment_url( $ids[0] ) : '';
+	}
+
+	return $cache[ $source ];
+}
+
+/**
+ * The project video configured for the current post, with resolved URLs.
+ *
+ * @return array|null
+ */
+function asfaltbama_current_post_video() {
+	if ( ! is_singular( 'post' ) ) {
+		return null;
+	}
+
+	$file = ASFALTBAMA_CHILD_PATH . '/content/manifest.json';
+	if ( ! is_readable( $file ) ) {
+		return null;
+	}
+	$manifest = json_decode( file_get_contents( $file ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	$slug     = get_post_field( 'post_name', get_queried_object_id() );
+
+	foreach ( (array) ( $manifest['post_videos'] ?? [] ) as $video ) {
+		if ( $video['slug'] !== $slug ) {
+			continue;
+		}
+		$video['video_url']  = asfaltbama_imported_media_url( $video['video'] );
+		$video['poster_url'] = asfaltbama_imported_media_url( $video['poster'] );
+		return $video['video_url'] ? $video : null;
+	}
+
+	return null;
+}
+
+/**
+ * Insert the project video after the article's first paragraph (or its
+ * summary box). Done at display time so the stored article is untouched.
+ *
+ * @param string $content Post content.
+ *
+ * @return string
+ */
+function asfaltbama_insert_post_video( $content ) {
+	if ( ! in_the_loop() || ! is_main_query() ) {
+		return $content;
+	}
+	$video = asfaltbama_current_post_video();
+	if ( ! $video ) {
+		return $content;
+	}
+
+	$figure = sprintf(
+		'<figure class="abm-video"><video controls muted playsinline preload="none"%s><source src="%s" type="video/mp4"></video><figcaption>%s</figcaption></figure>',
+		$video['poster_url'] ? ' poster="' . esc_url( $video['poster_url'] ) . '"' : '',
+		esc_url( $video['video_url'] ),
+		esc_html( $video['caption'] )
+	);
+
+	$after = strpos( $content, 'class="abm-summary"' ) !== false ? '</div>' : '</p>';
+	$pos   = strpos( $content, $after, (int) strpos( $content, 'class="abm-summary"' ) );
+	if ( false === $pos ) {
+		return $content . $figure;
+	}
+	$pos += strlen( $after );
+
+	return substr( $content, 0, $pos ) . "\n" . $figure . substr( $content, $pos );
+}
+add_filter( 'the_content', 'asfaltbama_insert_post_video', 20 );
+
+/**
+ * VideoObject schema for the project video.
+ *
+ * @param array $data Schema entities.
+ *
+ * @return array
+ */
+function asfaltbama_video_schema( $data ) {
+	$video = is_array( $data ) ? asfaltbama_current_post_video() : null;
+	if ( ! $video ) {
+		return $data;
+	}
+
+	$data['asfaltbamaVideo'] = [
+		'@type'        => 'VideoObject',
+		'@id'          => get_permalink() . '#video',
+		'name'         => $video['name'],
+		'description'  => $video['description'],
+		'thumbnailUrl' => $video['poster_url'],
+		'contentUrl'   => $video['video_url'],
+		'uploadDate'   => $video['upload_date'],
+		'duration'     => $video['duration'],
+		'inLanguage'   => asfaltbama_content_lang(),
+		'publisher'    => [ '@id' => home_url( '/#organization' ) ],
+	];
+
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'asfaltbama_video_schema', 20 );
