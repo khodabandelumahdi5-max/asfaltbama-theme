@@ -39,6 +39,30 @@
       "seo_description": "اجاره روزانه و ماهانه بابکت، مینی‌بیل، بیل مکانیکی، فینیشر و غلتک با اپراتور ماهر در تهران و البرز. استعلام قیمت: 09191299559"
     }
   },
+  "images_version": "2026-09-25.1",
+  "images": [
+    {
+      "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
+      "title": "آسفالت محوطه‌ی مجتمع مسکونی با فینیشر و غلتک",
+      "alt": "آسفالت‌کاری محوطه‌ی مجتمع مسکونی با فینیشر و غلتک دوچرخ؛ پروژه‌ی آسفالت با ما",
+      "featured_for": [
+        "site-landscaping-asphalt",
+        "asphalt-yard-parking"
+      ]
+    },
+    {
+      "file": "images/gheirpashi-bastar-asfalt-mohavate-mojtame.jpg",
+      "title": "قیرپاشی بستر شنی پیش از پخش آسفالت در محوطه‌ی مجتمع",
+      "alt": "قیرپاشی (پریم‌کت) روی بستر شنی کوبیده‌شده و کامیون حمل آسفالت پیش از پخش با فینیشر در محوطه‌ی مجتمع مسکونی",
+      "featured_for": [
+        "subgrade-preparation-compaction",
+        "bitumen-types"
+      ]
+    }
+  ],
+  "replace_featured_ids": [
+    31902
+  ],
   "about_page": {
     "current_slug": "درباره-ما",
     "new_slug": "about-us"

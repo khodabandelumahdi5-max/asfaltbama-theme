@@ -265,6 +265,92 @@ function asfaltbama_importer_media_alt( $manifest ) {
 }
 
 /**
+ * Upload project photos from content/images to the media library (once
+ * per file) and set them as featured images of the listed posts. A post's
+ * featured image is only set when it has none or when it is one of
+ * replace_featured_ids (e.g. the logo used as a placeholder).
+ *
+ * @param array $manifest Manifest.
+ *
+ * @return string[] Log lines.
+ */
+function asfaltbama_importer_images( $manifest ) {
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	require_once ABSPATH . 'wp-admin/includes/media.php';
+
+	$log     = [];
+	$replace = array_map( 'intval', (array) ( $manifest['replace_featured_ids'] ?? [] ) );
+
+	foreach ( (array) ( $manifest['images'] ?? [] ) as $image ) {
+		$source = basename( $image['file'] );
+
+		$existing = get_posts(
+			[
+				'post_type'   => 'attachment',
+				'post_status' => 'inherit',
+				'numberposts' => 1,
+				'fields'      => 'ids',
+				'meta_key'    => '_asfaltbama_source', // phpcs:ignore WordPress.DB.SlowDBQuery
+				'meta_value'  => $source, // phpcs:ignore WordPress.DB.SlowDBQuery
+			]
+		);
+
+		if ( $existing ) {
+			$attachment_id = (int) $existing[0];
+		} else {
+			$contents = asfaltbama_importer_read( $image['file'] );
+			if ( '' === $contents ) {
+				$log[] = '⚠️ فایل ' . $source . ' پیدا نشد';
+				continue;
+			}
+			$upload = wp_upload_bits( $source, null, $contents );
+			if ( ! empty( $upload['error'] ) ) {
+				$log[] = '❌ ' . $source . ': ' . $upload['error'];
+				continue;
+			}
+			$type          = wp_check_filetype( $upload['file'] );
+			$attachment_id = wp_insert_attachment(
+				[
+					'post_title'     => $image['title'],
+					'post_mime_type' => $type['type'],
+					'post_status'    => 'inherit',
+				],
+				$upload['file']
+			);
+			if ( is_wp_error( $attachment_id ) || ! $attachment_id ) {
+				$log[] = '❌ ' . $source . ': ثبت در کتابخانه‌ی رسانه ناموفق بود';
+				continue;
+			}
+			wp_update_attachment_metadata( $attachment_id, wp_generate_attachment_metadata( $attachment_id, $upload['file'] ) );
+			update_post_meta( $attachment_id, '_asfaltbama_source', $source );
+			$log[] = '✅ عکس «' . $image['title'] . '» به کتابخانه‌ی رسانه اضافه شد';
+		}
+
+		if ( '' === trim( (string) get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) ) {
+			update_post_meta( $attachment_id, '_wp_attachment_image_alt', wp_slash( sanitize_text_field( $image['alt'] ) ) );
+		}
+
+		foreach ( (array) ( $image['featured_for'] ?? [] ) as $slug ) {
+			$post = asfaltbama_importer_find( $slug, 'post' );
+			if ( ! $post ) {
+				$log[] = '⚠️ مقاله‌ی /' . $slug . '/ پیدا نشد';
+				continue;
+			}
+			$current = (int) get_post_thumbnail_id( $post );
+			if ( $current && ! in_array( $current, $replace, true ) ) {
+				$log[] = '✅ /' . $slug . '/ تصویر شاخص خودش را دارد؛ دست نخورد';
+				continue;
+			}
+			set_post_thumbnail( $post, $attachment_id );
+			$log[] = '✅ تصویر شاخص /' . $slug . '/ تنظیم شد';
+		}
+	}
+
+	return $log;
+}
+
+/**
  * Set Rank Math title/description on existing pages (by slug; the key
  * "__front__" means the static front page). Overwrites on purpose: the
  * manifest holds the optimized values.
@@ -326,6 +412,11 @@ function asfaltbama_importer_auto_run() {
 	if ( ! empty( $manifest['page_seo_version'] ) && get_option( 'asfaltbama_page_seo_version' ) !== $manifest['page_seo_version'] ) {
 		update_option( 'asfaltbama_page_seo_version', $manifest['page_seo_version'], false );
 		$log = array_merge( $log, asfaltbama_importer_page_seo( $manifest ) );
+	}
+
+	if ( ! empty( $manifest['images_version'] ) && get_option( 'asfaltbama_images_version' ) !== $manifest['images_version'] ) {
+		update_option( 'asfaltbama_images_version', $manifest['images_version'], false );
+		$log = array_merge( $log, asfaltbama_importer_images( $manifest ) );
 	}
 
 	if ( $log ) {
