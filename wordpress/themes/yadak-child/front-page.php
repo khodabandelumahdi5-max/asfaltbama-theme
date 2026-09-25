@@ -144,6 +144,24 @@ $yadak_cats   = $yadak_has_wc ? get_terms(
 		</section>
 	<?php endif; ?>
 
+	<?php
+	$yadak_brand_strip = shortcode_exists( 'yadak_brands' ) ? do_shortcode( '[yadak_brands layout="strip" limit="6"]' ) : '';
+	if ( $yadak_brand_strip ) :
+		$yadak_brands_page = get_page_by_path( 'brands' );
+		?>
+		<section class="yadak-section">
+			<div class="yadak-container">
+				<div class="yadak-section__head">
+					<h2><?php esc_html_e( 'برندهای معتبر', 'yadak-child' ); ?></h2>
+					<?php if ( $yadak_brands_page && 'publish' === $yadak_brands_page->post_status ) : ?>
+						<a href="<?php echo esc_url( get_permalink( $yadak_brands_page ) ); ?>"><?php esc_html_e( 'همه برندها', 'yadak-child' ); ?> <?php echo yadak_icon( 'arrow' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
+					<?php endif; ?>
+				</div>
+				<?php echo $yadak_brand_strip; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the shortcode. ?>
+			</div>
+		</section>
+	<?php endif; ?>
+
 	<section class="yadak-section yadak-trust">
 		<div class="yadak-container">
 			<ul class="yadak-trust__grid">

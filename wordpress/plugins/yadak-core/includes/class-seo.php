@@ -63,7 +63,7 @@ class Yadak_SEO {
 	private static function heading() {
 		$combo = self::combo();
 		if ( $combo ) {
-			return $combo[1]->name . ' ' . str_replace( ' › ', ' ', Yadak_Fitment::path( $combo[0] ) );
+			return yadak_join_name( $combo[1]->name, str_replace( ' › ', ' ', Yadak_Fitment::path( $combo[0] ) ) );
 		}
 		if ( Yadak_Fitment::is_vehicle_archive() ) {
 			/* translators: %s: vehicle */

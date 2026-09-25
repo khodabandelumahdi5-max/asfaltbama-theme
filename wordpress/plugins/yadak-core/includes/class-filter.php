@@ -1,10 +1,10 @@
 <?php
 /**
  * Advanced part filter for shop, category, vehicle and search pages:
- * part number / keyword, category, car origin (Japanese, Chinese, Korean,
- * Iranian), make › model, model year, in stock only.
+ * part number / keyword, category, part brand, car origin (Japanese, Chinese,
+ * Korean, Iranian), make › model, model year, in stock only.
  *
- * Parameters (GET): s, yf_cat, yf_origin, yf_make, yf_model, yf_year, yf_stock.
+ * Parameters (GET): s, yf_cat, yf_brand, yf_origin, yf_make, yf_model, yf_year, yf_stock.
  * Filtered listings are marked noindex (see Yadak_SEO) so they don't
  * compete with the clean category and vehicle URLs.
  *
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Yadak_Filter {
 
-	const PARAMS = array( 'yf_cat', 'yf_origin', 'yf_make', 'yf_model', 'yf_year', 'yf_stock' );
+	const PARAMS = array( 'yf_cat', 'yf_brand', 'yf_origin', 'yf_make', 'yf_model', 'yf_year', 'yf_stock' );
 
 	public static function init() {
 		add_action( 'woocommerce_before_shop_loop', array( __CLASS__, 'render' ), 5 );
@@ -85,6 +85,14 @@ class Yadak_Filter {
 				'terms'    => array( $cat ),
 			);
 		}
+		$brand = sanitize_title( self::param( 'yf_brand' ) );
+		if ( $brand && taxonomy_exists( 'product_brand' ) ) {
+			$tax[] = array(
+				'taxonomy' => 'product_brand',
+				'field'    => 'slug',
+				'terms'    => array( $brand ),
+			);
+		}
 		$model = absint( self::param( 'yf_model' ) );
 		$make  = absint( self::param( 'yf_make' ) );
 		if ( $model || $make ) {
@@ -149,6 +157,17 @@ class Yadak_Filter {
 		$groups   = Yadak_Fitment::makes_by_origin();
 		$current  = get_queried_object();
 		$cat      = self::param( 'yf_cat' ) ? self::param( 'yf_cat' ) : ( $current instanceof WP_Term && 'product_cat' === $current->taxonomy ? $current->slug : '' );
+		$brand    = self::param( 'yf_brand' ) ? self::param( 'yf_brand' ) : ( $current instanceof WP_Term && 'product_brand' === $current->taxonomy ? $current->slug : '' );
+		if ( ! $brand && class_exists( 'Yadak_Brands' ) && Yadak_Brands::queried_brand() ) {
+			$brand = Yadak_Brands::queried_brand()->slug; // Brand + category pages.
+		}
+		$brands   = taxonomy_exists( 'product_brand' ) ? get_terms(
+			array(
+				'taxonomy'   => 'product_brand',
+				'hide_empty' => true,
+				'orderby'    => 'name',
+			)
+		) : array();
 		$make     = absint( self::param( 'yf_make' ) );
 		$model    = absint( self::param( 'yf_model' ) );
 		$year     = self::param( 'yf_year' );
@@ -183,6 +202,17 @@ class Yadak_Filter {
 				<span><?php esc_html_e( 'دسته', 'yadak-core' ); ?></span>
 				<select name="yf_cat"><option value=""><?php esc_html_e( 'همه دسته‌ها', 'yadak-core' ); ?></option><?php $options( 0, 0 ); ?></select>
 			</label>
+			<?php if ( $brands && ! is_wp_error( $brands ) ) : ?>
+				<label class="yadak-filter__field">
+					<span><?php esc_html_e( 'برند قطعه', 'yadak-core' ); ?></span>
+					<select name="yf_brand">
+						<option value=""><?php esc_html_e( 'همه برندها', 'yadak-core' ); ?></option>
+						<?php foreach ( $brands as $term ) : ?>
+							<option value="<?php echo esc_attr( $term->slug ); ?>" <?php selected( $brand, $term->slug ); ?>><?php echo esc_html( Yadak_Brands::label( $term ) ); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</label>
+			<?php endif; ?>
 			<label class="yadak-filter__field">
 				<span><?php esc_html_e( 'خودروی', 'yadak-core' ); ?></span>
 				<select name="yf_origin">

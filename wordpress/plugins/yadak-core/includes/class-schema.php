@@ -37,11 +37,16 @@ class Yadak_Schema {
 	 * @return array
 	 */
 	public static function product( $markup, $product ) {
-		$brands = taxonomy_exists( 'product_brand' ) ? wp_get_post_terms( $product->get_id(), 'product_brand', array( 'fields' => 'names' ) ) : array();
+		$brands = taxonomy_exists( 'product_brand' ) ? wp_get_post_terms( $product->get_id(), 'product_brand' ) : array();
 		if ( ! is_wp_error( $brands ) && $brands ) {
-			$markup['brand'] = array(
-				'@type' => 'Brand',
-				'name'  => $brands[0],
+			$markup['brand'] = array_filter(
+				array(
+					'@type'         => 'Brand',
+					'name'          => $brands[0]->name,
+					'alternateName' => Yadak_Brands::latin( $brands[0] ),
+					'url'           => get_term_link( $brands[0] ),
+					'logo'          => Yadak_Brands::logo_url( $brands[0], 'large' ),
+				)
 			);
 		}
 		$pn = $product->get_meta( '_yadak_part_number' );
@@ -185,8 +190,8 @@ class Yadak_Schema {
 	}
 
 	public static function meta() {
-		// Vehicle pages get their own title/description/canonical from Yadak_SEO.
-		if ( self::seo_plugin() || Yadak_Fitment::is_vehicle_archive() ) {
+		// Vehicle and brand pages get their own title/description/canonical.
+		if ( self::seo_plugin() || Yadak_Fitment::is_vehicle_archive() || Yadak_Brands::is_brand_page() ) {
 			return;
 		}
 		$title = '';

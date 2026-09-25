@@ -250,8 +250,23 @@ class Yadak_Part_Data {
 			return;
 		}
 		echo '<dl class="yadak-specs">';
+		$brand_label = __( 'برند', 'yadak-core' );
 		foreach ( $rows as $label => $value ) {
-			printf( '<div><dt>%1$s</dt><dd>%2$s</dd></div>', esc_html( $label ), esc_html( $value ) );
+			$html = esc_html( $value );
+			if ( $brand_label === $label ) {
+				// Link each brand to its page.
+				$terms = wp_get_post_terms( $product->get_id(), 'product_brand' );
+				$html  = is_wp_error( $terms ) ? $html : implode(
+					'، ',
+					array_map(
+						static function ( $term ) {
+							return '<a href="' . esc_url( get_term_link( $term ) ) . '">' . esc_html( Yadak_Brands::label( $term ) ) . '</a>';
+						},
+						$terms
+					)
+				);
+			}
+			printf( '<div><dt>%1$s</dt><dd>%2$s</dd></div>', esc_html( $label ), $html ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
 		}
 		echo '</dl>';
 	}

@@ -154,3 +154,19 @@ function yadak_get_price_tier( $user_id = null ) {
 function yadak_money( $amount ) {
 	return wc_price( (float) $amount );
 }
+
+/**
+ * Name + qualifier with the Persian linking «ی» after a plural:
+ * «سنسورها» + «بوش» → «سنسورهای بوش».
+ *
+ * @param string $name      Category name.
+ * @param string $qualifier Brand or vehicle.
+ * @return string
+ */
+function yadak_join_name( $name, $qualifier ) {
+	$name = trim( $name );
+	if ( preg_match( '/ها$/u', $name ) ) {
+		$name .= 'ی';
+	}
+	return $name . ' ' . $qualifier;
+}

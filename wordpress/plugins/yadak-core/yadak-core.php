@@ -45,6 +45,7 @@ require_once YADAK_CORE_DIR . 'includes/class-quotes.php';
 require_once YADAK_CORE_DIR . 'includes/class-crm.php';
 require_once YADAK_CORE_DIR . 'includes/class-warehouses.php';
 require_once YADAK_CORE_DIR . 'includes/class-seo.php';
+require_once YADAK_CORE_DIR . 'includes/class-brands.php';
 require_once YADAK_CORE_DIR . 'includes/class-dashboard.php';
 require_once YADAK_CORE_DIR . 'includes/class-model3d.php';
 require_once YADAK_CORE_DIR . 'includes/class-filter.php';
@@ -95,6 +96,7 @@ add_action(
 		Yadak_CRM::init();
 		Yadak_Warehouses::init();
 		Yadak_SEO::init();
+		Yadak_Brands::init();
 		Yadak_Model3D::init();
 		Yadak_Filter::init();
 		Yadak_Bulk::init();
@@ -128,6 +130,7 @@ register_activation_hook(
 		Yadak_Credit::add_endpoints();
 		Yadak_Quotes::add_endpoints();
 		Yadak_SEO::rewrites();
+		Yadak_Brands::rewrites();
 		if ( function_exists( 'wc_get_orders' ) ) {
 			Yadak_CRM::backfill_last_orders();
 		}

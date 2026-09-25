@@ -89,6 +89,7 @@
 .yadak-specs > div { background: #fff; padding: 10px 12px; }
 .yadak-specs dt { font-size: 12px; color: var(--y-muted); margin: 0; }
 .yadak-specs dd { margin: 0; font-weight: 700; color: var(--y-ink); overflow-wrap: anywhere; }
+.yadak-specs dd a { color: var(--y-accent-ink); text-decoration: underline; text-underline-offset: 3px; }
 
 .yadak-fit {
 	margin: 12px 0; padding: 12px 14px; border-radius: var(--y-radius-sm); font-weight: 700; font-size: 14px;
@@ -247,6 +248,51 @@
 .woocommerce-products-header .yadak-cat-links a:hover { background: #fff; color: var(--y-ink); }
 .woocommerce-products-header .yadak-search-corrected { background: rgb(255 255 255 / 10%); color: #fde68a; }
 .woocommerce-breadcrumb a { color: var(--y-muted); }
+
+/* ---------- Part brands: brand page header, brand cards, index ---------- */
+
+.yadak-wordmark { font-family: "Arial Black", "Segoe UI", system-ui, sans-serif; font-weight: 900; letter-spacing: -.02em; color: var(--y-ink); font-feature-settings: normal; white-space: nowrap; }
+.yadak-monogram { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--y-ink); color: #fff; font-weight: 900; font-size: 22px; }
+.yadak-brand-hero { display: flex; align-items: center; gap: 16px; margin: 4px 0 6px; }
+.yadak-brand-hero__logo {
+	flex: none; display: grid; place-items: center; width: 132px; height: 76px; padding: 10px;
+	border-radius: 14px; background: #fff; box-shadow: 0 6px 20px rgb(0 0 0 / 25%); overflow: hidden;
+}
+.yadak-brand-hero__logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.yadak-brand-hero__logo .yadak-wordmark { font-size: 20px; }
+.yadak-brand-hero__facts { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 6px; padding: 0; }
+.yadak-brand-hero__facts li { padding: 3px 10px; border-radius: 999px; background: rgb(255 255 255 / 10%); color: #e2e8f0; font-size: 12px; font-weight: 700; }
+.yadak-brand-hero p { margin: 0; font-size: 14px; }
+.yadak-brand-hero a { color: #fdba74; }
+.woocommerce-products-header .yadak-cat-links a[aria-current] { background: var(--y-accent); border-color: var(--y-accent); color: #fff; }
+@media (max-width: 599px) {
+	.yadak-brand-hero { align-items: flex-start; }
+	.yadak-brand-hero__logo { width: 96px; height: 60px; }
+	.yadak-brand-hero__logo .yadak-wordmark { font-size: 15px; }
+}
+
+.yadak-brand-group { margin: 0 0 28px; }
+.yadak-brand-group h2 { font-size: 18px; margin: 0 0 12px; }
+.yadak-brand-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.yadak-brand-grid--strip { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+@media (max-width: 959px) {
+	/* One swipeable row on phones instead of a tall wall of logos. */
+	.yadak-brand-grid--strip { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
+	.yadak-brand-grid--strip li { flex: 0 0 140px; scroll-snap-align: start; }
+}
+.yadak-brand-card {
+	display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; padding: 14px 10px 12px;
+	border: 1px solid var(--y-line); border-radius: var(--y-radius); background: #fff; color: var(--y-ink); text-align: center;
+	transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.yadak-brand-card:hover { border-color: var(--y-ink); box-shadow: 0 8px 22px rgb(15 23 42 / 10%); transform: translateY(-2px); color: var(--y-ink); }
+.yadak-brand-card__logo { display: grid; place-items: center; width: 100%; height: 52px; }
+.yadak-brand-card__logo img { max-width: 110px; max-height: 48px; object-fit: contain; }
+.yadak-brand-card__logo .yadak-wordmark { font-size: 17px; }
+.yadak-brand-card__name { font-weight: 700; font-size: 14px; }
+.yadak-brand-card__count { font-size: 12px; color: var(--y-muted); }
+.yadak-brands-empty { padding: 16px; border-radius: var(--y-radius); background: var(--y-surface); color: var(--y-muted); }
+@media (prefers-reduced-motion: reduce) { .yadak-brand-card { transition: none; } .yadak-brand-card:hover { transform: none; } }
 
 /* Product images sit on the brand surface so mixed photos look consistent. */
 .woocommerce ul.products li.product a img, .woocommerce div.product div.images img { background: var(--y-surface); }

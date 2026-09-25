@@ -23,6 +23,7 @@ class Yadak_Search {
 		add_action( 'woocommerce_after_product_object_save', array( __CLASS__, 'index_product_object' ) );
 		add_action( 'set_object_terms', array( __CLASS__, 'on_terms_changed' ), 10, 4 );
 		add_action( 'edited_' . Yadak_Fitment::TAXONOMY, array( __CLASS__, 'on_vehicle_renamed' ) );
+		add_action( 'edited_product_brand', array( __CLASS__, 'on_brand_renamed' ), 20 ); // After the Latin name is saved.
 		add_filter( 'posts_search', array( __CLASS__, 'posts_search' ), 20, 2 );
 		add_action( 'admin_post_yadak_reindex', array( __CLASS__, 'admin_reindex' ) );
 		add_filter( 'plugin_action_links_' . plugin_basename( YADAK_CORE_FILE ), array( __CLASS__, 'plugin_links' ) );
@@ -63,6 +64,10 @@ class Yadak_Search {
 		$parts[] = yadak_compact_number( $product->get_sku() );
 		$parts   = array_merge( $parts, Yadak_Part_Data::split_list( $product->get_meta( '_yadak_alt_names' ) ) );
 
+		$brands = taxonomy_exists( 'product_brand' ) ? wp_get_post_terms( $product_id, 'product_brand' ) : array();
+		foreach ( is_wp_error( $brands ) ? array() : $brands as $brand ) {
+			$parts[] = Yadak_Brands::latin( $brand ); // "bosch" finds «بوش».
+		}
 		foreach ( array( 'product_brand', 'product_cat' ) as $taxonomy ) {
 			if ( taxonomy_exists( $taxonomy ) ) {
 				$names = wp_get_post_terms( $product_id, $taxonomy, array( 'fields' => 'names' ) );
@@ -242,6 +247,13 @@ class Yadak_Search {
 			return;
 		}
 		foreach ( array_unique( $ids ) as $id ) {
+			self::index( $id );
+		}
+	}
+
+	public static function on_brand_renamed( $term_id ) {
+		$ids = get_objects_in_term( $term_id, 'product_brand' );
+		foreach ( is_wp_error( $ids ) ? array() : array_unique( $ids ) as $id ) {
 			self::index( $id );
 		}
 	}

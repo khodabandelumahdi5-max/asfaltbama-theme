@@ -1,8 +1,8 @@
 <?php
 /**
- * Core sitemap provider listing every "category + vehicle" page with parts
- * (/wp-sitemap-yadakparts-1.xml). Vehicle and category archives themselves
- * are already in WordPress's taxonomy sitemaps.
+ * Core sitemap provider listing every "category + vehicle" and "category +
+ * brand" page with parts (/wp-sitemap-yadakparts-1.xml). Vehicle, category
+ * and brand archives themselves are already in WordPress's taxonomy sitemaps.
  *
  * @package YadakCore
  */
@@ -29,15 +29,12 @@ class Yadak_Sitemap_Provider extends WP_Sitemaps_Provider {
 				'hide_empty' => false,
 			)
 		);
-		if ( is_wp_error( $vehicles ) ) {
-			return $urls;
-		}
-		foreach ( $vehicles as $vehicle ) {
+		foreach ( is_wp_error( $vehicles ) ? array() : $vehicles as $vehicle ) {
 			foreach ( Yadak_SEO::categories_for_vehicle( $vehicle ) as $cat ) {
 				$urls[] = Yadak_SEO::url( $vehicle, $cat );
 			}
 		}
-		return $urls;
+		return array_merge( $urls, Yadak_Brands::sitemap_urls() );
 	}
 
 	public function get_url_list( $page_num, $object_subtype = '' ) {

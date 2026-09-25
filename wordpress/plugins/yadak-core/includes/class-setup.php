@@ -42,6 +42,7 @@ class Yadak_Setup {
 			'classic'    => array( __( 'صفحه سبد و پرداخت کلاسیک', 'yadak-core' ), __( 'برای خرید اعتباری، کارت‌به‌کارت و اعتبارسنجی موبایل و کد پستی.', 'yadak-core' ), true ),
 			'categories' => array( __( 'درخت دسته‌بندی قطعات', 'yadak-core' ), __( 'سه بخش برقی و الکترونیک، بدنه، سقف و چراغ، عمومی و مکانیکی با زیردسته‌ها و نامک لاتین.', 'yadak-core' ), true ),
 			'vehicles'   => array( __( 'فهرست خودروها', 'yadak-core' ), __( 'برندها و مدل‌های پرتردد ژاپنی، چینی، کره‌ای و ایرانی با کشور سازنده و نامک لاتین. تیپ و موتور را بعداً خودتان اضافه کنید.', 'yadak-core' ), true ),
+			'brands'     => array( __( 'برندهای سازنده قطعه', 'yadak-core' ), __( 'برندهای رایج (بوش، دنسو، موبیس، والئو، ایساکو و …) با نام لاتین، کشور و نوع، آدرس «/brand/نام/» و برگه «برندها». لوگو را خودتان در محصولات › برندها بگذارید.', 'yadak-core' ), true ),
 			'pages'      => array( __( 'برگه‌های پایه (پیش‌نویس)', 'yadak-core' ), __( 'درباره ما، تماس، همکاری عمده، قوانین، مرجوعی و ضمانت، ارسال. به‌صورت پیش‌نویس ساخته می‌شوند تا متن را بازبینی و بعد منتشر کنید.', 'yadak-core' ), true ),
 			'menus'      => array( __( 'منوی بالا و پایین', 'yadak-core' ), __( 'منوی بالا با سه بخش فروشگاه و منوی پایین با برگه‌ها.', 'yadak-core' ), true ),
 			'live'       => array( __( 'باز کردن فروشگاه برای همه (خاموش کردن «به‌زودی»)', 'yadak-core' ), __( 'فقط وقتی محصولات و برگه‌ها آماده شد تیک بزنید.', 'yadak-core' ), false ),
@@ -156,7 +157,86 @@ class Yadak_Setup {
 
 	public static function step_permalinks() {
 		update_option( 'permalink_structure', '/%postname%/' );
+		self::brand_base();
 		return __( '✔ پیوندهای یکتا روی «/نام-نوشته/» تنظیم شد.', 'yadak-core' );
+	}
+
+	/**
+	 * Latin brand URLs (/brand/bosch/) instead of the translated base (/برند/…).
+	 */
+	private static function brand_base() {
+		if ( '' === (string) get_option( 'woocommerce_brand_permalink', '' ) ) {
+			update_option( 'woocommerce_brand_permalink', 'brand' );
+			if ( class_exists( 'WC_Brands' ) && taxonomy_exists( 'product_brand' ) ) {
+				WC_Brands::init_taxonomy(); // Re-register so the flush below uses the new base.
+				Yadak_Brands::rewrites();
+			}
+		}
+	}
+
+	/**
+	 * Common part brands in Iran: [fa, slug/Latin, country, type].
+	 * Country and type are starting points; check them against your suppliers.
+	 */
+	public static function brands() {
+		return array(
+			array( 'بوش', 'Bosch', 'de', 'oe' ),
+			array( 'والئو', 'Valeo', 'fr', 'oe' ),
+			array( 'دنسو', 'Denso', 'jp', 'oe' ),
+			array( 'ان‌جی‌کی', 'NGK', 'jp', 'oe' ),
+			array( 'آیسین', 'Aisin', 'jp', 'oe' ),
+			array( 'کایابا', 'KYB', 'jp', 'oe' ),
+			array( 'اکسدی', 'Exedy', 'jp', 'oe' ),
+			array( 'هلا', 'Hella', 'de', 'oe' ),
+			array( 'ماله', 'Mahle', 'de', 'oe' ),
+			array( 'مان فیلتر', 'Mann-Filter', 'de', 'oe' ),
+			array( 'زاکس', 'Sachs', 'de', 'oe' ),
+			array( 'کنتیننتال', 'Continental', 'de', 'oe' ),
+			array( 'فبی', 'Febi', 'de', 'aftermarket' ),
+			array( 'موبیس', 'Mobis', 'kr', 'genuine' ),
+			array( 'ماندو', 'Mando', 'kr', 'oe' ),
+			array( 'دانگیل', 'Dongil', 'kr', '' ), // Type unknown: set it in Products › Brands.
+			array( 'دپو', 'Depo', 'tw', 'aftermarket' ),
+			array( 'تی‌وای‌سی', 'TYC', 'tw', 'aftermarket' ),
+			array( 'ایساکو', 'Isaco', 'ir', 'genuine' ),
+			array( 'سایپا یدک', 'Saipa Yadak', 'ir', 'genuine' ),
+			array( 'کروز', 'Crouse', 'ir', 'oe' ),
+		);
+	}
+
+	public static function step_brands() {
+		if ( ! taxonomy_exists( 'product_brand' ) ) {
+			return __( '✖ برندهای ووکامرس در دسترس نیست (ووکامرس را به‌روز کنید).', 'yadak-core' );
+		}
+		self::brand_base();
+		$made = 0;
+		foreach ( self::brands() as $brand ) {
+			$slug = sanitize_title( $brand[1] );
+			if ( get_term_by( 'slug', $slug, 'product_brand' ) ) {
+				continue; // Keep the owner's edits.
+			}
+			$term = wp_insert_term( $brand[0], 'product_brand', array( 'slug' => $slug ) );
+			if ( is_wp_error( $term ) ) {
+				continue;
+			}
+			update_term_meta( $term['term_id'], 'yadak_latin', $brand[1] );
+			update_term_meta( $term['term_id'], 'yadak_country', $brand[2] );
+			update_term_meta( $term['term_id'], 'yadak_brand_type', $brand[3] );
+			++$made;
+		}
+		if ( ! get_page_by_path( 'brands' ) ) {
+			wp_insert_post(
+				array(
+					'post_type'    => 'page',
+					'post_status'  => 'publish', // Built from live brand data, nothing to proofread.
+					'post_name'    => 'brands',
+					'post_title'   => 'برندها',
+					'post_content' => '<!-- wp:paragraph --><p>قطعات برندهای معتبر سازنده، از قطعه اصلی شرکتی تا تأمین‌کنندگان خط تولید خودروسازان. برند را انتخاب کنید تا همه قطعات موجود آن را ببینید.</p><!-- /wp:paragraph --><!-- wp:shortcode -->[yadak_brands]<!-- /wp:shortcode -->',
+				)
+			);
+		}
+		/* translators: %d: count */
+		return sprintf( __( '✔ %d برند ساخته شد و برگه «برندها» آماده است. کشور و نوع هر برند را در محصولات › برندها بازبینی کنید و لوگو بگذارید.', 'yadak-core' ), $made );
 	}
 
 	public static function step_classic() {
@@ -361,6 +441,16 @@ class Yadak_Setup {
 						);
 					}
 				}
+				wp_update_nav_menu_item(
+					$menu_id,
+					0,
+					array(
+						'menu-item-title'  => 'برندها',
+						'menu-item-url'    => home_url( '/brands/' ),
+						'menu-item-status' => 'publish',
+						'menu-item-type'   => 'custom',
+					)
+				);
 				wp_update_nav_menu_item(
 					$menu_id,
 					0,
