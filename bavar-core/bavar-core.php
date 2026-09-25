@@ -1,12 +1,11 @@
 <?php
 /**
- * Plugin Name: BAVAR Core
+ * Plugin Name: BAVAR Core — گروه باور
  * Description: هسته‌ی سایت گروه باور — مدیریت مخاطبان و فعالیت‌ها، آمار، فرم‌های هر بخش، پک‌های کتاب، تحویل محتوای خریداری‌شده، پرداخت کارت‌به‌کارت با ارسال فیش و لایسنس اسپات‌پلیر.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: BAVAR GROUP
  * Requires at least: 6.2
  * Requires PHP: 7.4
- * Requires Plugins: woocommerce
  * Text Domain: bavar-core
  */
 
@@ -14,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BAVAR_CORE_VERSION', '1.1.0' );
+define( 'BAVAR_CORE_VERSION', '1.1.1' );
 define( 'BAVAR_CORE_FILE', __FILE__ );
 define( 'BAVAR_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BAVAR_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -53,6 +52,9 @@ add_action(
 			);
 			return;
 		}
+
+		// Order-independent install: configure WooCommerce the first time it is active.
+		Bavar_Install::maybe_configure_woocommerce();
 
 		Bavar_Products::init();
 		Bavar_Library::init();

@@ -132,12 +132,33 @@ class Bavar_Install {
 	}
 
 	/**
+	 * Apply the WooCommerce settings once, even when WooCommerce is activated
+	 * after this plugin.
+	 */
+	public static function maybe_configure_woocommerce() {
+		if ( get_option( 'bavar_wc_configured' ) ) {
+			return;
+		}
+		add_action(
+			'init',
+			function () {
+				if ( function_exists( 'wc_get_page_id' ) && wc_get_page_id( 'checkout' ) > 0 ) {
+					self::woocommerce_options();
+					flush_rewrite_rules();
+				}
+			},
+			99
+		);
+	}
+
+	/**
 	 * WooCommerce settings suited to selling digital products.
 	 */
 	private static function woocommerce_options() {
-		if ( ! function_exists( 'wc_get_page_id' ) ) {
+		if ( ! function_exists( 'wc_get_page_id' ) || wc_get_page_id( 'checkout' ) <= 0 ) {
 			return;
 		}
+		update_option( 'bavar_wc_configured', 1 );
 
 		$options = [
 			'woocommerce_enable_guest_checkout'              => 'no',
