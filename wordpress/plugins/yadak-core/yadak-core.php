@@ -50,6 +50,7 @@ require_once YADAK_CORE_DIR . 'includes/class-model3d.php';
 require_once YADAK_CORE_DIR . 'includes/class-filter.php';
 require_once YADAK_CORE_DIR . 'includes/class-bulk.php';
 require_once YADAK_CORE_DIR . 'includes/class-schema.php';
+require_once YADAK_CORE_DIR . 'includes/class-setup.php';
 
 // Declare compatibility with WooCommerce custom order tables (HPOS).
 add_action(
@@ -98,6 +99,7 @@ add_action(
 		Yadak_Filter::init();
 		Yadak_Bulk::init();
 		Yadak_Schema::init();
+		Yadak_Setup::init();
 
 		add_filter(
 			'woocommerce_payment_gateways',
