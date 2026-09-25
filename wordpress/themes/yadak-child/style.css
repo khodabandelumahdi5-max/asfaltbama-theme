@@ -213,13 +213,39 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 /* ---------- Hero ---------- */
 
 .yadak-hero {
+	position: relative;
+	isolation: isolate;
+	/* Layers: warm headlight glow, cool glow, blueprint grid, deep ink. */
 	background:
-		radial-gradient(ellipse at 70% 60%, rgb(234 88 12 / 22%), transparent 55%),
-		radial-gradient(circle at 10% 10%, rgb(59 130 246 / 14%), transparent 40%),
-		linear-gradient(160deg, var(--y-ink) 0%, #111c33 60%, #0b1222 100%);
+		radial-gradient(ellipse 60% 55% at 28% 58%, rgb(234 88 12 / 26%), transparent 70%),
+		radial-gradient(circle at 90% 8%, rgb(59 130 246 / 16%), transparent 38%),
+		linear-gradient(rgb(148 163 184 / 7%) 1px, transparent 1px) 0 0 / 44px 44px,
+		linear-gradient(90deg, rgb(148 163 184 / 7%) 1px, transparent 1px) 0 0 / 44px 44px,
+		linear-gradient(160deg, var(--y-ink) 0%, #111c33 55%, #0a1020 100%);
 	color: #e2e8f0;
 	padding-block: 32px 40px;
 	overflow: hidden;
+}
+/* Optional brand photo (Customizer) under an ink overlay. */
+.yadak-hero.has-photo {
+	background:
+		linear-gradient(100deg, rgb(10 16 32 / 55%) 0%, rgb(10 16 32 / 88%) 55%, rgb(10 16 32 / 96%) 100%),
+		var(--y-hero-photo) center / cover no-repeat,
+		var(--y-ink);
+}
+/* Headlight beams sweeping across the hero. */
+.yadak-hero__beams {
+	position: absolute; inset: 0; z-index: -1; pointer-events: none;
+	background:
+		linear-gradient(100deg, transparent 38%, rgb(255 244 220 / 7%) 46%, transparent 54%),
+		linear-gradient(106deg, transparent 52%, rgb(234 88 12 / 9%) 58%, transparent 64%),
+		linear-gradient(94deg, transparent 22%, rgb(255 255 255 / 4%) 27%, transparent 32%);
+	mask-image: linear-gradient(to bottom, #000 60%, transparent);
+}
+.yadak-hero::after {
+	/* Fade the grid into the page below. */
+	content: ""; position: absolute; inset: auto 0 0 0; height: 80px; z-index: -1;
+	background: linear-gradient(to bottom, transparent, rgb(10 16 32 / 70%));
 }
 .yadak-hero__inner { display: grid; gap: 20px; align-items: center; }
 .yadak-hero h1 { color: #fff; font-size: clamp(24px, 4.4vw, 40px); font-weight: 900; margin-bottom: 10px; }
@@ -314,6 +340,37 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 .yadak-origin .yadak-makes a { min-height: 40px; padding: 0 14px; font-size: 14px; }
 @media (min-width: 900px) { .yadak-origins { grid-template-columns: repeat(3, 1fr); } }
 
+/* Store departments: large illustrated cards. */
+.yadak-depts { display: grid; gap: 14px; grid-template-columns: 1fr; }
+.yadak-dept {
+	position: relative; overflow: hidden; isolation: isolate;
+	min-height: 220px; border-radius: 18px; padding: 22px;
+	color: #e2e8f0;
+	background:
+		linear-gradient(rgb(148 163 184 / 8%) 1px, transparent 1px) 0 0 / 28px 28px,
+		linear-gradient(90deg, rgb(148 163 184 / 8%) 1px, transparent 1px) 0 0 / 28px 28px,
+		linear-gradient(150deg, #16233d, var(--y-ink));
+	box-shadow: 0 1px 0 rgb(255 255 255 / 6%) inset, 0 18px 36px -18px rgb(15 23 42 / 55%);
+	transition: transform .2s, box-shadow .2s;
+}
+.yadak-dept--1 { background-color: #0f172a; background-image: linear-gradient(rgb(148 163 184 / 8%) 1px, transparent 1px), linear-gradient(90deg, rgb(148 163 184 / 8%) 1px, transparent 1px), radial-gradient(circle at 15% 85%, rgb(234 88 12 / 35%), transparent 55%), linear-gradient(150deg, #1c2640, #0f172a); background-size: 28px 28px, 28px 28px, auto, auto; }
+.yadak-dept--2 { background-image: linear-gradient(rgb(148 163 184 / 8%) 1px, transparent 1px), linear-gradient(90deg, rgb(148 163 184 / 8%) 1px, transparent 1px), linear-gradient(150deg, #2a1a12, #0f172a 70%); background-size: 28px 28px, 28px 28px, auto; }
+.yadak-dept__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; opacity: .35; }
+.yadak-dept__art { position: absolute; inset-inline-end: -18px; bottom: -22px; z-index: -1; color: rgb(234 88 12 / 32%); transition: transform .4s; }
+.yadak-dept__art .yadak-cat-icon { width: 190px; height: 190px; stroke-width: .9; }
+.yadak-dept__icon { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: var(--y-accent); color: #fff; margin-bottom: 12px; box-shadow: 0 10px 20px -8px rgb(234 88 12 / 70%); }
+.yadak-dept h3 { margin: 0 0 12px; font-size: 20px; }
+.yadak-dept h3 a { color: #fff; }
+.yadak-dept h3 a::after { content: ""; position: absolute; inset: 0; z-index: 0; }
+.yadak-dept ul { position: relative; z-index: 1; list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; max-width: 85%; }
+.yadak-dept li a { display: inline-block; padding: 4px 12px; border-radius: 999px; background: rgb(255 255 255 / 9%); border: 1px solid rgb(255 255 255 / 14%); color: #e2e8f0; font-size: 13px; font-weight: 600; backdrop-filter: blur(4px); }
+.yadak-dept li a:hover { background: #fff; color: var(--y-ink); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+	.yadak-dept:hover { transform: translateY(-4px); box-shadow: 0 1px 0 rgb(255 255 255 / 6%) inset, 0 26px 44px -18px rgb(15 23 42 / 65%); }
+	.yadak-dept:hover .yadak-dept__art { transform: rotate(-6deg) scale(1.06); }
+}
+@media (min-width: 900px) { .yadak-depts { grid-template-columns: repeat(3, 1fr); } .yadak-dept { min-height: 260px; } }
+
 .yadak-cats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .yadak-cats a {
 	display: flex; align-items: center; gap: 12px; height: 100%; box-sizing: border-box;
@@ -327,7 +384,11 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 .yadak-cats__name { font-weight: 700; color: var(--y-ink); line-height: 1.5; }
 @media (min-width: 768px) { .yadak-cats { grid-template-columns: repeat(4, 1fr); } }
 
-.yadak-trust { background: var(--y-surface); }
+.yadak-trust {
+	background:
+		radial-gradient(circle at 1px 1px, rgb(15 23 42 / 7%) 1px, transparent 0) 0 0 / 18px 18px,
+		var(--y-surface);
+}
 .yadak-trust__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 12px; }
 .yadak-trust__grid li {
 	display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 12px;
@@ -341,7 +402,13 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 
 .yadak-b2b {
 	display: flex; flex-direction: column; gap: 16px; align-items: flex-start;
-	padding: 24px; border-radius: 16px; background: var(--y-ink); color: #cbd5e1;
+	padding: 24px; border-radius: 16px; color: #cbd5e1;
+	background:
+		linear-gradient(100deg, transparent 55%, rgb(234 88 12 / 16%) 62%, transparent 70%),
+		linear-gradient(104deg, transparent 68%, rgb(255 255 255 / 5%) 73%, transparent 78%),
+		linear-gradient(rgb(148 163 184 / 7%) 1px, transparent 1px) 0 0 / 32px 32px,
+		linear-gradient(90deg, rgb(148 163 184 / 7%) 1px, transparent 1px) 0 0 / 32px 32px,
+		var(--y-ink);
 }
 .yadak-b2b h2 { color: #fff; font-size: 20px; }
 .yadak-b2b p { margin: 0; }
@@ -365,7 +432,15 @@ body:not(.home) main#content {
 
 /* ---------- Footer ---------- */
 
-.yadak-footer { background: var(--y-ink); color: #94a3b8; margin-top: 32px; padding-top: 40px; font-size: 14px; }
+.yadak-footer {
+	position: relative; overflow: hidden; isolation: isolate;
+	background: var(--y-ink); color: #94a3b8; margin-top: 32px; padding-top: 40px; font-size: 14px;
+}
+.yadak-footer::before {
+	/* Faint brand mark watermark. */
+	content: ""; position: absolute; z-index: -1; width: 420px; height: 420px; inset-inline-end: -110px; bottom: -150px;
+	background: url("assets/brand/mark.svg") center / contain no-repeat; opacity: .05; filter: grayscale(1) brightness(3);
+}
 .yadak-footer a { color: #e2e8f0; }
 .yadak-footer a:hover { color: #fdba74; }
 .yadak-footer__grid { display: grid; gap: 28px; grid-template-columns: 1fr; padding-bottom: 32px; }

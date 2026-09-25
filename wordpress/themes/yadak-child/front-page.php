@@ -30,7 +30,8 @@ $yadak_cats   = $yadak_has_wc ? get_terms(
 ?>
 <main id="content" class="yadak-home">
 
-	<section class="yadak-hero">
+	<section class="yadak-hero<?php echo get_theme_mod( 'yadak_hero_image', '' ) ? ' has-photo' : ''; ?>" style="<?php echo esc_attr( yadak_hero_style() ); ?>">
+		<div class="yadak-hero__beams" aria-hidden="true"></div>
 		<div class="yadak-container yadak-hero__inner">
 			<div class="yadak-hero__copy">
 				<h1><?php echo esc_html( yadak_opt( 'hero_title' ) ); ?></h1>
@@ -93,28 +94,41 @@ $yadak_cats   = $yadak_has_wc ? get_terms(
 		<section class="yadak-section">
 			<div class="yadak-container">
 				<div class="yadak-section__head">
-					<h2><?php esc_html_e( 'دسته‌بندی قطعات', 'yadak-child' ); ?></h2>
+					<h2><?php esc_html_e( 'بخش‌های فروشگاه', 'yadak-child' ); ?></h2>
 					<a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"><?php esc_html_e( 'همه قطعات', 'yadak-child' ); ?> <?php echo yadak_icon( 'arrow' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
 				</div>
-				<ul class="yadak-cats">
-					<?php foreach ( $yadak_cats as $yadak_cat ) : ?>
-						<?php $yadak_thumb = (int) get_term_meta( $yadak_cat->term_id, 'thumbnail_id', true ); ?>
-						<li>
-							<a href="<?php echo esc_url( get_term_link( $yadak_cat ) ); ?>">
-								<span class="yadak-cats__media">
-									<?php
-									if ( $yadak_thumb ) {
-										echo wp_get_attachment_image( $yadak_thumb, 'thumbnail', false, array( 'alt' => '' ) );
-									} else {
-										echo '<span class="yadak-cats__initial" aria-hidden="true">' . esc_html( mb_substr( $yadak_cat->name, 0, 1 ) ) . '</span>';
-									}
-									?>
-								</span>
-								<span class="yadak-cats__name"><?php echo esc_html( $yadak_cat->name ); ?></span>
-							</a>
-						</li>
+				<div class="yadak-depts">
+					<?php foreach ( $yadak_cats as $yadak_i => $yadak_cat ) : ?>
+						<?php
+						$yadak_subs  = get_terms(
+							array(
+								'taxonomy'   => 'product_cat',
+								'parent'     => $yadak_cat->term_id,
+								'hide_empty' => false,
+								'number'     => 8,
+							)
+						);
+						$yadak_thumb = (int) get_term_meta( $yadak_cat->term_id, 'thumbnail_id', true );
+						?>
+						<article class="yadak-dept yadak-dept--<?php echo esc_attr( $yadak_i % 3 ); ?>">
+							<?php if ( $yadak_thumb ) : ?>
+								<?php echo wp_get_attachment_image( $yadak_thumb, 'large', false, array( 'class' => 'yadak-dept__photo', 'alt' => '', 'loading' => 'lazy' ) ); ?>
+							<?php endif; ?>
+							<span class="yadak-dept__art"><?php echo yadak_cat_icon( $yadak_cat, 180 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+							<div class="yadak-dept__body">
+								<span class="yadak-dept__icon"><?php echo yadak_cat_icon( $yadak_cat, 30 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+								<h3><a href="<?php echo esc_url( get_term_link( $yadak_cat ) ); ?>"><?php echo esc_html( $yadak_cat->name ); ?></a></h3>
+								<?php if ( ! is_wp_error( $yadak_subs ) && $yadak_subs ) : ?>
+									<ul>
+										<?php foreach ( $yadak_subs as $yadak_sub ) : ?>
+											<li><a href="<?php echo esc_url( get_term_link( $yadak_sub ) ); ?>"><?php echo esc_html( $yadak_sub->name ); ?></a></li>
+										<?php endforeach; ?>
+									</ul>
+								<?php endif; ?>
+							</div>
+						</article>
 					<?php endforeach; ?>
-				</ul>
+				</div>
 			</div>
 		</section>
 	<?php endif; ?>

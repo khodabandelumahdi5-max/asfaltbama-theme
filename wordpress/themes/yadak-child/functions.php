@@ -16,6 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'YADAK_CHILD_VERSION', '0.3.0' );
 
+require_once get_stylesheet_directory() . '/inc/visuals.php';
+
 /**
  * Theme option with default.
  *
