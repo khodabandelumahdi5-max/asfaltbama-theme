@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'YADAK_CHILD_VERSION', '0.2.0' );
+define( 'YADAK_CHILD_VERSION', '0.3.0' );
 
 /**
  * Theme option with default.
@@ -27,9 +27,11 @@ function yadak_opt( $key ) {
 		'phone'         => '021-00000000',
 		'hours'         => 'شنبه تا پنجشنبه ۹ تا ۱۸',
 		'address'       => 'تهران',
-		'hero_title'    => 'داروخانه تخصصی خودروهای چینی، ژاپنی و کره‌ای',
-		'hero_subtitle' => 'هر قطعه‌ای که خودروی شما لازم دارد، با شماره فنی دقیق و ضمانت اصالت. خودروی‌تان را انتخاب کنید تا فقط قطعات سازگار را ببینید.',
+		'hero_title'    => 'قطعه درست، همین حالا',
+		'hero_subtitle' => 'قطعات برقی، بدنه و چراغ و مکانیکی خودروهای ژاپنی، چینی، کره‌ای و ایرانی — با شماره فنی دقیق، ضمانت اصالت و ارسال فوری.',
 		'b2b_url'       => '',
+		'brand_latin'   => 'GetFori',
+		'instagram'     => '',
 		'trust_seal'    => '',
 	);
 	$value = get_theme_mod( 'yadak_' . $key, isset( $defaults[ $key ] ) ? $defaults[ $key ] : '' );
@@ -72,6 +74,9 @@ add_action(
 			esc_url( get_stylesheet_directory_uri() . '/assets/fonts/Vazirmatn-wght.woff2' )
 		);
 		echo '<meta name="theme-color" content="#0f172a">' . "\n";
+		if ( ! has_site_icon() ) {
+			printf( '<link rel="icon" type="image/svg+xml" href="%s">' . "\n", esc_url( get_stylesheet_directory_uri() . '/assets/brand/mark.svg' ) );
+		}
 	},
 	1
 );
@@ -102,6 +107,8 @@ add_action(
 			'phone'         => array( __( 'تلفن پشتیبانی', 'yadak-child' ), 'text' ),
 			'hours'         => array( __( 'ساعات پاسخگویی', 'yadak-child' ), 'text' ),
 			'address'       => array( __( 'آدرس', 'yadak-child' ), 'textarea' ),
+			'brand_latin'   => array( __( 'نام لاتین برند', 'yadak-child' ), 'text' ),
+			'instagram'     => array( __( 'لینک اینستاگرام', 'yadak-child' ), 'url' ),
 			'hero_title'    => array( __( 'تیتر صفحه اصلی', 'yadak-child' ), 'text' ),
 			'hero_subtitle' => array( __( 'زیرتیتر صفحه اصلی', 'yadak-child' ), 'textarea' ),
 			'b2b_url'       => array( __( 'لینک صفحه همکاری (B2B)', 'yadak-child' ), 'url' ),
@@ -155,15 +162,15 @@ function yadak_3d_parts() {
 	$defs = apply_filters(
 		'yadak_3d_parts',
 		array(
-			'headlights'   => array( __( 'چراغ جلو', 'yadak-child' ), array( 'headlights', 'lights' ) ),
-			'taillights'   => array( __( 'چراغ خطر عقب', 'yadak-child' ), array( 'taillights', 'lights' ) ),
-			'fog'          => array( __( 'مه‌شکن', 'yadak-child' ), array( 'fog-lights', 'lights' ) ),
-			'front_bumper' => array( __( 'سپر جلو', 'yadak-child' ), array( 'front-bumper', 'bumpers' ) ),
-			'rear_bumper'  => array( __( 'سپر عقب', 'yadak-child' ), array( 'rear-bumper', 'bumpers' ) ),
-			'grille'       => array( __( 'جلوپنجره', 'yadak-child' ), array( 'grille', 'bumpers' ) ),
-			'mirrors'      => array( __( 'آینه بغل', 'yadak-child' ), array( 'mirrors', 'bumpers' ) ),
-			'accessories'  => array( __( 'باربند', 'yadak-child' ), array( 'racks-steps', 'accessories' ) ),
-			'steps'        => array( __( 'رکاب', 'yadak-child' ), array( 'racks-steps', 'accessories' ) ),
+			'headlights'   => array( __( 'چراغ جلو', 'yadak-child' ), array( 'headlights', 'lights', 'body-lights' ) ),
+			'taillights'   => array( __( 'چراغ خطر عقب', 'yadak-child' ), array( 'taillights', 'lights', 'body-lights' ) ),
+			'fog'          => array( __( 'مه‌شکن و پروژکتور', 'yadak-child' ), array( 'fog-lights', 'lights', 'body-lights' ) ),
+			'front_bumper' => array( __( 'سپر جلو', 'yadak-child' ), array( 'front-bumper', 'bumpers', 'body-parts', 'body-lights' ) ),
+			'rear_bumper'  => array( __( 'سپر عقب', 'yadak-child' ), array( 'rear-bumper', 'bumpers', 'body-parts', 'body-lights' ) ),
+			'grille'       => array( __( 'جلوپنجره', 'yadak-child' ), array( 'grille', 'body-parts', 'body-lights' ) ),
+			'mirrors'      => array( __( 'آینه بغل', 'yadak-child' ), array( 'mirrors', 'body-parts', 'body-lights' ) ),
+			'accessories'  => array( __( 'سقف و باربند', 'yadak-child' ), array( 'roof', 'racks-steps', 'accessories', 'body-lights' ) ),
+			'steps'        => array( __( 'رکاب', 'yadak-child' ), array( 'body-parts', 'racks-steps', 'body-lights' ) ),
 		)
 	);
 	$vehicle = class_exists( 'Yadak_Fitment' ) ? Yadak_Fitment::current_vehicle() : null;
@@ -247,6 +254,56 @@ function yadak_search_form( $id = 'yadak-s' ) {
 	</form>
 	<?php
 }
+
+/**
+ * Speed (Core Web Vitals): no emoji script, no jQuery Migrate on the
+ * storefront, WooCommerce block styles only where blocks are used, theme
+ * scripts deferred.
+ */
+add_action(
+	'init',
+	static function () {
+		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+		remove_action( 'wp_print_styles', 'print_emoji_styles' );
+		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+		remove_action( 'admin_print_styles', 'print_emoji_styles' );
+		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+	}
+);
+add_action(
+	'wp_default_scripts',
+	static function ( $scripts ) {
+		if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
+			$scripts->registered['jquery']->deps = array_diff( $scripts->registered['jquery']->deps, array( 'jquery-migrate' ) );
+		}
+	}
+);
+add_action(
+	'wp_enqueue_scripts',
+	static function () {
+		$content = is_singular() && get_post() ? get_post()->post_content : '';
+		if ( false === strpos( $content, 'wp:woocommerce/' ) ) {
+			wp_dequeue_style( 'wc-blocks-style' );
+		}
+		if ( ! has_blocks( $content ) ) {
+			wp_dequeue_style( 'wp-block-library' );
+			wp_dequeue_style( 'classic-theme-styles' );
+		}
+	},
+	100
+);
+add_filter(
+	'script_loader_tag',
+	static function ( $tag, $handle ) {
+		if ( in_array( $handle, array( 'yadak-child', 'yadak-hero3d', 'yadak-vehicle-selector' ), true ) && false === strpos( $tag, ' defer' ) ) {
+			$tag = str_replace( ' src=', ' defer src=', $tag );
+		}
+		return $tag;
+	},
+	10,
+	2
+);
 
 /**
  * Tidy WooCommerce defaults for this layout.

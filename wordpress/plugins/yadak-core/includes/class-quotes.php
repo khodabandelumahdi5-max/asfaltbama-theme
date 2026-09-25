@@ -184,6 +184,15 @@ class Yadak_Quotes {
 		if ( ! $customer && isset( $_GET['yq_customer'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$customer = absint( $_GET['yq_customer'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
+		$deal = (int) get_post_meta( $post->ID, '_yq_deal', true );
+		if ( ! $deal && isset( $_GET['yq_deal'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$deal = absint( $_GET['yq_deal'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		}
+		echo '<input type="hidden" name="yq_deal" value="' . esc_attr( $deal ) . '">';
+		if ( $deal ) {
+			/* translators: %s: deal title */
+			echo '<p>' . esc_html( sprintf( __( 'فرصت فروش: %s', 'yadak-core' ), get_the_title( $deal ) ) ) . '</p>';
+		}
 		$user     = $customer ? get_userdata( $customer ) : null;
 		$items    = self::items( $post->ID );
 		$totals   = self::totals( $post->ID );
@@ -249,6 +258,10 @@ class Yadak_Quotes {
 		}
 		$customer = isset( $_POST['yq_customer'] ) ? absint( $_POST['yq_customer'] ) : 0;
 		update_post_meta( $post_id, '_yq_customer', $customer );
+		if ( ! empty( $_POST['yq_deal'] ) ) {
+			update_post_meta( $post_id, '_yq_deal', absint( $_POST['yq_deal'] ) );
+			update_post_meta( absint( $_POST['yq_deal'] ), '_yl_quote', $post_id );
+		}
 
 		$items = array();
 		$rows  = isset( $_POST['yq_items'] ) && is_array( $_POST['yq_items'] ) ? wp_unslash( $_POST['yq_items'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized per field below.
@@ -289,6 +302,10 @@ class Yadak_Quotes {
 			return;
 		}
 		update_post_meta( $quote_id, '_yq_status', 'sent' );
+		$deal = (int) get_post_meta( $quote_id, '_yq_deal', true );
+		if ( $deal ) {
+			Yadak_CRM::set_deal_stage( $deal, 'quotation' );
+		}
 		$totals = self::totals( $quote_id );
 		$link   = self::customer_url( $quote_id );
 		Yadak_SMS::notify(
@@ -395,6 +412,12 @@ class Yadak_Quotes {
 		$order->set_address( $customer->get_billing(), 'billing' );
 		$order->set_address( $customer->get_shipping(), 'shipping' );
 		$order->update_meta_data( '_yadak_quote_id', $quote_id );
+		$deal = (int) get_post_meta( $quote_id, '_yq_deal', true );
+		if ( $deal ) {
+			$order->update_meta_data( '_yadak_deal', $deal );
+			update_post_meta( $deal, '_yl_order', $order->get_id() );
+			Yadak_CRM::set_deal_stage( $deal, 'won' );
+		}
 		$order->calculate_totals();
 		/* translators: %d: quote number */
 		$order->update_status( 'pending', sprintf( __( 'ساخته‌شده از پیش‌فاکتور #%d', 'yadak-core' ), $quote_id ) );

@@ -2,7 +2,7 @@
 Theme Name:   Yadak Child
 Description:  قالب فروشگاه قطعات خودرو — فرزند Hello Elementor؛ راست‌به‌چپ، موبایل‌محور، با انتخاب خودرو و جستجوی شماره فنی. همراه با افزونه Yadak Core.
 Template:     hello-elementor
-Version:      0.2.0
+Version:      0.3.0
 Requires PHP: 7.4
 Text Domain:  yadak-child
 License:      GNU General Public License v3 or later
@@ -135,7 +135,11 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 	background: #fff; color: var(--y-ink); cursor: pointer; padding: 0;
 }
 
-.yadak-brand__name { font-size: 22px; font-weight: 900; color: var(--y-ink); letter-spacing: -.3px; }
+.yadak-brand__link { display: inline-flex; align-items: center; gap: 10px; }
+.yadak-brand__mark { display: block; width: 40px; height: 40px; border-radius: 11px; }
+.yadak-brand__text { display: flex; flex-direction: column; line-height: 1.1; }
+.yadak-brand__name { font-size: 21px; font-weight: 900; color: var(--y-ink); letter-spacing: -.3px; }
+.yadak-brand__latin { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: var(--y-muted); text-transform: uppercase; font-feature-settings: normal; margin-top: 3px; }
 .yadak-brand .custom-logo { max-height: 44px; width: auto; display: block; }
 
 .yadak-action {

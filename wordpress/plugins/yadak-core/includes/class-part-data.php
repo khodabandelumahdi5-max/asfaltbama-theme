@@ -26,6 +26,8 @@ class Yadak_Part_Data {
 			'_yadak_origin'      => __( 'کشور سازنده', 'yadak-core' ),
 			'_yadak_warranty'    => __( 'گارانتی', 'yadak-core' ),
 			'_yadak_replace_days' => __( 'دوره تعویض (روز)', 'yadak-core' ),
+			'_yadak_year_from'   => __( 'سال ساخت از', 'yadak-core' ),
+			'_yadak_year_to'     => __( 'سال ساخت تا', 'yadak-core' ),
 			'_yadak_moodian_id'  => __( 'شناسه کالا (مودیان)', 'yadak-core' ),
 		);
 	}
@@ -112,6 +114,22 @@ class Yadak_Part_Data {
 		);
 		woocommerce_wp_text_input(
 			array(
+				'id'          => '_yadak_year_from',
+				'label'       => __( 'سال ساخت از', 'yadak-core' ),
+				'placeholder' => '2016 یا 1395',
+				'desc_tip'    => true,
+				'description' => __( 'بازه سال ساخت خودروهای سازگار (میلادی یا شمسی). خالی = همه سال‌ها. در فیلتر «سال ساخت» استفاده می‌شود.', 'yadak-core' ),
+			)
+		);
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_yadak_year_to',
+				'label'       => __( 'سال ساخت تا', 'yadak-core' ),
+				'placeholder' => '2023 یا 1402',
+			)
+		);
+		woocommerce_wp_text_input(
+			array(
 				'id'                => '_yadak_replace_days',
 				'label'             => __( 'دوره تعویض (روز)', 'yadak-core' ),
 				'type'              => 'number',
@@ -145,9 +163,26 @@ class Yadak_Part_Data {
 			if ( '_yadak_quality' === $key && ! array_key_exists( $value, self::qualities() ) ) {
 				$value = '';
 			}
+			if ( in_array( $key, array( '_yadak_year_from', '_yadak_year_to' ), true ) ) {
+				$value = self::normalize_year( $value );
+			}
 			$product->update_meta_data( $key, $value );
 		}
 		// phpcs:enable
+	}
+
+	/**
+	 * Store model years as Gregorian: "1395" → "2016", "" stays "".
+	 *
+	 * @param string $year Year.
+	 * @return string
+	 */
+	public static function normalize_year( $year ) {
+		$year = (int) yadak_normalize_digits( trim( (string) $year ) );
+		if ( ! $year ) {
+			return '';
+		}
+		return (string) ( $year < 1700 ? $year + 621 : $year );
 	}
 
 	/**
@@ -184,6 +219,14 @@ class Yadak_Part_Data {
 		}
 		if ( $quality && isset( $quals[ $quality ] ) ) {
 			$rows[ __( 'کیفیت', 'yadak-core' ) ] = $quals[ $quality ];
+		}
+		$from = $product->get_meta( '_yadak_year_from' );
+		$to   = $product->get_meta( '_yadak_year_to' );
+		if ( $from || $to ) {
+			$fmt = static function ( $y ) {
+				return $y ? $y . ' (' . ( (int) $y - 621 ) . ')' : '…';
+			};
+			$rows[ __( 'سال ساخت', 'yadak-core' ) ] = $fmt( $from ) . ' – ' . $fmt( $to );
 		}
 		if ( $product->get_meta( '_yadak_origin' ) ) {
 			$rows[ __( 'کشور سازنده', 'yadak-core' ) ] = $product->get_meta( '_yadak_origin' );

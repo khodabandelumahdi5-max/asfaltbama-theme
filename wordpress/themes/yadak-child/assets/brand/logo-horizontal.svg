@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" role="img" aria-label="قطعه فوری — GetFori">
+  <rect x="236" width="64" height="64" rx="16" fill="#0f172a"/>
+  <path d="M262 16a16 16 0 0 0 0 32z" fill="#ea580c"/>
+  <rect x="267" y="21" width="20" height="4" rx="2" fill="#fff"/>
+  <rect x="267" y="30" width="15" height="4" rx="2" fill="#fff" opacity=".8"/>
+  <rect x="267" y="39" width="10" height="4" rx="2" fill="#fff" opacity=".6"/>
+  <text x="222" y="36" text-anchor="end" direction="rtl" font-family="Vazirmatn, Tahoma, sans-serif" font-weight="900" font-size="30" fill="#0f172a">قطعه <tspan fill="#ea580c">فوری</tspan></text>
+  <text x="222" y="56" text-anchor="end" font-family="Vazirmatn, Arial, sans-serif" font-weight="700" font-size="13" letter-spacing="2" fill="#64748b">GETFORI</text>
+</svg>

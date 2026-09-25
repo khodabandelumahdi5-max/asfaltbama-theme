@@ -41,7 +41,13 @@ $yadak_menu     = wp_nav_menu(
 			<?php if ( has_custom_logo() ) : ?>
 				<?php the_custom_logo(); ?>
 			<?php else : ?>
-				<a class="yadak-brand__name" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+				<a class="yadak-brand__link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+					<img class="yadak-brand__mark" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/brand/mark.svg' ); ?>" width="40" height="40" alt="">
+					<span class="yadak-brand__text">
+						<span class="yadak-brand__name"><?php bloginfo( 'name' ); ?></span>
+						<?php if ( yadak_opt( 'brand_latin' ) ) : ?><span class="yadak-brand__latin" lang="en"><?php echo esc_html( yadak_opt( 'brand_latin' ) ); ?></span><?php endif; ?>
+					</span>
+				</a>
 			<?php endif; ?>
 		</div>
 

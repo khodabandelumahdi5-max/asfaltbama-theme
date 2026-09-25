@@ -165,6 +165,56 @@ class Yadak_Dashboard {
 		return $d;
 	}
 
+	/**
+	 * Live order pipeline: what needs action now (not cached).
+	 */
+	private static function render_orders() {
+		$statuses = array(
+			'pending'    => __( 'در انتظار پرداخت', 'yadak-core' ),
+			'on-hold'    => __( 'در انتظار بررسی (کارت‌به‌کارت/اعتباری)', 'yadak-core' ),
+			'processing' => __( 'پرداخت‌شده، آماده ارسال', 'yadak-core' ),
+		);
+		$orders_url = class_exists( \Automattic\WooCommerce\Utilities\OrderUtil::class ) && \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled()
+			? admin_url( 'admin.php?page=wc-orders&status=wc-' )
+			: admin_url( 'edit.php?post_type=shop_order&post_status=wc-' );
+		echo '<h2 style="font-size:14px">' . esc_html__( 'سفارش‌هایی که منتظر شما هستند', 'yadak-core' ) . '</h2><div class="yd-tiles" style="margin-top:6px">';
+		foreach ( $statuses as $status => $label ) {
+			$count = wc_orders_count( $status );
+			echo '<a class="yd-tile" style="text-decoration:none" href="' . esc_url( $orders_url . $status ) . '"><div class="yd-tile__label">' . esc_html( $label ) . '</div><div class="yd-tile__value">' . esc_html( number_format_i18n( $count ) ) . '</div></a>';
+		}
+		echo '</div>';
+
+		$waiting = wc_get_orders(
+			array(
+				'status'  => array( 'processing', 'on-hold' ),
+				'limit'   => 10,
+				'orderby' => 'date',
+				'order'   => 'ASC',
+			)
+		);
+		if ( ! $waiting ) {
+			return;
+		}
+		echo '<table class="widefat striped" style="margin-bottom:20px"><thead><tr><th>' . esc_html__( 'سفارش', 'yadak-core' ) . '</th><th>' . esc_html__( 'مشتری', 'yadak-core' ) . '</th><th>' . esc_html__( 'مبلغ', 'yadak-core' ) . '</th><th>' . esc_html__( 'وضعیت', 'yadak-core' ) . '</th><th>' . esc_html__( 'منتظر از', 'yadak-core' ) . '</th><th>' . esc_html__( 'شهر', 'yadak-core' ) . '</th></tr></thead><tbody>';
+		foreach ( $waiting as $order ) {
+			$created = $order->get_date_created();
+			$hours   = $created ? ( time() - $created->getTimestamp() ) / HOUR_IN_SECONDS : 0;
+			$style   = $hours > 24 ? 'color:#b32d2e;font-weight:700' : ( $hours > 4 ? 'color:#996800;font-weight:700' : '' );
+			printf(
+				'<tr><td><a href="%1$s">#%2$s</a></td><td>%3$s</td><td class="yd-num">%4$s</td><td>%5$s</td><td style="%6$s">%7$s</td><td>%8$s</td></tr>',
+				esc_url( $order->get_edit_order_url() ),
+				esc_html( $order->get_order_number() ),
+				esc_html( $order->get_formatted_billing_full_name() ),
+				esc_html( Yadak_SMS::plain_money( $order->get_total() ) ),
+				esc_html( wc_get_order_status_name( $order->get_status() ) ),
+				esc_attr( $style ),
+				esc_html( $created ? human_time_diff( $created->getTimestamp() ) : '' ),
+				esc_html( $order->get_billing_city() )
+			);
+		}
+		echo '</tbody></table>';
+	}
+
 	private static function tile( $label, $value, $sub = '' ) {
 		echo '<div class="yd-tile"><div class="yd-tile__label">' . esc_html( $label ) . '</div><div class="yd-tile__value">' . esc_html( $value ) . '</div>' . ( $sub ? '<div class="yd-tile__sub">' . esc_html( $sub ) . '</div>' : '' ) . '</div>';
 	}
@@ -219,6 +269,8 @@ class Yadak_Dashboard {
 				self::tile( __( 'کالاهای رو به اتمام', 'yadak-core' ), number_format_i18n( count( $d['low'] ) ), __( 'موجودی ≤ حداقل', 'yadak-core' ) );
 				?>
 			</div>
+
+			<?php self::render_orders(); ?>
 
 			<div class="yd-grid">
 				<div>

@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Yadak Core — هسته فروشگاه قطعات خودرو
  * Description:       فروشگاه قطعات خودرو روی ووکامرس: سازگاری با خودرو، جستجوی فارسی، قیمت همکار، اعتبار و حساب مشتری، پیش‌فاکتور، CRM، چند انبار، پیامک، زرین‌پال و کارت‌به‌کارت، فاکتور و خروجی مودیان، تاریخ شمسی، سئو و داشبورد فروش.
- * Version:           0.2.0
+ * Version:           0.3.0
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'YADAK_CORE_VERSION', '0.2.0' );
+define( 'YADAK_CORE_VERSION', '0.3.0' );
 define( 'YADAK_CORE_FILE', __FILE__ );
 define( 'YADAK_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'YADAK_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -47,6 +47,9 @@ require_once YADAK_CORE_DIR . 'includes/class-warehouses.php';
 require_once YADAK_CORE_DIR . 'includes/class-seo.php';
 require_once YADAK_CORE_DIR . 'includes/class-dashboard.php';
 require_once YADAK_CORE_DIR . 'includes/class-model3d.php';
+require_once YADAK_CORE_DIR . 'includes/class-filter.php';
+require_once YADAK_CORE_DIR . 'includes/class-bulk.php';
+require_once YADAK_CORE_DIR . 'includes/class-schema.php';
 
 // Declare compatibility with WooCommerce custom order tables (HPOS).
 add_action(
@@ -92,6 +95,9 @@ add_action(
 		Yadak_Warehouses::init();
 		Yadak_SEO::init();
 		Yadak_Model3D::init();
+		Yadak_Filter::init();
+		Yadak_Bulk::init();
+		Yadak_Schema::init();
 
 		add_filter(
 			'woocommerce_payment_gateways',

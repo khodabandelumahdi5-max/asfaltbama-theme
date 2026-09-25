@@ -99,6 +99,14 @@ class Yadak_CSV {
 	 * @param array      $data    Parsed row.
 	 */
 	public static function import_vehicles( $product, $data ) {
+		// Model years may be typed in Jalali; store Gregorian like the product form does.
+		foreach ( array( '_yadak_year_from', '_yadak_year_to' ) as $key ) {
+			$year = $product->get_meta( $key );
+			if ( '' !== $year && Yadak_Part_Data::normalize_year( $year ) !== $year ) {
+				$product->update_meta_data( $key, Yadak_Part_Data::normalize_year( $year ) );
+				$product->save_meta_data();
+			}
+		}
 		if ( ! isset( $data[ self::VEHICLES ] ) || $product->is_type( 'variation' ) ) {
 			return;
 		}

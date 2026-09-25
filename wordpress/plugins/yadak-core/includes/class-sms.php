@@ -375,7 +375,7 @@ class Yadak_SMS {
 				esc_html( $row->mobile ),
 				esc_html( isset( $events[ $row->event ] ) ? $events[ $row->event ] : $row->event ),
 				esc_html( $row->message ),
-				'sent' === $row->status ? '✅' : '❌',
+				'sent' === $row->status ? __( 'ارسال شد', 'yadak-core' ) : __( 'ناموفق', 'yadak-core' ),
 				esc_attr( $row->response )
 			);
 		}

@@ -36,6 +36,9 @@ class Yadak_CRM {
 		add_action( 'edit_user_profile_update', array( __CLASS__, 'save_user_activity' ) );
 
 		add_action( 'restrict_manage_users', array( __CLASS__, 'user_filters' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'lead_assets' ) );
+		add_action( 'woocommerce_order_status_processing', array( __CLASS__, 'deal_from_order' ), 30, 2 );
+		add_action( 'woocommerce_order_status_completed', array( __CLASS__, 'deal_from_order' ), 30, 2 );
 		add_action( 'pre_get_users', array( __CLASS__, 'filter_users' ) );
 	}
 
@@ -48,9 +51,51 @@ class Yadak_CRM {
 			'interested'  => __( 'علاقه‌مند', 'yadak-core' ),
 			'quotation'   => __( 'پیش‌فاکتور', 'yadak-core' ),
 			'negotiation' => __( 'مذاکره', 'yadak-core' ),
-			'won'         => __( 'مشتری شد', 'yadak-core' ),
+			'won'         => __( 'سفارش ثبت شد', 'yadak-core' ),
+			'paid'        => __( 'پرداخت شد', 'yadak-core' ),
+			'shipped'     => __( 'ارسال شد', 'yadak-core' ),
 			'lost'        => __( 'از دست رفت', 'yadak-core' ),
 		);
+	}
+
+	public static function channels() {
+		return array(
+			'b2b' => __( 'عمده / همکار (B2B)', 'yadak-core' ),
+			'b2c' => __( 'خرده (B2C)', 'yadak-core' ),
+		);
+	}
+
+	public static function lead_assets() {
+		$screen = get_current_screen();
+		if ( $screen && self::LEAD === $screen->post_type && 'post' === $screen->base ) {
+			wp_enqueue_style( 'woocommerce_admin_styles' );
+			wp_enqueue_script( 'wc-enhanced-select' );
+		}
+	}
+
+	/**
+	 * Move a deal to a stage (only forward, never out of "lost") and log it.
+	 */
+	public static function set_deal_stage( $deal_id, $stage ) {
+		$order = array_keys( self::stages() );
+		$old   = self::lead_meta( $deal_id, 'stage' );
+		if ( 'lost' === $old || array_search( $stage, $order, true ) <= array_search( $old, $order, true ) ) {
+			return;
+		}
+		update_post_meta( $deal_id, '_yl_stage', $stage );
+		/* translators: 1: old stage, 2: new stage */
+		self::add_activity( 'lead', $deal_id, 'note', sprintf( __( 'تغییر خودکار مرحله: %1$s ← %2$s', 'yadak-core' ), self::stages()[ $old ] ?? $old, self::stages()[ $stage ] ), '', 0, true );
+	}
+
+	/**
+	 * Paid → "پرداخت شد", completed → "ارسال شد" for the deal behind an order.
+	 */
+	public static function deal_from_order( $order_id, $order = null ) {
+		$order = $order ? $order : wc_get_order( $order_id );
+		$deal  = $order ? (int) $order->get_meta( '_yadak_deal' ) : 0;
+		if ( $deal ) {
+			self::set_deal_stage( $deal, 'completed' === $order->get_status() ? 'shipped' : 'paid' );
+		}
 	}
 
 	public static function activity_types() {
@@ -80,14 +125,14 @@ class Yadak_CRM {
 			self::LEAD,
 			array(
 				'labels'          => array(
-					'name'          => __( 'سرنخ‌ها', 'yadak-core' ),
-					'singular_name' => __( 'سرنخ', 'yadak-core' ),
-					'add_new'       => __( 'سرنخ جدید', 'yadak-core' ),
-					'add_new_item'  => __( 'سرنخ جدید (مشتری احتمالی)', 'yadak-core' ),
-					'edit_item'     => __( 'ویرایش سرنخ', 'yadak-core' ),
-					'all_items'     => __( 'سرنخ‌ها', 'yadak-core' ),
-					'search_items'  => __( 'جستجوی سرنخ', 'yadak-core' ),
-					'not_found'     => __( 'سرنخی نیست.', 'yadak-core' ),
+					'name'          => __( 'سرنخ‌ها و فرصت‌ها', 'yadak-core' ),
+					'singular_name' => __( 'فرصت فروش', 'yadak-core' ),
+					'add_new'       => __( 'فرصت جدید', 'yadak-core' ),
+					'add_new_item'  => __( 'سرنخ / فرصت فروش جدید', 'yadak-core' ),
+					'edit_item'     => __( 'ویرایش فرصت فروش', 'yadak-core' ),
+					'all_items'     => __( 'سرنخ‌ها و فرصت‌ها', 'yadak-core' ),
+					'search_items'  => __( 'جستجو', 'yadak-core' ),
+					'not_found'     => __( 'موردی نیست.', 'yadak-core' ),
 				),
 				'public'          => false,
 				'show_ui'         => true,
@@ -176,7 +221,7 @@ class Yadak_CRM {
 					echo '<td>' . nl2br( esc_html( $row->note ) ) . '</td><td>';
 					if ( $row->due_date ) {
 						echo esc_html( yadak_show_date( $row->due_date ) );
-						echo $row->done ? ' ✅' : ' — <a href="' . esc_url( self::done_url( $row->id ) ) . '">' . esc_html__( 'انجام شد', 'yadak-core' ) . '</a>';
+						echo $row->done ? ' ✓' : ' — <a href="' . esc_url( self::done_url( $row->id ) ) . '">' . esc_html__( 'انجام شد', 'yadak-core' ) . '</a>';
 					}
 					echo '</td><td>' . esc_html( $by ? $by->display_name : __( 'سیستم', 'yadak-core' ) ) . '</td></tr>';
 				}
@@ -250,6 +295,13 @@ class Yadak_CRM {
 		?>
 		<p class="description"><?php esc_html_e( 'عنوان بالا = نام شخص یا کسب‌وکار.', 'yadak-core' ); ?></p>
 		<table class="form-table" role="presentation">
+			<tr><th><?php esc_html_e( 'نوع فروش', 'yadak-core' ); ?></th><td><?php $select( 'yl[channel]', self::channels(), self::lead_meta( $post->ID, 'channel' ) ? self::lead_meta( $post->ID, 'channel' ) : 'b2b' ); ?></td></tr>
+			<tr><th><?php esc_html_e( 'مشتری موجود', 'yadak-core' ); ?></th><td>
+				<?php $linked = get_userdata( (int) self::lead_meta( $post->ID, 'user' ) ); ?>
+				<select name="yl[user]" class="wc-customer-search" style="width:320px" data-allow_clear="true" data-placeholder="<?php esc_attr_e( 'برای مشتری ثبت‌شده انتخاب کنید (اختیاری)', 'yadak-core' ); ?>">
+					<?php if ( $linked ) : ?><option value="<?php echo esc_attr( $linked->ID ); ?>" selected><?php echo esc_html( Yadak_SMS::user_name( $linked->ID ) ); ?></option><?php endif; ?>
+				</select>
+			</td></tr>
 			<tr><th><?php esc_html_e( 'موبایل', 'yadak-core' ); ?></th><td><input type="text" name="yl[mobile]" value="<?php echo esc_attr( self::lead_meta( $post->ID, 'mobile' ) ); ?>" dir="ltr"></td></tr>
 			<tr><th><?php esc_html_e( 'نام فروشگاه / تعمیرگاه / شرکت', 'yadak-core' ); ?></th><td><input type="text" class="regular-text" name="yl[company]" value="<?php echo esc_attr( self::lead_meta( $post->ID, 'company' ) ); ?>"></td></tr>
 			<tr><th><?php esc_html_e( 'شهر', 'yadak-core' ); ?></th><td><input type="text" name="yl[city]" value="<?php echo esc_attr( self::lead_meta( $post->ID, 'city' ) ); ?>"></td></tr>
@@ -271,6 +323,21 @@ class Yadak_CRM {
 		$user_id = (int) self::lead_meta( $post->ID, 'user' );
 		if ( $user_id && get_userdata( $user_id ) ) {
 			echo '<p><a class="button" href="' . esc_url( get_edit_user_link( $user_id ) ) . '">' . esc_html__( 'پرونده مشتری', 'yadak-core' ) . '</a></p>';
+			echo '<p><a class="button button-primary" href="' . esc_url( admin_url( 'post-new.php?post_type=' . Yadak_Quotes::POST_TYPE . '&yq_customer=' . $user_id . '&yq_deal=' . $post->ID ) ) . '">' . esc_html__( 'پیش‌فاکتور برای این فرصت', 'yadak-core' ) . '</a></p>';
+			$quote = (int) self::lead_meta( $post->ID, 'quote' );
+			$order = wc_get_order( (int) self::lead_meta( $post->ID, 'order' ) );
+			if ( $quote ) {
+				/* translators: 1: quote number, 2: status */
+				echo '<p><a href="' . esc_url( (string) get_edit_post_link( $quote ) ) . '">' . esc_html( sprintf( __( 'پیش‌فاکتور #%1$d — %2$s', 'yadak-core' ), $quote, Yadak_Quotes::statuses()[ Yadak_Quotes::status( $quote ) ] ) ) . '</a></p>';
+			}
+			if ( $order ) {
+				/* translators: 1: order number, 2: status */
+				echo '<p><a href="' . esc_url( $order->get_edit_order_url() ) . '">' . esc_html( sprintf( __( 'سفارش #%1$s — %2$s', 'yadak-core' ), $order->get_order_number(), wc_get_order_status_name( $order->get_status() ) ) ) . '</a>';
+				if ( $order->get_meta( '_yadak_tracking' ) ) {
+					echo '<br>' . esc_html__( 'کد رهگیری:', 'yadak-core' ) . ' <span dir="ltr">' . esc_html( $order->get_meta( '_yadak_tracking' ) ) . '</span>';
+				}
+				echo '</p>';
+			}
 			return;
 		}
 		if ( 'auto-draft' === $post->post_status ) {
@@ -291,7 +358,7 @@ class Yadak_CRM {
 		}
 		$in = isset( $_POST['yl'] ) && is_array( $_POST['yl'] ) ? wp_unslash( $_POST['yl'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized per field below.
 		$old_stage = self::lead_meta( $post_id, 'stage' );
-		foreach ( array( 'mobile', 'company', 'city', 'type', 'stage', 'source', 'rep', 'value', 'next' ) as $key ) {
+		foreach ( array( 'channel', 'user', 'mobile', 'company', 'city', 'type', 'stage', 'source', 'rep', 'value', 'next' ) as $key ) {
 			if ( ! isset( $in[ $key ] ) ) {
 				continue;
 			}
@@ -300,6 +367,10 @@ class Yadak_CRM {
 				$value = yadak_parse_date_input( $value );
 			} elseif ( 'mobile' === $key ) {
 				$value = Yadak_Checkout::normalize_mobile( $value ) ? Yadak_Checkout::normalize_mobile( $value ) : $value;
+			} elseif ( 'user' === $key ) {
+				$value = (string) absint( $value );
+			} elseif ( 'channel' === $key && ! array_key_exists( $value, self::channels() ) ) {
+				$value = 'b2b';
 			} elseif ( 'stage' === $key && ! array_key_exists( $value, self::stages() ) ) {
 				$value = 'lead';
 			}
@@ -341,7 +412,7 @@ class Yadak_CRM {
 			case 'yl_next':
 				$next = self::lead_meta( $post_id, 'next' );
 				if ( $next ) {
-					$late = $next < yadak_today() && ! in_array( self::lead_meta( $post_id, 'stage' ), array( 'won', 'lost' ), true );
+					$late = $next < yadak_today() && ! in_array( self::lead_meta( $post_id, 'stage' ), array( 'won', 'paid', 'shipped', 'lost' ), true );
 					echo '<span style="' . ( $late ? 'color:#b32d2e;font-weight:700' : '' ) . '">' . esc_html( yadak_show_date( $next ) ) . '</span>';
 				}
 				break;
@@ -411,14 +482,14 @@ class Yadak_CRM {
 			wp_die( esc_html__( 'دسترسی ندارید.', 'yadak-core' ) );
 		}
 		$mobile = self::lead_meta( $lead, 'mobile' );
-		$users  = $mobile ? get_users(
+		$users  = get_userdata( (int) self::lead_meta( $lead, 'user' ) ) ? array( (int) self::lead_meta( $lead, 'user' ) ) : ( $mobile ? get_users(
 			array(
 				'meta_key'   => 'billing_phone', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 				'meta_value' => $mobile, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 				'number'     => 1,
 				'fields'     => 'ID',
 			)
-		) : array();
+		) : array() );
 		$user_id = $users ? (int) $users[0] : 0;
 
 		if ( ! $user_id ) {
@@ -445,7 +516,6 @@ class Yadak_CRM {
 		update_user_meta( $user_id, 'yadak_company', self::lead_meta( $lead, 'company' ) );
 		update_user_meta( $user_id, 'yadak_sales_rep', (int) self::lead_meta( $lead, 'rep' ) );
 		update_post_meta( $lead, '_yl_user', $user_id );
-		update_post_meta( $lead, '_yl_stage', 'won' );
 
 		// Move the history to the customer file.
 		$wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
@@ -469,7 +539,7 @@ class Yadak_CRM {
 
 	public static function menu() {
 		add_submenu_page( Yadak_Settings::MENU, __( 'پیگیری‌های من', 'yadak-core' ), self::menu_label(), 'edit_shop_orders', 'yadak-followups', array( __CLASS__, 'render_followups' ), 1 );
-		add_submenu_page( Yadak_Settings::MENU, __( 'قیف فروش', 'yadak-core' ), __( 'قیف فروش', 'yadak-core' ), 'edit_shop_orders', 'yadak-pipeline', array( __CLASS__, 'render_pipeline' ), 2 );
+		add_submenu_page( Yadak_Settings::MENU, __( 'قیف فروش (Deal Pipeline)', 'yadak-core' ), __( 'قیف فروش', 'yadak-core' ), 'edit_shop_orders', 'yadak-pipeline', array( __CLASS__, 'render_pipeline' ), 2 );
 	}
 
 	private static function menu_label() {
@@ -529,7 +599,7 @@ class Yadak_CRM {
 				),
 				array(
 					'key'     => '_yl_stage',
-					'value'   => array( 'won', 'lost' ),
+					'value'   => array( 'won', 'paid', 'shipped', 'lost' ),
 					'compare' => 'NOT IN',
 				),
 			),
@@ -567,7 +637,7 @@ class Yadak_CRM {
 		echo '<div class="wrap"><h1>' . esc_html__( 'پیگیری‌ها', 'yadak-core' ) . '</h1>';
 		echo '<p><a href="' . esc_url( admin_url( 'admin.php?page=yadak-followups' ) ) . '">' . esc_html__( 'مال من', 'yadak-core' ) . '</a> | <a href="' . esc_url( admin_url( 'admin.php?page=yadak-followups&all=1' ) ) . '">' . esc_html__( 'همه کارشناسان', 'yadak-core' ) . '</a> — ' . esc_html__( 'عقب‌افتاده، امروز و ۷ روز آینده', 'yadak-core' ) . '</p>';
 		if ( ! $items ) {
-			echo '<p>' . esc_html__( 'پیگیری بازی ندارید. 👌', 'yadak-core' ) . '</p></div>';
+			echo '<p>' . esc_html__( 'پیگیری بازی ندارید.', 'yadak-core' ) . '</p></div>';
 			return;
 		}
 		echo '<table class="widefat striped"><thead><tr><th>' . esc_html__( 'تاریخ', 'yadak-core' ) . '</th><th>' . esc_html__( 'مشتری / سرنخ', 'yadak-core' ) . '</th><th>' . esc_html__( 'شرح', 'yadak-core' ) . '</th>' . ( $all ? '<th>' . esc_html__( 'کارشناس', 'yadak-core' ) . '</th>' : '' ) . '<th></th></tr></thead><tbody>';
@@ -591,12 +661,18 @@ class Yadak_CRM {
 			'posts_per_page' => 500,
 			'orderby'        => 'modified',
 		);
+		$args['meta_query'] = array(); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 		if ( $mine ) {
-			$args['meta_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-				array(
-					'key'   => '_yl_rep',
-					'value' => get_current_user_id(),
-				),
+			$args['meta_query'][] = array(
+				'key'   => '_yl_rep',
+				'value' => get_current_user_id(),
+			);
+		}
+		$channel = isset( $_GET['channel'] ) ? sanitize_key( $_GET['channel'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( $channel ) {
+			$args['meta_query'][] = array(
+				'key'   => '_yl_channel',
+				'value' => $channel,
 			);
 		}
 		$by_stage = array_fill_keys( array_keys( self::stages() ), array() );
@@ -609,7 +685,7 @@ class Yadak_CRM {
 		<div class="wrap">
 			<h1 class="wp-heading-inline"><?php esc_html_e( 'قیف فروش', 'yadak-core' ); ?></h1>
 			<a class="page-title-action" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . self::LEAD ) ); ?>"><?php esc_html_e( 'سرنخ جدید', 'yadak-core' ); ?></a>
-			<p><a href="<?php echo esc_url( admin_url( 'admin.php?page=yadak-pipeline' ) ); ?>"><?php esc_html_e( 'همه', 'yadak-core' ); ?></a> | <a href="<?php echo esc_url( admin_url( 'admin.php?page=yadak-pipeline&mine=1' ) ); ?>"><?php esc_html_e( 'فقط من', 'yadak-core' ); ?></a></p>
+			<p><a href="<?php echo esc_url( admin_url( 'admin.php?page=yadak-pipeline' ) ); ?>"><?php esc_html_e( 'همه', 'yadak-core' ); ?></a> | <a href="<?php echo esc_url( admin_url( 'admin.php?page=yadak-pipeline&mine=1' ) ); ?>"><?php esc_html_e( 'فقط من', 'yadak-core' ); ?></a> | <a href="<?php echo esc_url( admin_url( 'admin.php?page=yadak-pipeline&channel=b2b' ) ); ?>">B2B</a> | <a href="<?php echo esc_url( admin_url( 'admin.php?page=yadak-pipeline&channel=b2c' ) ); ?>">B2C</a></p>
 			<style>
 				.yk-board{display:flex;gap:10px;overflow-x:auto;align-items:flex-start;padding-bottom:10px}
 				.yk-col{flex:0 0 220px;background:#f0f0f1;border-radius:8px;padding:8px}
@@ -617,6 +693,8 @@ class Yadak_CRM {
 				.yk-card{background:#fff;border:1px solid #dcdcde;border-radius:6px;padding:8px;margin-bottom:8px;font-size:12px}
 				.yk-card a.yk-title{font-weight:700;font-size:13px;display:block;margin-bottom:2px}
 				.yk-card .late{color:#b32d2e;font-weight:700}
+				.yk-card .dashicons{font-size:14px;width:14px;height:14px;vertical-align:middle;color:#646970}
+				.yk-badge{display:inline-block;padding:0 6px;border-radius:4px;background:#1d2327;color:#fff;font-size:10px;font-weight:700}
 				.yk-card form{display:flex;gap:4px;margin-top:6px}
 				.yk-card select{flex:1;font-size:12px;min-height:26px}
 			</style>
@@ -638,8 +716,19 @@ class Yadak_CRM {
 							<div class="yk-card">
 								<a class="yk-title" href="<?php echo esc_url( (string) get_edit_post_link( $lead->ID ) ); ?>"><?php echo esc_html( $lead->post_title ); ?></a>
 								<?php if ( self::lead_meta( $lead->ID, 'company' ) ) : ?><div><?php echo esc_html( self::lead_meta( $lead->ID, 'company' ) ); ?></div><?php endif; ?>
-								<?php if ( $rep ) : ?><div>👤 <?php echo esc_html( $rep->display_name ); ?></div><?php endif; ?>
-								<?php if ( $next ) : ?><div class="<?php echo $next < $today && ! in_array( $stage, array( 'won', 'lost' ), true ) ? 'late' : ''; ?>">📅 <?php echo esc_html( yadak_show_date( $next ) ); ?></div><?php endif; ?>
+								<div><span class="yk-badge"><?php echo esc_html( 'b2c' === self::lead_meta( $lead->ID, 'channel' ) ? 'B2C' : 'B2B' ); ?></span>
+								<?php if ( self::lead_meta( $lead->ID, 'value' ) ) : ?> <?php echo esc_html( Yadak_SMS::plain_money( (float) self::lead_meta( $lead->ID, 'value' ) ) ); ?><?php endif; ?></div>
+								<?php
+								$deal_order = wc_get_order( (int) self::lead_meta( $lead->ID, 'order' ) );
+								if ( $deal_order ) {
+									echo '<div><span class="dashicons dashicons-cart"></span> <a href="' . esc_url( $deal_order->get_edit_order_url() ) . '">#' . esc_html( $deal_order->get_order_number() ) . '</a> ' . esc_html( wc_get_order_status_name( $deal_order->get_status() ) ) . ( $deal_order->get_meta( '_yadak_tracking' ) ? ' — ' . esc_html__( 'رهگیری:', 'yadak-core' ) . ' ' . esc_html( $deal_order->get_meta( '_yadak_tracking' ) ) : '' ) . '</div>';
+								} elseif ( self::lead_meta( $lead->ID, 'quote' ) ) {
+									$qid = (int) self::lead_meta( $lead->ID, 'quote' );
+									echo '<div><span class="dashicons dashicons-media-text"></span> <a href="' . esc_url( (string) get_edit_post_link( $qid ) ) . '">' . esc_html__( 'پیش‌فاکتور', 'yadak-core' ) . ' #' . (int) $qid . '</a> ' . esc_html( Yadak_Quotes::statuses()[ Yadak_Quotes::status( $qid ) ] ) . '</div>';
+								}
+								?>
+								<?php if ( $rep ) : ?><div><span class="dashicons dashicons-admin-users"></span> <?php echo esc_html( $rep->display_name ); ?></div><?php endif; ?>
+								<?php if ( $next ) : ?><div class="<?php echo $next < $today && ! in_array( $stage, array( 'won', 'paid', 'shipped', 'lost' ), true ) ? 'late' : ''; ?>"><span class="dashicons dashicons-calendar-alt"></span> <?php echo esc_html( yadak_show_date( $next ) ); ?></div><?php endif; ?>
 								<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 									<input type="hidden" name="action" value="yadak_lead_stage">
 									<input type="hidden" name="lead" value="<?php echo esc_attr( $lead->ID ); ?>">
