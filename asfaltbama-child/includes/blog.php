@@ -417,7 +417,7 @@ function asfaltbama_service_links() {
 			[ 'درزگیری و ماستیک گرم', '/asphalt-joint-sealing/' ],
 			[ 'اجاره ماشین‌آلات راه‌سازی', '/machinery-rental/' ],
 			[ 'تخریب و خرید ضایعات', '/demolition-scrap/' ],
-			[ 'قیمت هر متر آسفالت', '/asphalt-cost-per-square-meter/' ],
+			[ 'قیمت هر متر آسفالت', '/asphalt-price-factors/' ],
 		]
 	);
 }

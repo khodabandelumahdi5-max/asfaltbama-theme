@@ -128,6 +128,10 @@ function asfaltbama_importer_seo( $post_id, $item ) {
 			update_post_meta( $post_id, $meta_key, wp_slash( $item[ $key ] ) );
 		}
 	}
+
+	if ( ! empty( $item['robots'] ) ) {
+		update_post_meta( $post_id, 'rank_math_robots', array_map( 'sanitize_key', (array) $item['robots'] ) );
+	}
 }
 
 /**
@@ -369,7 +373,63 @@ function asfaltbama_importer_page_seo( $manifest ) {
 			continue;
 		}
 		asfaltbama_importer_seo( $page->ID, $seo );
-		$log[] = '✅ عنوان و توضیحات ' . $name . ' به‌روز شد';
+		$log[] = ! empty( $seo['robots'] ) && in_array( 'noindex', (array) $seo['robots'], true )
+			? '✅ ' . $name . ' تا تکمیل محتوا از نتایج گوگل کنار گذاشته شد (noindex)'
+			: '✅ عنوان و توضیحات ' . $name . ' به‌روز شد';
+	}
+
+	return $log;
+}
+
+/**
+ * Fill empty site settings (site title and tagline) and describe the
+ * article categories: term description plus Rank Math title and
+ * description. Only empty values are filled; anything set in WordPress
+ * stays as it is.
+ *
+ * @param array $manifest Manifest.
+ *
+ * @return string[] Log lines.
+ */
+function asfaltbama_importer_site( $manifest ) {
+	$log = [];
+
+	$labels = [
+		'blogname'        => 'عنوان سایت',
+		'blogdescription' => 'معرفی کوتاه سایت',
+	];
+	foreach ( $labels as $option => $label ) {
+		$value = (string) ( $manifest['site'][ $option ] ?? '' );
+		if ( '' === $value ) {
+			continue;
+		}
+		if ( '' !== trim( (string) get_option( $option ) ) ) {
+			$log[] = '✅ ' . $label . ' از قبل تنظیم شده است';
+			continue;
+		}
+		update_option( $option, sanitize_text_field( $value ) );
+		$log[] = '✅ ' . $label . ' تنظیم شد: ' . $value;
+	}
+
+	$meta = [
+		'seo_title'       => 'rank_math_title',
+		'seo_description' => 'rank_math_description',
+	];
+	foreach ( (array) ( $manifest['categories'] ?? [] ) as $slug => $item ) {
+		$term = get_category_by_slug( $slug );
+		if ( ! $term ) {
+			$log[] = '⚠️ دسته‌بندی ' . $slug . ' پیدا نشد';
+			continue;
+		}
+		if ( ! empty( $item['description'] ) && '' === trim( $term->description ) ) {
+			wp_update_term( $term->term_id, 'category', [ 'description' => $item['description'] ] );
+		}
+		foreach ( $meta as $key => $meta_key ) {
+			if ( ! empty( $item[ $key ] ) && '' === trim( (string) get_term_meta( $term->term_id, $meta_key, true ) ) ) {
+				update_term_meta( $term->term_id, $meta_key, wp_slash( $item[ $key ] ) );
+			}
+		}
+		$log[] = '✅ عنوان و توضیحات دسته‌بندی «' . $term->name . '» تنظیم شد';
 	}
 
 	return $log;
@@ -402,6 +462,11 @@ function asfaltbama_importer_auto_run() {
 	if ( ! empty( $manifest['content_version'] ) && get_option( 'asfaltbama_content_version' ) !== $manifest['content_version'] ) {
 		update_option( 'asfaltbama_content_version', $manifest['content_version'], false );
 		$log = array_merge( $log, asfaltbama_importer_run( $manifest, false ) );
+	}
+
+	if ( ! empty( $manifest['site_version'] ) && get_option( 'asfaltbama_site_version' ) !== $manifest['site_version'] ) {
+		update_option( 'asfaltbama_site_version', $manifest['site_version'], false );
+		$log = array_merge( $log, asfaltbama_importer_site( $manifest ) );
 	}
 
 	if ( ! empty( $manifest['media_alt_version'] ) && get_option( 'asfaltbama_media_alt_version' ) !== $manifest['media_alt_version'] ) {
@@ -478,7 +543,7 @@ function asfaltbama_importer_page() {
 	// submission arrived without its fields, so the import never ran.
 	if ( $manifest && isset( $_REQUEST['asfaltbama_import'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 		check_admin_referer( 'asfaltbama_import' );
-		$log = asfaltbama_importer_run( $manifest );
+		$log = array_merge( asfaltbama_importer_run( $manifest ), asfaltbama_importer_site( $manifest ) );
 	}
 
 	echo '<div class="wrap" dir="rtl" style="text-align:right">';

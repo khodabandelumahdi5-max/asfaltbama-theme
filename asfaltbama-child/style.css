@@ -5,7 +5,7 @@
 	Author: Asfaltbama
 	Author URI: https://asfaltbama.com/
 	Template: hello-elementor
-	Version: 1.12.0
+	Version: 1.13.0
 	Requires at least: 6.0
 	Requires PHP: 7.4
 	License: GNU General Public License v3 or later.
@@ -94,6 +94,26 @@ body :where(h1, h2, h3, h4, h5, h6, p, a, span, strong, b, em, small, li, dt, dd
 		content: "📞";
 		margin-left: 6px;
 	}
+}
+
+/*
+ * Site footer (Asphalt Business Suite): the brand badge showed a plain
+ * "A"; use the logo instead. Service names are links now (includes/
+ * site-fixes.php) and keep the chip look.
+ */
+.aas-site-footer .aas-footer-logo {
+	background: transparent url("assets/images/logo-light-128.webp") center / contain no-repeat !important;
+	color: transparent !important;
+	font-size: 0 !important;
+}
+
+.aas-site-footer .aas-footer-services span a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.aas-site-footer .aas-footer-services span a:hover {
+	text-decoration: underline;
 }
 
 /* Articles pages and cards: assets/css/blog.css */
