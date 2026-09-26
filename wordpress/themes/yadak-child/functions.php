@@ -19,6 +19,7 @@ define( 'YADAK_CHILD_VERSION', '0.4.0' );
 require_once get_stylesheet_directory() . '/inc/visuals.php';
 require_once get_stylesheet_directory() . '/inc/ux.php';
 require_once get_stylesheet_directory() . '/inc/mega.php';
+require_once get_stylesheet_directory() . '/inc/site.php';
 
 /**
  * Theme option with default.
@@ -40,7 +41,12 @@ function yadak_opt( $key ) {
 		'trust_seal'    => '',
 	);
 	$value = get_theme_mod( 'yadak_' . $key, isset( $defaults[ $key ] ) ? $defaults[ $key ] : '' );
-	return is_string( $value ) ? $value : '';
+	$value = is_string( $value ) ? $value : '';
+	// A link to the B2B page is hidden while that page is still a draft.
+	if ( 'b2b_url' === $key && $value && function_exists( 'yadak_url_is_live' ) && ! yadak_url_is_live( $value ) ) {
+		return '';
+	}
+	return $value;
 }
 
 add_action(

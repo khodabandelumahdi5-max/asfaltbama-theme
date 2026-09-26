@@ -204,7 +204,8 @@ $yadak_cats   = $yadak_has_wc ? get_terms(
 	</section>
 
 	<?php
-	while ( have_posts() ) :
+	// Only a static front page has content of its own (not the blog loop).
+	while ( is_page() && have_posts() ) :
 		the_post();
 		if ( '' !== trim( get_the_content() ) ) :
 			?>

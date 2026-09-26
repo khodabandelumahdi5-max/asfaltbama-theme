@@ -25,6 +25,28 @@ class Yadak_SEO {
 		add_action( 'woocommerce_archive_description', array( __CLASS__, 'category_links' ), 20 );
 		add_action( 'init', array( __CLASS__, 'sitemap' ), 30 );
 		add_action( 'set_object_terms', array( __CLASS__, 'flush_cache' ) );
+		// Usernames are half a login: keep them out of the sitemap and URLs.
+		add_filter( 'wp_sitemaps_add_provider', array( __CLASS__, 'no_users_sitemap' ), 10, 2 );
+		add_action( 'template_redirect', array( __CLASS__, 'no_author_archives' ) );
+		add_filter( 'rest_endpoints', array( __CLASS__, 'no_public_users_api' ) );
+	}
+
+	public static function no_public_users_api( $endpoints ) {
+		if ( ! is_user_logged_in() ) {
+			unset( $endpoints['/wp/v2/users'], $endpoints['/wp/v2/users/(?P<id>[\\d]+)'] );
+		}
+		return $endpoints;
+	}
+
+	public static function no_users_sitemap( $provider, $name ) {
+		return 'users' === $name ? false : $provider;
+	}
+
+	public static function no_author_archives() {
+		if ( is_author() ) {
+			wp_safe_redirect( home_url( '/' ), 301 );
+			exit;
+		}
 	}
 
 	public static function rewrites() {

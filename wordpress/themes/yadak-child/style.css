@@ -648,3 +648,71 @@ body { isolation: isolate; }
 @media (prefers-reduced-motion: reduce) {
 	.yadak-mega, .yadak-mega .yadak-mega__item, .yadak-mega .yadak-mega__emblem { transition: none; }
 }
+
+/* ======================================================================
+   Pages, 404, contact card
+   ====================================================================== */
+
+.yadak-page { padding-block: 20px 40px; }
+.yadak-page__head {
+	position: relative; overflow: hidden; isolation: isolate;
+	margin: 0 0 22px; padding: 26px 24px 24px; border-radius: 18px; color: #cbd5e1;
+	background:
+		radial-gradient(ellipse 50% 90% at 10% 50%, rgb(234 88 12 / 24%), transparent 70%),
+		linear-gradient(rgb(148 163 184 / 8%) 1px, transparent 1px) 0 0 / 30px 30px,
+		linear-gradient(90deg, rgb(148 163 184 / 8%) 1px, transparent 1px) 0 0 / 30px 30px,
+		linear-gradient(150deg, #16233d, var(--y-ink));
+}
+.yadak-page__head::after {
+	content: ""; position: absolute; z-index: -1; width: 220px; height: 220px; inset-inline-start: -30px; top: 50%; translate: 0 -50%;
+	background: url("assets/brand/emblem-256.webp") center / contain no-repeat; opacity: .16;
+}
+.yadak-page__crumbs { font-size: 13px; margin-bottom: 8px; }
+.yadak-page__crumbs a { color: #cbd5e1; }
+.yadak-page__crumbs a:hover { color: #fdba74; }
+.yadak-page__title { color: #fff; font-size: clamp(24px, 3.4vw, 34px); font-weight: 900; margin: 0; }
+.yadak-page__lead { margin: 8px 0 0; max-width: 680px; }
+.yadak-page__layout { display: grid; gap: 22px; }
+.yadak-page__body {
+	background: #fff; border: 1px solid var(--y-line); border-radius: 18px; padding: clamp(18px, 3vw, 34px);
+	font-size: 16px; line-height: 2;
+}
+.yadak-page__body h2 { font-size: 20px; margin: 28px 0 10px; color: var(--y-ink); }
+.yadak-page__body h2:first-child { margin-top: 0; }
+.yadak-page__body h3 { font-size: 17px; margin: 22px 0 8px; }
+.yadak-page__body ul, .yadak-page__body ol { padding-inline-start: 22px; }
+.yadak-page__body li { margin-bottom: 6px; }
+.yadak-page__body li::marker { color: var(--y-accent); }
+.yadak-page__body details { border: 1px solid var(--y-line); border-radius: 12px; padding: 10px 14px; margin: 8px 0; background: var(--y-surface); }
+.yadak-page__body summary { cursor: pointer; font-weight: 700; color: var(--y-ink); }
+.yadak-page__body .wp-block-table table { width: 100%; border-collapse: collapse; }
+.yadak-page__body .wp-block-table td, .yadak-page__body .wp-block-table th { border: 1px solid var(--y-line); padding: 8px 12px; }
+.yadak-help {
+	position: sticky; top: 16px; display: flex; flex-direction: column; gap: 10px; padding: 20px; border-radius: 18px;
+	background: #fff; border: 1px solid var(--y-line); text-align: center; align-items: center;
+}
+.yadak-help h2 { font-size: 17px; margin: 0; }
+.yadak-help p { margin: 0; color: var(--y-muted); font-size: 14px; }
+.yadak-help .yadak-btn { width: 100%; justify-content: center; }
+@media (min-width: 960px) {
+	.yadak-page__layout { grid-template-columns: minmax(0, 1fr) 300px; align-items: start; }
+}
+
+.yadak-contact { list-style: none; margin: 16px 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.yadak-contact li { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid var(--y-line); border-radius: 14px; background: var(--y-surface); margin: 0; }
+.yadak-contact__icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--y-ink); color: #fdba74; flex: none; }
+.yadak-contact small { display: block; color: var(--y-muted); font-size: 12px; line-height: 1.6; }
+.yadak-contact a { font-weight: 800; color: var(--y-ink); }
+
+.yadak-404 { padding-block: 40px 60px; }
+.yadak-404__box { max-width: 640px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.yadak-404__emblem { width: 140px; height: 140px; filter: drop-shadow(0 14px 24px rgb(15 23 42 / 25%)); animation: yadak-float 6s ease-in-out infinite; }
+.yadak-404__code { margin: 0; font-size: 72px; font-weight: 900; line-height: 1; color: var(--y-accent); }
+.yadak-404 h1 { margin: 0; font-size: 26px; }
+.yadak-404 p { margin: 0; color: var(--y-muted); }
+.yadak-404 .yadak-search { width: 100%; }
+.yadak-404__links { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.yadak-404__links a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--y-line); border-radius: 999px; background: #fff; font-weight: 700; color: var(--y-ink); }
+.yadak-404__links a:hover { border-color: var(--y-accent); color: var(--y-accent-ink); }
+.yadak-404__links svg { width: 20px; height: 20px; }
+@media (prefers-reduced-motion: reduce) { .yadak-404__emblem { animation: none; } }
