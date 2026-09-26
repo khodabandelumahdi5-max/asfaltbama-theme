@@ -36,6 +36,7 @@ class Yadak_Setup {
 	 */
 	public static function steps() {
 		return array(
+			'language'   => array( __( 'زبان فارسی و ساعت تهران', 'yadak-core' ), __( 'زبان سایت فارسی (fa_IR)، دریافت ترجمه وردپرس و افزونه‌ها، منطقه زمانی تهران و شروع هفته از شنبه.', 'yadak-core' ), true ),
 			'brand'      => array( __( 'نام برند و شعار', 'yadak-core' ), __( 'عنوان سایت «قطعه فوری» و شعار سئو.', 'yadak-core' ), true ),
 			'woo'        => array( __( 'تنظیمات ووکامرس برای ایران', 'yadak-core' ), __( 'فروشگاه در تهران، فروش و ارسال فقط ایران، واحد پول تومان بدون اعشار، کیلوگرم و سانتی‌متر، نظرها و امتیاز فعال، تأیید خریدار واقعی برای نظر.', 'yadak-core' ), true ),
 			'permalinks' => array( __( 'پیوندهای یکتای سئو', 'yadak-core' ), __( 'ساختار «/نام-نوشته/» و ساخت دوباره قوانین آدرس.', 'yadak-core' ), true ),
@@ -103,6 +104,30 @@ class Yadak_Setup {
 	}
 
 	/* ---------- Steps ---------- */
+
+	public static function step_language() {
+		require_once ABSPATH . 'wp-admin/includes/translation-install.php';
+		$installed = wp_download_language_pack( 'fa_IR' );
+		if ( ! $installed ) {
+			return __( '✖ دانلود ترجمه فارسی وردپرس ممکن نشد (اتصال سرور به wordpress.org را بررسی کنید). زبان را دستی در تنظیمات › عمومی عوض کنید.', 'yadak-core' );
+		}
+		update_option( 'WPLANG', 'fa_IR' );
+		update_option( 'timezone_string', 'Asia/Tehran' );
+		update_option( 'gmt_offset', '' );
+		update_option( 'start_of_week', 6 );
+		// Plugin and theme translations (WooCommerce etc.) for the new language.
+		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		require_once ABSPATH . 'wp-admin/includes/update.php';
+		wp_clean_update_cache();
+		wp_update_plugins();
+		wp_update_themes();
+		$updates = wp_get_translation_updates();
+		if ( $updates ) {
+			$upgrader = new Language_Pack_Upgrader( new Automatic_Upgrader_Skin() );
+			$upgrader->bulk_upgrade( $updates );
+		}
+		return __( '✔ زبان سایت فارسی و منطقه زمانی تهران شد.', 'yadak-core' );
+	}
 
 	public static function step_brand() {
 		update_option( 'blogname', 'قطعه فوری' );

@@ -97,6 +97,28 @@ add_action(
 );
 
 /**
+ * The store is Persian: keep the front end right-to-left even while
+ * Settings › General › Site Language is still English (a fresh install).
+ */
+function yadak_force_rtl() {
+	global $wp_locale;
+	if ( ! is_admin() && $wp_locale instanceof WP_Locale ) {
+		$wp_locale->text_direction = 'rtl';
+	}
+}
+add_action( 'after_setup_theme', 'yadak_force_rtl', 0 );
+add_action( 'change_locale', 'yadak_force_rtl' );
+add_filter(
+	'language_attributes',
+	static function ( $output ) {
+		if ( is_admin() || 0 === strpos( get_locale(), 'fa' ) ) {
+			return $output;
+		}
+		return preg_replace( '/lang="[^"]*"/', 'lang="fa-IR"', $output );
+	}
+);
+
+/**
  * Customizer: store contact details, trust seal and homepage texts.
  */
 add_action(
