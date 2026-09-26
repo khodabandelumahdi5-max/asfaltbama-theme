@@ -42,7 +42,10 @@ $yadak_menu     = wp_nav_menu(
 				<?php the_custom_logo(); ?>
 			<?php else : ?>
 				<a class="yadak-brand__link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-					<img class="yadak-brand__mark" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/brand/mark.svg' ); ?>" width="40" height="40" alt="">
+					<picture>
+						<source type="image/webp" srcset="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/brand/emblem-128.webp' ); ?> 1x, <?php echo esc_url( get_stylesheet_directory_uri() . '/assets/brand/emblem-256.webp' ); ?> 2x">
+						<img class="yadak-brand__mark" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/brand/emblem-128.png' ); ?>" width="56" height="56" alt="">
+					</picture>
 					<span class="yadak-brand__text">
 						<span class="yadak-brand__name"><?php bloginfo( 'name' ); ?></span>
 						<?php if ( yadak_opt( 'brand_latin' ) ) : ?><span class="yadak-brand__latin" lang="en"><?php echo esc_html( yadak_opt( 'brand_latin' ) ); ?></span><?php endif; ?>

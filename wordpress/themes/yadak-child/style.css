@@ -137,7 +137,8 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 }
 
 .yadak-brand__link { display: inline-flex; align-items: center; gap: 10px; }
-.yadak-brand__mark { display: block; width: 40px; height: 40px; border-radius: 11px; }
+.yadak-brand__mark { display: block; width: 56px; height: 56px; border-radius: 50%; filter: drop-shadow(0 2px 4px rgb(15 23 42 / 18%)); }
+@media (max-width: 599px) { .yadak-brand__mark { width: 46px; height: 46px; } }
 .yadak-brand__text { display: flex; flex-direction: column; line-height: 1.1; }
 .yadak-brand__name { font-size: 21px; font-weight: 900; color: var(--y-ink); letter-spacing: -.3px; }
 .yadak-brand__latin { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: var(--y-muted); text-transform: uppercase; font-feature-settings: normal; margin-top: 3px; }
@@ -293,6 +294,30 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 	background: var(--y-accent); border-color: var(--y-accent); color: #fff; transform: translateY(-2px);
 }
 
+/* Default hero: the brand banner's blueprint backdrop (light). */
+.yadak-hero.is-brand {
+	background:
+		radial-gradient(ellipse 55% 60% at 50% 45%, rgb(255 255 255 / 55%), transparent 70%),
+		image-set(url("assets/brand/hero-bg.webp") type("image/webp"), url("assets/brand/hero-bg.jpg") type("image/jpeg")) center / cover no-repeat,
+		#cfd3d8;
+	color: var(--y-text);
+}
+.yadak-hero.is-brand .yadak-hero__beams {
+	background: linear-gradient(104deg, transparent 50%, rgb(234 88 12 / 4%) 57%, transparent 64%);
+}
+.yadak-hero.is-brand::after { background: linear-gradient(to bottom, transparent, rgb(255 255 255 / 55%)); }
+.yadak-hero.is-brand h1 { color: var(--y-ink); }
+.yadak-hero.is-brand .yadak-hero__copy > p { color: #334155; }
+.yadak-hero.is-brand .yadak-hero__panel { box-shadow: 0 24px 48px -16px rgb(15 23 42 / 35%), 0 6px 14px rgb(15 23 42 / 10%); }
+.yadak-hero.is-brand .yadak-stage__hint { color: #475569; }
+.yadak-hero.is-brand .yadak-stage__chips a { background: rgb(255 255 255 / 75%); border-color: rgb(15 23 42 / 12%); color: var(--y-ink); }
+.yadak-hero.is-brand .yadak-stage__chips a:hover, .yadak-hero.is-brand .yadak-stage__chips a:focus-visible, .yadak-hero.is-brand .yadak-stage__chips a.is-active { background: var(--y-accent); border-color: var(--y-accent); color: #fff; }
+.yadak-hero .yadak-hero__copy > p.yadak-hero__eyebrow {
+	display: inline-block; margin: 0 0 10px; padding: 4px 12px; border-radius: 999px;
+	background: var(--y-ink); color: #fff; font-size: 13px; font-weight: 800;
+}
+.yadak-hero.has-photo .yadak-hero__copy > p.yadak-hero__eyebrow { background: rgb(255 255 255 / 12%); }
+
 @media (min-width: 960px) {
 	.yadak-hero { padding-block: 48px 56px; }
 	.yadak-hero__inner { grid-template-columns: 440px 1fr; gap: 40px; }
@@ -440,7 +465,7 @@ body:not(.home) main#content {
 .yadak-footer::before {
 	/* Faint brand mark watermark. */
 	content: ""; position: absolute; z-index: -1; width: 420px; height: 420px; inset-inline-end: -110px; bottom: -150px;
-	background: url("assets/brand/mark.svg") center / contain no-repeat; opacity: .05; filter: grayscale(1) brightness(3);
+	background: url("assets/brand/emblem-256.webp") center / contain no-repeat; opacity: .06; filter: grayscale(1) brightness(2.2);
 }
 .yadak-footer a { color: #e2e8f0; }
 .yadak-footer a:hover { color: #fdba74; }

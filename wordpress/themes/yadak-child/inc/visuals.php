@@ -68,7 +68,7 @@ function yadak_cat_icon( $term, $size = 48 ) {
 add_filter(
 	'woocommerce_placeholder_img_src',
 	static function () {
-		return get_stylesheet_directory_uri() . '/assets/brand/placeholder.svg';
+		return get_stylesheet_directory_uri() . '/assets/brand/placeholder.webp';
 	}
 );
 

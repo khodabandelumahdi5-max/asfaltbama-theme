@@ -145,7 +145,7 @@ class Yadak_Schema {
 				'@type'         => 'AutoPartsStore',
 				'@id'           => $home . '#organization',
 				'name'          => get_bloginfo( 'name' ),
-				'alternateName' => get_theme_mod( 'yadak_brand_latin', 'GetFori' ),
+				'alternateName' => get_theme_mod( 'yadak_brand_latin', 'Ghateh Foori' ),
 				'url'           => $home,
 				'logo'          => self::logo_url(),
 				'image'         => self::logo_url(),
@@ -228,8 +228,8 @@ class Yadak_Schema {
 		}
 		$desc = mb_substr( trim( preg_replace( '/\s+/u', ' ', $desc ) ), 0, 160 );
 		if ( ! $image || is_front_page() ) {
-			$cover = get_stylesheet_directory() . '/assets/brand/og-cover.png';
-			$image = file_exists( $cover ) ? get_stylesheet_directory_uri() . '/assets/brand/og-cover.png' : $image;
+			$cover = get_stylesheet_directory() . '/assets/brand/og-cover.jpg';
+			$image = file_exists( $cover ) ? get_stylesheet_directory_uri() . '/assets/brand/og-cover.jpg' : $image;
 		}
 		echo '<meta name="description" content="' . esc_attr( $desc ) . '">' . "\n";
 		$tags = array(

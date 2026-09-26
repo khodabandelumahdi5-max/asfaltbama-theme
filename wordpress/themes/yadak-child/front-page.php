@@ -30,10 +30,13 @@ $yadak_cats   = $yadak_has_wc ? get_terms(
 ?>
 <main id="content" class="yadak-home">
 
-	<section class="yadak-hero<?php echo get_theme_mod( 'yadak_hero_image', '' ) ? ' has-photo' : ''; ?>" style="<?php echo esc_attr( yadak_hero_style() ); ?>">
+	<section class="yadak-hero <?php echo get_theme_mod( 'yadak_hero_image', '' ) ? 'has-photo' : 'is-brand'; ?>" style="<?php echo esc_attr( yadak_hero_style() ); ?>">
 		<div class="yadak-hero__beams" aria-hidden="true"></div>
 		<div class="yadak-container yadak-hero__inner">
 			<div class="yadak-hero__copy">
+				<?php if ( yadak_opt( 'hero_eyebrow' ) ) : ?>
+					<p class="yadak-hero__eyebrow"><?php echo esc_html( yadak_opt( 'hero_eyebrow' ) ); ?></p>
+				<?php endif; ?>
 				<h1><?php echo esc_html( yadak_opt( 'hero_title' ) ); ?></h1>
 				<p><?php echo esc_html( yadak_opt( 'hero_subtitle' ) ); ?></p>
 				<div class="yadak-hero__panel">

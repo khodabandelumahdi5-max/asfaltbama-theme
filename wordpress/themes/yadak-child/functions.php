@@ -33,7 +33,8 @@ function yadak_opt( $key ) {
 		'hero_title'    => 'قطعه درست، همین حالا',
 		'hero_subtitle' => 'قطعات برقی، بدنه و چراغ و مکانیکی خودروهای ژاپنی، چینی، کره‌ای و ایرانی — با شماره فنی دقیق، ضمانت اصالت و ارسال فوری.',
 		'b2b_url'       => '',
-		'brand_latin'   => 'GetFori',
+		'brand_latin'   => 'Ghateh Foori',
+		'hero_eyebrow'  => 'لوازم یدکی تخصصی · داروخانه اتومبیل',
 		'instagram'     => '',
 		'trust_seal'    => '',
 	);
@@ -78,7 +79,10 @@ add_action(
 		);
 		echo '<meta name="theme-color" content="#0f172a">' . "\n";
 		if ( ! has_site_icon() ) {
-			printf( '<link rel="icon" type="image/svg+xml" href="%s">' . "\n", esc_url( get_stylesheet_directory_uri() . '/assets/brand/mark.svg' ) );
+			$brand = get_stylesheet_directory_uri() . '/assets/brand/';
+			printf( '<link rel="icon" type="image/png" sizes="32x32" href="%s">' . "\n", esc_url( $brand . 'favicon-32.png' ) );
+			printf( '<link rel="icon" type="image/png" sizes="64x64" href="%s">' . "\n", esc_url( $brand . 'favicon-64.png' ) );
+			printf( '<link rel="apple-touch-icon" href="%s">' . "\n", esc_url( $brand . 'apple-touch-icon.png' ) );
 		}
 	},
 	1
@@ -112,6 +116,7 @@ add_action(
 			'address'       => array( __( 'آدرس', 'yadak-child' ), 'textarea' ),
 			'brand_latin'   => array( __( 'نام لاتین برند', 'yadak-child' ), 'text' ),
 			'instagram'     => array( __( 'لینک اینستاگرام', 'yadak-child' ), 'url' ),
+			'hero_eyebrow'  => array( __( 'برچسب بالای تیتر صفحه اصلی', 'yadak-child' ), 'text' ),
 			'hero_title'    => array( __( 'تیتر صفحه اصلی', 'yadak-child' ), 'text' ),
 			'hero_subtitle' => array( __( 'زیرتیتر صفحه اصلی', 'yadak-child' ), 'textarea' ),
 			'b2b_url'       => array( __( 'لینک صفحه همکاری (B2B)', 'yadak-child' ), 'url' ),

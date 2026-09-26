@@ -1,4 +1,4 @@
-# قطعه فوری / GetFori — ghetehfori.ir
+# قطعه فوری / Ghateh Foori — ghetehfori.ir
 
 فروشگاه آنلاین قطعات خودرو روی وردپرس + ووکامرس.
 
