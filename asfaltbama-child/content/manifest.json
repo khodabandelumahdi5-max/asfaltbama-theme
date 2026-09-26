@@ -55,7 +55,7 @@
   "media_alt_version": "2026-09-24.1",
   "media_alt": {
     "32033": "ضمانت کتبی اجرا و کیفیت تضمین‌شده در پروژه‌های آسفالت با ما",
-    "32271": "مهندس اجرایی آسفالت با ما با کلاه ایمنی؛ بیش از ۸۵۰ پروژه‌ی موفق و ۱۵ سال تجربه",
+    "32271": "مهندس اجرایی آسفالت با ما با کلاه ایمنی؛ بیش از ۸۵۰ پروژه‌ی موفق و ۲۵ سال تجربه",
     "32248": "سوالات متداول درباره‌ی آسفالت‌کاری و اجرای آسفالت",
     "32190": "اجرای آسفالت معابر با فینیشر و غلتک در تهران و کرج",
     "31902": "لوگوی آسفالت با ما"
@@ -97,7 +97,7 @@
       ]
     }
   },
-  "images_version": "2026-09-26.1",
+  "images_version": "2026-09-27.1",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -289,11 +289,89 @@
       "featured_for": [
         "asphalt-isogam-warranty-guide"
       ]
+    },
+    {
+      "file": "images/mohandes-asfaltbama-25-sal-tajrobe.webp",
+      "title": "آسفالت با ما؛ ۲۵ سال تجربه و بیش از ۸۵۰ پروژه",
+      "alt": "مهندس اجرایی آسفالت با ما با کلاه ایمنی؛ بیش از ۸۵۰ پروژه‌ی موفق و ۲۵ سال تجربه",
+      "featured_for": []
+    },
+    {
+      "file": "images/pas-zamine-asfalt-kari-asfaltbama.mp4",
+      "title": "ویدیوی پس‌زمینه؛ تراکم خاک و آسفالت‌کاری",
+      "alt": "",
+      "featured_for": []
+    },
+    {
+      "file": "images/pas-zamine-asfalt-kari-asfaltbama-poster.webp",
+      "title": "تصویر ویدیوی پس‌زمینه؛ تراکم خاک با کامپکت",
+      "alt": "تراکم خاک بستر با کامپکت پیش از آسفالت‌کاری",
+      "featured_for": []
+    },
+    {
+      "file": "images/film-ejraye-asfalt-asfaltbama.mp4",
+      "title": "ویدیوی اجرای آسفالت با فینیشر و غلتک",
+      "alt": "",
+      "featured_for": []
+    },
+    {
+      "file": "images/film-ejraye-asfalt-asfaltbama-poster.webp",
+      "title": "تصویر ویدیوی اجرای آسفالت با فینیشر و غلتک",
+      "alt": "پخش آسفالت با فینیشر و کوبیدن با غلتک",
+      "featured_for": []
     }
   ],
   "replace_featured_ids": [
     31902
   ],
+  "elementor_version": "2026-09-27.1",
+  "elementor_edits": [
+    {
+      "page": "__front__",
+      "counters": [
+        {
+          "title": "پشتیبانی و مشاوره",
+          "set": {
+            "title": "ضمانت‌نامه کتبی",
+            "ending_number": 100,
+            "suffix": "٪"
+          }
+        },
+        {
+          "title": "سال سابقه",
+          "set": {
+            "ending_number": 25
+          }
+        }
+      ],
+      "image_swaps": {
+        "32271": "mohandes-asfaltbama-25-sal-tajrobe.webp"
+      },
+      "background_videos": {
+        "d3430de5-d501-42ee-97b5-33b22d0bff2e.mp4": {
+          "video": "pas-zamine-asfalt-kari-asfaltbama.mp4",
+          "poster": "pas-zamine-asfalt-kari-asfaltbama-poster.webp"
+        },
+        "Create_an_ultra_realistic_cine.mp4": {
+          "video": "film-ejraye-asfalt-asfaltbama.mp4",
+          "poster": "film-ejraye-asfalt-asfaltbama-poster.webp"
+        }
+      }
+    },
+    {
+      "page": "about-us"
+    },
+    {
+      "page": "isogam-waterproofing"
+    }
+  ],
+  "text_replacements": {
+    "بیش از ۱۵ سال": "بیش از ۲۵ سال",
+    "۱۵ سال تجربه": "۲۵ سال تجربه",
+    "۱۵ سال سابقه": "۲۵ سال سابقه",
+    "15 سال سابقه": "25 سال سابقه",
+    "۱۵+ سال": "۲۵+ سال"
+  },
   "about_page": {
     "current_slug": "درباره-ما",
     "new_slug": "about-us"

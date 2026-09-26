@@ -436,6 +436,208 @@ function asfaltbama_importer_site( $manifest ) {
 }
 
 /**
+ * Attachment imported from content/images, by file name.
+ *
+ * @param string $source File name.
+ *
+ * @return int Attachment ID, or 0.
+ */
+function asfaltbama_importer_media_id( $source ) {
+	$ids = get_posts(
+		[
+			'post_type'   => 'attachment',
+			'post_status' => 'inherit',
+			'numberposts' => 1,
+			'fields'      => 'ids',
+			'meta_key'    => '_asfaltbama_source', // phpcs:ignore WordPress.DB.SlowDBQuery
+			'meta_value'  => $source, // phpcs:ignore WordPress.DB.SlowDBQuery
+		]
+	);
+	return $ids ? (int) $ids[0] : 0;
+}
+
+/**
+ * Apply the manifest's text replacements to every string in a value.
+ *
+ * @param mixed $value        Value.
+ * @param array $replacements Search => replace.
+ *
+ * @return mixed
+ */
+function asfaltbama_importer_replace_deep( $value, $replacements ) {
+	if ( is_string( $value ) ) {
+		return strtr( $value, $replacements );
+	}
+	if ( is_array( $value ) ) {
+		foreach ( $value as $key => $item ) {
+			$value[ $key ] = asfaltbama_importer_replace_deep( $item, $replacements );
+		}
+	}
+	return $value;
+}
+
+/**
+ * Walk Elementor elements and apply one page's edits.
+ *
+ * @param array $elements Elementor elements.
+ * @param array $edit     Page edits from the manifest.
+ * @param array $media    Resolved media: image_swaps (old ID => [id, url]) and
+ *                        background_videos (old file name => [video url, poster id, poster url]).
+ * @param int   $changes  Number of changes, by reference.
+ *
+ * @return array
+ */
+function asfaltbama_importer_edit_elements( $elements, $edit, $media, &$changes ) {
+	foreach ( $elements as $i => $element ) {
+		$settings = isset( $element['settings'] ) && is_array( $element['settings'] ) ? $element['settings'] : [];
+
+		// Counters, matched by their title.
+		if ( 'counter' === ( $element['widgetType'] ?? '' ) ) {
+			foreach ( (array) ( $edit['counters'] ?? [] ) as $counter ) {
+				if ( isset( $settings['title'] ) && trim( $settings['title'] ) === $counter['title'] ) {
+					$settings = array_merge( $settings, $counter['set'] );
+					++$changes;
+				}
+			}
+		}
+
+		// Background videos: lighter file, no playback on phones, poster instead.
+		if ( ! empty( $settings['background_video_link'] ) ) {
+			$file = basename( wp_parse_url( $settings['background_video_link'], PHP_URL_PATH ) );
+			if ( isset( $media['background_videos'][ $file ] ) ) {
+				list( $video_url, $poster_id, $poster_url ) = $media['background_videos'][ $file ];
+				$settings['background_video_link']     = $video_url;
+				$settings['background_play_on_mobile'] = '';
+				$settings['background_video_fallback'] = [
+					'url' => $poster_url,
+					'id'  => $poster_id,
+				];
+				++$changes;
+			}
+		}
+
+		// Swapped images, wherever an {id, url} pair points at them.
+		$settings = asfaltbama_importer_swap_images( $settings, $media['image_swaps'], $changes );
+
+		if ( $settings ) {
+			$element['settings'] = $settings;
+		}
+		if ( ! empty( $element['elements'] ) && is_array( $element['elements'] ) ) {
+			$element['elements'] = asfaltbama_importer_edit_elements( $element['elements'], $edit, $media, $changes );
+		}
+		$elements[ $i ] = $element;
+	}
+	return $elements;
+}
+
+/**
+ * Replace {id, url} image values whose ID is in $swaps.
+ *
+ * @param mixed $value   Setting value.
+ * @param array $swaps   Old ID => [new ID, new URL].
+ * @param int   $changes Number of changes, by reference.
+ *
+ * @return mixed
+ */
+function asfaltbama_importer_swap_images( $value, $swaps, &$changes ) {
+	if ( ! is_array( $value ) || ! $swaps ) {
+		return $value;
+	}
+	if ( isset( $value['id'], $value['url'] ) && isset( $swaps[ (int) $value['id'] ] ) ) {
+		list( $value['id'], $value['url'] ) = $swaps[ (int) $value['id'] ];
+		++$changes;
+		return $value;
+	}
+	foreach ( $value as $key => $item ) {
+		$value[ $key ] = asfaltbama_importer_swap_images( $item, $swaps, $changes );
+	}
+	return $value;
+}
+
+/**
+ * Edit Elementor pages: counters, text (e.g. years of experience), swapped
+ * images and lighter background videos that do not play on phones.
+ *
+ * @param array $manifest Manifest.
+ *
+ * @return string[] Log lines.
+ */
+function asfaltbama_importer_elementor( $manifest ) {
+	$log          = [];
+	$replacements = (array) ( $manifest['text_replacements'] ?? [] );
+
+	foreach ( (array) ( $manifest['elementor_edits'] ?? [] ) as $edit ) {
+		$slug = $edit['page'];
+		$page = '__front__' === $slug ? get_post( (int) get_option( 'page_on_front' ) ) : asfaltbama_importer_find( $slug, 'page' );
+		$name = '__front__' === $slug ? 'صفحه‌ی اصلی' : '/' . $slug . '/';
+		if ( ! $page ) {
+			$log[] = '⚠️ ' . $name . ' پیدا نشد';
+			continue;
+		}
+
+		$media = [
+			'image_swaps'       => [],
+			'background_videos' => [],
+		];
+		foreach ( (array) ( $edit['image_swaps'] ?? [] ) as $old_id => $source ) {
+			$new_id = asfaltbama_importer_media_id( $source );
+			if ( $new_id ) {
+				$media['image_swaps'][ (int) $old_id ] = [ $new_id, wp_get_attachment_url( $new_id ) ];
+			}
+		}
+		foreach ( (array) ( $edit['background_videos'] ?? [] ) as $old_file => $files ) {
+			$video_id  = asfaltbama_importer_media_id( $files['video'] );
+			$poster_id = asfaltbama_importer_media_id( $files['poster'] );
+			if ( $video_id && $poster_id ) {
+				$media['background_videos'][ $old_file ] = [ wp_get_attachment_url( $video_id ), $poster_id, wp_get_attachment_url( $poster_id ) ];
+			}
+		}
+
+		$changes = 0;
+		$raw     = get_post_meta( $page->ID, '_elementor_data', true );
+		$data    = is_string( $raw ) ? json_decode( $raw, true ) : ( is_array( $raw ) ? $raw : null );
+		if ( is_array( $data ) ) {
+			$before = wp_json_encode( $data );
+			$data   = asfaltbama_importer_edit_elements( $data, $edit, $media, $changes );
+			$data   = asfaltbama_importer_replace_deep( $data, $replacements );
+			if ( wp_json_encode( $data ) !== $before ) {
+				update_post_meta( $page->ID, '_elementor_data', wp_slash( wp_json_encode( $data ) ) );
+				delete_post_meta( $page->ID, '_elementor_element_cache' );
+				delete_post_meta( $page->ID, '_elementor_css' );
+				++$changes;
+			}
+		}
+
+		foreach ( [ 'rank_math_title', 'rank_math_description' ] as $meta_key ) {
+			$value = (string) get_post_meta( $page->ID, $meta_key, true );
+			$new   = strtr( $value, $replacements );
+			if ( $new !== $value ) {
+				update_post_meta( $page->ID, $meta_key, wp_slash( $new ) );
+				++$changes;
+			}
+		}
+		$content = strtr( $page->post_content, $replacements );
+		if ( $content !== $page->post_content ) {
+			wp_update_post(
+				[
+					'ID'           => $page->ID,
+					'post_content' => $content,
+				]
+			);
+			++$changes;
+		}
+
+		$log[] = $changes ? '✅ ' . $name . ' به‌روز شد' : '✅ ' . $name . ' نیازی به تغییر نداشت';
+	}
+
+	if ( class_exists( '\Elementor\Plugin' ) && isset( \Elementor\Plugin::$instance->files_manager ) ) {
+		\Elementor\Plugin::$instance->files_manager->clear_cache();
+	}
+
+	return $log;
+}
+
+/**
  * Run the import automatically, once per content_version, when an
  * administrator loads the dashboard.
  *
@@ -482,6 +684,12 @@ function asfaltbama_importer_auto_run() {
 	if ( ! empty( $manifest['images_version'] ) && get_option( 'asfaltbama_images_version' ) !== $manifest['images_version'] ) {
 		update_option( 'asfaltbama_images_version', $manifest['images_version'], false );
 		$log = array_merge( $log, asfaltbama_importer_images( $manifest ) );
+	}
+
+	// After the images step: it needs the imported media.
+	if ( ! empty( $manifest['elementor_version'] ) && get_option( 'asfaltbama_elementor_version' ) !== $manifest['elementor_version'] ) {
+		update_option( 'asfaltbama_elementor_version', $manifest['elementor_version'], false );
+		$log = array_merge( $log, asfaltbama_importer_elementor( $manifest ) );
 	}
 
 	if ( $log ) {
