@@ -500,3 +500,151 @@ body { padding-bottom: 64px; }
 	border: 0; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(50%);
 	height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute !important; width: 1px; word-wrap: normal !important;
 }
+
+/* ======================================================================
+   Brand emblem across the page + mega menu
+   ====================================================================== */
+
+/* Faint emblem and blueprint behind every page. */
+body::before {
+	content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+	background:
+		url("assets/brand/emblem-256.webp") center 58% / min(78vmin, 720px) no-repeat,
+		url("assets/brand/hero-bg.webp") center / cover no-repeat;
+	opacity: .045; filter: grayscale(1);
+}
+body { isolation: isolate; }
+
+/* Floating emblem in the hero, with a turning light ring. */
+.yadak-seal {
+	position: absolute; z-index: 2; inset-block-start: 0; inset-inline-end: 4%;
+	width: 150px; height: 150px; border-radius: 50%;
+	filter: drop-shadow(0 18px 28px rgb(15 23 42 / 30%));
+	animation: yadak-float 6s ease-in-out infinite;
+	transition: transform .4s ease;
+}
+.yadak-seal img { position: relative; display: block; width: 100%; height: 100%; border-radius: 50%; }
+.yadak-seal__ring {
+	position: absolute; inset: -7px; border-radius: 50%;
+	background: conic-gradient(from 0deg, transparent 0 55%, rgb(234 88 12 / 85%) 72%, #fff 76%, transparent 82% 100%);
+	-webkit-mask: radial-gradient(circle, transparent 66%, #000 67%); mask: radial-gradient(circle, transparent 66%, #000 67%);
+	animation: yadak-spin 5s linear infinite;
+}
+.yadak-stage:hover .yadak-seal { transform: perspective(600px) rotateY(-14deg) rotateX(6deg) scale(1.04); }
+@keyframes yadak-float { 50% { translate: 0 -10px; } }
+@keyframes yadak-spin { to { rotate: 1turn; } }
+@media (max-width: 959px) {
+	.yadak-seal { width: 92px; height: 92px; inset-block-start: 6px; inset-inline-end: 2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.yadak-seal, .yadak-seal__ring { animation: none; }
+}
+
+/* Mega menu. */
+.yadak-mega__toggle { display: none; }
+.yadak-mega { display: none; }
+
+@media (min-width: 960px) {
+	.yadak-nav { position: relative; z-index: 40; background: rgb(255 255 255 / 92%); backdrop-filter: blur(8px); }
+	.yadak-nav__list > li.has-mega { position: static; }
+	.yadak-nav__list > li.has-mega > a { display: inline-flex; align-items: center; gap: 4px; position: relative; }
+	.yadak-nav__list > li.has-mega > a::after {
+		content: ""; width: 7px; height: 7px; margin-inline-start: 2px; border: solid currentColor; border-width: 0 1.6px 1.6px 0;
+		transform: translateY(-2px) rotate(45deg); opacity: .55; transition: transform .2s;
+	}
+	.yadak-nav__list > li.has-mega > a::before {
+		content: ""; position: absolute; inset-inline: 10px; bottom: 0; height: 3px; border-radius: 3px 3px 0 0;
+		background: var(--y-accent); transform: scaleX(0); transition: transform .2s;
+	}
+	.yadak-mega {
+		display: block; position: absolute; inset-inline: 0; top: 100%;
+		padding-block: 18px 22px; background: #fff; border-top: 1px solid var(--y-line);
+		box-shadow: 0 30px 50px -20px rgb(15 23 42 / 30%), 0 0 0 100vmax rgb(15 23 42 / 28%);
+		clip-path: inset(0 -100vmax -100vmax -100vmax); /* Dim only the page below. */
+		opacity: 0; visibility: hidden; transform: translateY(-8px);
+		transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
+		transition-delay: .12s; /* A moment's grace when the mouse crosses items. */
+	}
+	.yadak-nav__list > li.has-mega:is(:hover, :focus-within, .is-open) > .yadak-mega {
+		opacity: 1; visibility: visible; transform: none; transition-delay: .08s, .08s, 0s;
+	}
+	.yadak-nav__list > li.has-mega:is(:hover, :focus-within, .is-open) > a { color: var(--y-accent-ink); }
+	.yadak-nav__list > li.has-mega:is(:hover, :focus-within, .is-open) > a::before { transform: scaleX(1); }
+	.yadak-nav__list > li.has-mega:is(:hover, :focus-within, .is-open) > a::after { transform: translateY(1px) rotate(225deg); }
+}
+
+.yadak-mega .yadak-mega__grid { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 22px; align-items: stretch; }
+.yadak-mega .yadak-mega__items { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.yadak-mega .yadak-mega__item {
+	display: flex; align-items: center; gap: 12px; padding: 10px 12px !important; border-radius: 12px;
+	color: var(--y-ink) !important; font-weight: 700 !important; transition: background .15s, transform .15s;
+}
+.yadak-mega .yadak-mega__item:hover { background: var(--y-surface); transform: translateX(-3px); }
+.yadak-mega .yadak-mega__icon {
+	flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px;
+	background: var(--y-surface); color: var(--y-accent-ink); transition: background .15s, color .15s;
+}
+.yadak-mega .yadak-mega__item:hover .yadak-mega .yadak-mega__icon { background: var(--y-accent); color: #fff; }
+.yadak-mega .yadak-mega__icon .yadak-cat-icon { width: 26px; height: 26px; }
+.yadak-mega .yadak-mega__label { display: flex; flex-direction: column; font-size: 14px; line-height: 1.5; }
+.yadak-mega .yadak-mega__label small { color: var(--y-muted); font-weight: 500; font-size: 12px; }
+
+.yadak-mega .yadak-mega__feature {
+	position: relative; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px;
+	min-height: 210px; padding: 18px !important; border-radius: 16px; color: #cbd5e1 !important; font-weight: 500 !important;
+	background: radial-gradient(ellipse 80% 60% at 20% 20%, rgb(234 88 12 / 30%), transparent 70%), linear-gradient(150deg, #1b2945, var(--y-ink));
+}
+.yadak-mega .yadak-mega__feature strong { color: #fff; font-size: 18px; font-weight: 900; }
+.yadak-mega .yadak-mega__feature > span:not(.yadak-mega .yadak-mega__cta):not(.yadak-mega .yadak-mega__feature-icon) { font-size: 13px; }
+.yadak-mega .yadak-mega__emblem {
+	position: absolute; z-index: -1; width: 180px; height: 180px; inset-block-start: -26px; inset-inline-start: -30px;
+	opacity: .22; transition: transform .6s ease, opacity .3s;
+}
+.yadak-mega .yadak-mega__feature:hover .yadak-mega .yadak-mega__emblem { transform: rotate(-12deg) scale(1.08); opacity: .35; }
+.yadak-mega .yadak-mega__feature-icon { color: #fdba74; }
+.yadak-mega .yadak-mega__feature-icon svg { width: 36px; height: 36px; }
+.yadak-mega .yadak-mega__cta { display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; color: #fdba74; font-weight: 800; font-size: 14px; }
+.yadak-mega .yadak-mega__cta .yadak-icon { width: 16px; height: 16px; transition: transform .2s; }
+.yadak-mega .yadak-mega__feature:hover .yadak-mega .yadak-mega__cta .yadak-icon { transform: translateX(-4px); }
+
+.yadak-mega .yadak-mega__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.yadak-mega .yadak-mega__cols--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.yadak-mega .yadak-mega__col-head { display: flex; align-items: center; gap: 10px; padding: 0 0 8px !important; margin-bottom: 6px; border-bottom: 1px solid var(--y-line); color: var(--y-ink) !important; font-weight: 900 !important; font-size: 15px; }
+.yadak-mega .yadak-mega__col ul { list-style: none; margin: 0; padding: 0; }
+.yadak-mega .yadak-mega__col li a { display: block; padding: 6px 2px !important; color: var(--y-ink-2) !important; font-weight: 500 !important; font-size: 14px; transition: color .15s, padding .15s; }
+.yadak-mega .yadak-mega__col li a:hover { color: var(--y-accent-ink) !important; padding-inline-start: 8px !important; }
+
+.yadak-mega .yadak-mega__brands { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.yadak-mega .yadak-mega__brand {
+	display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 6px !important; border: 1px solid var(--y-line); border-radius: 12px;
+	font-size: 12px; font-weight: 700 !important; color: var(--y-ink) !important; text-align: center; transition: border-color .15s, transform .15s, box-shadow .15s;
+}
+.yadak-mega .yadak-mega__brand:hover { border-color: var(--y-ink); transform: translateY(-2px); box-shadow: 0 8px 18px rgb(15 23 42 / 10%); }
+.yadak-mega .yadak-mega__brand-logo { display: grid; place-items: center; height: 36px; }
+.yadak-mega .yadak-mega__brand-logo img { max-width: 80px; max-height: 34px; object-fit: contain; }
+.yadak-mega .yadak-mega__brand-logo .yadak-wordmark { font-size: 14px; }
+.yadak-mega .yadak-mega__brand-logo .yadak-monogram { width: 34px; height: 34px; font-size: 17px; }
+
+/* Mobile drawer: panels open under their item. */
+@media (max-width: 959px) {
+	.yadak-nav__list > li.has-mega { display: grid; grid-template-columns: 1fr auto; align-items: center; border-bottom: 1px solid var(--y-line); }
+	.yadak-mega__toggle {
+		display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 10px; background: var(--y-surface); color: var(--y-ink); cursor: pointer;
+	}
+	.yadak-mega__toggle .yadak-icon { transition: transform .2s; }
+	.yadak-mega__toggle:hover, .yadak-mega__toggle:focus { background: var(--y-line); color: var(--y-ink); }
+	li.is-open > .yadak-mega__toggle { background: var(--y-accent); color: #fff; }
+	.yadak-mega .yadak-mega__col li a { padding-block: 4px !important; }
+	li.is-open > .yadak-mega__toggle .yadak-icon { transform: rotate(180deg); }
+	li.is-open > .yadak-mega { display: block; grid-column: 1 / -1; padding-bottom: 12px; }
+	.yadak-mega .yadak-container { padding: 0; }
+	.yadak-mega .yadak-mega__grid { grid-template-columns: 1fr; }
+	.yadak-mega .yadak-mega__items, .yadak-mega .yadak-mega__cols, .yadak-mega .yadak-mega__cols--4 { grid-template-columns: 1fr 1fr; }
+	.yadak-mega .yadak-mega__brands { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	.yadak-mega .yadak-mega__feature { display: none; }
+	.yadak-mega .yadak-mega__item { padding: 8px !important; gap: 8px; }
+	.yadak-mega .yadak-mega__icon { width: 36px; height: 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.yadak-mega, .yadak-mega .yadak-mega__item, .yadak-mega .yadak-mega__emblem { transition: none; }
+}

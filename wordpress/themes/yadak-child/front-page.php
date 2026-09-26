@@ -50,6 +50,10 @@ $yadak_cats   = $yadak_has_wc ? get_terms(
 				</div>
 			</div>
 			<div class="yadak-stage">
+				<div class="yadak-seal" aria-hidden="true">
+					<span class="yadak-seal__ring"></span>
+					<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/brand/emblem-256.webp' ); ?>" width="150" height="150" alt="" decoding="async">
+				</div>
 				<div class="yadak-stage__canvas">
 					<div class="yadak-stage__loading" aria-hidden="true"></div>
 					<div class="yadak-stage__tip" hidden></div>
@@ -72,7 +76,7 @@ $yadak_cats   = $yadak_has_wc ? get_terms(
 	</section>
 
 	<?php if ( $yadak_makes ) : ?>
-		<section class="yadak-section">
+		<section class="yadak-section" id="yadak-cars">
 			<div class="yadak-container">
 				<div class="yadak-section__head">
 					<h2><?php esc_html_e( 'قطعه بر اساس خودرو', 'yadak-child' ); ?></h2>

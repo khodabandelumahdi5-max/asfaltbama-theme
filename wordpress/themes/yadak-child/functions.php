@@ -18,6 +18,7 @@ define( 'YADAK_CHILD_VERSION', '0.4.0' );
 
 require_once get_stylesheet_directory() . '/inc/visuals.php';
 require_once get_stylesheet_directory() . '/inc/ux.php';
+require_once get_stylesheet_directory() . '/inc/mega.php';
 
 /**
  * Theme option with default.
@@ -260,6 +261,7 @@ function yadak_icon( $name ) {
 		'return'  => '<path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/>',
 		'headset' => '<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>',
 		'arrow'   => '<path d="M15 6l-6 6 6 6"/>',
+		'chevron' => '<path d="m6 9 6 6 6-6"/>',
 		'home'    => '<path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/>',
 		'grid'    => '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
 	);
