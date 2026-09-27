@@ -371,7 +371,7 @@ function asfaltbama_importer_images( $manifest ) {
 		}
 
 		foreach ( (array) ( $image['featured_for'] ?? [] ) as $slug ) {
-			$post = asfaltbama_importer_find( $slug, 'post' );
+			$post = '__front__' === $slug ? get_post( (int) get_option( 'page_on_front' ) ) : asfaltbama_importer_find( $slug, 'post' );
 			if ( ! $post ) {
 				$post = asfaltbama_importer_find( $slug, 'page' );
 			}
@@ -391,6 +391,18 @@ function asfaltbama_importer_images( $manifest ) {
 			}
 			set_post_thumbnail( $post, $attachment_id );
 			$log[] = '✅ تصویر شاخص /' . $slug . '/ تنظیم شد';
+		}
+
+		// Default share image for pages without their own (categories etc.),
+		// only when none is set in Rank Math > Titles & Meta > Global.
+		if ( ! empty( $image['default_og'] ) ) {
+			$titles = get_option( 'rank-math-options-titles', [] );
+			if ( is_array( $titles ) && empty( $titles['open_graph_image'] ) ) {
+				$titles['open_graph_image']    = wp_get_attachment_url( $attachment_id );
+				$titles['open_graph_image_id'] = $attachment_id;
+				update_option( 'rank-math-options-titles', $titles );
+				$log[] = '✅ تصویر پیش‌فرض اشتراک‌گذاری در Rank Math تنظیم شد';
+			}
 		}
 	}
 
@@ -569,6 +581,26 @@ function asfaltbama_importer_edit_elements( $elements, $edit, $media, &$changes 
 
 		// Swapped images, wherever an {id, url} pair points at them.
 		$settings = asfaltbama_importer_swap_images( $settings, $media['image_swaps'], $changes );
+
+		// Edits to single widgets, by Elementor element ID: settings to set,
+		// and "image" (a file from content/images) for image widgets.
+		$widget_edit = $edit['widgets'][ $element['id'] ?? '' ] ?? null;
+		if ( is_array( $widget_edit ) ) {
+			foreach ( (array) ( $widget_edit['settings'] ?? [] ) as $key => $value ) {
+				$settings[ $key ] = $value;
+			}
+			if ( ! empty( $widget_edit['image'] ) ) {
+				$new_id = asfaltbama_importer_media_id( $widget_edit['image'] );
+				if ( $new_id ) {
+					$settings['image'] = [
+						'id'  => $new_id,
+						'url' => wp_get_attachment_url( $new_id ),
+						'alt' => (string) get_post_meta( $new_id, '_wp_attachment_image_alt', true ),
+					];
+				}
+			}
+			++$changes;
+		}
 
 		if ( $settings ) {
 			$element['settings'] = $settings;

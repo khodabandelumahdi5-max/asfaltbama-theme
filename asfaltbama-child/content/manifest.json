@@ -60,7 +60,7 @@
     "32190": "اجرای آسفالت معابر با فینیشر و غلتک در تهران و کرج",
     "31902": "لوگوی آسفالت با ما"
   },
-  "page_seo_version": "2026-09-27.2",
+  "page_seo_version": "2026-09-27.3",
   "page_seo": {
     "__front__": {
       "seo_title": "آسفالت با ما | اجرای آسفالت، خاکبرداری و ایزوگام تهران و کرج",
@@ -119,10 +119,11 @@
       "focus_keyword": "تماس با ما"
     },
     "about-us": {
-      "focus_keyword": "درباره ما"
+      "focus_keyword": "درباره ما",
+      "seo_title": "درباره ما | شرکت افق آپادانا پاسارگاد (آسفالت با ما)"
     }
   },
-  "images_version": "2026-09-27.5",
+  "images_version": "2026-09-27.6",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -600,6 +601,173 @@
       "featured_for": [
         "industrial-asphalt-waterproofing"
       ]
+    },
+    {
+      "file": "images/og/about-us-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: درباره شرکت افق آپادانا پاسارگاد",
+      "alt": "درباره شرکت افق آپادانا پاسارگاد",
+      "featured_for": [
+        "about-us"
+      ]
+    },
+    {
+      "file": "images/og/articles-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: مقالات آسفالت با ما",
+      "alt": "مقالات آسفالت با ما",
+      "featured_for": [
+        "articles"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-chitgar-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: آسفالت کاری در چیتگر؛ برج‌ها، رمپ و پارکینگ منطقه ۲۲",
+      "alt": "آسفالت کاری در چیتگر؛ برج‌ها، رمپ و پارکینگ منطقه ۲۲",
+      "featured_for": [
+        "asphalt-chitgar"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-damavand-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: آسفالت کاری در دماوند؛ باغ، ویلا و مسیرهای کوهستانی",
+      "alt": "آسفالت کاری در دماوند؛ باغ، ویلا و مسیرهای کوهستانی",
+      "featured_for": [
+        "asphalt-damavand"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-fasham-meygoun-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: آسفالت کاری در فشم و میگون؛ مسیرهای شیب‌دار و برف‌گیر",
+      "alt": "آسفالت کاری در فشم و میگون؛ مسیرهای شیب‌دار و برف‌گیر",
+      "featured_for": [
+        "asphalt-fasham-meygoun"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-jadeh-makhsous-karaj-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: آسفالت کاری در جاده مخصوص کرج؛ محوطه کارخانه و انبار",
+      "alt": "آسفالت کاری در جاده مخصوص کرج؛ محوطه کارخانه و انبار",
+      "featured_for": [
+        "asphalt-jadeh-makhsous-karaj"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-joint-sealing-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: درزگیری آسفالت با ماستیک گرم",
+      "alt": "درزگیری آسفالت با ماستیک گرم",
+      "featured_for": [
+        "asphalt-joint-sealing"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-lavasan-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: آسفالت کاری در لواسان؛ حیاط، مسیر ورودی و رمپ ویلا",
+      "alt": "آسفالت کاری در لواسان؛ حیاط، مسیر ورودی و رمپ ویلا",
+      "featured_for": [
+        "asphalt-lavasan"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-pakdasht-varamin-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: آسفالت کاری در پاکدشت و ورامین؛ کارخانه، کارگاه و مزرعه",
+      "alt": "آسفالت کاری در پاکدشت و ورامین؛ کارخانه، کارگاه و مزرعه",
+      "featured_for": [
+        "asphalt-pakdasht-varamin"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-pardis-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: آسفالت کاری در پردیس؛ مجتمع‌های مسکونی، برج‌ها و معابر",
+      "alt": "آسفالت کاری در پردیس؛ مجتمع‌های مسکونی، برج‌ها و معابر",
+      "featured_for": [
+        "asphalt-pardis"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-paving-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: آسفالت کاری در تهران و کرج",
+      "alt": "آسفالت کاری در تهران و کرج",
+      "featured_for": [
+        "asphalt-paving"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-shahriar-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: آسفالت کاری در شهریار؛ باغ‌ویلا، کارگاه و کوچه",
+      "alt": "آسفالت کاری در شهریار؛ باغ‌ویلا، کارگاه و کوچه",
+      "featured_for": [
+        "asphalt-shahriar"
+      ]
+    },
+    {
+      "file": "images/og/contact-us-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: تماس با آسفالت با ما",
+      "alt": "تماس با آسفالت با ما",
+      "featured_for": [
+        "contact-us"
+      ]
+    },
+    {
+      "file": "images/og/default-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: آسفالت با ما؛ آسفالت، ایزوگام و قیرگونی",
+      "alt": "آسفالت با ما؛ آسفالت، ایزوگام و قیرگونی",
+      "featured_for": [],
+      "default_og": true
+    },
+    {
+      "file": "images/og/demolition-scrap-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: تخریب ساختمان و خرید ضایعات آهن",
+      "alt": "تخریب ساختمان و خرید ضایعات آهن",
+      "featured_for": [
+        "demolition-scrap"
+      ]
+    },
+    {
+      "file": "images/og/excavation-and-grading-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: خاکبرداری و گودبرداری",
+      "alt": "خاکبرداری و گودبرداری",
+      "featured_for": [
+        "excavation-and-grading"
+      ]
+    },
+    {
+      "file": "images/og/front-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: صفحه‌ی اصلی آسفالت با ما",
+      "alt": "صفحه‌ی اصلی آسفالت با ما",
+      "featured_for": [
+        "__front__"
+      ]
+    },
+    {
+      "file": "images/og/isogam-waterproofing-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: اجرای ایزوگام و قیرگونی",
+      "alt": "اجرای ایزوگام و قیرگونی",
+      "featured_for": [
+        "isogam-waterproofing"
+      ]
+    },
+    {
+      "file": "images/og/machinery-rental-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: اجاره ماشین‌آلات راه‌سازی",
+      "alt": "اجاره ماشین‌آلات راه‌سازی",
+      "featured_for": [
+        "machinery-rental"
+      ]
+    },
+    {
+      "file": "images/og/service-areas-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: مناطق تحت پوشش آسفالت با ما",
+      "alt": "مناطق تحت پوشش آسفالت با ما",
+      "featured_for": [
+        "service-areas"
+      ]
+    },
+    {
+      "file": "images/og/services-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: خدمات آسفالت با ما",
+      "alt": "خدمات آسفالت با ما",
+      "featured_for": [
+        "services"
+      ]
     }
   ],
   "replace_featured_ids": [
@@ -611,7 +779,7 @@
     "isogam-price-guide-cover.webp",
     "roof-leak-after-isogam-cover.webp"
   ],
-  "elementor_version": "2026-09-27.1",
+  "elementor_version": "2026-09-27.2",
   "elementor_edits": [
     {
       "page": "__front__",
@@ -642,6 +810,41 @@
         "Create_an_ultra_realistic_cine.mp4": {
           "video": "film-ejraye-asfalt-asfaltbama.mp4",
           "poster": "film-ejraye-asfalt-asfaltbama-poster.webp"
+        }
+      },
+      "widgets": {
+        "d7b8eb1": {
+          "image": "asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg"
+        },
+        "2c20c4c": {
+          "image": "isogam-kenar-divar-mahiche-kesh.jpg"
+        },
+        "121f417": {
+          "image": "isogam-poshtbam-hampooshani-darz-ghiri.jpg"
+        },
+        "3119d54": {
+          "image": "bargiri-khak-nakhale-bobcat-kargah-shahri.jpg"
+        },
+        "c164120": {
+          "image": "bobcat-bargiri-nakhale-kamyon.jpg"
+        },
+        "79b64d5": {
+          "image": "gheirpashi-bastar-asfalt-mohavate-mojtame.jpg"
+        },
+        "79d18de": {
+          "settings": {
+            "title": "درزگیری آسفالت با ماستیک گرم"
+          }
+        },
+        "f926e38": {
+          "settings": {
+            "title": "کوبیدن و تراکم بستر پیش از آسفالت"
+          }
+        },
+        "71acdc4": {
+          "settings": {
+            "editor": "<p>از آسفالت معابر و محوطه تا قیرگونی، ایزوگام، درزگیری و اجاره ماشین‌آلات راهسازی؛ همه را با یک تماس به تیم <strong>آسفالت با ما</strong> بسپارید. اجرا با ماشین‌آلات و تیم خود شرکت و با ضمانت‌نامه‌ی کتبی انجام می‌شود.</p>"
+          }
         }
       }
     },

@@ -636,3 +636,90 @@ function asfaltbama_gallery_shortcode( $atts ) {
 	return $items ? '<div class="abm-gallery__grid abm-gallery__grid--inline">' . $items . '</div>' : '';
 }
 add_shortcode( 'abm_gallery', 'asfaltbama_gallery_shortcode' );
+
+/**
+ * Author links point to the about page: author archives are off (the link
+ * answered with a redirect) and /author/<login>/ exposed the login name.
+ *
+ * @return string
+ */
+function asfaltbama_author_link() {
+	return home_url( '/about-us/' );
+}
+add_filter( 'author_link', 'asfaltbama_author_link' );
+
+/**
+ * Article schema: the author Person carried the login name ("admin").
+ * Name the editorial team instead and point it to the about page.
+ *
+ * @param array $data Schema entities.
+ *
+ * @return array
+ */
+function asfaltbama_author_schema( $data ) {
+	if ( ! is_array( $data ) || ! is_singular( 'post' ) ) {
+		return $data;
+	}
+	$post  = get_post();
+	$login = $post ? get_the_author_meta( 'user_login', $post->post_author ) : '';
+	$name  = asfaltbama_author_name( $post );
+	foreach ( $data as $key => $entity ) {
+		if ( ! is_array( $entity ) || 'Person' !== ( $entity['@type'] ?? '' ) ) {
+			continue;
+		}
+		if ( ( $entity['name'] ?? '' ) === $login || ( $entity['name'] ?? '' ) === 'admin' ) {
+			$data[ $key ]['name'] = $name;
+			$data[ $key ]['url']  = home_url( '/about-us/' );
+			unset( $data[ $key ]['image'], $data[ $key ]['sameAs'] );
+		}
+	}
+	// Other entities may repeat the author's name inline.
+	array_walk_recursive(
+		$data,
+		function ( &$value, $k ) use ( $login, $name ) {
+			if ( 'name' === $k && ( $value === $login || 'admin' === $value ) ) {
+				$value = $name;
+			}
+		}
+	);
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'asfaltbama_author_schema', 99 );
+
+/**
+ * Bylines: show the editorial team instead of the login name ("admin")
+ * that the article template prints.
+ *
+ * @param string $name Author display name.
+ *
+ * @return string
+ */
+function asfaltbama_byline_name( $name ) {
+	if ( is_admin() || wp_doing_ajax() || ( ! in_the_loop() && ! is_singular( 'post' ) ) ) {
+		return $name;
+	}
+	$post = get_post();
+	return $post ? asfaltbama_author_name( $post ) : $name;
+}
+add_filter( 'the_author', 'asfaltbama_byline_name' );
+add_filter( 'get_the_author_display_name', 'asfaltbama_byline_name' );
+
+/**
+ * Article dates in the Persian calendar with Persian digits, wherever the
+ * site's default date format is used on the front end. Machine formats
+ * (c, U, Y-m-d …) used by feeds and schema are left alone.
+ *
+ * @param string       $the_date Formatted date.
+ * @param string       $format   Requested format ('' = site default).
+ * @param WP_Post|null $post     Post.
+ *
+ * @return string
+ */
+function asfaltbama_jalali_the_date( $the_date, $format, $post ) {
+	if ( is_admin() || is_feed() || wp_doing_ajax() || ( '' !== $format && get_option( 'date_format' ) !== $format ) ) {
+		return $the_date;
+	}
+	$post = get_post( $post );
+	return $post ? asfaltbama_date( $post->post_date ) : $the_date;
+}
+add_filter( 'get_the_date', 'asfaltbama_jalali_the_date', 10, 3 );
