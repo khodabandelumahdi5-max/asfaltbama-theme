@@ -42,6 +42,72 @@ HUBS = [
 
 # Persian article slug -> {"fa": updated Persian fields, "en": {...}, "ar": {...}}
 ARTICLES = {
+    "bathroom-waterproofing": {
+        "fa": {
+            "excerpt": "عایق‌کاری حمام و سرویس بهداشتی از هماهنگی با لوله‌کشی و شیب‌بندی تا اجرای گام‌به‌گام، هفت نقطه‌ی پرنشتی، تست آب‌بندی، تشخیص نشتی و تعمیر.",
+            "seo_description": "عایق‌کاری حمام و سرویس: تست فشار لوله‌ها، شیب‌بندی به کف‌شور، بالاآوردن عایق روی دیوار، جزئیات کف‌شور و لوله‌ها، تست آب‌بندی ۲۴ تا ۴۸ ساعته و تشخیص نشتی.",
+        },
+        "en": {
+            "slug": "bathroom-wet-area-waterproofing",
+            "title": "Bathroom and Wet Area Waterproofing: A Complete Guide for Hotels, Apartments and Villas",
+            "excerpt": "Choosing a system, coordinating with plumbing, step-by-step installation, the seven points where most leaks occur, flood testing, mock-ups for repeat bathrooms, diagnosis and repair.",
+            "seo_title": "Bathroom Waterproofing Guide for Wet Areas | Asfaltbama",
+            "seo_description": "Bathroom and wet area waterproofing: falls to the drain, upstands, drain and pipe details, flood tests, level-access showers, hotel mock-ups and leak diagnosis.",
+            "focus_keyword": "bathroom waterproofing",
+        },
+        "ar": {
+            "slug": "bathroom-waterproofing-ar",
+            "title": "عزل الحمامات والمناطق الرطبة: الدليل الكامل للفنادق والشقق والفلل",
+            "excerpt": "اختيار النظام، والتنسيق مع السباكة، والتنفيذ خطوة بخطوة، والنقاط السبع التي تبدأ منها معظم التسربات، واختبار الغمر، والحمام النموذجي، والتشخيص والإصلاح.",
+            "seo_title": "عزل الحمامات والمناطق الرطبة: الدليل الكامل | أسفلت با ما",
+            "seo_description": "عزل الحمامات في العراق والخليج: الميول نحو الصفاية، وارتفاع العزل على الجدران، وتفاصيل الصفاية والأنابيب، واختبار الغمر، والدُّش المستوي، وتشخيص التسرب.",
+            "focus_keyword": "عزل الحمامات",
+        },
+    },
+    "foundation-waterproofing": {
+        "fa": {
+            "excerpt": "شناخت زمین و سه سطح شرایط رطوبتی، روش‌های عایق پی، مراحل گام‌به‌گام ایزوگام زیر فونداسیون، عایق دیوار زیرزمین، جزئیات حساس، زهکشی و راه‌حل ساختمان‌های موجود.",
+            "seo_description": "عایق‌کاری پی ساختمان: شناخت آب زیرزمینی، بتن مگر، ایزوگام زیر فونداسیون، لبه‌ی منتظر، لایه‌ی محافظ، عایق دیوار زیرزمین، زهکشی و اشتباهات رایج.",
+        },
+        "en": {
+            "slug": "foundation-basement-waterproofing",
+            "title": "Foundation and Basement Waterproofing: A Complete Guide for Gulf Sites",
+            "excerpt": "Ground conditions and groundwater, choosing a system, installing membranes under the raft, basement walls, construction joints and penetrations, drainage and dewatering, and options for existing buildings.",
+            "seo_title": "Foundation and Basement Waterproofing Guide | Asfaltbama",
+            "seo_description": "Foundation and basement waterproofing for Gulf sites: groundwater and sabkha, blinding, membranes under the raft, waiting laps, protection, walls, joints and drainage.",
+            "focus_keyword": "foundation and basement waterproofing",
+        },
+        "ar": {
+            "slug": "foundation-waterproofing-ar",
+            "title": "عزل الأساسات والأقبية: الدليل الكامل للمواقع في العراق والخليج",
+            "excerpt": "ظروف التربة والمياه الجوفية، واختيار النظام، وتركيب العزل تحت اللبشة، وجدران القبو، وفواصل الصب والاختراقات، والتصريف ونزح المياه، وحلول المباني القائمة.",
+            "seo_title": "عزل الأساسات والأقبية: الدليل الكامل | أسفلت با ما",
+            "seo_description": "عزل الأساسات والأقبية في العراق والخليج: المياه الجوفية والسبخة، وخرسانة النظافة، والعزل تحت اللبشة، وأطراف الانتظار، والحماية، والجدران، والفواصل والتصريف.",
+            "focus_keyword": "عزل الأساسات",
+        },
+    },
+    "isogam-over-old-isogam": {
+        "fa": {
+            "excerpt": "کی می‌شود ایزوگام جدید را روی ایزوگام قدیمی اجرا کرد و کی باید جمع کرد؟ ۸ بررسی لایه‌ی قدیمی، جدول تصمیم، مراحل هر دو مسیر، ناودان‌ها، وزن سقف، هزینه و ضمانت.",
+            "seo_description": "ایزوگام روی ایزوگام قدیمی فقط روی لایه‌ی سالم، خشک و چسبیده مجاز است. ۸ بررسی، جدول تصمیم، مراحل اجرا یا جمع‌آوری، ناودان‌ها، هزینه و ضمانت.",
+        },
+        "en": {
+            "slug": "reroofing-over-existing-membrane",
+            "title": "Re-roofing Over an Existing Membrane: When to Overlay and When to Strip",
+            "excerpt": "When a new Isogam or modified bitumen membrane can go over the old one and when stripping is essential: eight checks, a decision table, both procedures, drains, roof load, cost and warranty.",
+            "seo_title": "Re-roofing Over an Existing Membrane: Overlay or Strip? | Asfaltbama",
+            "seo_description": "Re-roofing over an existing membrane only works on a sound, dry, bonded layer. Eight checks, a decision table, overlay and tear-off procedures, drains, cost and warranty.",
+            "focus_keyword": "re-roofing over an existing membrane",
+        },
+        "ar": {
+            "slug": "isogam-over-old-isogam-ar",
+            "title": "تركيب الإيزوجام فوق الإيزوجام القديم: متى يجوز ومتى تجب الإزالة؟",
+            "excerpt": "متى يمكن تركيب إيزوجام جديد فوق القديم ومتى تكون الإزالة ضرورية: ثمانية فحوص، وجدول قرار، وإجراءات المسارين، والمصارف، وحمل السطح، والتكلفة والضمان.",
+            "seo_title": "الإيزوجام فوق الإيزوجام القديم: تركيب أم إزالة؟ | أسفلت با ما",
+            "seo_description": "تركيب الإيزوجام فوق الإيزوجام القديم يجوز فقط على طبقة سليمة جافة ملتصقة. ثمانية فحوص، وجدول قرار، وإجراءات التركيب والإزالة، والمصارف والتكلفة.",
+            "focus_keyword": "الإيزوجام فوق الإيزوجام القديم",
+        },
+    },
     "isogam-price-guide": {
         "fa": {
             "excerpt": "۸ عامل تعیین‌کننده‌ی قیمت ایزوگام، انواع ایزوگام و کاربردشان، ۱۲ کنترل ساده برای تشخیص ایزوگام مرغوب، تقلب‌های رایج، محاسبه‌ی تعداد رول با مثال و مقایسه‌ی پیشنهاد قیمت اجرا.",

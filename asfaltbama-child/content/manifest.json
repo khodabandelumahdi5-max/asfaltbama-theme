@@ -1,5 +1,5 @@
 {
-  "content_version": "2026-09-28.3",
+  "content_version": "2026-09-28.4",
   "site_version": "2026-09-26.1",
   "site": {
     "blogname": "آسفالت با ما",
@@ -123,7 +123,7 @@
       "seo_title": "درباره ما | شرکت افق آپادانا پاسارگاد (آسفالت با ما)"
     }
   },
-  "images_version": "2026-09-28.3",
+  "images_version": "2026-09-28.4",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -808,6 +808,54 @@
       ],
       "title": "الإيزوجام أم القير والجنفاص؟ مقارنة شاملة ودليل الاختيار",
       "alt": "الإيزوجام أم القير والجنفاص؟ مقارنة شاملة ودليل الاختيار"
+    },
+    {
+      "file": "images/covers/intl/reroofing-over-existing-membrane.webp",
+      "featured_for": [
+        "reroofing-over-existing-membrane"
+      ],
+      "title": "Re-roofing Over an Existing Membrane: When to Overlay and When to Strip",
+      "alt": "Re-roofing Over an Existing Membrane: When to Overlay and When to Strip"
+    },
+    {
+      "file": "images/covers/intl/isogam-over-old-isogam-ar.webp",
+      "featured_for": [
+        "isogam-over-old-isogam-ar"
+      ],
+      "title": "تركيب الإيزوجام فوق الإيزوجام القديم: متى يجوز ومتى تجب الإزالة؟",
+      "alt": "تركيب الإيزوجام فوق الإيزوجام القديم: متى يجوز ومتى تجب الإزالة؟"
+    },
+    {
+      "file": "images/covers/intl/foundation-basement-waterproofing.webp",
+      "featured_for": [
+        "foundation-basement-waterproofing"
+      ],
+      "title": "Foundation and Basement Waterproofing: A Complete Guide for Gulf Sites",
+      "alt": "Foundation and Basement Waterproofing: A Complete Guide for Gulf Sites"
+    },
+    {
+      "file": "images/covers/intl/foundation-waterproofing-ar.webp",
+      "featured_for": [
+        "foundation-waterproofing-ar"
+      ],
+      "title": "عزل الأساسات والأقبية: الدليل الكامل للمواقع في العراق والخليج",
+      "alt": "عزل الأساسات والأقبية: الدليل الكامل للمواقع في العراق والخليج"
+    },
+    {
+      "file": "images/covers/intl/bathroom-wet-area-waterproofing.webp",
+      "featured_for": [
+        "bathroom-wet-area-waterproofing"
+      ],
+      "title": "Bathroom and Wet Area Waterproofing: A Complete Guide for Hotels, Apartments and Villas",
+      "alt": "Bathroom and Wet Area Waterproofing: A Complete Guide for Hotels, Apartments and Villas"
+    },
+    {
+      "file": "images/covers/intl/bathroom-waterproofing-ar.webp",
+      "featured_for": [
+        "bathroom-waterproofing-ar"
+      ],
+      "title": "عزل الحمامات والمناطق الرطبة: الدليل الكامل للفنادق والشقق والفلل",
+      "alt": "عزل الحمامات والمناطق الرطبة: الدليل الكامل للفنادق والشقق والفلل"
     }
   ],
   "replace_featured_ids": [
@@ -1525,6 +1573,90 @@
       "category": "waterproofing-isogam",
       "managed": true,
       "hreflang_group": "art-isogam-price-guide"
+    },
+    {
+      "slug": "reroofing-over-existing-membrane",
+      "title": "Re-roofing Over an Existing Membrane: When to Overlay and When to Strip",
+      "file": "articles/en/isogam-over-old-isogam.html",
+      "excerpt": "When a new Isogam or modified bitumen membrane can go over the old one and when stripping is essential: eight checks, a decision table, both procedures, drains, roof load, cost and warranty.",
+      "seo_title": "Re-roofing Over an Existing Membrane: Overlay or Strip? | Asfaltbama",
+      "seo_description": "Re-roofing over an existing membrane only works on a sound, dry, bonded layer. Eight checks, a decision table, overlay and tear-off procedures, drains, cost and warranty.",
+      "focus_keyword": "re-roofing over an existing membrane",
+      "lang": "en",
+      "layout": "article",
+      "category": "waterproofing-isogam",
+      "managed": true,
+      "hreflang_group": "art-isogam-over-old-isogam"
+    },
+    {
+      "slug": "isogam-over-old-isogam-ar",
+      "title": "تركيب الإيزوجام فوق الإيزوجام القديم: متى يجوز ومتى تجب الإزالة؟",
+      "file": "articles/ar/isogam-over-old-isogam.html",
+      "excerpt": "متى يمكن تركيب إيزوجام جديد فوق القديم ومتى تكون الإزالة ضرورية: ثمانية فحوص، وجدول قرار، وإجراءات المسارين، والمصارف، وحمل السطح، والتكلفة والضمان.",
+      "seo_title": "الإيزوجام فوق الإيزوجام القديم: تركيب أم إزالة؟ | أسفلت با ما",
+      "seo_description": "تركيب الإيزوجام فوق الإيزوجام القديم يجوز فقط على طبقة سليمة جافة ملتصقة. ثمانية فحوص، وجدول قرار، وإجراءات التركيب والإزالة، والمصارف والتكلفة.",
+      "focus_keyword": "الإيزوجام فوق الإيزوجام القديم",
+      "lang": "ar",
+      "layout": "article",
+      "category": "waterproofing-isogam",
+      "managed": true,
+      "hreflang_group": "art-isogam-over-old-isogam"
+    },
+    {
+      "slug": "foundation-basement-waterproofing",
+      "title": "Foundation and Basement Waterproofing: A Complete Guide for Gulf Sites",
+      "file": "articles/en/foundation-waterproofing.html",
+      "excerpt": "Ground conditions and groundwater, choosing a system, installing membranes under the raft, basement walls, construction joints and penetrations, drainage and dewatering, and options for existing buildings.",
+      "seo_title": "Foundation and Basement Waterproofing Guide | Asfaltbama",
+      "seo_description": "Foundation and basement waterproofing for Gulf sites: groundwater and sabkha, blinding, membranes under the raft, waiting laps, protection, walls, joints and drainage.",
+      "focus_keyword": "foundation and basement waterproofing",
+      "lang": "en",
+      "layout": "article",
+      "category": "waterproofing-isogam",
+      "managed": true,
+      "hreflang_group": "art-foundation-waterproofing"
+    },
+    {
+      "slug": "foundation-waterproofing-ar",
+      "title": "عزل الأساسات والأقبية: الدليل الكامل للمواقع في العراق والخليج",
+      "file": "articles/ar/foundation-waterproofing.html",
+      "excerpt": "ظروف التربة والمياه الجوفية، واختيار النظام، وتركيب العزل تحت اللبشة، وجدران القبو، وفواصل الصب والاختراقات، والتصريف ونزح المياه، وحلول المباني القائمة.",
+      "seo_title": "عزل الأساسات والأقبية: الدليل الكامل | أسفلت با ما",
+      "seo_description": "عزل الأساسات والأقبية في العراق والخليج: المياه الجوفية والسبخة، وخرسانة النظافة، والعزل تحت اللبشة، وأطراف الانتظار، والحماية، والجدران، والفواصل والتصريف.",
+      "focus_keyword": "عزل الأساسات",
+      "lang": "ar",
+      "layout": "article",
+      "category": "waterproofing-isogam",
+      "managed": true,
+      "hreflang_group": "art-foundation-waterproofing"
+    },
+    {
+      "slug": "bathroom-wet-area-waterproofing",
+      "title": "Bathroom and Wet Area Waterproofing: A Complete Guide for Hotels, Apartments and Villas",
+      "file": "articles/en/bathroom-waterproofing.html",
+      "excerpt": "Choosing a system, coordinating with plumbing, step-by-step installation, the seven points where most leaks occur, flood testing, mock-ups for repeat bathrooms, diagnosis and repair.",
+      "seo_title": "Bathroom Waterproofing Guide for Wet Areas | Asfaltbama",
+      "seo_description": "Bathroom and wet area waterproofing: falls to the drain, upstands, drain and pipe details, flood tests, level-access showers, hotel mock-ups and leak diagnosis.",
+      "focus_keyword": "bathroom waterproofing",
+      "lang": "en",
+      "layout": "article",
+      "category": "waterproofing-isogam",
+      "managed": true,
+      "hreflang_group": "art-bathroom-waterproofing"
+    },
+    {
+      "slug": "bathroom-waterproofing-ar",
+      "title": "عزل الحمامات والمناطق الرطبة: الدليل الكامل للفنادق والشقق والفلل",
+      "file": "articles/ar/bathroom-waterproofing.html",
+      "excerpt": "اختيار النظام، والتنسيق مع السباكة، والتنفيذ خطوة بخطوة، والنقاط السبع التي تبدأ منها معظم التسربات، واختبار الغمر، والحمام النموذجي، والتشخيص والإصلاح.",
+      "seo_title": "عزل الحمامات والمناطق الرطبة: الدليل الكامل | أسفلت با ما",
+      "seo_description": "عزل الحمامات في العراق والخليج: الميول نحو الصفاية، وارتفاع العزل على الجدران، وتفاصيل الصفاية والأنابيب، واختبار الغمر، والدُّش المستوي، وتشخيص التسرب.",
+      "focus_keyword": "عزل الحمامات",
+      "lang": "ar",
+      "layout": "article",
+      "category": "waterproofing-isogam",
+      "managed": true,
+      "hreflang_group": "art-bathroom-waterproofing"
     }
   ],
   "posts": [
@@ -1776,10 +1908,14 @@
       "title": "عایق‌کاری سرویس بهداشتی و حمام: مراحل اصولی و نقاط حساس نشتی",
       "category": "waterproofing-isogam",
       "file": "articles/bathroom-waterproofing.html",
-      "excerpt": "روش‌های عایق‌کاری سرویس و حمام، مراحل اجرای اصولی از شیب‌بندی تا آزمایش آب‌بندی، و پنج نقطه‌ای که بیشترین نشتی را دارند.",
+      "excerpt": "عایق‌کاری حمام و سرویس بهداشتی از هماهنگی با لوله‌کشی و شیب‌بندی تا اجرای گام‌به‌گام، هفت نقطه‌ی پرنشتی، تست آب‌بندی، تشخیص نشتی و تعمیر.",
       "seo_title": "عایق‌کاری سرویس بهداشتی و حمام؛ مراحل اصولی | آسفالت با ما",
-      "seo_description": "مراحل عایق‌کاری سرویس بهداشتی و حمام: شیب‌بندی، بالا آوردن عایق روی دیوار، آب‌بندی کفشوی و لوله‌ها و آزمایش آب‌بندی پیش از کاشی.",
-      "focus_keyword": "عایق‌کاری سرویس بهداشتی,عایق کاری سرویس بهداشتی"
+      "seo_description": "عایق‌کاری حمام و سرویس: تست فشار لوله‌ها، شیب‌بندی به کف‌شور، بالاآوردن عایق روی دیوار، جزئیات کف‌شور و لوله‌ها، تست آب‌بندی ۲۴ تا ۴۸ ساعته و تشخیص نشتی.",
+      "focus_keyword": "عایق‌کاری سرویس بهداشتی,عایق کاری سرویس بهداشتی",
+      "hreflang_group": "art-bathroom-waterproofing",
+      "prev_hashes": [
+        "e71c3d2a30a28374272b4cc7e2a93b85"
+      ]
     },
     {
       "slug": "land-grading-guide",
@@ -1877,10 +2013,14 @@
       "title": "ایزوگام روی ایزوگام قدیمی: کی می‌شود و کی باید جمع کرد؟",
       "category": "waterproofing-isogam",
       "file": "articles/isogam-over-old-isogam.html",
-      "excerpt": "شرایط اجرای ایزوگام روی ایزوگام قدیمی، زمانی که باید عایق قدیمی جمع شود، روش بررسی لایه‌ی قدیمی و مراحل اجرای اصولی.",
+      "excerpt": "کی می‌شود ایزوگام جدید را روی ایزوگام قدیمی اجرا کرد و کی باید جمع کرد؟ ۸ بررسی لایه‌ی قدیمی، جدول تصمیم، مراحل هر دو مسیر، ناودان‌ها، وزن سقف، هزینه و ضمانت.",
       "seo_title": "ایزوگام روی ایزوگام قدیمی؛ مجاز است یا نه؟ | آسفالت با ما",
-      "seo_description": "ایزوگام روی ایزوگام قدیمی کی مجاز است و کی باید جمع شود؟ بررسی تاول و رطوبت، پرایمر، مراحل اجرا، مقایسه‌ی هزینه و نکات ضمانت.",
-      "focus_keyword": "ایزوگام روی ایزوگام قدیمی"
+      "seo_description": "ایزوگام روی ایزوگام قدیمی فقط روی لایه‌ی سالم، خشک و چسبیده مجاز است. ۸ بررسی، جدول تصمیم، مراحل اجرا یا جمع‌آوری، ناودان‌ها، هزینه و ضمانت.",
+      "focus_keyword": "ایزوگام روی ایزوگام قدیمی",
+      "hreflang_group": "art-isogam-over-old-isogam",
+      "prev_hashes": [
+        "1223196c293a0c1d7725685fc701a95c"
+      ]
     },
     {
       "slug": "asphalt-over-concrete",
@@ -1917,10 +2057,14 @@
       "title": "عایق‌کاری پی ساختمان: ایزوگام زیر فونداسیون و دیوار زیرزمین",
       "category": "waterproofing-isogam",
       "file": "articles/foundation-waterproofing.html",
-      "excerpt": "چرا پی ساختمان عایق لازم دارد، روش‌های رایج، مراحل اجرای ایزوگام زیر فونداسیون و دیوار زیرزمین، زهکشی و اشتباهات رایج.",
+      "excerpt": "شناخت زمین و سه سطح شرایط رطوبتی، روش‌های عایق پی، مراحل گام‌به‌گام ایزوگام زیر فونداسیون، عایق دیوار زیرزمین، جزئیات حساس، زهکشی و راه‌حل ساختمان‌های موجود.",
       "seo_title": "عایق‌کاری پی ساختمان؛ ایزوگام زیر فونداسیون | آسفالت با ما",
-      "seo_description": "عایق‌کاری پی ساختمان پیش از بتن‌ریزی: بتن مگر، ایزوگام زیر فونداسیون و دیوار زیرزمین، لایه‌ی محافظ، زهکشی و اشتباهات رایج.",
-      "focus_keyword": "عایق‌کاری پی ساختمان,عایق کاری پی ساختمان,ایزوگام زیر فونداسیون"
+      "seo_description": "عایق‌کاری پی ساختمان: شناخت آب زیرزمینی، بتن مگر، ایزوگام زیر فونداسیون، لبه‌ی منتظر، لایه‌ی محافظ، عایق دیوار زیرزمین، زهکشی و اشتباهات رایج.",
+      "focus_keyword": "عایق‌کاری پی ساختمان,عایق کاری پی ساختمان,ایزوگام زیر فونداسیون",
+      "hreflang_group": "art-foundation-waterproofing",
+      "prev_hashes": [
+        "b7440e5ac2c1ef2514fb03f70f97150d"
+      ]
     },
     {
       "slug": "bitumen-roofing-steps",
@@ -1961,7 +2105,7 @@
       ]
     }
   },
-  "post_seo_version": "2026-09-28.3",
+  "post_seo_version": "2026-09-28.4",
   "tags_version": "2026-09-27.2",
   "tags_cleanup": {
     "delete_slugs": [
