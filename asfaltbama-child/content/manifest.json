@@ -1,5 +1,5 @@
 {
-  "content_version": "2026-09-27.4",
+  "content_version": "2026-09-27.5",
   "site_version": "2026-09-26.1",
   "site": {
     "blogname": "آسفالت با ما",
@@ -122,7 +122,7 @@
       "focus_keyword": "درباره ما"
     }
   },
-  "images_version": "2026-09-27.4",
+  "images_version": "2026-09-27.5",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -456,6 +456,150 @@
       "featured_for": [
         "bitumen-roofing-steps"
       ]
+    },
+    {
+      "file": "images/og/asphalt-contractor-middle-east-ar-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: مقاول أسفلت وإيزوجام وعزل بالقير والجنفاص في العراق والخليج",
+      "alt": "مقاول أسفلت وإيزوجام وعزل بالقير والجنفاص في العراق والخليج",
+      "featured_for": [
+        "asphalt-contractor-middle-east-ar"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-contractor-middle-east-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: Asphalt, Isogam & Bitumen Roofing Contractor for Iraq and the Gulf",
+      "alt": "Asphalt, Isogam & Bitumen Roofing Contractor for Iraq and the Gulf",
+      "featured_for": [
+        "asphalt-contractor-middle-east"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-shams-abad-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: آسفالت، قیرگونی و ایزوگام در شهرک صنعتی شمس‌آباد",
+      "alt": "آسفالت، قیرگونی و ایزوگام در شهرک صنعتی شمس‌آباد",
+      "featured_for": [
+        "asphalt-shams-abad"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-bahrain-ar-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في البحرين",
+      "alt": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في البحرين",
+      "featured_for": [
+        "asphalt-waterproofing-bahrain-ar"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-bahrain-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: Asphalt Paving, Isogam & Bitumen Roofing in Bahrain",
+      "alt": "Asphalt Paving, Isogam & Bitumen Roofing in Bahrain",
+      "featured_for": [
+        "asphalt-waterproofing-bahrain"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-basra-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في البصرة",
+      "alt": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في البصرة",
+      "featured_for": [
+        "asphalt-waterproofing-basra"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-dubai-uae-ar-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في دبي والإمارات",
+      "alt": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في دبي والإمارات",
+      "featured_for": [
+        "asphalt-waterproofing-dubai-uae-ar"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-dubai-uae-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: Asphalt Paving, Isogam & Bitumen Roofing in Dubai and the UAE",
+      "alt": "Asphalt Paving, Isogam & Bitumen Roofing in Dubai and the UAE",
+      "featured_for": [
+        "asphalt-waterproofing-dubai-uae"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-erbil-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في أربيل",
+      "alt": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في أربيل",
+      "featured_for": [
+        "asphalt-waterproofing-erbil"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-iraq-ar-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في العراق",
+      "alt": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في العراق",
+      "featured_for": [
+        "asphalt-waterproofing-iraq-ar"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-iraq-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: Asphalt Paving, Isogam & Bitumen Roofing in Iraq",
+      "alt": "Asphalt Paving, Isogam & Bitumen Roofing in Iraq",
+      "featured_for": [
+        "asphalt-waterproofing-iraq"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-karbala-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في كربلاء",
+      "alt": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في كربلاء",
+      "featured_for": [
+        "asphalt-waterproofing-karbala"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-kuwait-ar-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في الكويت",
+      "alt": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في الكويت",
+      "featured_for": [
+        "asphalt-waterproofing-kuwait-ar"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-kuwait-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: Asphalt Paving, Isogam & Bitumen Roofing in Kuwait",
+      "alt": "Asphalt Paving, Isogam & Bitumen Roofing in Kuwait",
+      "featured_for": [
+        "asphalt-waterproofing-kuwait"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-najaf-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في النجف",
+      "alt": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في النجف",
+      "featured_for": [
+        "asphalt-waterproofing-najaf"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-oman-ar-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في سلطنة عُمان",
+      "alt": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في سلطنة عُمان",
+      "featured_for": [
+        "asphalt-waterproofing-oman-ar"
+      ]
+    },
+    {
+      "file": "images/og/asphalt-waterproofing-oman-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: Asphalt Paving, Isogam & Bitumen Roofing in Oman",
+      "alt": "Asphalt Paving, Isogam & Bitumen Roofing in Oman",
+      "featured_for": [
+        "asphalt-waterproofing-oman"
+      ]
+    },
+    {
+      "file": "images/og/industrial-asphalt-waterproofing-og.jpg",
+      "title": "تصویر اشتراک‌گذاری: آسفالت کارخانه و عایق‌کاری صنعتی؛ محوطه، قیرگونی و ایزوگام سوله",
+      "alt": "آسفالت کارخانه و عایق‌کاری صنعتی؛ محوطه، قیرگونی و ایزوگام سوله",
+      "featured_for": [
+        "industrial-asphalt-waterproofing"
+      ]
     }
   ],
   "replace_featured_ids": [
@@ -651,62 +795,96 @@
     {
       "slug": "industrial-asphalt-waterproofing",
       "title": "آسفالت کارخانه و عایق‌کاری صنعتی؛ محوطه، قیرگونی و ایزوگام سوله",
-      "file": "pages/areas/industrial-asphalt-waterproofing.html",
-      "excerpt": "آسفالت کارخانه و محوطه صنعتی با زیرسازی و آسفالت دو لایه، قیرگونی و ایزوگام بام سوله و انبار، اجرای مرحله‌ای بدون توقف تولید. بازدید رایگان.",
-      "seo_title": "آسفالت کارخانه و ایزوگام سوله | عایق‌کاری صنعتی | آسفالت با ما",
-      "seo_description": "آسفالت کارخانه و محوطه صنعتی با زیرسازی و آسفالت دو لایه، قیرگونی و ایزوگام بام سوله و انبار، اجرای مرحله‌ای بدون توقف تولید. بازدید رایگان.",
-      "focus_keyword": "آسفالت کارخانه,ایزوگام سوله,آسفالت محوطه صنعتی"
+      "file": "pages/landing/industrial-asphalt-waterproofing.html",
+      "excerpt": "آسفالت کارخانه و محوطه صنعتی با آسفالت دو لایه، قیرگونی و ایزوگام بام سوله و انبار؛ اجرای مرحله‌ای بدون توقف تولید و بازدید رایگان.",
+      "seo_title": "آسفالت کارخانه و ایزوگام سوله | قیرگونی صنعتی | آسفالت با ما",
+      "seo_description": "آسفالت کارخانه و محوطه صنعتی با آسفالت دو لایه، قیرگونی و ایزوگام بام سوله و انبار؛ اجرای مرحله‌ای بدون توقف تولید و بازدید رایگان.",
+      "focus_keyword": "آسفالت کارخانه,ایزوگام سوله,قیرگونی سوله",
+      "layout": "landing",
+      "managed": true,
+      "lang": "fa"
     },
     {
       "slug": "asphalt-shams-abad",
       "title": "آسفالت، قیرگونی و ایزوگام در شهرک صنعتی شمس‌آباد",
-      "file": "pages/areas/asphalt-shams-abad.html",
+      "file": "pages/landing/asphalt-shams-abad.html",
       "excerpt": "آسفالت محوطه کارخانه و انبار، قیرگونی و ایزوگام بام سوله در شهرک صنعتی شمس‌آباد؛ آسفالت دو لایه و اجرای مرحله‌ای. بازدید رایگان.",
       "seo_title": "آسفالت و ایزوگام در شهرک صنعتی شمس‌آباد | آسفالت با ما",
       "seo_description": "آسفالت محوطه کارخانه و انبار، قیرگونی و ایزوگام بام سوله در شهرک صنعتی شمس‌آباد؛ آسفالت دو لایه و اجرای مرحله‌ای. بازدید رایگان.",
       "focus_keyword": "شهرک صنعتی شمس‌آباد,آسفالت شمس آباد,ایزوگام شمس آباد",
+      "layout": "landing",
+      "managed": true,
+      "lang": "fa",
       "area_served": [
         "شهرک صنعتی شمس‌آباد"
       ]
     },
     {
       "slug": "asphalt-contractor-middle-east",
-      "title": "Asphalt Paving & Waterproofing Contractor in Iraq, Oman and the UAE",
-      "file": "pages/intl/asphalt-contractor-middle-east.html",
-      "excerpt": "Asphalt paving of factory yards and roads, bitumen roofing and membrane waterproofing in Iraq, Oman and the UAE. 25 years of experience. Email or WhatsApp us.",
-      "seo_title": "Asphalt Paving & Waterproofing Contractor | Iraq, Oman, UAE",
-      "seo_description": "Asphalt paving of factory yards and roads, bitumen roofing and membrane waterproofing in Iraq, Oman and the UAE. 25 years of experience. Email or WhatsApp us.",
-      "focus_keyword": "Asphalt Paving,waterproofing contractor",
+      "title": "Asphalt, Isogam & Bitumen Roofing Contractor for Iraq and the Gulf",
+      "file": "pages/landing/asphalt-contractor-middle-east.html",
+      "excerpt": "Bitumen roofing contractor for asphalt paving, isogam membranes and hot bitumen roofing in Iraq, Kuwait, Oman, Bahrain and the UAE. 25 years. WhatsApp us.",
+      "seo_title": "Asphalt, Isogam & Bitumen Roofing Contractor | Iraq & the Gulf",
+      "seo_description": "Bitumen roofing contractor for asphalt paving, isogam membranes and hot bitumen roofing in Iraq, Kuwait, Oman, Bahrain and the UAE. 25 years. WhatsApp us.",
+      "focus_keyword": "Bitumen Roofing Contractor,asphalt contractor,isogam",
+      "layout": "landing",
+      "managed": true,
       "lang": "en",
       "hreflang_group": "hub",
       "area_served": [
         "Iraq",
+        "Kuwait",
         "Oman",
+        "Bahrain",
         "United Arab Emirates"
       ]
     },
     {
       "slug": "asphalt-waterproofing-iraq",
-      "title": "Asphalt Paving and Roof Waterproofing in Iraq",
-      "file": "pages/intl/asphalt-waterproofing-iraq.html",
-      "excerpt": "Asphalt paving and roof waterproofing in Iraq: heavy-duty factory yards, access roads, membrane and bitumen roofing for Baghdad, Basra, Erbil and more.",
-      "seo_title": "Asphalt Paving and Roof Waterproofing in Iraq | Asfaltbama",
-      "seo_description": "Asphalt paving and roof waterproofing in Iraq: heavy-duty factory yards, access roads, membrane and bitumen roofing for Baghdad, Basra, Erbil and more.",
+      "title": "Asphalt Paving, Isogam & Bitumen Roofing in Iraq",
+      "file": "pages/landing/asphalt-waterproofing-iraq.html",
+      "excerpt": "Asphalt paving, isogam membranes and hot bitumen roofing in Iraq: Karbala, Najaf, Basra and Erbil. Specifications for 50 °C heat. WhatsApp or email us.",
+      "seo_title": "Asphalt Paving, Isogam & Bitumen Roofing in Iraq | Asfaltbama",
+      "seo_description": "Asphalt paving, isogam membranes and hot bitumen roofing in Iraq: Karbala, Najaf, Basra and Erbil. Specifications for 50 °C heat. WhatsApp or email us.",
       "focus_keyword": "Asphalt Paving,roof waterproofing Iraq",
+      "layout": "landing",
+      "managed": true,
       "lang": "en",
       "hreflang_group": "iraq",
       "area_served": [
-        "Iraq"
+        "Iraq",
+        "Karbala",
+        "Najaf",
+        "Basra",
+        "Erbil"
+      ]
+    },
+    {
+      "slug": "asphalt-waterproofing-kuwait",
+      "title": "Asphalt Paving, Isogam & Bitumen Roofing in Kuwait",
+      "file": "pages/landing/asphalt-waterproofing-kuwait.html",
+      "excerpt": "Asphalt paving of yards and car parks, reflective isogam membranes and bitumen roofing in Kuwait City, Shuwaikh, Sabhan and Ahmadi. WhatsApp or email us.",
+      "seo_title": "Asphalt Paving, Isogam & Bitumen Roofing in Kuwait | Asfaltbama",
+      "seo_description": "Asphalt paving of yards and car parks, reflective isogam membranes and bitumen roofing in Kuwait City, Shuwaikh, Sabhan and Ahmadi. WhatsApp or email us.",
+      "focus_keyword": "Asphalt Paving,roof waterproofing Kuwait",
+      "layout": "landing",
+      "managed": true,
+      "lang": "en",
+      "hreflang_group": "kuwait",
+      "area_served": [
+        "Kuwait"
       ]
     },
     {
       "slug": "asphalt-waterproofing-oman",
-      "title": "Asphalt Paving and Roof Waterproofing in Oman",
-      "file": "pages/intl/asphalt-waterproofing-oman.html",
-      "excerpt": "Asphalt paving and roof waterproofing in Oman: industrial yards, car parks, access roads and flat roofs, with drainage designed for heavy rain. Muscat, Sohar.",
-      "seo_title": "Asphalt Paving and Roof Waterproofing in Oman | Asfaltbama",
-      "seo_description": "Asphalt paving and roof waterproofing in Oman: industrial yards, car parks, access roads and flat roofs, with drainage designed for heavy rain. Muscat, Sohar.",
+      "title": "Asphalt Paving, Isogam & Bitumen Roofing in Oman",
+      "file": "pages/landing/asphalt-waterproofing-oman.html",
+      "excerpt": "Asphalt paving, isogam membranes and bitumen roofing in Oman with drainage planned first: Muscat, Sohar, Barka and Nizwa. WhatsApp or email us.",
+      "seo_title": "Asphalt Paving, Isogam & Bitumen Roofing in Oman | Asfaltbama",
+      "seo_description": "Asphalt paving, isogam membranes and bitumen roofing in Oman with drainage planned first: Muscat, Sohar, Barka and Nizwa. WhatsApp or email us.",
       "focus_keyword": "Asphalt Paving,roof waterproofing Oman",
+      "layout": "landing",
+      "managed": true,
       "lang": "en",
       "hreflang_group": "oman",
       "area_served": [
@@ -714,13 +892,31 @@
       ]
     },
     {
+      "slug": "asphalt-waterproofing-bahrain",
+      "title": "Asphalt Paving, Isogam & Bitumen Roofing in Bahrain",
+      "file": "pages/landing/asphalt-waterproofing-bahrain.html",
+      "excerpt": "Asphalt paving, isogam membranes and bitumen roofing in Bahrain for humid coastal sites: Manama, Muharraq, Sitra and Hidd. WhatsApp or email us.",
+      "seo_title": "Asphalt Paving, Isogam & Bitumen Roofing in Bahrain | Asfaltbama",
+      "seo_description": "Asphalt paving, isogam membranes and bitumen roofing in Bahrain for humid coastal sites: Manama, Muharraq, Sitra and Hidd. WhatsApp or email us.",
+      "focus_keyword": "Asphalt Paving,roof waterproofing Bahrain",
+      "layout": "landing",
+      "managed": true,
+      "lang": "en",
+      "hreflang_group": "bahrain",
+      "area_served": [
+        "Bahrain"
+      ]
+    },
+    {
       "slug": "asphalt-waterproofing-dubai-uae",
-      "title": "Asphalt Paving and Roof Waterproofing in Dubai & UAE",
-      "file": "pages/intl/asphalt-waterproofing-dubai-uae.html",
-      "excerpt": "Asphalt paving and roof waterproofing in Dubai and the UAE: warehouse yards, car parks, heavy-duty pavements and reflective roof membranes, to specification.",
-      "seo_title": "Asphalt Paving & Roof Waterproofing in Dubai, UAE | Asfaltbama",
-      "seo_description": "Asphalt paving and roof waterproofing in Dubai and the UAE: warehouse yards, car parks, heavy-duty pavements and reflective roof membranes, to specification.",
+      "title": "Asphalt Paving, Isogam & Bitumen Roofing in Dubai and the UAE",
+      "file": "pages/landing/asphalt-waterproofing-dubai-uae.html",
+      "excerpt": "Asphalt paving of warehouse yards and car parks and reflective isogam roof membranes in Dubai, Sharjah and Ajman, to specification. WhatsApp or email us.",
+      "seo_title": "Asphalt Paving, Isogam & Bitumen Roofing in Dubai, UAE | Asfaltbama",
+      "seo_description": "Asphalt paving of warehouse yards and car parks and reflective isogam roof membranes in Dubai, Sharjah and Ajman, to specification. WhatsApp or email us.",
       "focus_keyword": "Asphalt Paving,roof waterproofing Dubai",
+      "layout": "landing",
+      "managed": true,
       "lang": "en",
       "hreflang_group": "uae",
       "area_served": [
@@ -730,42 +926,70 @@
     },
     {
       "slug": "asphalt-contractor-middle-east-ar",
-      "title": "مقاول أسفلت وعزل مائي في العراق وعُمان والإمارات",
-      "file": "pages/intl/asphalt-contractor-middle-east-ar.html",
-      "excerpt": "مقاول أسفلت وعزل مائي: رصف ساحات المصانع والطرق، العزل بالقير والجنفاص وأغشية البيتومين في العراق وعُمان والإمارات. خبرة ٢٥ عاماً. تواصلوا عبر واتساب.",
-      "seo_title": "مقاول أسفلت وعزل مائي في العراق وعُمان والإمارات | أسفلت با ما",
-      "seo_description": "مقاول أسفلت وعزل مائي: رصف ساحات المصانع والطرق، العزل بالقير والجنفاص وأغشية البيتومين في العراق وعُمان والإمارات. خبرة ٢٥ عاماً. تواصلوا عبر واتساب.",
-      "focus_keyword": "مقاول أسفلت,عزل مائي",
+      "title": "مقاول أسفلت وإيزوجام وعزل بالقير والجنفاص في العراق والخليج",
+      "file": "pages/landing/asphalt-contractor-middle-east-ar.html",
+      "excerpt": "مقاول أسفلت وعزل أسطح بالإيزوجام والقير والجنفاص في العراق والكويت وعُمان والبحرين والإمارات. خبرة ٢٥ عاماً وضمان مكتوب. تواصلوا عبر واتساب.",
+      "seo_title": "مقاول أسفلت وإيزوجام وقير وجنفاص في العراق والخليج | أسفلت با ما",
+      "seo_description": "مقاول أسفلت وعزل أسطح بالإيزوجام والقير والجنفاص في العراق والكويت وعُمان والبحرين والإمارات. خبرة ٢٥ عاماً وضمان مكتوب. تواصلوا عبر واتساب.",
+      "focus_keyword": "مقاول أسفلت,عزل الأسطح,إيزوجام",
+      "layout": "landing",
+      "managed": true,
       "lang": "ar",
       "hreflang_group": "hub",
       "area_served": [
         "العراق",
+        "الكويت",
         "سلطنة عمان",
+        "البحرين",
         "الإمارات العربية المتحدة"
       ]
     },
     {
       "slug": "asphalt-waterproofing-iraq-ar",
-      "title": "رصف الأسفلت والعزل المائي للأسطح في العراق",
-      "file": "pages/intl/asphalt-waterproofing-iraq-ar.html",
-      "excerpt": "رصف الأسفلت في العراق لساحات المصانع والطرق الداخلية، والعزل المائي للأسطح بالقير والجنفاص وأغشية البيتومين في بغداد والبصرة وأربيل.",
-      "seo_title": "رصف الأسفلت والعزل المائي في العراق | أسفلت با ما",
-      "seo_description": "رصف الأسفلت في العراق لساحات المصانع والطرق الداخلية، والعزل المائي للأسطح بالقير والجنفاص وأغشية البيتومين في بغداد والبصرة وأربيل.",
-      "focus_keyword": "رصف الأسفلت,عزل الأسطح العراق",
+      "title": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في العراق",
+      "file": "pages/landing/asphalt-waterproofing-iraq-ar.html",
+      "excerpt": "رصف الأسفلت وعزل الأسطح بالإيزوجام والقير والجنفاص في العراق: كربلاء والنجف والبصرة وأربيل، بمواصفات لحرارة ٥٠ درجة. تواصلوا عبر واتساب.",
+      "seo_title": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في العراق",
+      "seo_description": "رصف الأسفلت وعزل الأسطح بالإيزوجام والقير والجنفاص في العراق: كربلاء والنجف والبصرة وأربيل، بمواصفات لحرارة ٥٠ درجة. تواصلوا عبر واتساب.",
+      "focus_keyword": "رصف الأسفلت,عزل الأسطح العراق,قير وجنفاص",
+      "layout": "landing",
+      "managed": true,
       "lang": "ar",
       "hreflang_group": "iraq",
       "area_served": [
-        "العراق"
+        "العراق",
+        "كربلاء",
+        "النجف",
+        "البصرة",
+        "أربيل"
+      ]
+    },
+    {
+      "slug": "asphalt-waterproofing-kuwait-ar",
+      "title": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في الكويت",
+      "file": "pages/landing/asphalt-waterproofing-kuwait-ar.html",
+      "excerpt": "رصف الأسفلت لساحات المستودعات والمواقف، وعزل الأسطح بلفائف إيزوجام عاكسة وبالقير والجنفاص في الكويت والشويخ وصبحان والأحمدي. تواصلوا عبر واتساب.",
+      "seo_title": "رصف الأسفلت والعزل بالإيزوجام في الكويت | أسفلت با ما",
+      "seo_description": "رصف الأسفلت لساحات المستودعات والمواقف، وعزل الأسطح بلفائف إيزوجام عاكسة وبالقير والجنفاص في الكويت والشويخ وصبحان والأحمدي. تواصلوا عبر واتساب.",
+      "focus_keyword": "رصف الأسفلت,عزل الأسطح الكويت",
+      "layout": "landing",
+      "managed": true,
+      "lang": "ar",
+      "hreflang_group": "kuwait",
+      "area_served": [
+        "الكويت"
       ]
     },
     {
       "slug": "asphalt-waterproofing-oman-ar",
-      "title": "رصف الأسفلت والعزل المائي للأسطح في سلطنة عُمان",
-      "file": "pages/intl/asphalt-waterproofing-oman-ar.html",
-      "excerpt": "رصف الأسفلت في عُمان للساحات الصناعية ومواقف السيارات والطرق، والعزل المائي للأسطح مع تصريف مصمم للأمطار الغزيرة. مسقط وصحار.",
-      "seo_title": "رصف الأسفلت والعزل المائي في سلطنة عُمان | أسفلت با ما",
-      "seo_description": "رصف الأسفلت في عُمان للساحات الصناعية ومواقف السيارات والطرق، والعزل المائي للأسطح مع تصريف مصمم للأمطار الغزيرة. مسقط وصحار.",
+      "title": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في سلطنة عُمان",
+      "file": "pages/landing/asphalt-waterproofing-oman-ar.html",
+      "excerpt": "رصف الأسفلت وعزل الأسطح بالإيزوجام والقير والجنفاص في عُمان مع أولوية للتصريف: مسقط وصحار وبركاء ونزوى. تواصلوا عبر واتساب.",
+      "seo_title": "رصف الأسفلت والعزل بالإيزوجام في سلطنة عُمان | أسفلت با ما",
+      "seo_description": "رصف الأسفلت وعزل الأسطح بالإيزوجام والقير والجنفاص في عُمان مع أولوية للتصريف: مسقط وصحار وبركاء ونزوى. تواصلوا عبر واتساب.",
       "focus_keyword": "رصف الأسفلت,عزل الأسطح عمان",
+      "layout": "landing",
+      "managed": true,
       "lang": "ar",
       "hreflang_group": "oman",
       "area_served": [
@@ -773,18 +997,96 @@
       ]
     },
     {
+      "slug": "asphalt-waterproofing-bahrain-ar",
+      "title": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في البحرين",
+      "file": "pages/landing/asphalt-waterproofing-bahrain-ar.html",
+      "excerpt": "رصف الأسفلت وعزل الأسطح بالإيزوجام والقير والجنفاص في البحرين للمواقع الساحلية الرطبة: المنامة والمحرق وسترة والحد. تواصلوا عبر واتساب.",
+      "seo_title": "رصف الأسفلت والعزل بالإيزوجام في البحرين | أسفلت با ما",
+      "seo_description": "رصف الأسفلت وعزل الأسطح بالإيزوجام والقير والجنفاص في البحرين للمواقع الساحلية الرطبة: المنامة والمحرق وسترة والحد. تواصلوا عبر واتساب.",
+      "focus_keyword": "رصف الأسفلت,عزل الأسطح البحرين",
+      "layout": "landing",
+      "managed": true,
+      "lang": "ar",
+      "hreflang_group": "bahrain",
+      "area_served": [
+        "البحرين"
+      ]
+    },
+    {
       "slug": "asphalt-waterproofing-dubai-uae-ar",
-      "title": "رصف الأسفلت والعزل المائي للأسطح في دبي والإمارات",
-      "file": "pages/intl/asphalt-waterproofing-dubai-uae-ar.html",
-      "excerpt": "رصف الأسفلت في دبي والإمارات لساحات المستودعات ومواقف السيارات، وعزل الأسطح بأغشية عاكسة وفق مواصفات المشروع. تواصلوا عبر واتساب.",
-      "seo_title": "رصف الأسفلت والعزل المائي في دبي والإمارات | أسفلت با ما",
-      "seo_description": "رصف الأسفلت في دبي والإمارات لساحات المستودعات ومواقف السيارات، وعزل الأسطح بأغشية عاكسة وفق مواصفات المشروع. تواصلوا عبر واتساب.",
+      "title": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في دبي والإمارات",
+      "file": "pages/landing/asphalt-waterproofing-dubai-uae-ar.html",
+      "excerpt": "رصف الأسفلت لساحات المستودعات والمواقف وعزل الأسطح بلفائف إيزوجام عاكسة في دبي والشارقة وعجمان وفق المواصفات. تواصلوا عبر واتساب.",
+      "seo_title": "رصف الأسفلت والعزل بالإيزوجام في دبي والإمارات | أسفلت با ما",
+      "seo_description": "رصف الأسفلت لساحات المستودعات والمواقف وعزل الأسطح بلفائف إيزوجام عاكسة في دبي والشارقة وعجمان وفق المواصفات. تواصلوا عبر واتساب.",
       "focus_keyword": "رصف الأسفلت,عزل الأسطح دبي",
+      "layout": "landing",
+      "managed": true,
       "lang": "ar",
       "hreflang_group": "uae",
       "area_served": [
         "دبي",
         "الإمارات العربية المتحدة"
+      ]
+    },
+    {
+      "slug": "asphalt-waterproofing-karbala",
+      "title": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في كربلاء",
+      "file": "pages/landing/asphalt-waterproofing-karbala.html",
+      "excerpt": "عزل أسطح الفنادق والحسينيات بالإيزوجام والقير والجنفاص ورصف الأسفلت للساحات ومواقف الحافلات في كربلاء، مع تنفيذ قبل مواسم الزيارة. تواصلوا عبر واتساب.",
+      "seo_title": "رصف الأسفلت وعزل الأسطح بالإيزوجام في كربلاء | أسفلت با ما",
+      "seo_description": "عزل أسطح الفنادق والحسينيات بالإيزوجام والقير والجنفاص ورصف الأسفلت للساحات ومواقف الحافلات في كربلاء، مع تنفيذ قبل مواسم الزيارة. تواصلوا عبر واتساب.",
+      "focus_keyword": "رصف الأسفلت,عزل الأسطح كربلاء",
+      "layout": "landing",
+      "managed": true,
+      "lang": "ar",
+      "area_served": [
+        "كربلاء"
+      ]
+    },
+    {
+      "slug": "asphalt-waterproofing-najaf",
+      "title": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في النجف",
+      "file": "pages/landing/asphalt-waterproofing-najaf.html",
+      "excerpt": "عزل أسطح الفنادق والمجمعات بالإيزوجام العاكس والقير والجنفاص ورصف الأسفلت للساحات والمواقف في النجف. تواصلوا عبر واتساب.",
+      "seo_title": "رصف الأسفلت وعزل الأسطح بالإيزوجام في النجف | أسفلت با ما",
+      "seo_description": "عزل أسطح الفنادق والمجمعات بالإيزوجام العاكس والقير والجنفاص ورصف الأسفلت للساحات والمواقف في النجف. تواصلوا عبر واتساب.",
+      "focus_keyword": "رصف الأسفلت,عزل الأسطح النجف",
+      "layout": "landing",
+      "managed": true,
+      "lang": "ar",
+      "area_served": [
+        "النجف"
+      ]
+    },
+    {
+      "slug": "asphalt-waterproofing-basra",
+      "title": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في البصرة",
+      "file": "pages/landing/asphalt-waterproofing-basra.html",
+      "excerpt": "رصف الأسفلت للساحات الصناعية والمستودعات بطبقتين وعزل الأسطح بالإيزوجام والقير والجنفاص في البصرة، لحرارة ورطوبة وتربة مالحة. تواصلوا عبر واتساب.",
+      "seo_title": "رصف الأسفلت وعزل الأسطح بالإيزوجام في البصرة | أسفلت با ما",
+      "seo_description": "رصف الأسفلت للساحات الصناعية والمستودعات بطبقتين وعزل الأسطح بالإيزوجام والقير والجنفاص في البصرة، لحرارة ورطوبة وتربة مالحة. تواصلوا عبر واتساب.",
+      "focus_keyword": "رصف الأسفلت,عزل الأسطح البصرة",
+      "layout": "landing",
+      "managed": true,
+      "lang": "ar",
+      "area_served": [
+        "البصرة"
+      ]
+    },
+    {
+      "slug": "asphalt-waterproofing-erbil",
+      "title": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في أربيل",
+      "file": "pages/landing/asphalt-waterproofing-erbil.html",
+      "excerpt": "رصف الأسفلت لساحات المجمعات والمواقف وعزل الأسطح بالإيزوجام والقير والجنفاص في أربيل، لصيف حار وشتاء بصقيع. تواصلوا عبر واتساب.",
+      "seo_title": "رصف الأسفلت وعزل الأسطح بالإيزوجام في أربيل | أسفلت با ما",
+      "seo_description": "رصف الأسفلت لساحات المجمعات والمواقف وعزل الأسطح بالإيزوجام والقير والجنفاص في أربيل، لصيف حار وشتاء بصقيع. تواصلوا عبر واتساب.",
+      "focus_keyword": "رصف الأسفلت,عزل الأسطح أربيل",
+      "layout": "landing",
+      "managed": true,
+      "lang": "ar",
+      "area_served": [
+        "أربيل"
       ]
     }
   ],

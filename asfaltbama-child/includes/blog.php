@@ -493,11 +493,14 @@ function asfaltbama_faq_schema( $data ) {
 	}
 
 	$html = get_post_field( 'post_content', get_queried_object_id() );
-	if ( ! preg_match( '#<h2[^>]*>[^<]*سؤالات متداول[^<]*</h2>(.*?)(?=<h2|$)#su', $html, $section ) ) {
+	if ( preg_match_all( '#<details[^>]*>\s*<summary>(.*?)</summary>(.*?)</details>#su', $html, $pairs, PREG_SET_ORDER ) ) {
+		// Landing pages: <details><summary>question</summary><p>answer</p></details>.
+		unset( $section );
+	} elseif ( preg_match( '#<h2[^>]*>[^<]*سؤالات متداول[^<]*</h2>(.*?)(?=<h2|$)#su', $html, $section ) ) {
+		preg_match_all( '#<h3[^>]*>(.*?)</h3>(.*?)(?=<h3|$)#su', $section[1], $pairs, PREG_SET_ORDER );
+	} else {
 		return $data;
 	}
-
-	preg_match_all( '#<h3[^>]*>(.*?)</h3>(.*?)(?=<h3|$)#su', $section[1], $pairs, PREG_SET_ORDER );
 
 	$questions = [];
 	foreach ( $pairs as $pair ) {

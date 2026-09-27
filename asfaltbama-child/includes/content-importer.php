@@ -109,6 +109,33 @@ function asfaltbama_importer_upsert( $post_type, $slug, $fields, &$log, $update 
 }
 
 /**
+ * Whether a theme-managed page (manifest "managed": true) may be replaced
+ * with a newer version of its file on an automatic run: only when nobody
+ * has edited it in WordPress. The stored hash is the content the importer
+ * last wrote; pages created before hashes existed count as unedited while
+ * they have never been modified since publication.
+ *
+ * @param array  $item    Manifest item.
+ * @param string $content New content.
+ *
+ * @return bool
+ */
+function asfaltbama_importer_may_refresh( $item, $content ) {
+	if ( empty( $item['managed'] ) ) {
+		return false;
+	}
+	$page = asfaltbama_importer_find( $item['slug'], 'page' );
+	if ( ! $page || $page->post_content === $content ) {
+		return false;
+	}
+	$hash = get_post_meta( $page->ID, '_asfaltbama_content_hash', true );
+	if ( $hash ) {
+		return md5( $page->post_content ) === $hash;
+	}
+	return $page->post_modified_gmt === $page->post_date_gmt;
+}
+
+/**
  * Store Rank Math title, description and focus keyword.
  *
  * @param int   $post_id Post ID.
@@ -192,18 +219,22 @@ function asfaltbama_importer_run( $manifest, $update_existing = true ) {
 
 	// 3. Pages.
 	foreach ( $manifest['pages'] as $item ) {
-		$id = asfaltbama_importer_upsert(
+		$content = asfaltbama_importer_read( $item['file'] );
+		$id      = asfaltbama_importer_upsert(
 			'page',
 			$item['slug'],
 			[
 				'post_title'   => $item['title'],
-				'post_content' => asfaltbama_importer_read( $item['file'] ),
+				'post_content' => $content,
 				'post_excerpt' => $item['excerpt'] ?? '',
 				'post_status'  => 'publish',
 			],
 			$log,
-			$update_existing
+			$update_existing || asfaltbama_importer_may_refresh( $item, $content )
 		);
+		if ( $id && ! empty( $item['managed'] ) ) {
+			update_post_meta( $id, '_asfaltbama_content_hash', md5( get_post_field( 'post_content', $id ) ) );
+		}
 		if ( $id ) {
 			asfaltbama_importer_seo( $id, $item );
 		}
@@ -341,6 +372,9 @@ function asfaltbama_importer_images( $manifest ) {
 
 		foreach ( (array) ( $image['featured_for'] ?? [] ) as $slug ) {
 			$post = asfaltbama_importer_find( $slug, 'post' );
+			if ( ! $post ) {
+				$post = asfaltbama_importer_find( $slug, 'page' );
+			}
 			if ( ! $post ) {
 				$log[] = '⚠️ مقاله‌ی /' . $slug . '/ پیدا نشد';
 				continue;

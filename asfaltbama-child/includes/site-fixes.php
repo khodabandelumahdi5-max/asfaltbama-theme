@@ -462,6 +462,11 @@ function asfaltbama_plain_page_wrap( $content ) {
 		return $content;
 	}
 	$lang = asfaltbama_page_lang();
+	if ( asfaltbama_is_landing() ) {
+		// Landing pages bring their own full-width layout and contact band.
+		$dir = 'en' === $lang ? 'ltr' : 'rtl';
+		return '<div class="abm-lp" lang="' . esc_attr( $lang ) . '" dir="' . $dir . '">' . $content . '</div>';
+	}
 	if ( 'fa' !== $lang ) {
 		// English / Arabic pages carry their own email and WhatsApp box.
 		$dir = 'ar' === $lang ? 'rtl' : 'ltr';
