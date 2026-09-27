@@ -418,6 +418,7 @@ function asfaltbama_service_links() {
 			[ 'اجاره ماشین‌آلات راه‌سازی', '/machinery-rental/' ],
 			[ 'تخریب و خرید ضایعات', '/demolition-scrap/' ],
 			[ 'قیمت هر متر آسفالت', '/asphalt-price-factors/' ],
+			[ 'مناطق تحت پوشش', '/service-areas/' ],
 		]
 	);
 }
@@ -474,7 +475,13 @@ function asfaltbama_related_posts( $count = 3 ) {
  * @return array
  */
 function asfaltbama_faq_schema( $data ) {
-	if ( ! is_array( $data ) || ! is_singular( 'post' ) ) {
+	if ( ! is_array( $data ) ) {
+		return $data;
+	}
+	// Articles, and pages written in the editor rather than built with
+	// Elementor (the area pages); Elementor pages carry their own FAQ JSON-LD.
+	$is_plain_page = is_page() && 'builder' !== get_post_meta( get_queried_object_id(), '_elementor_edit_mode', true );
+	if ( ! is_singular( 'post' ) && ! $is_plain_page ) {
 		return $data;
 	}
 

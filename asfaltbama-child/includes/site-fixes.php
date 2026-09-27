@@ -35,7 +35,7 @@ function asfaltbama_footer_service_links() {
 		array_filter(
 			asfaltbama_service_links(),
 			function ( $link ) {
-				return '/asphalt-price-factors/' !== $link[1];
+				return ! in_array( $link[1], [ '/asphalt-price-factors/', '/service-areas/' ], true );
 			}
 		)
 	);
@@ -72,6 +72,14 @@ function asfaltbama_fix_business_footer( $html ) {
 		'#href="[^"]*/asphalt-cost-per-square-meter/?"(\s*)>(\s*)مقالات#u',
 		'href="' . esc_url( asfaltbama_articles_url() ) . '"$1>$2مقالات',
 		$html
+	);
+
+	// «مناطق تحت پوشش» after «مقالات» in the quick links.
+	$html = preg_replace(
+		'#(<a href="[^"]*/articles/"\s*>\s*مقالات\s*</a>)#u',
+		'$1' . "\n" . '<a href="' . esc_url( home_url( '/service-areas/' ) ) . '">مناطق تحت پوشش</a>',
+		$html,
+		1
 	);
 
 	$links = '';
@@ -242,11 +250,82 @@ function asfaltbama_service_related_articles( $content ) {
 		$html .= '<a class="abm-btn abm-btn--dark" href="' . esc_url( get_category_link( $main_cat ) ) . '">' . esc_html( 'همه‌ی مقالات ' . $main_cat->name ) . '</a>';
 	}
 	$html .= '<a class="abm-btn abm-btn--amber" href="tel:' . esc_attr( ASFALTBAMA_PHONE ) . '">مشاوره‌ی رایگان: <span dir="ltr">' . esc_html( ASFALTBAMA_PHONE_DISPLAY ) . '</span></a>';
-	$html .= '</p></div></section>';
+	$html .= '</p>' . asfaltbama_area_links() . '</div></section>';
 
 	return $content . $html;
 }
 add_filter( 'the_content', 'asfaltbama_service_related_articles', 30 );
+
+/**
+ * Area pages from the manifest (pages with area_served), except the hub.
+ *
+ * @return array[] Page manifest items.
+ */
+function asfaltbama_area_pages() {
+	$pages = [];
+	foreach ( (array) ( asfaltbama_content_manifest()['pages'] ?? [] ) as $item ) {
+		if ( ! empty( $item['area_served'] ) && 'service-areas' !== $item['slug'] ) {
+			$pages[] = $item;
+		}
+	}
+	return $pages;
+}
+
+/**
+ * Links to the area pages, for the service pages.
+ *
+ * @return string
+ */
+function asfaltbama_area_links() {
+	$items = '';
+	foreach ( asfaltbama_area_pages() as $item ) {
+		$items .= '<a href="' . esc_url( home_url( '/' . $item['slug'] . '/' ) ) . '">' . esc_html( implode( ' و ', $item['area_served'] ) ) . '</a>';
+	}
+	if ( ! $items ) {
+		return '';
+	}
+	return '<nav class="abm-areas" aria-label="مناطق تحت پوشش"><span class="abm-areas__title">مناطق تحت پوشش:</span>' . $items . '<a href="' . esc_url( home_url( '/service-areas/' ) ) . '">همه‌ی مناطق</a></nav>';
+}
+
+/**
+ * Service entity for the area pages: what is offered and where.
+ *
+ * @param array $data Schema entities.
+ *
+ * @return array
+ */
+function asfaltbama_area_schema( $data ) {
+	if ( ! is_array( $data ) || ! is_page() ) {
+		return $data;
+	}
+	$slug = get_post_field( 'post_name', get_queried_object_id() );
+	foreach ( (array) ( asfaltbama_content_manifest()['pages'] ?? [] ) as $item ) {
+		if ( $item['slug'] !== $slug || empty( $item['area_served'] ) ) {
+			continue;
+		}
+		$url   = get_permalink( get_queried_object_id() );
+		$areas = [];
+		foreach ( (array) $item['area_served'] as $area ) {
+			$areas[] = [
+				'@type' => 'Place',
+				'name'  => $area,
+			];
+		}
+		$data['asfaltbamaAreaService'] = [
+			'@type'       => 'Service',
+			'@id'         => $url . '#service',
+			'name'        => get_the_title( get_queried_object_id() ),
+			'serviceType' => 'آسفالت‌کاری، خاکبرداری و عایق‌کاری',
+			'description' => $item['seo_description'] ?? '',
+			'url'         => $url,
+			'provider'    => [ '@id' => home_url( '/#organization' ) ],
+			'areaServed'  => $areas,
+		];
+		break;
+	}
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'asfaltbama_area_schema', 20 );
 
 /**
  * Project photo gallery on a service page (manifest service_galleries),
@@ -337,3 +416,44 @@ function asfaltbama_tag_sitemap( $exclude, $taxonomy ) {
 	return 'post_tag' === $taxonomy ? true : $exclude;
 }
 add_filter( 'rank_math/sitemap/exclude_taxonomy', 'asfaltbama_tag_sitemap', 10, 2 );
+
+/**
+ * Whether the current page is written in the editor rather than built with
+ * Elementor (area pages, the services page).
+ *
+ * @return bool
+ */
+function asfaltbama_is_plain_page() {
+	return is_page() && ! is_front_page()
+		&& 'builder' !== get_post_meta( get_queried_object_id(), '_elementor_edit_mode', true );
+}
+
+/**
+ * Body class for plain pages, for the page title styles.
+ *
+ * @param string[] $classes Body classes.
+ *
+ * @return string[]
+ */
+function asfaltbama_plain_page_class( $classes ) {
+	if ( asfaltbama_is_plain_page() ) {
+		$classes[] = 'abm-plain-page';
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'asfaltbama_plain_page_class' );
+
+/**
+ * Give plain pages the article typography and a call-to-action box.
+ *
+ * @param string $content Page content.
+ *
+ * @return string
+ */
+function asfaltbama_plain_page_wrap( $content ) {
+	if ( ! asfaltbama_is_plain_page() || ! in_the_loop() || ! is_main_query() ) {
+		return $content;
+	}
+	return '<div class="abm-page abm-prose">' . $content . asfaltbama_cta( 'box' ) . '</div>';
+}
+add_filter( 'the_content', 'asfaltbama_plain_page_wrap', 40 );
