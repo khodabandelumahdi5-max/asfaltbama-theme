@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Yadak Core — هسته فروشگاه قطعات خودرو
  * Description:       فروشگاه قطعات خودرو روی ووکامرس: سازگاری با خودرو، جستجوی فارسی، قیمت همکار، اعتبار و حساب مشتری، پیش‌فاکتور، CRM، چند انبار، پیامک، زرین‌پال و کارت‌به‌کارت، فاکتور و خروجی مودیان، تاریخ شمسی، سئو و داشبورد فروش.
- * Version:           0.3.0
+ * Version:           0.4.0
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'YADAK_CORE_VERSION', '0.3.0' );
+define( 'YADAK_CORE_VERSION', '0.4.0' );
 define( 'YADAK_CORE_FILE', __FILE__ );
 define( 'YADAK_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'YADAK_CORE_URL', plugin_dir_url( __FILE__ ) );

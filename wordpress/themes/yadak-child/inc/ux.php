@@ -230,7 +230,7 @@ add_action(
 	'wp_enqueue_scripts',
 	static function () {
 		if ( yadak_has_action_bar() ) {
-			wp_enqueue_script( 'yadak-ux', get_stylesheet_directory_uri() . '/assets/js/ux.js', array( 'jquery' ), YADAK_CHILD_VERSION, true );
+			wp_enqueue_script( 'yadak-ux', get_stylesheet_directory_uri() . '/assets/js/ux.js', array( 'jquery' ), yadak_asset_ver( 'assets/js/ux.js' ), true );
 			wp_localize_script(
 				'yadak-ux',
 				'yadakUx',

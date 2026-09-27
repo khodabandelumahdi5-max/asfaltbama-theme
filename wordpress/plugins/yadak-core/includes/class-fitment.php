@@ -373,7 +373,7 @@ class Yadak_Fitment {
 	}
 
 	public static function register_assets() {
-		wp_register_script( 'yadak-vehicle-selector', YADAK_CORE_URL . 'assets/vehicle-selector.js', array(), YADAK_CORE_VERSION, true );
+		wp_register_script( 'yadak-vehicle-selector', YADAK_CORE_URL . 'assets/vehicle-selector.js', array(), YADAK_CORE_VERSION . '.' . filemtime( YADAK_CORE_DIR . 'assets/vehicle-selector.js' ), true );
 		wp_localize_script(
 			'yadak-vehicle-selector',
 			'yadakVehicles',

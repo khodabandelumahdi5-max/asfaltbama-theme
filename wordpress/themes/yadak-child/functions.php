@@ -14,7 +14,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'YADAK_CHILD_VERSION', '0.4.0' );
+define( 'YADAK_CHILD_VERSION', '0.5.0' );
+
+/**
+ * Asset version: theme version plus the file's modification time, so a
+ * changed CSS/JS file gets a new URL even if the version isn't bumped
+ * (hosts cache these files for days).
+ *
+ * @param string $path Path inside the theme, e.g. 'style.css'.
+ * @return string
+ */
+function yadak_asset_ver( $path ) {
+	$file = get_stylesheet_directory() . '/' . ltrim( $path, '/' );
+	return YADAK_CHILD_VERSION . ( file_exists( $file ) ? '.' . filemtime( $file ) : '' );
+}
 
 require_once get_stylesheet_directory() . '/inc/visuals.php';
 require_once get_stylesheet_directory() . '/inc/ux.php';
@@ -56,14 +69,14 @@ add_action(
 		wp_dequeue_style( 'hello-elementor-theme-style' );
 		wp_dequeue_style( 'hello-elementor-header-footer' );
 
-		wp_enqueue_style( 'yadak-child', get_stylesheet_uri(), array( 'hello-elementor' ), YADAK_CHILD_VERSION );
+		wp_enqueue_style( 'yadak-child', get_stylesheet_uri(), array( 'hello-elementor' ), yadak_asset_ver( 'style.css' ) );
 		if ( class_exists( 'WooCommerce' ) ) {
-			wp_enqueue_style( 'yadak-shop', get_stylesheet_directory_uri() . '/assets/css/shop.css', array( 'yadak-child' ), YADAK_CHILD_VERSION );
+			wp_enqueue_style( 'yadak-shop', get_stylesheet_directory_uri() . '/assets/css/shop.css', array( 'yadak-child' ), yadak_asset_ver( 'assets/css/shop.css' ) );
 		}
-		wp_enqueue_script( 'yadak-child', get_stylesheet_directory_uri() . '/assets/js/theme.js', array(), YADAK_CHILD_VERSION, true );
+		wp_enqueue_script( 'yadak-child', get_stylesheet_directory_uri() . '/assets/js/theme.js', array(), yadak_asset_ver( 'assets/js/theme.js' ), true );
 
 		if ( is_front_page() ) {
-			wp_enqueue_script( 'yadak-hero3d', get_stylesheet_directory_uri() . '/assets/js/hero3d.js', array(), YADAK_CHILD_VERSION, true );
+			wp_enqueue_script( 'yadak-hero3d', get_stylesheet_directory_uri() . '/assets/js/hero3d.js', array(), yadak_asset_ver( 'assets/js/hero3d.js' ), true );
 			wp_localize_script(
 				'yadak-hero3d',
 				'yadak3d',
