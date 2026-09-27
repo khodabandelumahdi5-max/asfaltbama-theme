@@ -305,3 +305,35 @@ function asfaltbama_service_gallery( $content ) {
 	return $content . $html;
 }
 add_filter( 'the_content', 'asfaltbama_service_gallery', 29 );
+
+/**
+ * Tag archives: noindex, follow and out of the sitemap. Each tag lists
+ * only a few articles that the category pages already list, so indexing
+ * them would add thin, near-duplicate pages. The tags still link related
+ * articles for visitors.
+ *
+ * @param array $robots Robots values.
+ *
+ * @return array
+ */
+function asfaltbama_tag_robots( $robots ) {
+	if ( is_tag() ) {
+		$robots['index']  = 'noindex';
+		$robots['follow'] = 'follow';
+	}
+	return $robots;
+}
+add_filter( 'rank_math/frontend/robots', 'asfaltbama_tag_robots' );
+
+/**
+ * Keep tag archives out of Rank Math's sitemap.
+ *
+ * @param bool   $exclude  Whether to exclude.
+ * @param string $taxonomy Taxonomy.
+ *
+ * @return bool
+ */
+function asfaltbama_tag_sitemap( $exclude, $taxonomy ) {
+	return 'post_tag' === $taxonomy ? true : $exclude;
+}
+add_filter( 'rank_math/sitemap/exclude_taxonomy', 'asfaltbama_tag_sitemap', 10, 2 );

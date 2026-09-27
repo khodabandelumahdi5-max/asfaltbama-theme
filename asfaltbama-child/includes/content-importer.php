@@ -681,6 +681,87 @@ function asfaltbama_importer_post_seo( $manifest ) {
 }
 
 /**
+ * Clean up leftover tags and tag the articles.
+ *
+ * Only empty tags are deleted: demo tags from the theme import, a tag
+ * holding pasted admin text and a misspelt one. Tag names with invisible
+ * word joiners (U+2060) are cleaned, or deleted when a clean twin exists.
+ * Tags are then added to the manifest's articles (existing tags are kept).
+ *
+ * @param array $manifest Manifest.
+ *
+ * @return string[] Log lines.
+ */
+function asfaltbama_importer_tags( $manifest ) {
+	$log     = [];
+	$cleanup = (array) ( $manifest['tags_cleanup'] ?? [] );
+	$deleted = 0;
+	$renamed = 0;
+
+	$terms = get_terms(
+		[
+			'taxonomy'   => 'post_tag',
+			'hide_empty' => false,
+		]
+	);
+	$names = [];
+	foreach ( is_array( $terms ) ? $terms : [] as $term ) {
+		$names[ $term->name ] = $term->term_id;
+	}
+
+	foreach ( is_array( $terms ) ? $terms : [] as $term ) {
+		if ( $term->count > 0 ) {
+			continue;
+		}
+		$delete = in_array( $term->slug, (array) ( $cleanup['delete_slugs'] ?? [] ), true );
+		foreach ( (array) ( $cleanup['delete_names_containing'] ?? [] ) as $needle ) {
+			if ( false !== mb_strpos( $term->name, $needle ) ) {
+				$delete = true;
+			}
+		}
+
+		$clean = trim( str_replace( [ "\u{2060}", "\u{200B}", "\u{FEFF}" ], '', $term->name ), " \t\n\r\u{200C}" );
+		if ( ! $delete && $clean !== $term->name ) {
+			if ( isset( $names[ $clean ] ) ) {
+				$delete = true;
+			} else {
+				wp_update_term(
+					$term->term_id,
+					'post_tag',
+					[
+						'name' => $clean,
+						'slug' => sanitize_title( $clean ),
+					]
+				);
+				$names[ $clean ] = $term->term_id;
+				++$renamed;
+			}
+		}
+
+		if ( $delete ) {
+			wp_delete_term( $term->term_id, 'post_tag' );
+			++$deleted;
+		}
+	}
+	if ( $deleted || $renamed ) {
+		$log[] = sprintf( '✅ برچسب‌های اضافه: %d حذف و %d اصلاح شد', $deleted, $renamed );
+	}
+
+	$tagged = 0;
+	foreach ( (array) ( $manifest['post_tags'] ?? [] ) as $slug => $tags ) {
+		$post = asfaltbama_importer_find( $slug, 'post' );
+		if ( ! $post ) {
+			continue;
+		}
+		wp_set_post_tags( $post->ID, array_values( (array) $tags ), true );
+		++$tagged;
+	}
+	$log[] = '✅ به ' . $tagged . ' مقاله برچسب اضافه شد';
+
+	return $log;
+}
+
+/**
  * Run the import automatically, once per content_version, when an
  * administrator loads the dashboard.
  *
@@ -717,6 +798,11 @@ function asfaltbama_importer_auto_run() {
 	if ( ! empty( $manifest['post_seo_version'] ) && get_option( 'asfaltbama_post_seo_version' ) !== $manifest['post_seo_version'] ) {
 		update_option( 'asfaltbama_post_seo_version', $manifest['post_seo_version'], false );
 		$log = array_merge( $log, asfaltbama_importer_post_seo( $manifest ) );
+	}
+
+	if ( ! empty( $manifest['tags_version'] ) && get_option( 'asfaltbama_tags_version' ) !== $manifest['tags_version'] ) {
+		update_option( 'asfaltbama_tags_version', $manifest['tags_version'], false );
+		$log = array_merge( $log, asfaltbama_importer_tags( $manifest ) );
 	}
 
 	if ( ! empty( $manifest['media_alt_version'] ) && get_option( 'asfaltbama_media_alt_version' ) !== $manifest['media_alt_version'] ) {
