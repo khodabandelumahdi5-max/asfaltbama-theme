@@ -109,6 +109,7 @@ function asfaltbama_business_data() {
 	$data = [
 		'legalName'   => 'شرکت افق آپادانا پاسارگاد',
 		'telephone'   => '+989191299559',
+		'email'       => 'ofoghapadanapasargad@gmail.com',
 		'areaServed'  => [
 			[
 				'@type' => 'AdministrativeArea',
@@ -139,9 +140,10 @@ function asfaltbama_business_data() {
 		'contactPoint' => [
 			'@type'             => 'ContactPoint',
 			'telephone'         => '+989191299559',
+			'email'             => 'ofoghapadanapasargad@gmail.com',
 			'contactType'       => 'customer service',
-			'areaServed'        => 'IR',
-			'availableLanguage' => [ 'fa' ],
+			'areaServed'        => [ 'IR', 'IQ', 'KW', 'OM', 'BH', 'AE' ],
+			'availableLanguage' => [ 'fa', 'ar', 'en' ],
 		],
 	];
 

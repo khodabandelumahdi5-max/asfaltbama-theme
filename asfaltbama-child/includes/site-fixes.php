@@ -54,6 +54,9 @@ function asfaltbama_footer_service_links() {
 function asfaltbama_fix_business_footer( $html ) {
 	$tel = 'tel:' . ASFALTBAMA_PHONE;
 
+	// Company email instead of the personal address set in the plugin.
+	$html = str_replace( 'khodabandelumahdi9@gmail.com', 'ofoghapadanapasargad@gmail.com', $html );
+
 	$html = str_replace(
 		[
 			'<a href="#">☎',

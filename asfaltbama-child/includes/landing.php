@@ -114,7 +114,7 @@ function asfaltbama_contact_shortcode( $atts ) {
 		],
 		$atts
 	);
-	$email = 'khodabandelumahdi9@gmail.com';
+	$email = 'ofoghapadanapasargad@gmail.com';
 	$texts = [
 		'en' => [ 'WhatsApp', 'Email us', 'Hello, I have a project and would like a proposal.' ],
 		'ar' => [ 'واتساب', 'البريد الإلكتروني', 'مرحباً، لدي مشروع وأرغب في عرض سعر.' ],
