@@ -1173,3 +1173,57 @@
 	line-height: 1.8;
 	text-align: right;
 }
+
+/* ------------------------------------ Project gallery on service pages */
+
+.abm-gallery {
+	background: var(--abm-soft);
+}
+
+.abm-gallery__intro {
+	max-width: 760px;
+	margin: -12px auto 28px;
+	color: var(--abm-text);
+	font-size: 15px;
+	line-height: 1.9;
+	text-align: center;
+}
+
+.abm-gallery__grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.abm-gallery__item {
+	margin: 0;
+	overflow: hidden;
+	border-radius: var(--abm-radius);
+	border-top: 4px solid var(--abm-amber);
+	background: #ffffff;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.abm-gallery__item img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 3 / 4;
+	object-fit: cover;
+}
+
+.abm-gallery__item figcaption {
+	padding: 10px 12px;
+	color: var(--abm-navy);
+	font-size: 13px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+	.abm-gallery__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 12px;
+	}
+}

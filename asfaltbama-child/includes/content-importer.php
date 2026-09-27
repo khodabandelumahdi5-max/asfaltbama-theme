@@ -272,7 +272,8 @@ function asfaltbama_importer_media_alt( $manifest ) {
  * Upload project photos from content/images to the media library (once
  * per file) and set them as featured images of the listed posts. A post's
  * featured image is only set when it has none or when it is one of
- * replace_featured_ids (e.g. the logo used as a placeholder).
+ * replace_featured_ids (e.g. the logo used as a placeholder) or was imported
+ * from a file in replace_featured_sources (a branded cover).
  *
  * @param array $manifest Manifest.
  *
@@ -285,6 +286,9 @@ function asfaltbama_importer_images( $manifest ) {
 
 	$log     = [];
 	$replace = array_map( 'intval', (array) ( $manifest['replace_featured_ids'] ?? [] ) );
+	// Placeholders imported by this theme (e.g. branded covers) that a real
+	// project photo may replace, by file name.
+	$replace_sources = (array) ( $manifest['replace_featured_sources'] ?? [] );
 
 	foreach ( (array) ( $manifest['images'] ?? [] ) as $image ) {
 		$source = basename( $image['file'] );
@@ -342,7 +346,12 @@ function asfaltbama_importer_images( $manifest ) {
 				continue;
 			}
 			$current = (int) get_post_thumbnail_id( $post );
-			if ( $current && ! in_array( $current, $replace, true ) ) {
+			$replaceable = in_array( $current, $replace, true )
+				|| in_array( get_post_meta( $current, '_asfaltbama_source', true ), $replace_sources, true );
+			if ( $current === $attachment_id ) {
+				continue;
+			}
+			if ( $current && ! $replaceable ) {
 				$log[] = '✅ /' . $slug . '/ تصویر شاخص خودش را دارد؛ دست نخورد';
 				continue;
 			}

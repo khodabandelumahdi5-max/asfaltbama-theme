@@ -97,7 +97,7 @@
       ]
     }
   },
-  "images_version": "2026-09-27.1",
+  "images_version": "2026-09-27.2",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -319,10 +319,48 @@
       "title": "تصویر ویدیوی اجرای آسفالت با فینیشر و غلتک",
       "alt": "پخش آسفالت با فینیشر و کوبیدن با غلتک",
       "featured_for": []
+    },
+    {
+      "file": "images/isogam-poshtbam-hampooshani-darz-ghiri.jpg",
+      "title": "ایزوگام پشت‌بام با هم‌پوشانی و درزهای قیری",
+      "alt": "اجرای ایزوگام فویل‌دار روی پشت‌بام با هم‌پوشانی رول‌ها و درزگیری قیری؛ پروژه‌ی آسفالت با ما در تهران",
+      "featured_for": [
+        "isogam-installation-steps"
+      ]
+    },
+    {
+      "file": "images/isogam-poshtbam-paye-kooler.jpg",
+      "title": "ایزوگام پشت‌بام دور پایه‌ی کولرها",
+      "alt": "ایزوگام پشت‌بام مسکونی دور پایه‌ی کولرها و تجهیزات؛ اجرای آسفالت با ما",
+      "featured_for": [
+        "roof-waterproofing-methods"
+      ]
+    },
+    {
+      "file": "images/isogam-divar-jan-panah-labe-bam.jpg",
+      "title": "ایزوگام دیوار جان‌پناه و لبه‌ی بام",
+      "alt": "ایزوگام دیوار جان‌پناه و لبه‌ی بام با برگشت عایق روی دیوار برای جلوگیری از نشت آب",
+      "featured_for": [
+        "isogam-price-guide"
+      ]
+    },
+    {
+      "file": "images/isogam-kenar-divar-mahiche-kesh.jpg",
+      "title": "ایزوگام محل اتصال بام به دیوار",
+      "alt": "اجرای ایزوگام در محل اتصال بام به دیوار و دور لوله‌ها با آب‌بندی قیری لبه‌ها",
+      "featured_for": [
+        "roof-leak-after-isogam"
+      ]
     }
   ],
   "replace_featured_ids": [
     31902
+  ],
+  "replace_featured_sources": [
+    "isogam-installation-steps-cover.webp",
+    "roof-waterproofing-methods-cover.webp",
+    "isogam-price-guide-cover.webp",
+    "roof-leak-after-isogam-cover.webp"
   ],
   "elementor_version": "2026-09-27.1",
   "elementor_edits": [
@@ -690,5 +728,17 @@
       "upload_date": "2026-09-25",
       "duration": "PT20S"
     }
-  ]
+  ],
+  "service_galleries": {
+    "isogam-waterproofing": {
+      "title": "نمونه‌کار اخیر ایزوگام پشت‌بام",
+      "intro": "تصاویر یک پروژه‌ی اجرای ایزوگام پشت‌بام مسکونی در تهران توسط تیم آسفالت با ما: هم‌پوشانی رول‌ها، درزگیری قیری، برگشت عایق روی دیوار جان‌پناه و آب‌بندی دور پایه‌ی کولرها.",
+      "images": [
+        "isogam-poshtbam-hampooshani-darz-ghiri.jpg",
+        "isogam-poshtbam-paye-kooler.jpg",
+        "isogam-divar-jan-panah-labe-bam.jpg",
+        "isogam-kenar-divar-mahiche-kesh.jpg"
+      ]
+    }
+  }
 }

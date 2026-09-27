@@ -532,9 +532,21 @@ add_filter( 'rank_math/json_ld', 'asfaltbama_faq_schema', 20 );
  * @return string Empty string when not imported yet.
  */
 function asfaltbama_imported_media_url( $source ) {
+	$id = asfaltbama_imported_media_id( $source );
+	return $id ? (string) wp_get_attachment_url( $id ) : '';
+}
+
+/**
+ * Attachment ID of a file imported from content/images.
+ *
+ * @param string $source File name.
+ *
+ * @return int
+ */
+function asfaltbama_imported_media_id( $source ) {
 	static $cache = [];
 	if ( ! array_key_exists( $source, $cache ) ) {
-		$ids = get_posts(
+		$ids              = get_posts(
 			[
 				'post_type'   => 'attachment',
 				'post_status' => 'inherit',
@@ -544,10 +556,24 @@ function asfaltbama_imported_media_url( $source ) {
 				'meta_value'  => $source, // phpcs:ignore WordPress.DB.SlowDBQuery
 			]
 		);
-		$cache[ $source ] = $ids ? (string) wp_get_attachment_url( $ids[0] ) : '';
+		$cache[ $source ] = $ids ? (int) $ids[0] : 0;
 	}
 
 	return $cache[ $source ];
+}
+
+/**
+ * The content manifest (content/manifest.json), read once per request.
+ *
+ * @return array
+ */
+function asfaltbama_content_manifest() {
+	static $manifest = null;
+	if ( null === $manifest ) {
+		$file     = ASFALTBAMA_CHILD_PATH . '/content/manifest.json';
+		$manifest = is_readable( $file ) ? (array) json_decode( file_get_contents( $file ), true ) : []; // phpcs:ignore WordPress.WP.AlternativeFunctions
+	}
+	return $manifest;
 }
 
 /**
@@ -560,11 +586,7 @@ function asfaltbama_current_post_video() {
 		return null;
 	}
 
-	$file = ASFALTBAMA_CHILD_PATH . '/content/manifest.json';
-	if ( ! is_readable( $file ) ) {
-		return null;
-	}
-	$manifest = json_decode( file_get_contents( $file ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	$manifest = asfaltbama_content_manifest();
 	$slug     = get_post_field( 'post_name', get_queried_object_id() );
 
 	foreach ( (array) ( $manifest['post_videos'] ?? [] ) as $video ) {

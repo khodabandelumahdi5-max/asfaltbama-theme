@@ -247,3 +247,61 @@ function asfaltbama_service_related_articles( $content ) {
 	return $content . $html;
 }
 add_filter( 'the_content', 'asfaltbama_service_related_articles', 30 );
+
+/**
+ * Project photo gallery on a service page (manifest service_galleries),
+ * placed before the related articles. Real project photos show visitors
+ * and search engines first-hand work, not stock images.
+ *
+ * @param string $content Page content.
+ *
+ * @return string
+ */
+function asfaltbama_service_gallery( $content ) {
+	static $done = false;
+
+	if ( $done || ! is_page() || ! in_the_loop() || ! is_main_query() ) {
+		return $content;
+	}
+
+	$galleries = (array) ( asfaltbama_content_manifest()['service_galleries'] ?? [] );
+	$slug      = get_post_field( 'post_name', get_queried_object_id() );
+	if ( empty( $galleries[ $slug ]['images'] ) ) {
+		return $content;
+	}
+	$gallery = $galleries[ $slug ];
+
+	$items = '';
+	foreach ( (array) $gallery['images'] as $source ) {
+		$id = asfaltbama_imported_media_id( $source );
+		if ( ! $id ) {
+			continue;
+		}
+		$caption = wp_get_attachment_caption( $id ) ?: get_the_title( $id );
+		$items  .= '<figure class="abm-gallery__item">';
+		$items  .= wp_get_attachment_image(
+			$id,
+			'medium_large',
+			false,
+			[
+				'loading' => 'lazy',
+				'sizes'   => '(max-width: 600px) 50vw, 300px',
+			]
+		);
+		$items  .= '<figcaption>' . esc_html( $caption ) . '</figcaption></figure>';
+	}
+	if ( ! $items ) {
+		return $content;
+	}
+
+	$done  = true;
+	$html  = '<section class="abm-latest abm-gallery" aria-labelledby="abm-gallery-title"><div class="abm-wrap">';
+	$html .= '<h2 id="abm-gallery-title" class="abm-section-title">' . esc_html( $gallery['title'] ) . '</h2>';
+	if ( ! empty( $gallery['intro'] ) ) {
+		$html .= '<p class="abm-gallery__intro">' . esc_html( $gallery['intro'] ) . '</p>';
+	}
+	$html .= '<div class="abm-gallery__grid">' . $items . '</div></div></section>';
+
+	return $content . $html;
+}
+add_filter( 'the_content', 'asfaltbama_service_gallery', 29 );
