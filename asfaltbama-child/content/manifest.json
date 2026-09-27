@@ -1,5 +1,5 @@
 {
-  "content_version": "2026-09-28.1",
+  "content_version": "2026-09-28.2",
   "site_version": "2026-09-26.1",
   "site": {
     "blogname": "آسفالت با ما",
@@ -123,7 +123,7 @@
       "seo_title": "درباره ما | شرکت افق آپادانا پاسارگاد (آسفالت با ما)"
     }
   },
-  "images_version": "2026-09-28.1",
+  "images_version": "2026-09-28.2",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -770,6 +770,38 @@
       "featured_for": [
         "services"
       ]
+    },
+    {
+      "file": "images/covers/intl/bitumen-jute-roof-waterproofing.webp",
+      "featured_for": [
+        "bitumen-jute-roof-waterproofing"
+      ],
+      "title": "Hot Bitumen and Jute Roof Waterproofing: A Complete Guide",
+      "alt": "Hot Bitumen and Jute Roof Waterproofing: A Complete Guide"
+    },
+    {
+      "file": "images/covers/intl/bitumen-jute-waterproofing-ar.webp",
+      "featured_for": [
+        "bitumen-jute-waterproofing-ar"
+      ],
+      "title": "العزل بالقير والجنفاص: المواد والمراحل والتفاصيل",
+      "alt": "العزل بالقير والجنفاص: المواد والمراحل والتفاصيل"
+    },
+    {
+      "file": "images/covers/intl/isogam-vs-bitumen-jute-waterproofing.webp",
+      "featured_for": [
+        "isogam-vs-bitumen-jute-waterproofing"
+      ],
+      "title": "Isogam Membrane or Bitumen and Jute? Choosing the Right Waterproofing",
+      "alt": "Isogam Membrane or Bitumen and Jute? Choosing the Right Waterproofing"
+    },
+    {
+      "file": "images/covers/intl/isogam-vs-bitumen-jute-ar.webp",
+      "featured_for": [
+        "isogam-vs-bitumen-jute-ar"
+      ],
+      "title": "الإيزوجام أم القير والجنفاص؟ مقارنة شاملة ودليل الاختيار",
+      "alt": "الإيزوجام أم القير والجنفاص؟ مقارنة شاملة ودليل الاختيار"
     }
   ],
   "replace_featured_ids": [
@@ -1347,6 +1379,62 @@
       "category": "waterproofing-isogam",
       "managed": true,
       "hreflang_group": "art-isogam-installation-steps"
+    },
+    {
+      "slug": "bitumen-jute-roof-waterproofing",
+      "title": "Hot Bitumen and Jute Roof Waterproofing: A Complete Guide",
+      "file": "articles/en/bitumen-roofing-steps.html",
+      "excerpt": "Choosing the bitumen and jute, preparing the deck, building two layers, detailing upstands and drains, flood testing and protecting the roof: the complete guide to built-up bituminous waterproofing.",
+      "seo_title": "Bitumen and Jute Roofing: Materials, Steps, Checks | Asfaltbama",
+      "seo_description": "Hot bitumen and jute roofing step by step: bitumen grades, jute, primer, the two-layer build-up, upstands, flood test, protection and repairs.",
+      "focus_keyword": "bitumen and jute roofing",
+      "lang": "en",
+      "layout": "article",
+      "category": "waterproofing-isogam",
+      "managed": true,
+      "hreflang_group": "art-bitumen-roofing-steps"
+    },
+    {
+      "slug": "bitumen-jute-waterproofing-ar",
+      "title": "العزل بالقير والجنفاص: المواد والمراحل والتفاصيل",
+      "file": "articles/ar/bitumen-roofing-steps.html",
+      "excerpt": "اختيار القير والجنفاص، وتجهيز السطح، وبناء طبقتين، وتفاصيل الدروات والمصارف، واختبار الغمر وحماية السطح: الدليل الكامل للعزل البيتوميني المنفّذ في الموقع.",
+      "seo_title": "العزل بالقير والجنفاص: دليل التنفيذ الكامل | أسفلت با ما",
+      "seo_description": "العزل بالقير والجنفاص خطوة بخطوة: درجات القير والجنفاص والبرايمر وبناء طبقتين ورفع العزل على الدروات واختبار الغمر والحماية والإصلاح.",
+      "focus_keyword": "العزل بالقير والجنفاص",
+      "lang": "ar",
+      "layout": "article",
+      "category": "waterproofing-isogam",
+      "managed": true,
+      "hreflang_group": "art-bitumen-roofing-steps"
+    },
+    {
+      "slug": "isogam-vs-bitumen-jute-waterproofing",
+      "title": "Isogam Membrane or Bitumen and Jute? Choosing the Right Waterproofing",
+      "file": "articles/en/bitumen-roofing-vs-isogam.html",
+      "excerpt": "Twelve criteria, six causes of deterioration, the right system for exposed roofs, tiled roofs, terraces, bathrooms, foundations and industrial roofs, life-cycle cost and a quick decision table.",
+      "seo_title": "Isogam Membrane or Bitumen and Jute? Full Comparison | Asfaltbama",
+      "seo_description": "Isogam membrane or bitumen and jute? A comparison on 12 criteria, the right choice for exposed and tiled roofs, wet areas, foundations and industrial roofs in the Gulf.",
+      "focus_keyword": "Isogam membrane or bitumen and jute",
+      "lang": "en",
+      "layout": "article",
+      "category": "waterproofing-isogam",
+      "managed": true,
+      "hreflang_group": "art-bitumen-roofing-vs-isogam"
+    },
+    {
+      "slug": "isogam-vs-bitumen-jute-ar",
+      "title": "الإيزوجام أم القير والجنفاص؟ مقارنة شاملة ودليل الاختيار",
+      "file": "articles/ar/bitumen-roofing-vs-isogam.html",
+      "excerpt": "اثنا عشر معياراً وستة عوامل تلف، والنظام المناسب للسطح المكشوف والمبلّط والتراس والحمام والأساسات والأسطح الصناعية، مع تكلفة دورة الحياة وجدول قرار سريع.",
+      "seo_title": "الإيزوجام أم القير والجنفاص؟ مقارنة شاملة | أسفلت با ما",
+      "seo_description": "الإيزوجام أم القير والجنفاص؟ مقارنة في ١٢ معياراً، والاختيار الصحيح للأسطح المكشوفة والمبلطة والحمامات والأساسات والأسطح الصناعية في الخليج والعراق.",
+      "focus_keyword": "الإيزوجام أم القير والجنفاص",
+      "lang": "ar",
+      "layout": "article",
+      "category": "waterproofing-isogam",
+      "managed": true,
+      "hreflang_group": "art-bitumen-roofing-vs-isogam"
     }
   ],
   "posts": [
@@ -1511,10 +1599,14 @@
       "title": "قیرگونی یا ایزوگام؟ مقایسه‌ی کامل و راهنمای انتخاب",
       "category": "waterproofing-isogam",
       "file": "articles/bitumen-roofing-vs-isogam.html",
-      "excerpt": "مقایسه‌ی قیرگونی و ایزوگام از نظر اجرا، دوام، کاربرد و هزینه، و این‌که برای بام، سرویس بهداشتی و فونداسیون کدام مناسب‌تر است.",
+      "excerpt": "مقایسه‌ی قیرگونی و ایزوگام در ۱۲ معیار، رفتار در برابر عوامل تخریب، انتخاب برای بام روباز، موزاییکی، تراس، سرویس، پی و بام صنعتی، هزینه‌ی چرخه‌ی عمر و جدول تصمیم‌گیری.",
       "seo_title": "قیرگونی یا ایزوگام؟ مقایسه و راهنمای انتخاب | آسفالت با ما",
-      "seo_description": "قیرگونی یا ایزوگام؟ مقایسه‌ی دوام، وزن، سرعت اجرا، هزینه و کاربرد هر عایق برای پشت‌بام، سرویس و پی، و راهنمای انتخاب درست.",
-      "focus_keyword": "قیرگونی یا ایزوگام"
+      "seo_description": "قیرگونی یا ایزوگام؟ مقایسه در ۱۲ معیار، انتخاب برای بام روباز، زیر موزاییک، سرویس، پی و بام صنعتی، هزینه‌ی واقعی و جدول تصمیم‌گیری سریع.",
+      "focus_keyword": "قیرگونی یا ایزوگام",
+      "hreflang_group": "art-bitumen-roofing-vs-isogam",
+      "prev_hashes": [
+        "c4119f05ad12b54adf3a4432f041ca1d"
+      ]
     },
     {
       "slug": "bitumen-types",
@@ -1733,10 +1825,14 @@
       "title": "اجرای قیرگونی پشت‌بام: مواد، مراحل دو لایه و نکات دوام",
       "category": "waterproofing-isogam",
       "file": "articles/bitumen-roofing-steps.html",
-      "excerpt": "مواد لازم برای قیرگونی، مراحل اجرای قیرگونی دو لایه از آماده‌سازی بستر تا تست آب، لایه‌ی محافظ، نکات ایمنی و اشتباهات رایج.",
+      "excerpt": "انتخاب قیر و گونی، برآورد مصالح، ۱۴ مرحله‌ی اجرای قیرگونی دو لایه، جزئیات دیوار و ناودان، آزمایش آب‌بندی، لایه‌ی محافظ و تعمیر قیرگونی قدیمی.",
       "seo_title": "اجرای قیرگونی پشت‌بام؛ مراحل دو لایه و نکات | آسفالت با ما",
-      "seo_description": "اجرای قیرگونی دو لایه قدم به قدم: شیب‌بندی و ماهیچه‌کشی، پرایمر، قیر و گونی با هم‌پوشانی، تست آب، لایه‌ی محافظ و اشتباهات رایج.",
-      "focus_keyword": "اجرای قیرگونی,قیرگونی پشت بام"
+      "seo_description": "اجرای قیرگونی پشت‌بام در ۱۴ مرحله: انتخاب قیر و گونی، شیب‌بندی و ماهیچه‌کشی، پرایمر، دو لایه قیر و گونی، آزمایش آب‌بندی، لایه‌ی محافظ و تعمیر.",
+      "focus_keyword": "اجرای قیرگونی,قیرگونی پشت بام",
+      "hreflang_group": "art-bitumen-roofing-steps",
+      "prev_hashes": [
+        "d0fc29dea0c04468a77b4bce702119ed"
+      ]
     }
   ],
   "post_videos": [
@@ -1763,7 +1859,7 @@
       ]
     }
   },
-  "post_seo_version": "2026-09-28.1",
+  "post_seo_version": "2026-09-28.2",
   "tags_version": "2026-09-27.2",
   "tags_cleanup": {
     "delete_slugs": [
