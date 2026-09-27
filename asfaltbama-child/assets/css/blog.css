@@ -1283,3 +1283,88 @@
 .abm-page .abm-cta {
 	margin-top: 36px;
 }
+
+/* ------------------------------------ Project photos inside page text */
+
+.abm-gallery__grid--inline {
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	margin: 28px 0 36px;
+}
+
+.abm-prose .abm-gallery__item img {
+	margin: 0;
+	border-radius: 0;
+}
+
+/* ------------------------------------ Email / WhatsApp box (en, ar pages) */
+
+.abm-contact-box {
+	margin: 36px 0 0;
+	padding: 24px 26px;
+	border-radius: 12px;
+	background: #0f172a;
+	color: #e2e8f0;
+}
+
+.abm-contact-box p {
+	margin: 0;
+	color: #e2e8f0;
+}
+
+.abm-contact-box__title {
+	margin-bottom: 8px !important;
+	color: #f59e0b !important;
+	font-size: 20px;
+	font-weight: 900;
+}
+
+.abm-prose .abm-contact-box a {
+	color: #ffffff;
+	font-weight: 800;
+	text-decoration: underline;
+}
+
+/* English pages: left-to-right title and text in the RTL site shell */
+
+.abm-lang-en .page-header .entry-title {
+	direction: ltr;
+	text-align: left;
+}
+
+.abm-page[dir="ltr"] {
+	text-align: left;
+}
+
+.abm-page[dir="ltr"],
+.abm-page[dir="ltr"] .abm-summary {
+	direction: ltr;
+	text-align: left;
+}
+
+.abm-page[dir="ltr"] h2 {
+	padding-right: 0;
+	padding-left: 14px;
+	border-right: 0;
+	border-left: 4px solid var(--abm-amber);
+}
+
+.abm-page[dir="ltr"] .abm-summary {
+	border-right: 1px solid #0f172a;
+	border-left: 5px solid #f59e0b;
+}
+
+.abm-page[dir="ltr"] .abm-summary li {
+	padding-right: 0;
+	padding-left: 22px;
+}
+
+.abm-page[dir="ltr"] .abm-summary li::before {
+	right: auto;
+	left: 0;
+}
+
+.abm-page[dir="ltr"] ul,
+.abm-page[dir="ltr"] ol {
+	padding-right: 0;
+	padding-left: 1.4em;
+}

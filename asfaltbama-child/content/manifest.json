@@ -1,5 +1,5 @@
 {
-  "content_version": "2026-09-27.3",
+  "content_version": "2026-09-27.4",
   "site_version": "2026-09-26.1",
   "site": {
     "blogname": "آسفالت با ما",
@@ -638,14 +638,153 @@
       "slug": "service-areas",
       "title": "مناطق تحت پوشش آسفالت با ما",
       "file": "pages/areas/service-areas.html",
-      "excerpt": "مناطق تحت پوشش آسفالت با ما: جاده مخصوص کرج، پردیس، دماوند، لواسان، فشم و میگون، چیتگر، پاکدشت، ورامین و شهریار.",
+      "excerpt": "مناطق تحت پوشش آسفالت با ما: شهرک صنعتی شمس‌آباد، جاده مخصوص کرج، پردیس، دماوند، لواسان، فشم، چیتگر، پاکدشت، ورامین و شهریار.",
       "seo_title": "مناطق تحت پوشش آسفالت با ما | تهران، البرز و اطراف",
-      "seo_description": "مناطق تحت پوشش آسفالت با ما: جاده مخصوص کرج، پردیس، دماوند، لواسان، فشم و میگون، چیتگر، پاکدشت، ورامین و شهریار.",
+      "seo_description": "مناطق تحت پوشش آسفالت با ما: شهرک صنعتی شمس‌آباد، جاده مخصوص کرج، پردیس، دماوند، لواسان، فشم، چیتگر، پاکدشت، ورامین و شهریار.",
       "focus_keyword": "مناطق تحت پوشش",
       "area_served": [
         "تهران",
         "استان البرز",
         "کرج"
+      ]
+    },
+    {
+      "slug": "industrial-asphalt-waterproofing",
+      "title": "آسفالت کارخانه و عایق‌کاری صنعتی؛ محوطه، قیرگونی و ایزوگام سوله",
+      "file": "pages/areas/industrial-asphalt-waterproofing.html",
+      "excerpt": "آسفالت کارخانه و محوطه صنعتی با زیرسازی و آسفالت دو لایه، قیرگونی و ایزوگام بام سوله و انبار، اجرای مرحله‌ای بدون توقف تولید. بازدید رایگان.",
+      "seo_title": "آسفالت کارخانه و ایزوگام سوله | عایق‌کاری صنعتی | آسفالت با ما",
+      "seo_description": "آسفالت کارخانه و محوطه صنعتی با زیرسازی و آسفالت دو لایه، قیرگونی و ایزوگام بام سوله و انبار، اجرای مرحله‌ای بدون توقف تولید. بازدید رایگان.",
+      "focus_keyword": "آسفالت کارخانه,ایزوگام سوله,آسفالت محوطه صنعتی"
+    },
+    {
+      "slug": "asphalt-shams-abad",
+      "title": "آسفالت، قیرگونی و ایزوگام در شهرک صنعتی شمس‌آباد",
+      "file": "pages/areas/asphalt-shams-abad.html",
+      "excerpt": "آسفالت محوطه کارخانه و انبار، قیرگونی و ایزوگام بام سوله در شهرک صنعتی شمس‌آباد؛ آسفالت دو لایه و اجرای مرحله‌ای. بازدید رایگان.",
+      "seo_title": "آسفالت و ایزوگام در شهرک صنعتی شمس‌آباد | آسفالت با ما",
+      "seo_description": "آسفالت محوطه کارخانه و انبار، قیرگونی و ایزوگام بام سوله در شهرک صنعتی شمس‌آباد؛ آسفالت دو لایه و اجرای مرحله‌ای. بازدید رایگان.",
+      "focus_keyword": "شهرک صنعتی شمس‌آباد,آسفالت شمس آباد,ایزوگام شمس آباد",
+      "area_served": [
+        "شهرک صنعتی شمس‌آباد"
+      ]
+    },
+    {
+      "slug": "asphalt-contractor-middle-east",
+      "title": "Asphalt Paving & Waterproofing Contractor in Iraq, Oman and the UAE",
+      "file": "pages/intl/asphalt-contractor-middle-east.html",
+      "excerpt": "Asphalt paving of factory yards and roads, bitumen roofing and membrane waterproofing in Iraq, Oman and the UAE. 25 years of experience. Email or WhatsApp us.",
+      "seo_title": "Asphalt Paving & Waterproofing Contractor | Iraq, Oman, UAE",
+      "seo_description": "Asphalt paving of factory yards and roads, bitumen roofing and membrane waterproofing in Iraq, Oman and the UAE. 25 years of experience. Email or WhatsApp us.",
+      "focus_keyword": "Asphalt Paving,waterproofing contractor",
+      "lang": "en",
+      "hreflang_group": "hub",
+      "area_served": [
+        "Iraq",
+        "Oman",
+        "United Arab Emirates"
+      ]
+    },
+    {
+      "slug": "asphalt-waterproofing-iraq",
+      "title": "Asphalt Paving and Roof Waterproofing in Iraq",
+      "file": "pages/intl/asphalt-waterproofing-iraq.html",
+      "excerpt": "Asphalt paving and roof waterproofing in Iraq: heavy-duty factory yards, access roads, membrane and bitumen roofing for Baghdad, Basra, Erbil and more.",
+      "seo_title": "Asphalt Paving and Roof Waterproofing in Iraq | Asfaltbama",
+      "seo_description": "Asphalt paving and roof waterproofing in Iraq: heavy-duty factory yards, access roads, membrane and bitumen roofing for Baghdad, Basra, Erbil and more.",
+      "focus_keyword": "Asphalt Paving,roof waterproofing Iraq",
+      "lang": "en",
+      "hreflang_group": "iraq",
+      "area_served": [
+        "Iraq"
+      ]
+    },
+    {
+      "slug": "asphalt-waterproofing-oman",
+      "title": "Asphalt Paving and Roof Waterproofing in Oman",
+      "file": "pages/intl/asphalt-waterproofing-oman.html",
+      "excerpt": "Asphalt paving and roof waterproofing in Oman: industrial yards, car parks, access roads and flat roofs, with drainage designed for heavy rain. Muscat, Sohar.",
+      "seo_title": "Asphalt Paving and Roof Waterproofing in Oman | Asfaltbama",
+      "seo_description": "Asphalt paving and roof waterproofing in Oman: industrial yards, car parks, access roads and flat roofs, with drainage designed for heavy rain. Muscat, Sohar.",
+      "focus_keyword": "Asphalt Paving,roof waterproofing Oman",
+      "lang": "en",
+      "hreflang_group": "oman",
+      "area_served": [
+        "Oman"
+      ]
+    },
+    {
+      "slug": "asphalt-waterproofing-dubai-uae",
+      "title": "Asphalt Paving and Roof Waterproofing in Dubai & UAE",
+      "file": "pages/intl/asphalt-waterproofing-dubai-uae.html",
+      "excerpt": "Asphalt paving and roof waterproofing in Dubai and the UAE: warehouse yards, car parks, heavy-duty pavements and reflective roof membranes, to specification.",
+      "seo_title": "Asphalt Paving & Roof Waterproofing in Dubai, UAE | Asfaltbama",
+      "seo_description": "Asphalt paving and roof waterproofing in Dubai and the UAE: warehouse yards, car parks, heavy-duty pavements and reflective roof membranes, to specification.",
+      "focus_keyword": "Asphalt Paving,roof waterproofing Dubai",
+      "lang": "en",
+      "hreflang_group": "uae",
+      "area_served": [
+        "Dubai",
+        "United Arab Emirates"
+      ]
+    },
+    {
+      "slug": "asphalt-contractor-middle-east-ar",
+      "title": "مقاول أسفلت وعزل مائي في العراق وعُمان والإمارات",
+      "file": "pages/intl/asphalt-contractor-middle-east-ar.html",
+      "excerpt": "مقاول أسفلت وعزل مائي: رصف ساحات المصانع والطرق، العزل بالقير والجنفاص وأغشية البيتومين في العراق وعُمان والإمارات. خبرة ٢٥ عاماً. تواصلوا عبر واتساب.",
+      "seo_title": "مقاول أسفلت وعزل مائي في العراق وعُمان والإمارات | أسفلت با ما",
+      "seo_description": "مقاول أسفلت وعزل مائي: رصف ساحات المصانع والطرق، العزل بالقير والجنفاص وأغشية البيتومين في العراق وعُمان والإمارات. خبرة ٢٥ عاماً. تواصلوا عبر واتساب.",
+      "focus_keyword": "مقاول أسفلت,عزل مائي",
+      "lang": "ar",
+      "hreflang_group": "hub",
+      "area_served": [
+        "العراق",
+        "سلطنة عمان",
+        "الإمارات العربية المتحدة"
+      ]
+    },
+    {
+      "slug": "asphalt-waterproofing-iraq-ar",
+      "title": "رصف الأسفلت والعزل المائي للأسطح في العراق",
+      "file": "pages/intl/asphalt-waterproofing-iraq-ar.html",
+      "excerpt": "رصف الأسفلت في العراق لساحات المصانع والطرق الداخلية، والعزل المائي للأسطح بالقير والجنفاص وأغشية البيتومين في بغداد والبصرة وأربيل.",
+      "seo_title": "رصف الأسفلت والعزل المائي في العراق | أسفلت با ما",
+      "seo_description": "رصف الأسفلت في العراق لساحات المصانع والطرق الداخلية، والعزل المائي للأسطح بالقير والجنفاص وأغشية البيتومين في بغداد والبصرة وأربيل.",
+      "focus_keyword": "رصف الأسفلت,عزل الأسطح العراق",
+      "lang": "ar",
+      "hreflang_group": "iraq",
+      "area_served": [
+        "العراق"
+      ]
+    },
+    {
+      "slug": "asphalt-waterproofing-oman-ar",
+      "title": "رصف الأسفلت والعزل المائي للأسطح في سلطنة عُمان",
+      "file": "pages/intl/asphalt-waterproofing-oman-ar.html",
+      "excerpt": "رصف الأسفلت في عُمان للساحات الصناعية ومواقف السيارات والطرق، والعزل المائي للأسطح مع تصريف مصمم للأمطار الغزيرة. مسقط وصحار.",
+      "seo_title": "رصف الأسفلت والعزل المائي في سلطنة عُمان | أسفلت با ما",
+      "seo_description": "رصف الأسفلت في عُمان للساحات الصناعية ومواقف السيارات والطرق، والعزل المائي للأسطح مع تصريف مصمم للأمطار الغزيرة. مسقط وصحار.",
+      "focus_keyword": "رصف الأسفلت,عزل الأسطح عمان",
+      "lang": "ar",
+      "hreflang_group": "oman",
+      "area_served": [
+        "سلطنة عمان"
+      ]
+    },
+    {
+      "slug": "asphalt-waterproofing-dubai-uae-ar",
+      "title": "رصف الأسفلت والعزل المائي للأسطح في دبي والإمارات",
+      "file": "pages/intl/asphalt-waterproofing-dubai-uae-ar.html",
+      "excerpt": "رصف الأسفلت في دبي والإمارات لساحات المستودعات ومواقف السيارات، وعزل الأسطح بأغشية عاكسة وفق مواصفات المشروع. تواصلوا عبر واتساب.",
+      "seo_title": "رصف الأسفلت والعزل المائي في دبي والإمارات | أسفلت با ما",
+      "seo_description": "رصف الأسفلت في دبي والإمارات لساحات المستودعات ومواقف السيارات، وعزل الأسطح بأغشية عاكسة وفق مواصفات المشروع. تواصلوا عبر واتساب.",
+      "focus_keyword": "رصف الأسفلت,عزل الأسطح دبي",
+      "lang": "ar",
+      "hreflang_group": "uae",
+      "area_served": [
+        "دبي",
+        "الإمارات العربية المتحدة"
       ]
     }
   ],

@@ -419,6 +419,7 @@ function asfaltbama_service_links() {
 			[ 'تخریب و خرید ضایعات', '/demolition-scrap/' ],
 			[ 'قیمت هر متر آسفالت', '/asphalt-price-factors/' ],
 			[ 'مناطق تحت پوشش', '/service-areas/' ],
+			[ 'آسفالت و عایق کارخانه‌ها', '/industrial-asphalt-waterproofing/' ],
 		]
 	);
 }

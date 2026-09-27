@@ -35,7 +35,7 @@ function asfaltbama_footer_service_links() {
 		array_filter(
 			asfaltbama_service_links(),
 			function ( $link ) {
-				return ! in_array( $link[1], [ '/asphalt-price-factors/', '/service-areas/' ], true );
+				return ! in_array( $link[1], [ '/asphalt-price-factors/', '/service-areas/', '/industrial-asphalt-waterproofing/' ], true );
 			}
 		)
 	);
@@ -77,7 +77,10 @@ function asfaltbama_fix_business_footer( $html ) {
 	// «مناطق تحت پوشش» after «مقالات» in the quick links.
 	$html = preg_replace(
 		'#(<a href="[^"]*/articles/"\s*>\s*مقالات\s*</a>)#u',
-		'$1' . "\n" . '<a href="' . esc_url( home_url( '/service-areas/' ) ) . '">مناطق تحت پوشش</a>',
+		'$1' . "\n" . '<a href="' . esc_url( home_url( '/service-areas/' ) ) . '">مناطق تحت پوشش</a>'
+			. "\n" . '<a href="' . esc_url( home_url( '/industrial-asphalt-waterproofing/' ) ) . '">آسفالت و عایق کارخانه‌ها</a>'
+			. "\n" . '<a href="' . esc_url( home_url( '/asphalt-contractor-middle-east/' ) ) . '" lang="en" dir="ltr">English</a>'
+			. "\n" . '<a href="' . esc_url( home_url( '/asphalt-contractor-middle-east-ar/' ) ) . '" lang="ar">العربية</a>',
 		$html,
 		1
 	);
@@ -264,7 +267,7 @@ add_filter( 'the_content', 'asfaltbama_service_related_articles', 30 );
 function asfaltbama_area_pages() {
 	$pages = [];
 	foreach ( (array) ( asfaltbama_content_manifest()['pages'] ?? [] ) as $item ) {
-		if ( ! empty( $item['area_served'] ) && 'service-areas' !== $item['slug'] ) {
+		if ( ! empty( $item['area_served'] ) && 'service-areas' !== $item['slug'] && 'fa' === ( $item['lang'] ?? 'fa' ) ) {
 			$pages[] = $item;
 		}
 	}
@@ -315,7 +318,11 @@ function asfaltbama_area_schema( $data ) {
 			'@type'       => 'Service',
 			'@id'         => $url . '#service',
 			'name'        => get_the_title( get_queried_object_id() ),
-			'serviceType' => 'آسفالت‌کاری، خاکبرداری و عایق‌کاری',
+			'serviceType' => [
+				'fa' => 'آسفالت‌کاری، خاکبرداری و عایق‌کاری',
+				'en' => 'Asphalt paving and waterproofing',
+				'ar' => 'رصف الأسفلت والعزل المائي',
+			][ $item['lang'] ?? 'fa' ] ?? 'آسفالت‌کاری، خاکبرداری و عایق‌کاری',
 			'description' => $item['seo_description'] ?? '',
 			'url'         => $url,
 			'provider'    => [ '@id' => home_url( '/#organization' ) ],
@@ -454,6 +461,170 @@ function asfaltbama_plain_page_wrap( $content ) {
 	if ( ! asfaltbama_is_plain_page() || ! in_the_loop() || ! is_main_query() ) {
 		return $content;
 	}
+	$lang = asfaltbama_page_lang();
+	if ( 'fa' !== $lang ) {
+		// English / Arabic pages carry their own email and WhatsApp box.
+		$dir = 'ar' === $lang ? 'rtl' : 'ltr';
+		return '<div class="abm-page abm-prose" lang="' . esc_attr( $lang ) . '" dir="' . $dir . '">' . $content . '</div>';
+	}
 	return '<div class="abm-page abm-prose">' . $content . asfaltbama_cta( 'box' ) . '</div>';
 }
 add_filter( 'the_content', 'asfaltbama_plain_page_wrap', 40 );
+
+/**
+ * Manifest item of the current page, if the theme created it.
+ *
+ * @return array|null
+ */
+function asfaltbama_current_manifest_page() {
+	static $item = false;
+	if ( false === $item ) {
+		$item = null;
+		if ( is_page() ) {
+			$slug = get_post_field( 'post_name', get_queried_object_id() );
+			foreach ( (array) ( asfaltbama_content_manifest()['pages'] ?? [] ) as $page ) {
+				if ( $page['slug'] === $slug ) {
+					$item = $page;
+					break;
+				}
+			}
+		}
+	}
+	return $item;
+}
+
+/**
+ * Language of the current page: fa, or en / ar for the international pages.
+ *
+ * @return string
+ */
+function asfaltbama_page_lang() {
+	$item = asfaltbama_current_manifest_page();
+	return $item['lang'] ?? 'fa';
+}
+
+/**
+ * English and Arabic pages: <html lang>, og:locale and schema inLanguage.
+ *
+ * @param string $locale Locale.
+ *
+ * @return string
+ */
+function asfaltbama_intl_locale( $locale ) {
+	$map = [
+		'en' => 'en_US',
+		'ar' => 'ar',
+	];
+	return $map[ asfaltbama_page_lang() ] ?? $locale;
+}
+add_filter( 'asfaltbama_content_locale', 'asfaltbama_intl_locale' );
+
+/**
+ * og:locale needs a region: ar -> ar_AR.
+ *
+ * @param string $locale Locale.
+ *
+ * @return string
+ */
+function asfaltbama_intl_og_locale( $locale ) {
+	return 'ar' === $locale ? 'ar_AR' : $locale;
+}
+add_filter( 'rank_math/opengraph/facebook/og_locale', 'asfaltbama_intl_og_locale', 20 );
+
+/**
+ * hreflang links between the language versions of a page (manifest
+ * hreflang_group), with the English page as x-default.
+ *
+ * @return void
+ */
+function asfaltbama_hreflang_links() {
+	$item = asfaltbama_current_manifest_page();
+	if ( empty( $item['hreflang_group'] ) ) {
+		return;
+	}
+	$tags = [
+		'fa' => 'fa-IR',
+		'en' => 'en',
+		'ar' => 'ar',
+	];
+	$default = '';
+	foreach ( (array) ( asfaltbama_content_manifest()['pages'] ?? [] ) as $page ) {
+		if ( ( $page['hreflang_group'] ?? '' ) !== $item['hreflang_group'] ) {
+			continue;
+		}
+		$lang = $page['lang'] ?? 'fa';
+		$url  = home_url( '/' . $page['slug'] . '/' );
+		printf( '<link rel="alternate" hreflang="%s" href="%s" />' . "\n", esc_attr( $tags[ $lang ] ?? $lang ), esc_url( $url ) );
+		if ( 'en' === $lang ) {
+			$default = $url;
+		}
+	}
+	if ( $default ) {
+		printf( '<link rel="alternate" hreflang="x-default" href="%s" />' . "\n", esc_url( $default ) );
+	}
+}
+add_action( 'wp_head', 'asfaltbama_hreflang_links', 5 );
+
+/**
+ * Body class with the page language, for direction-aware styles.
+ *
+ * @param string[] $classes Body classes.
+ *
+ * @return string[]
+ */
+function asfaltbama_lang_body_class( $classes ) {
+	if ( 'fa' !== asfaltbama_page_lang() ) {
+		$classes[] = 'abm-lang-' . asfaltbama_page_lang();
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'asfaltbama_lang_body_class' );
+
+/**
+ * [abm_gallery files="a.jpg|b.jpg" captions="…|…" lang="en"]: project
+ * photos imported from content/images, with captions in the page language
+ * (also used as the alt text).
+ *
+ * @param array $atts Attributes.
+ *
+ * @return string
+ */
+function asfaltbama_gallery_shortcode( $atts ) {
+	$atts     = shortcode_atts(
+		[
+			'files'    => '',
+			'captions' => '',
+			'lang'     => 'fa',
+		],
+		$atts
+	);
+	$files    = array_filter( array_map( 'trim', explode( '|', $atts['files'] ) ) );
+	$captions = array_map( 'trim', explode( '|', $atts['captions'] ) );
+
+	$items = '';
+	foreach ( array_values( $files ) as $i => $file ) {
+		$id = asfaltbama_imported_media_id( $file );
+		if ( ! $id ) {
+			continue;
+		}
+		$caption = $captions[ $i ] ?? '';
+		$items  .= '<figure class="abm-gallery__item">';
+		$items  .= wp_get_attachment_image(
+			$id,
+			'medium_large',
+			false,
+			[
+				'loading' => 'lazy',
+				'alt'     => $caption ? $caption : get_post_meta( $id, '_wp_attachment_image_alt', true ),
+				'sizes'   => '(max-width: 600px) 50vw, 280px',
+			]
+		);
+		if ( $caption ) {
+			$items .= '<figcaption>' . esc_html( $caption ) . '</figcaption>';
+		}
+		$items .= '</figure>';
+	}
+
+	return $items ? '<div class="abm-gallery__grid abm-gallery__grid--inline">' . $items . '</div>' : '';
+}
+add_shortcode( 'abm_gallery', 'asfaltbama_gallery_shortcode' );
