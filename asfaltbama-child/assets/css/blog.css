@@ -309,6 +309,7 @@
 
 .abm-card__media {
 	display: block;
+	overflow: hidden;
 	aspect-ratio: 16 / 9;
 	background: var(--abm-navy);
 }
@@ -1367,4 +1368,379 @@
 .abm-page[dir="ltr"] ol {
 	padding-right: 0;
 	padding-left: 1.4em;
+}
+
+/* ------------------------------------------ Long-form article components */
+/* Used inside the article text: callouts, numbered steps, key figures,
+   checklists, pros/cons, photos and FAQ accordions. Direction-neutral
+   (logical properties) so they work in Persian, Arabic and English. */
+
+.abm-prose .abm-callout {
+	margin: 1.6em 0;
+	padding: 16px 20px 6px;
+	border: 1px solid #bfdbfe;
+	border-inline-start: 5px solid #2563eb;
+	border-radius: 12px;
+	background: #eff6ff;
+}
+
+.abm-prose .abm-callout__title {
+	margin: 0 0 6px;
+	color: #1e3a8a;
+	font-weight: 900;
+}
+
+.abm-prose .abm-callout--tip {
+	border-color: #bbf7d0;
+	border-inline-start-color: #16a34a;
+	background: #f0fdf4;
+}
+
+.abm-prose .abm-callout--tip .abm-callout__title {
+	color: #14532d;
+}
+
+.abm-prose .abm-callout--warn {
+	border-color: #fecaca;
+	border-inline-start-color: #dc2626;
+	background: #fef2f2;
+}
+
+.abm-prose .abm-callout--warn .abm-callout__title {
+	color: #7f1d1d;
+}
+
+.abm-prose .abm-callout__title::before {
+	margin-inline-end: 8px;
+}
+
+.abm-prose .abm-callout--info .abm-callout__title::before {
+	content: "ℹ️";
+}
+
+.abm-prose .abm-callout--tip .abm-callout__title::before {
+	content: "✅";
+}
+
+.abm-prose .abm-callout--warn .abm-callout__title::before {
+	content: "⚠️";
+}
+
+/* Numbered steps */
+.abm-prose ol.abm-steps {
+	margin: 1.4em 0 1.8em;
+	padding: 0;
+	list-style: none;
+	counter-reset: abm-step;
+}
+
+.abm-prose ol.abm-steps > li {
+	position: relative;
+	margin: 0 0 14px;
+	padding: 14px 18px;
+	padding-inline-start: 64px;
+	border: 1px solid var(--abm-line);
+	border-radius: 12px;
+	background: #ffffff;
+	counter-increment: abm-step;
+}
+
+.abm-prose ol.abm-steps > li::before {
+	content: counter(abm-step);
+	position: absolute;
+	top: 14px;
+	inset-inline-start: 14px;
+	display: grid;
+	place-items: center;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: var(--abm-navy);
+	color: var(--abm-amber);
+	font-weight: 900;
+	font-size: 16px;
+}
+
+.abm-lang-ar .abm-prose ol.abm-steps > li::before {
+	content: counter(abm-step, arabic-indic);
+}
+
+.abm-post:not(.abm-post--intl) .abm-prose ol.abm-steps > li::before {
+	content: counter(abm-step, persian);
+}
+
+.abm-prose ol.abm-steps > li > strong:first-child {
+	display: block;
+	margin-bottom: 4px;
+}
+
+/* Key figures */
+.abm-prose .abm-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 12px;
+	margin: 1.6em 0;
+}
+
+.abm-prose .abm-stat {
+	padding: 16px 14px;
+	border-top: 4px solid var(--abm-amber);
+	border-radius: 12px;
+	background: var(--abm-navy);
+	color: #cbd5e1;
+	text-align: center;
+	font-size: 14px;
+	line-height: 1.7;
+}
+
+.abm-prose .abm-stat b {
+	display: block;
+	margin-bottom: 4px;
+	color: #ffffff;
+	font-size: 24px;
+	font-weight: 900;
+}
+
+/* Checklist */
+.abm-prose ul.abm-checklist {
+	padding: 0;
+	list-style: none;
+}
+
+.abm-prose ul.abm-checklist > li {
+	position: relative;
+	padding-inline-start: 34px;
+}
+
+.abm-prose ul.abm-checklist > li::before {
+	content: "✓";
+	position: absolute;
+	top: 2px;
+	inset-inline-start: 0;
+	display: grid;
+	place-items: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 6px;
+	background: var(--abm-amber);
+	color: var(--abm-navy);
+	font-size: 13px;
+	font-weight: 900;
+}
+
+/* Pros / cons and side-by-side comparisons */
+.abm-prose .abm-compare {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 14px;
+	margin: 1.6em 0;
+}
+
+.abm-prose .abm-compare > div {
+	padding: 16px 18px 4px;
+	border: 1px solid var(--abm-line);
+	border-top: 4px solid var(--abm-navy);
+	border-radius: 12px;
+	background: #ffffff;
+}
+
+.abm-prose .abm-compare > div:nth-child(2) {
+	border-top-color: var(--abm-amber);
+}
+
+.abm-prose .abm-compare h3,
+.abm-prose .abm-compare h4 {
+	margin: 0 0 8px;
+	font-size: 17px;
+}
+
+.abm-prose .abm-compare ul {
+	padding-inline-start: 1.2em;
+	padding-inline-end: 0;
+}
+
+/* Photos in the article */
+.abm-prose .abm-figure {
+	margin: 1.8em 0;
+	overflow: hidden;
+	border: 1px solid var(--abm-line);
+	border-radius: 12px;
+	background: #ffffff;
+}
+
+.abm-prose .abm-figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+	max-height: 520px;
+	object-fit: cover;
+	border-radius: 0;
+}
+
+.abm-prose .abm-figure figcaption {
+	padding: 10px 16px;
+	color: var(--abm-muted);
+	font-size: 13.5px;
+	font-style: normal;
+	line-height: 1.8;
+}
+
+/* FAQ accordion (English and Arabic articles) */
+.abm-prose details {
+	margin: 0 0 10px;
+	border: 1px solid var(--abm-line);
+	border-radius: 12px;
+	background: #ffffff;
+}
+
+.abm-prose details > summary {
+	padding: 14px 18px;
+	color: var(--abm-navy);
+	font-weight: 800;
+	line-height: 1.7;
+	cursor: pointer;
+}
+
+.abm-prose details[open] > summary {
+	border-bottom: 1px solid var(--abm-line);
+}
+
+.abm-prose details > p {
+	margin: 12px 18px 14px;
+}
+
+/* Language versions under the article title */
+.abm-langs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 14px 0 0;
+}
+
+.abm-langs a {
+	display: inline-block;
+	padding: 4px 14px;
+	border: 1px solid rgba(245, 158, 11, 0.6);
+	border-radius: 999px;
+	color: #fde68a;
+	font-size: 13px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.abm-langs a:hover {
+	background: rgba(245, 158, 11, 0.15);
+}
+
+/* ------------------------------ English articles and guides hub (LTR) */
+
+.abm-post[dir="ltr"],
+.abm-hub[dir="ltr"] {
+	direction: ltr;
+	text-align: left;
+}
+
+.abm-post[dir="ltr"] .abm-prose h2 {
+	padding-right: 0;
+	padding-left: 14px;
+	border-right: 0;
+	border-left: 4px solid var(--abm-amber);
+}
+
+.abm-post[dir="ltr"] .abm-prose ul,
+.abm-post[dir="ltr"] .abm-prose ol {
+	padding-right: 0;
+	padding-left: 1.4em;
+}
+
+.abm-post[dir="ltr"] .abm-prose li {
+	padding-right: 0;
+	padding-left: 0.3em;
+}
+
+.abm-post[dir="ltr"] .abm-prose ul.abm-checklist,
+.abm-post[dir="ltr"] .abm-prose ol.abm-steps {
+	padding-left: 0;
+}
+
+.abm-post[dir="ltr"] .abm-prose blockquote {
+	border-right: 0;
+	border-left: 4px solid var(--abm-amber);
+}
+
+.abm-post[dir="ltr"] .abm-prose th,
+.abm-post[dir="ltr"] .abm-prose td {
+	text-align: left;
+}
+
+.abm-post[dir="ltr"] .abm-summary {
+	direction: ltr;
+	border-right: 1px solid #0f172a;
+	border-left: 5px solid #f59e0b;
+	text-align: left;
+}
+
+.abm-post[dir="ltr"] .abm-summary li {
+	padding-right: 0;
+	padding-left: 22px;
+}
+
+.abm-post[dir="ltr"] .abm-summary li::before {
+	right: auto;
+	left: 0;
+}
+
+.abm-post[dir="ltr"] .abm-crumbs li + li::before {
+	content: "›";
+	margin-right: 6px;
+	margin-left: 0;
+}
+
+.abm-post[dir="ltr"] .abm-post__meta li::before {
+	margin-right: 8px;
+	margin-left: 0;
+}
+
+.abm-post[dir="ltr"] .abm-hero::before {
+	right: max(16px, calc(50% - 620px));
+	left: auto;
+}
+
+.abm-post[dir="ltr"] .abm-hero__title,
+.abm-post[dir="ltr"] .abm-prose {
+	letter-spacing: 0;
+}
+
+.abm-post--intl[dir="ltr"] .abm-prose {
+	font-size: 17px;
+	line-height: 1.8;
+}
+
+.abm-hub-group + .abm-hub-group {
+	margin-top: 48px;
+}
+
+.abm-guides__body {
+	padding-top: 40px;
+	padding-bottom: 64px;
+}
+
+.abm-guides__intro {
+	max-width: 860px;
+	margin: 0 auto 40px;
+	color: #1e293b;
+	font-size: 17px;
+	line-height: 1.9;
+}
+
+.abm-lang-ar .abm-guides__intro {
+	line-height: 2.05;
+}
+
+.abm-post[dir="ltr"] .abm-toc__list a::before {
+	content: "›";
+}
+
+.abm-post[dir="ltr"] .abm-links a::before {
+	content: "› ";
 }

@@ -469,6 +469,13 @@ function asfaltbama_plain_page_wrap( $content ) {
 		return $content;
 	}
 	$lang = asfaltbama_page_lang();
+	if ( function_exists( 'asfaltbama_is_intl_article' ) && asfaltbama_is_intl_article() ) {
+		// article-intl.php and guides-intl.php lay these pages out.
+		return $content;
+	}
+	if ( function_exists( 'asfaltbama_is_article_hub' ) && asfaltbama_is_article_hub() ) {
+		return $content;
+	}
 	if ( asfaltbama_is_landing() ) {
 		// Landing pages bring their own full-width layout and contact band.
 		$dir = 'en' === $lang ? 'ltr' : 'rtl';
@@ -550,8 +557,21 @@ add_filter( 'rank_math/opengraph/facebook/og_locale', 'asfaltbama_intl_og_locale
  * @return void
  */
 function asfaltbama_hreflang_links() {
-	$item = asfaltbama_current_manifest_page();
-	if ( empty( $item['hreflang_group'] ) ) {
+	$group = '';
+	if ( is_singular( 'post' ) ) {
+		// Persian articles with English and Arabic versions.
+		$slug = get_post_field( 'post_name', get_queried_object_id() );
+		foreach ( (array) ( asfaltbama_content_manifest()['posts'] ?? [] ) as $post ) {
+			if ( $post['slug'] === $slug ) {
+				$group = $post['hreflang_group'] ?? '';
+				break;
+			}
+		}
+	} else {
+		$item  = asfaltbama_current_manifest_page();
+		$group = $item['hreflang_group'] ?? '';
+	}
+	if ( '' === $group ) {
 		return;
 	}
 	$tags = [
@@ -559,21 +579,26 @@ function asfaltbama_hreflang_links() {
 		'en' => 'en',
 		'ar' => 'ar',
 	];
-	$default = '';
-	foreach ( (array) ( asfaltbama_content_manifest()['pages'] ?? [] ) as $page ) {
-		if ( ( $page['hreflang_group'] ?? '' ) !== $item['hreflang_group'] ) {
-			continue;
+	$manifest = asfaltbama_content_manifest();
+	$links    = [];
+	foreach ( (array) ( $manifest['posts'] ?? [] ) as $post ) {
+		if ( ( $post['hreflang_group'] ?? '' ) === $group ) {
+			$links['fa'] = home_url( '/' . $post['slug'] . '/' );
 		}
-		$lang = $page['lang'] ?? 'fa';
-		$url  = home_url( '/' . $page['slug'] . '/' );
+	}
+	foreach ( (array) ( $manifest['pages'] ?? [] ) as $page ) {
+		if ( ( $page['hreflang_group'] ?? '' ) === $group ) {
+			$links[ $page['lang'] ?? 'fa' ] = home_url( '/' . $page['slug'] . '/' );
+		}
+	}
+	if ( count( $links ) < 2 ) {
+		return;
+	}
+	foreach ( $links as $lang => $url ) {
 		printf( '<link rel="alternate" hreflang="%s" href="%s" />' . "\n", esc_attr( $tags[ $lang ] ?? $lang ), esc_url( $url ) );
-		if ( 'en' === $lang ) {
-			$default = $url;
-		}
 	}
-	if ( $default ) {
-		printf( '<link rel="alternate" hreflang="x-default" href="%s" />' . "\n", esc_url( $default ) );
-	}
+	$default = $links['en'] ?? reset( $links );
+	printf( '<link rel="alternate" hreflang="x-default" href="%s" />' . "\n", esc_url( $default ) );
 }
 add_action( 'wp_head', 'asfaltbama_hreflang_links', 5 );
 

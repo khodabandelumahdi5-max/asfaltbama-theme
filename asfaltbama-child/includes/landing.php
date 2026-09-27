@@ -89,7 +89,7 @@ function asfaltbama_img_shortcode( $atts ) {
 			'alt'           => $atts['alt'],
 			'loading'       => $atts['eager'] ? 'eager' : 'lazy',
 			'fetchpriority' => false !== strpos( $atts['class'], 'lp-ph--main' ) ? 'high' : 'auto',
-			'sizes'         => $atts['eager'] ? '(max-width: 900px) 90vw, 560px' : '(max-width: 700px) 90vw, 420px',
+			'sizes'         => false !== strpos( $atts['class'], 'abm-figure' ) ? '(max-width: 900px) 92vw, 780px' : ( $atts['eager'] ? '(max-width: 900px) 90vw, 560px' : '(max-width: 700px) 90vw, 420px' ),
 		]
 	);
 	$class = esc_attr( trim( 'lp-figure ' . $atts['class'] ) );

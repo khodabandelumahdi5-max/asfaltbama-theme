@@ -1,5 +1,5 @@
 {
-  "content_version": "2026-09-27.5",
+  "content_version": "2026-09-28.1",
   "site_version": "2026-09-26.1",
   "site": {
     "blogname": "آسفالت با ما",
@@ -123,7 +123,7 @@
       "seo_title": "درباره ما | شرکت افق آپادانا پاسارگاد (آسفالت با ما)"
     }
   },
-  "images_version": "2026-09-27.6",
+  "images_version": "2026-09-28.1",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -351,7 +351,9 @@
       "title": "ایزوگام پشت‌بام با هم‌پوشانی و درزهای قیری",
       "alt": "اجرای ایزوگام فویل‌دار روی پشت‌بام با هم‌پوشانی رول‌ها و درزگیری قیری؛ پروژه‌ی آسفالت با ما در تهران",
       "featured_for": [
-        "isogam-installation-steps"
+        "isogam-installation-steps",
+        "isogam-roof-membrane-installation",
+        "isogam-roof-installation-ar"
       ]
     },
     {
@@ -1291,6 +1293,60 @@
       "area_served": [
         "أربيل"
       ]
+    },
+    {
+      "slug": "asphalt-waterproofing-guides",
+      "lang": "en",
+      "title": "Asphalt Paving and Waterproofing Guides",
+      "file": "pages/guides/guides-en.html",
+      "excerpt": "Field-tested guides on asphalt paving, Isogam membranes and hot bitumen waterproofing for owners, consultants and contractors in Iraq and the Gulf.",
+      "seo_title": "Asphalt Paving and Waterproofing Guides | Asfaltbama",
+      "seo_description": "Practical guides on asphalt paving, Isogam roof membranes and bitumen waterproofing from a contractor with 25+ years of experience, for Iraq and the Gulf.",
+      "focus_keyword": "asphalt paving and waterproofing guides",
+      "layout": "article-hub",
+      "managed": true,
+      "hreflang_group": "guides-intl"
+    },
+    {
+      "slug": "asphalt-waterproofing-guides-ar",
+      "lang": "ar",
+      "title": "أدلة رصف الأسفلت والعزل المائي",
+      "file": "pages/guides/guides-ar.html",
+      "excerpt": "أدلة عملية في رصف الأسفلت والعزل بالإيزوجام والقير للمالكين والاستشاريين والمقاولين في العراق والخليج، من خبرة تزيد على ٢٥ عاماً.",
+      "seo_title": "أدلة رصف الأسفلت والعزل المائي | أسفلت با ما",
+      "seo_description": "أدلة عملية في رصف الأسفلت وعزل الأسطح بالإيزوجام والعزل بالقير والجنفاص من مقاول بخبرة تزيد على ٢٥ عاماً، للعراق ودول الخليج.",
+      "focus_keyword": "أدلة رصف الأسفلت والعزل المائي",
+      "layout": "article-hub",
+      "managed": true,
+      "hreflang_group": "guides-intl"
+    },
+    {
+      "slug": "isogam-roof-membrane-installation",
+      "title": "Isogam Roof Membrane Installation: A Step-by-Step Guide",
+      "file": "articles/en/isogam-installation-steps.html",
+      "excerpt": "From deck preparation and falls to primer, laps, torching, upstands and the flood test: eleven steps to an Isogam roof that stays watertight in the Gulf heat.",
+      "seo_title": "Isogam Roof Membrane Installation: 11 Steps | Asfaltbama",
+      "seo_description": "How to install an Isogam (APP modified bitumen) roof membrane: deck prep, falls, primer, laps, torching, upstands and a 24–48 hour flood test.",
+      "focus_keyword": "Isogam roof membrane installation",
+      "lang": "en",
+      "layout": "article",
+      "category": "waterproofing-isogam",
+      "managed": true,
+      "hreflang_group": "art-isogam-installation-steps"
+    },
+    {
+      "slug": "isogam-roof-installation-ar",
+      "title": "مراحل عزل الأسطح بالإيزوجام: دليل التنفيذ خطوة بخطوة",
+      "file": "articles/ar/isogam-installation-steps.html",
+      "excerpt": "من تجهيز السطح والميول إلى البرايمر والتراكب واللحام والدروات واختبار الغمر: إحدى عشرة خطوة لعزل سطح بالإيزوجام يصمد أمام حر الخليج والعراق.",
+      "seo_title": "عزل الأسطح بالإيزوجام: ١١ خطوة للتنفيذ الصحيح | أسفلت با ما",
+      "seo_description": "مراحل عزل الأسطح بالإيزوجام: تجهيز السطح والميول والبرايمر والتراكب واللحام ورفع العزل على الدروات واختبار الغمر لمدة ٢٤ إلى ٤٨ ساعة.",
+      "focus_keyword": "عزل الأسطح بالإيزوجام",
+      "lang": "ar",
+      "layout": "article",
+      "category": "waterproofing-isogam",
+      "managed": true,
+      "hreflang_group": "art-isogam-installation-steps"
     }
   ],
   "posts": [
@@ -1319,10 +1375,14 @@
       "title": "مراحل اجرای اصولی ایزوگام پشت‌بام",
       "category": "waterproofing-isogam",
       "file": "articles/isogam-installation-steps.html",
-      "excerpt": "از تمیزکاری و شیب‌بندی تا پرایمر، هم‌پوشانی رول‌ها، دورچینی و آزمایش آب‌بندی؛ هشت مرحله‌ی اجرای ایزوگامی که سال‌ها بدون نشتی بماند.",
-      "seo_title": "مراحل اجرای ایزوگام پشت‌بام؛ ۸ گام اصولی | آسفالت با ما",
-      "seo_description": "اجرای ایزوگام پشت‌بام در ۸ گام: آماده‌سازی و شیب‌بندی، پرایمر، ماهیچه‌کشی، نصب با هم‌پوشانی، لبه‌ها و تست آب‌بندی ۲۴ ساعته.",
-      "focus_keyword": "ایزوگام پشت‌بام,مراحل اجرای ایزوگام"
+      "excerpt": "از بازدید و شیب‌بندی تا پرایمر، هم‌پوشانی رول‌ها، دورچینی، محافظت و آزمایش آب‌بندی؛ راهنمای کامل ۱۱ مرحله‌ای اجرای ایزوگامی که سال‌ها بدون نشتی بماند.",
+      "seo_title": "مراحل اجرای ایزوگام پشت‌بام؛ ۱۱ گام اصولی | آسفالت با ما",
+      "seo_description": "اجرای ایزوگام پشت‌بام در ۱۱ گام: آماده‌سازی و شیب‌بندی، ماهیچه‌کشی، پرایمر، هم‌پوشانی، دورچینی، محافظت و تست آب‌بندی ۲۴ تا ۴۸ ساعته.",
+      "focus_keyword": "ایزوگام پشت‌بام,مراحل اجرای ایزوگام",
+      "hreflang_group": "art-isogam-installation-steps",
+      "prev_hashes": [
+        "22b7c7aec7667474c91839225f4190c5"
+      ]
     },
     {
       "slug": "asphalt-crack-sealing-guide",
@@ -1703,7 +1763,7 @@
       ]
     }
   },
-  "post_seo_version": "2026-09-27.2",
+  "post_seo_version": "2026-09-28.1",
   "tags_version": "2026-09-27.2",
   "tags_cleanup": {
     "delete_slugs": [

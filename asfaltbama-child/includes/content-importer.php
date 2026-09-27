@@ -136,6 +136,48 @@ function asfaltbama_importer_may_refresh( $item, $content ) {
 }
 
 /**
+ * Whitespace-insensitive hash of post content, for recognising content
+ * the importer wrote (tools/prev_hashes.py computes the same in Python).
+ *
+ * @param string $content Content.
+ *
+ * @return string
+ */
+function asfaltbama_importer_nhash( $content ) {
+	return md5( (string) preg_replace( '/[ \t\n\r\f\x0B]+/', ' ', trim( (string) $content ) ) );
+}
+
+/**
+ * Whether an existing article may be replaced with the new version of its
+ * file: only when its content is still a version the theme shipped
+ * (manifest prev_hashes, or the hash stored at the last import), so an
+ * article edited in WordPress is never overwritten.
+ *
+ * @param array  $item    Manifest post.
+ * @param string $content New content.
+ * @param array  $log     Log lines, appended to.
+ *
+ * @return bool
+ */
+function asfaltbama_importer_may_refresh_post( $item, $content, &$log ) {
+	$post = asfaltbama_importer_find( $item['slug'], 'post' );
+	if ( ! $post ) {
+		return false;
+	}
+	$current = asfaltbama_importer_nhash( $post->post_content );
+	if ( asfaltbama_importer_nhash( $content ) === $current ) {
+		return false;
+	}
+	$known   = (array) ( $item['prev_hashes'] ?? [] );
+	$known[] = (string) get_post_meta( $post->ID, '_asfaltbama_content_nhash', true );
+	if ( in_array( $current, $known, true ) ) {
+		return true;
+	}
+	$log[] = sprintf( '⚠️ /%s/ در وردپرس ویرایش شده؛ برای حفظ ویرایش شما با نسخه‌ی جدید قالب جایگزین نشد (برای جایگزینی: ابزارها ← محتوای آسفالت با ما)', $item['slug'] );
+	return false;
+}
+
+/**
  * Store Rank Math title, description and focus keyword.
  *
  * @param int   $post_id Post ID.
@@ -250,21 +292,28 @@ function asfaltbama_importer_run( $manifest, $update_existing = true ) {
 				$log[]    = '✅ دسته‌بندی «' . $item['category_name'] . '» ساخته شد';
 			}
 		}
+		$content  = asfaltbama_importer_read( $item['file'] );
+		$exists   = (bool) asfaltbama_importer_find( $item['slug'], 'post' );
+		$refresh  = $update_existing || ! $exists || asfaltbama_importer_may_refresh_post( $item, $content, $log );
+		if ( $exists && ! $refresh ) {
+			continue;
+		}
 		$id       = asfaltbama_importer_upsert(
 			'post',
 			$item['slug'],
 			[
 				'post_title'    => $item['title'],
-				'post_content'  => asfaltbama_importer_read( $item['file'] ),
+				'post_content'  => $content,
 				'post_excerpt'  => $item['excerpt'],
 				'post_status'   => 'publish',
 				'post_author'   => get_current_user_id(),
 				'post_category' => $category ? [ $category->term_id ] : [],
 			],
 			$log,
-			$update_existing
+			true
 		);
 		if ( $id ) {
+			update_post_meta( $id, '_asfaltbama_content_nhash', asfaltbama_importer_nhash( get_post_field( 'post_content', $id ) ) );
 			asfaltbama_importer_seo( $id, $item );
 		}
 	}

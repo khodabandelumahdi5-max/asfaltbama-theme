@@ -335,6 +335,12 @@ def cta(lang, p):
             others.append(('fa', 'industrial-asphalt-waterproofing'))
         links = '<p class="lp-langs">' + E(b['other']) + ': ' + ' · '.join(
             f'<a href="{SITE}{s}/" lang="{l}">{LANG_NAMES[l]}</a>' for l, s in others) + '</p>'
+    guides = {
+        'en': ('asphalt-waterproofing-guides', 'Technical guides: asphalt paving, Isogam and bitumen waterproofing'),
+        'ar': ('asphalt-waterproofing-guides-ar', 'الأدلة الفنية: رصف الأسفلت والعزل بالإيزوجام والقير'),
+    }
+    if lang in guides:
+        links += f'<p class="lp-langs"><a href="{SITE}{guides[lang][0]}/">{E(guides[lang][1])}</a></p>'
     return f'''<section class="lp-cta">
 <div class="lp-wrap">
 <h2>{E(p.get('cta_title', b['cta_title']))}</h2>

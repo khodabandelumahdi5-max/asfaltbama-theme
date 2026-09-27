@@ -51,6 +51,19 @@ while ( have_posts() ) :
 					</li>
 					<li>نویسنده: <?php echo esc_html( asfaltbama_author_name() ); ?></li>
 				</ul>
+				<?php
+				$versions = function_exists( 'asfaltbama_article_versions' ) ? asfaltbama_article_versions() : [];
+				if ( isset( $versions['en'] ) || isset( $versions['ar'] ) ) :
+					?>
+					<p class="abm-langs">
+						<?php if ( isset( $versions['ar'] ) ) : ?>
+							<a href="<?php echo esc_url( $versions['ar'] ); ?>" hreflang="ar" lang="ar">النسخة العربية</a>
+						<?php endif; ?>
+						<?php if ( isset( $versions['en'] ) ) : ?>
+							<a href="<?php echo esc_url( $versions['en'] ); ?>" hreflang="en" lang="en" dir="ltr">English version</a>
+						<?php endif; ?>
+					</p>
+				<?php endif; ?>
 			</div>
 		</header>
 
