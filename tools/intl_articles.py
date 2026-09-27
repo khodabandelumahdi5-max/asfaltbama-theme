@@ -42,6 +42,74 @@ HUBS = [
 
 # Persian article slug -> {"fa": updated Persian fields, "en": {...}, "ar": {...}}
 ARTICLES = {
+    "isogam-price-guide": {
+        "fa": {
+            "excerpt": "۸ عامل تعیین‌کننده‌ی قیمت ایزوگام، انواع ایزوگام و کاربردشان، ۱۲ کنترل ساده برای تشخیص ایزوگام مرغوب، تقلب‌های رایج، محاسبه‌ی تعداد رول با مثال و مقایسه‌ی پیشنهاد قیمت اجرا.",
+            "seo_description": "قیمت ایزوگام به ضخامت و وزن، الیاف، قیر، روکش و برند بستگی دارد. تشخیص ایزوگام مرغوب با ۱۲ کنترل، محاسبه‌ی تعداد رول با مثال و مقایسه‌ی قیمت اجرا.",
+        },
+        "en": {
+            "slug": "isogam-membrane-price-guide",
+            "title": "Isogam Membrane Price Guide: Cost Factors, Quality Checks and How Many Rolls You Need",
+            "excerpt": "What sets the price of an Isogam membrane, the types and their uses, twelve quality checks, common market tricks, how to calculate the number of rolls and how to compare installation quotations.",
+            "seo_title": "Isogam Membrane Price: Cost Factors and Roll Calculator | Asfaltbama",
+            "seo_description": "Isogam membrane price depends on thickness, reinforcement, bitumen, finish and brand. Twelve quality checks, a roll calculator with examples and how to compare quotes.",
+            "focus_keyword": "Isogam membrane price",
+        },
+        "ar": {
+            "slug": "isogam-price-guide-ar",
+            "title": "سعر الإيزوجام: عوامل التكلفة وفحص الجودة وحساب عدد اللفائف",
+            "excerpt": "ما الذي يحدد سعر الإيزوجام، وأنواعه واستخداماتها، واثنا عشر فحصاً للجودة، وأساليب الغش الشائعة، وطريقة حساب عدد اللفائف، وكيف تقارن عروض التنفيذ.",
+            "seo_title": "سعر الإيزوجام: عوامل التكلفة وحساب اللفائف | أسفلت با ما",
+            "seo_description": "سعر الإيزوجام يعتمد على السماكة والتسليح والبيتومين والوجه والعلامة. اثنا عشر فحصاً للجودة، وحساب عدد اللفائف بأمثلة، ومقارنة عروض التنفيذ.",
+            "focus_keyword": "سعر الإيزوجام",
+        },
+    },
+    "roof-leak-after-isogam": {
+        "fa": {
+            "title": "نشتی پشت‌بام بعد از ایزوگام: ۱۲ علت رایج، روش پیدا کردن و تعمیر",
+            "excerpt": "۱۲ علت رایج نشتی پشت‌بام بعد از ایزوگام با نشانه‌های هر کدام، روش گام‌به‌گام پیدا کردن محل نشت، وصله‌ی اصولی، تعمیر موضعی یا تعویض کامل، ضمانت و پیشگیری.",
+            "seo_title": "نشتی پشت‌بام بعد از ایزوگام؛ ۱۲ علت و راه تعمیر | آسفالت با ما",
+            "seo_description": "نشتی پشت‌بام بعد از ایزوگام معمولاً از درزها، لبه‌ها، ناودان یا پایه‌هاست. ۱۲ علت رایج، پیدا کردن محل نشت با آب‌ریزی، وصله‌ی اصولی و پیشگیری.",
+        },
+        "en": {
+            "slug": "roof-leak-after-waterproofing",
+            "title": "Roof Leaks After Waterproofing: 12 Causes, How to Find and Repair Them",
+            "excerpt": "Twelve common causes of roof leaks after Isogam or bitumen waterproofing, how to locate the entry point step by step, how a proper patch is made, and when to re-waterproof instead of patching.",
+            "seo_title": "Roof Leak After Waterproofing: 12 Causes and Repairs | Asfaltbama",
+            "seo_description": "A roof leak after waterproofing usually comes from laps, upstands, drains or plinths. Learn 12 common causes, how to find the leak with a water test and how to repair it.",
+            "focus_keyword": "roof leak after waterproofing",
+        },
+        "ar": {
+            "slug": "roof-leak-after-waterproofing-ar",
+            "title": "تسرب المياه من السطح بعد العزل: ١٢ سبباً وطريقة التشخيص والإصلاح",
+            "excerpt": "اثنا عشر سبباً شائعاً لتسرب المياه من السطح بعد العزل بالإيزوجام أو القير، وكيف تحدد نقطة الدخول خطوة بخطوة، وكيف تُنفّذ الرقعة الصحيحة، ومتى تعيد العزل بدل الترقيع.",
+            "seo_title": "تسرب المياه من السطح بعد العزل: ١٢ سبباً والحل | أسفلت با ما",
+            "seo_description": "تسرب المياه من السطح بعد العزل يأتي غالباً من التراكبات والدروات والمصارف والقواعد. تعرّف على ١٢ سبباً وطريقة تحديد التسرب باختبار الماء والإصلاح الصحيح.",
+            "focus_keyword": "تسرب المياه من السطح",
+        },
+    },
+    "roof-waterproofing-methods": {
+        "fa": {
+            "excerpt": "ایزوگام، قیرگونی، عایق مایع، عایق سیمانی، ورق پلیمری و فوم پاششی در یک مقایسه‌ی کامل؛ انتخاب عایق برای هر نوع بام و اقلیم، عایق حرارتی، نقاط حساس، هزینه و نگهداری.",
+            "seo_description": "عایق‌کاری پشت‌بام: مقایسه‌ی ایزوگام، قیرگونی، عایق مایع، سیمانی، ورق پلیمری و فوم پاششی، انتخاب برای هر نوع بام، عایق حرارتی، هزینه و نگهداری.",
+        },
+        "en": {
+            "slug": "roof-waterproofing-systems",
+            "title": "Roof Waterproofing Methods: Comparing Every Option for Gulf Roofs",
+            "excerpt": "Membranes, bitumen and jute, liquid, cementitious, PVC/TPO and sprayed foam compared: the right system for each roof type and climate, thermal insulation and inverted roofs, details, cost and maintenance.",
+            "seo_title": "Roof Waterproofing Methods Compared | Asfaltbama",
+            "seo_description": "Roof waterproofing methods compared: Isogam membranes, bitumen and jute, liquid, cementitious, PVC/TPO and sprayed foam, with the right choice for Gulf roofs.",
+            "focus_keyword": "roof waterproofing methods",
+        },
+        "ar": {
+            "slug": "roof-waterproofing-systems-ar",
+            "title": "طرق عزل الأسطح: مقارنة شاملة واختيار النظام المناسب",
+            "excerpt": "الإيزوجام والقير والجنفاص والعزل السائل والإسمنتي والأغشية الصناعية والرغوة المرشوشة في مقارنة واحدة: النظام المناسب لكل سطح ومناخ، والعزل الحراري والسطح المقلوب، والتكلفة والصيانة.",
+            "seo_title": "طرق عزل الأسطح: مقارنة شاملة | أسفلت با ما",
+            "seo_description": "طرق عزل الأسطح: مقارنة بين الإيزوجام والقير والجنفاص والعزل السائل والإسمنتي والأغشية الصناعية والرغوة المرشوشة، والاختيار الصحيح لأسطح الخليج والعراق.",
+            "focus_keyword": "عزل الأسطح",
+        },
+    },
     "bitumen-roofing-vs-isogam": {
         "fa": {
             "excerpt": "مقایسه‌ی قیرگونی و ایزوگام در ۱۲ معیار، رفتار در برابر عوامل تخریب، انتخاب برای بام روباز، موزاییکی، تراس، سرویس، پی و بام صنعتی، هزینه‌ی چرخه‌ی عمر و جدول تصمیم‌گیری.",
