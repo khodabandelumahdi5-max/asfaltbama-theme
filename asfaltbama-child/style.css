@@ -5,7 +5,7 @@
 	Author: Asfaltbama
 	Author URI: https://asfaltbama.com/
 	Template: hello-elementor
-	Version: 1.24.0
+	Version: 1.25.0
 	Requires at least: 6.0
 	Requires PHP: 7.4
 	License: GNU General Public License v3 or later.
@@ -117,5 +117,38 @@ body :where(h1, h2, h3, h4, h5, h6, p, a, span, strong, b, em, small, li, dt, dd
 }
 
 /* Articles pages and cards: assets/css/blog.css */
+
+/* Contact form result (includes/quote-form.php). */
+.abm-form-msg {
+	margin: 0 0 16px;
+	padding: 14px 16px;
+	border-radius: 10px;
+	font-size: 15px;
+	line-height: 1.9;
+	text-align: right;
+}
+
+.abm-form-msg--ok {
+	background: #e8f6ee;
+	border: 1px solid #7cc79a;
+	color: #145c33;
+}
+
+.abm-form-msg--err {
+	background: #fdeceb;
+	border: 1px solid #e59a94;
+	color: #8a1f17;
+}
+
+.abm-form-msg a {
+	color: inherit;
+	font-weight: 700;
+	direction: ltr;
+	unicode-bidi: isolate;
+}
+
+#quote {
+	scroll-margin-top: 110px;
+}
 
 /* Add custom styles below this line. */

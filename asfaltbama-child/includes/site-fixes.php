@@ -126,6 +126,10 @@ function asfaltbama_filter_page_html( $html ) {
 		}
 	}
 
+	if ( function_exists( 'asfaltbama_wire_quote_form' ) ) {
+		$html = asfaltbama_wire_quote_form( $html );
+	}
+
 	return $html;
 }
 
