@@ -381,6 +381,14 @@ function asfaltbama_importer_page_seo( $manifest ) {
 			$log[] = '⚠️ ' . $name . ' پیدا نشد';
 			continue;
 		}
+		if ( ! empty( $seo['post_title'] ) && $seo['post_title'] !== $page->post_title ) {
+			wp_update_post(
+				[
+					'ID'         => $page->ID,
+					'post_title' => $seo['post_title'],
+				]
+			);
+		}
 		asfaltbama_importer_seo( $page->ID, $seo );
 		$log[] = ! empty( $seo['robots'] ) && in_array( 'noindex', (array) $seo['robots'], true )
 			? '✅ ' . $name . ' تا تکمیل محتوا از نتایج گوگل کنار گذاشته شد (noindex)'
@@ -647,6 +655,32 @@ function asfaltbama_importer_elementor( $manifest ) {
 }
 
 /**
+ * Rewrite Rank Math title, description and focus keywords of the
+ * manifest's articles. Overwrites on purpose: the focus keywords used to be
+ * written without the zero-width non-joiner the titles use (عایق کاری vs
+ * عایق‌کاری), so Rank Math reported them missing from the titles.
+ *
+ * @param array $manifest Manifest.
+ *
+ * @return string[] Log lines.
+ */
+function asfaltbama_importer_post_seo( $manifest ) {
+	$log   = [];
+	$count = 0;
+	foreach ( (array) ( $manifest['posts'] ?? [] ) as $item ) {
+		$post = asfaltbama_importer_find( $item['slug'], 'post' );
+		if ( ! $post ) {
+			continue;
+		}
+		asfaltbama_importer_seo( $post->ID, $item );
+		++$count;
+	}
+	$log[] = '✅ کلمه‌ی کلیدی، عنوان و توضیحات سئوی ' . $count . ' مقاله به‌روز شد';
+
+	return $log;
+}
+
+/**
  * Run the import automatically, once per content_version, when an
  * administrator loads the dashboard.
  *
@@ -678,6 +712,11 @@ function asfaltbama_importer_auto_run() {
 	if ( ! empty( $manifest['site_version'] ) && get_option( 'asfaltbama_site_version' ) !== $manifest['site_version'] ) {
 		update_option( 'asfaltbama_site_version', $manifest['site_version'], false );
 		$log = array_merge( $log, asfaltbama_importer_site( $manifest ) );
+	}
+
+	if ( ! empty( $manifest['post_seo_version'] ) && get_option( 'asfaltbama_post_seo_version' ) !== $manifest['post_seo_version'] ) {
+		update_option( 'asfaltbama_post_seo_version', $manifest['post_seo_version'], false );
+		$log = array_merge( $log, asfaltbama_importer_post_seo( $manifest ) );
 	}
 
 	if ( ! empty( $manifest['media_alt_version'] ) && get_option( 'asfaltbama_media_alt_version' ) !== $manifest['media_alt_version'] ) {
