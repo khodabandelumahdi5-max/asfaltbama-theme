@@ -1,7 +1,7 @@
 #!/bin/sh
 # Build release/asfaltbama-child.zip: every theme file except the media in
 # content/images that earlier releases already carried (they are imported
-# on the site once), plus the English/Arabic covers.
+# on the site once), plus the article covers (small generated images).
 # Usage: tools/make_release.sh <version>
 set -e
 cd "$(dirname "$0")/.."
@@ -13,6 +13,7 @@ LIST=$(mktemp)
 unzip -Z1 release/asfaltbama-child.zip | grep -v '/$' > "$LIST"
 find asfaltbama-child -type f ! -path 'asfaltbama-child/content/images/*' >> "$LIST"
 find asfaltbama-child/content/images/covers/intl -type f >> "$LIST" 2>/dev/null || true
+find asfaltbama-child/content/images/covers -maxdepth 1 -type f -name "*-cover.webp" >> "$LIST"
 sort -u "$LIST" | while read -r f; do [ -f "$f" ] && echo "$f"; done > "$LIST.ok"
 rm -f dist/asfaltbama-child.zip
 mkdir -p dist
