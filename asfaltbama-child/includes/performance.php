@@ -71,20 +71,25 @@ function asfaltbama_hero_preload() {
 	if ( ! $full ) {
 		return;
 	}
+	$wide   = wp_get_attachment_image_src( $hero['id'], '1536x1536' );
 	$tablet = $tablet ? $tablet[0] : $full[0];
 	$phone  = $phone ? $phone[0] : $tablet;
+	// Laptops (up to 1600px wide) get the 1536px copy; only larger screens the full image.
+	$wide = $wide ? $wide[0] : $full[0];
 
 	// One preload per breakpoint, so each device fetches only its own copy.
 	printf( '<link rel="preload" as="image" href="%s" media="(max-width: 767px)" fetchpriority="high">' . "\n", esc_url( $phone ) );
 	printf( '<link rel="preload" as="image" href="%s" media="(min-width: 768px) and (max-width: 1024px)" fetchpriority="high">' . "\n", esc_url( $tablet ) );
-	printf( '<link rel="preload" as="image" href="%s" media="(min-width: 1025px)" fetchpriority="high">' . "\n", esc_url( $full[0] ) );
+	printf( '<link rel="preload" as="image" href="%s" media="(min-width: 1025px) and (max-width: 1600px)" fetchpriority="high">' . "\n", esc_url( $wide ) );
+	printf( '<link rel="preload" as="image" href="%s" media="(min-width: 1601px)" fetchpriority="high">' . "\n", esc_url( $full[0] ) );
 
 	$sel = sprintf( '.elementor-%1$d .elementor-element.elementor-element-%2$s:not(.elementor-motion-effects-element-type-background)', $hero['page'], preg_replace( '/[^a-z0-9]/', '', $hero['el'] ) );
 	printf(
-		"<style id=\"abm-hero-bg\">@media (max-width:767px){%1\$s{background-image:url(\"%2\$s\")!important}}@media (min-width:768px) and (max-width:1024px){%1\$s{background-image:url(\"%3\$s\")!important}}</style>\n",
+		"<style id=\"abm-hero-bg\">@media (max-width:767px){%1\$s{background-image:url(\"%2\$s\")!important}}@media (min-width:768px) and (max-width:1024px){%1\$s{background-image:url(\"%3\$s\")!important}}@media (min-width:1025px) and (max-width:1600px){%1\$s{background-image:url(\"%4\$s\")!important}}</style>\n",
 		$sel, // Built from sanitized parts above.
 		esc_url( $phone ),
-		esc_url( $tablet )
+		esc_url( $tablet ),
+		esc_url( $wide )
 	);
 }
 add_action( 'wp_head', 'asfaltbama_hero_preload', 1 );
