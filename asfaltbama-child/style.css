@@ -5,7 +5,7 @@
 	Author: Asfaltbama
 	Author URI: https://asfaltbama.com/
 	Template: hello-elementor
-	Version: 1.32.0
+	Version: 1.33.0
 	Requires at least: 6.0
 	Requires PHP: 7.4
 	License: GNU General Public License v3 or later.
@@ -152,3 +152,9 @@ body :where(h1, h2, h3, h4, h5, h6, p, a, span, strong, b, em, small, li, dt, dd
 }
 
 /* Add custom styles below this line. */
+
+/* Card category badge: white on the brand orange was 2.85:1; this darker
+   orange meets the 4.5:1 contrast minimum for small bold text. */
+.card-category-badge {
+	background-color: #c2410c !important;
+}

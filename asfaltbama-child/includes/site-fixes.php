@@ -130,6 +130,10 @@ function asfaltbama_filter_page_html( $html ) {
 		$html = asfaltbama_wire_quote_form( $html );
 	}
 
+	if ( function_exists( 'asfaltbama_perf_html' ) ) {
+		$html = asfaltbama_perf_html( $html );
+	}
+
 	return $html;
 }
 
