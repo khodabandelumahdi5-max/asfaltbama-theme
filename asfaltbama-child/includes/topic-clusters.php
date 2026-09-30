@@ -37,7 +37,7 @@ function asfaltbama_clusters() {
 				'label'  => 'آسفالت‌کاری',
 				'anchor' => 'آسفالت کاری در تهران و کرج',
 				'desc'   => 'اجرای آسفالت گرم توپکا و بیندر برای حیاط، کوچه، پارکینگ، رمپ و محوطه با فینیشر و غلتک.',
-				'posts'  => [ 'asphalt-yard-parking', 'alley-asphalt', 'topeka-vs-binder-asphalt', 'parking-ramp-asphalt', 'cold-vs-hot-asphalt', 'asphalt-paving-season', 'asphalt-milling', 'asphalt-over-concrete', 'reclaimed-asphalt-guide', 'asphalt-drainage-ponding', 'curb-installation-guide', 'site-landscaping-asphalt', 'asphalt-contract-checklist' ],
+				'posts'  => [ 'asphalt-yard-parking', 'alley-asphalt', 'topeka-vs-binder-asphalt', 'parking-ramp-asphalt', 'cold-vs-hot-asphalt', 'asphalt-paving-season', 'asphalt-milling', 'asphalt-over-concrete', 'reclaimed-asphalt-guide', 'asphalt-drainage-ponding', 'curb-installation-guide', 'colored-asphalt', 'site-landscaping-asphalt', 'asphalt-contract-checklist' ],
 				'faq'    => [
 					[ 'آسفالت کوچه وظیفه‌ی کیست؟', 'آسفالت معابر عمومی در اصل با شهرداری است و ساکنان می‌توانند با درخواست کتبی، و در صورت نیاز استشهاد محلی، پیگیری کنند. اگر ساکنان بخواهند زودتر یا با کیفیت بهتر آسفالت شود، می‌توانند با هماهنگی و مجوز شهرداری هزینه را خودشان بپردازند. مراحل کامل در <a href="/alley-asphalt/">آسفالت کوچه</a> آمده است.' ],
 					[ 'ضخامت مناسب آسفالت حیاط و پارکینگ چقدر است؟', 'برای خودروهای سواری معمولاً یک لایه توپکا با ضخامت حدود ۴ تا ۵ سانتی‌متر کوبیده، روی زیرسازی کوبیده و قیرپاشی‌شده کافی است. برای تردد کامیون، لایه‌ی بیندر هم لازم می‌شود. جزئیات در <a href="/asphalt-yard-parking/">آسفالت حیاط و پارکینگ</a>.' ],
@@ -57,10 +57,10 @@ function asfaltbama_clusters() {
 				'label'  => 'ایزوگام، قیرگونی و قیر',
 				'anchor' => 'اجرای ایزوگام پشت بام',
 				'desc'   => 'نصب ایزوگام و قیرگونی بام، سرویس بهداشتی و فونداسیون با تست آب‌بندی و ضمانت کتبی، و فروش قیر.',
-				'posts'  => [ 'isogam-price-guide', 'isogam-installation-steps', 'bitumen-roofing-vs-isogam', 'isogam-over-old-isogam', 'roof-leak-after-isogam', 'roof-waterproofing-methods', 'bitumen-roofing-steps', 'bathroom-waterproofing', 'foundation-waterproofing', 'roof-winter-checklist', 'bitumen-price', 'bitumen-types', 'asphalt-isogam-warranty-guide' ],
+				'posts'  => [ 'isogam-price-guide', 'isogam-delijan', 'isogam-installation-steps', 'bitumen-roofing-vs-isogam', 'isogam-over-old-isogam', 'roof-leak-after-isogam', 'roof-waterproofing-methods', 'bitumen-roofing-steps', 'bathroom-waterproofing', 'foundation-waterproofing', 'roof-winter-checklist', 'isogam-cost-responsibility', 'nano-liquid-waterproofing', 'bitumen-price', 'bitumen-types', 'asphalt-isogam-warranty-guide' ],
 				'faq'    => [
 					[ 'اجرای ایزوگام پشت بام متری چند است؟', 'قیمت اجرای ایزوگام به نوع و برند ایزوگام، متراژ، تعداد لایه‌ها، دورچینی و وضعیت سطح (نیاز به جمع‌آوری ایزوگام قدیمی یا اصلاح شیب) بستگی دارد و پس از بازدید اعلام می‌شود. عوامل قیمت و محاسبه‌ی تعداد رول در <a href="/isogam-price-guide/">قیمت ایزوگام</a> آمده است.' ],
-					[ 'هزینه‌ی ایزوگام پشت بام به عهده‌ی کیست؟', 'در ساختمان‌های آپارتمانی، بام معمولاً جزو مشاعات است و هزینه‌ی تعمیر و نگهداری آن بین مالکان تقسیم می‌شود. در ملک اجاره‌ای، تعمیرات اساسی مثل عایق بام معمولاً با مالک است، مگر قرارداد اجاره ترتیب دیگری گذاشته باشد.' ],
+					[ 'هزینه‌ی ایزوگام پشت بام به عهده‌ی کیست؟', 'در ساختمان‌های آپارتمانی، بام معمولاً جزو مشاعات است و هزینه‌ی تعمیر و نگهداری آن بین مالکان تقسیم می‌شود. در ملک اجاره‌ای، تعمیرات اساسی مثل عایق بام معمولاً با مالک است، مگر قرارداد اجاره ترتیب دیگری گذاشته باشد. جزئیات در <a href="/isogam-cost-responsibility/">هزینه‌ی ایزوگام به عهده‌ی کیست</a>.' ],
 					[ 'قیرگونی بهتر است یا ایزوگام؟', 'هر دو روش در جای درست دوام خوبی دارند؛ ایزوگام سریع‌تر و یکنواخت‌تر است و قیرگونی در جزئیات پیچیده و بعضی کاربردها برتری دارد. مقایسه‌ی کامل در <a href="/bitumen-roofing-vs-isogam/">قیرگونی یا ایزوگام</a>.' ],
 					[ 'می‌شود ایزوگام را روی ایزوگام قبلی نصب کرد؟', 'فقط وقتی ایزوگام قبلی سالم، خشک و چسبیده به سطح باشد و شیب بام درست باشد؛ در غیر این صورت باید جمع شود. معیارهای تصمیم در <a href="/isogam-over-old-isogam/">ایزوگام روی ایزوگام قدیمی</a>.' ],
 				],
@@ -70,7 +70,7 @@ function asfaltbama_clusters() {
 				'label'  => 'خاکبرداری و گودبرداری',
 				'anchor' => 'خاکبرداری و گودبرداری در تهران',
 				'desc'   => 'خاکبرداری، گودبرداری ساختمانی، تسطیح زمین و آماده‌سازی بستر با بیل مکانیکی و لودر.',
-				'posts'  => [ 'excavation-cost-guide', 'excavation-safety-guide', 'land-grading-guide', 'subgrade-preparation-compaction' ],
+				'posts'  => [ 'excavation-cost-guide', 'excavation-safety-guide', 'soil-nailing', 'engineered-backfill', 'land-grading-guide', 'subgrade-preparation-compaction' ],
 				'faq'    => [
 					[ 'قیمت خاکبرداری هر متر مکعب چطور محاسبه می‌شود؟', 'مبنای معمول، حجم خاک برداشته‌شده بر حسب متر مکعب است و قیمت به جنس خاک، عمق، دسترسی ماشین‌آلات، فاصله‌ی حمل و محل تخلیه بستگی دارد. در پروژه‌های دولتی فهرست بها مرجع است و در پروژه‌های خصوصی قیمت پس از بازدید توافق می‌شود. روش محاسبه در <a href="/excavation-cost-guide/">قیمت خاکبرداری هر متر مکعب</a>.' ],
 					[ 'خاکبرداری با بیل مکانیکی بهتر است یا لودر؟', 'بیل مکانیکی برای کندن در عمق و گودبرداری مناسب است و لودر برای جابه‌جایی و بارگیری خاک سست و تسطیح؛ در بیشتر پروژه‌ها ترکیبی از هر دو، و در فضاهای تنگ بابکت یا مینی‌بیل به کار می‌رود.' ],
@@ -83,7 +83,7 @@ function asfaltbama_clusters() {
 				'label'  => 'تخریب و ضایعات آهن',
 				'anchor' => 'تخریب ساختمان کلنگی و خرید ضایعات آهن',
 				'desc'   => 'تخریب اصولی ساختمان کلنگی، بتنی و فلزی، حمل نخاله و خرید نقدی ضایعات آهن.',
-				'posts'  => [ 'demolition-cost-guide', 'scrap-iron-selling-guide', 'demolition-permit-tehran', 'excavation-cost-guide' ],
+				'posts'  => [ 'demolition-cost-guide', 'scrap-iron-selling-guide', 'construction-debris-removal', 'demolition-permit-tehran', 'excavation-cost-guide' ],
 				'schema' => true,
 				'faq'    => [
 					[ 'هزینه‌ی تخریب ساختمان کلنگی چقدر است؟', 'به متراژ و نوع سازه (آجری، بتنی یا فلزی)، روش تخریب، دسترسی، حمل نخاله و ارزش ضایعات آهن بستگی دارد؛ ارزش آهن‌آلات گاهی بخش قابل توجهی از هزینه را جبران می‌کند. عوامل قیمت در <a href="/demolition-cost-guide/">قیمت تخریب ساختمان</a>.' ],
@@ -110,7 +110,7 @@ function asfaltbama_clusters() {
 				'label'  => 'اجاره ماشین‌آلات',
 				'anchor' => 'اجاره بابکت و ماشین‌آلات راه‌سازی',
 				'desc'   => 'اجاره روزانه‌ی بابکت، مینی‌بیل، بیل مکانیکی، فینیشر و غلتک با اپراتور.',
-				'posts'  => [ 'bobcat-rental-guide', 'excavation-cost-guide', 'land-grading-guide' ],
+				'posts'  => [ 'bobcat-rental-guide', 'roller-finisher-rental', 'excavation-cost-guide', 'land-grading-guide' ],
 				'schema' => true,
 				'faq'    => [
 					[ 'اجاره‌ی بابکت روزانه است یا ساعتی؟', 'معمولاً روزانه (یک شیفت کاری) و با اپراتور؛ برای کارهای کوتاه گاهی ساعتی هم توافق می‌شود. هزینه‌ی رفت‌وبرگشت دستگاه هم باید مشخص باشد. عوامل نرخ اجاره در <a href="/bobcat-rental-guide/">اجاره بابکت</a>.' ],
