@@ -50,14 +50,14 @@ function asfaltbama_clusters() {
 				'label'  => 'قیمت آسفالت',
 				'anchor' => 'قیمت آسفالت ۱۴۰۵',
 				'desc'   => 'قیمت روز هر تن آسفالت توپکا و بیندر، تبدیل قیمت تنی به متری و روش مقایسه‌ی پیشنهادها.',
-				'posts'  => [ 'asphalt-price-per-ton', 'asphalt-price-factors', 'cold-asphalt-bag', 'asphalt-plant', 'asphalt-tonnage-calculation', 'asphalt-contract-checklist', 'asphalt-isogam-warranty-guide' ],
+				'posts'  => [ 'asphalt-price-per-ton', 'asphalt-price-per-cm', 'asphalt-price-factors', 'cold-asphalt-bag', 'asphalt-plant', 'asphalt-tonnage-calculation', 'asphalt-contract-checklist', 'asphalt-isogam-warranty-guide' ],
 			],
 			'isogam-waterproofing'   => [
 				'url'    => '/isogam-waterproofing/',
 				'label'  => 'ایزوگام، قیرگونی و قیر',
 				'anchor' => 'اجرای ایزوگام پشت بام',
 				'desc'   => 'نصب ایزوگام و قیرگونی بام، سرویس بهداشتی و فونداسیون با تست آب‌بندی و ضمانت کتبی، و فروش قیر.',
-				'posts'  => [ 'isogam-price-guide', 'isogam-brands-price', 'isogam-delijan', 'best-isogam', 'isogam-installation-steps', 'isogam-gas-torch', 'bitumen-roofing-vs-isogam', 'isogam-over-old-isogam', 'roof-leak-after-isogam', 'roof-waterproofing-methods', 'bitumen-roofing-steps', 'bathroom-waterproofing', 'foundation-waterproofing', 'roof-winter-checklist', 'isogam-cost-responsibility', 'nano-liquid-waterproofing', 'bitumen-price', 'bitumen-types', 'jute-burlap-price', 'asphalt-isogam-warranty-guide' ],
+				'posts'  => [ 'isogam-price-guide', 'isogam-roll-price', 'isogam-brands-price', 'isogam-delijan', 'best-isogam', 'isogam-installation-steps', 'isogam-gas-torch', 'bitumen-roofing-vs-isogam', 'isogam-over-old-isogam', 'roof-leak-after-isogam', 'roof-waterproofing-methods', 'bitumen-roofing-steps', 'bitumen-roofing-price', 'bathroom-waterproofing', 'foundation-waterproofing', 'roof-winter-checklist', 'isogam-cost-responsibility', 'nano-liquid-waterproofing', 'bitumen-price', 'bitumen-types', 'jute-burlap-price', 'asphalt-isogam-warranty-guide' ],
 				'faq'    => [
 					[ 'اجرای ایزوگام پشت بام متری چند است؟', 'قیمت اجرای ایزوگام به نوع و برند ایزوگام، متراژ، تعداد لایه‌ها، دورچینی و وضعیت سطح (نیاز به جمع‌آوری ایزوگام قدیمی یا اصلاح شیب) بستگی دارد و پس از بازدید اعلام می‌شود. عوامل قیمت و محاسبه‌ی تعداد رول در <a href="/isogam-price-guide/">قیمت ایزوگام</a> آمده است.' ],
 					[ 'هزینه‌ی ایزوگام پشت بام به عهده‌ی کیست؟', 'در ساختمان‌های آپارتمانی، بام معمولاً جزو مشاعات است و هزینه‌ی تعمیر و نگهداری آن بین مالکان تقسیم می‌شود. در ملک اجاره‌ای، تعمیرات اساسی مثل عایق بام معمولاً با مالک است، مگر قرارداد اجاره ترتیب دیگری گذاشته باشد. جزئیات در <a href="/isogam-cost-responsibility/">هزینه‌ی ایزوگام به عهده‌ی کیست</a>.' ],
@@ -70,7 +70,7 @@ function asfaltbama_clusters() {
 				'label'  => 'خاکبرداری و گودبرداری',
 				'anchor' => 'خاکبرداری و گودبرداری در تهران',
 				'desc'   => 'خاکبرداری، گودبرداری ساختمانی، تسطیح زمین و آماده‌سازی بستر با بیل مکانیکی و لودر.',
-				'posts'  => [ 'excavation-cost-guide', 'excavation-methods', 'excavation-safety-guide', 'soil-nailing', 'engineered-backfill', 'land-grading-guide', 'subgrade-preparation-compaction' ],
+				'posts'  => [ 'excavation-cost-guide', 'deep-excavation-price', 'shoring-price', 'excavation-methods', 'excavation-safety-guide', 'soil-nailing', 'engineered-backfill', 'land-grading-guide', 'subgrade-preparation-compaction', 'washed-sand-price', 'cement-type2-price' ],
 				'faq'    => [
 					[ 'قیمت خاکبرداری هر متر مکعب چطور محاسبه می‌شود؟', 'مبنای معمول، حجم خاک برداشته‌شده بر حسب متر مکعب است و قیمت به جنس خاک، عمق، دسترسی ماشین‌آلات، فاصله‌ی حمل و محل تخلیه بستگی دارد. در پروژه‌های دولتی فهرست بها مرجع است و در پروژه‌های خصوصی قیمت پس از بازدید توافق می‌شود. روش محاسبه در <a href="/excavation-cost-guide/">قیمت خاکبرداری هر متر مکعب</a>.' ],
 					[ 'خاکبرداری با بیل مکانیکی بهتر است یا لودر؟', 'بیل مکانیکی برای کندن در عمق و گودبرداری مناسب است و لودر برای جابه‌جایی و بارگیری خاک سست و تسطیح؛ در بیشتر پروژه‌ها ترکیبی از هر دو، و در فضاهای تنگ بابکت یا مینی‌بیل به کار می‌رود.' ],
