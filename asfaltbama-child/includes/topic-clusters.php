@@ -37,7 +37,7 @@ function asfaltbama_clusters() {
 				'label'  => 'آسفالت‌کاری',
 				'anchor' => 'آسفالت کاری در تهران و کرج',
 				'desc'   => 'اجرای آسفالت گرم توپکا و بیندر برای حیاط، کوچه، پارکینگ، رمپ و محوطه با فینیشر و غلتک.',
-				'posts'  => [ 'asphalt-yard-parking', 'alley-asphalt', 'topeka-vs-binder-asphalt', 'parking-ramp-asphalt', 'cold-vs-hot-asphalt', 'asphalt-paving-season', 'asphalt-milling', 'asphalt-over-concrete', 'reclaimed-asphalt-guide', 'asphalt-drainage-ponding', 'curb-installation-guide', 'colored-asphalt', 'site-landscaping-asphalt', 'asphalt-contract-checklist' ],
+				'posts'  => [ 'asphalt-yard-parking', 'alley-asphalt', 'cold-asphalt-bag', 'asphalt-plant', 'topeka-vs-binder-asphalt', 'parking-ramp-asphalt', 'cold-vs-hot-asphalt', 'asphalt-paving-season', 'asphalt-milling', 'asphalt-over-concrete', 'reclaimed-asphalt-guide', 'asphalt-drainage-ponding', 'curb-installation-guide', 'colored-asphalt', 'site-landscaping-asphalt', 'asphalt-contract-checklist' ],
 				'faq'    => [
 					[ 'آسفالت کوچه وظیفه‌ی کیست؟', 'آسفالت معابر عمومی در اصل با شهرداری است و ساکنان می‌توانند با درخواست کتبی، و در صورت نیاز استشهاد محلی، پیگیری کنند. اگر ساکنان بخواهند زودتر یا با کیفیت بهتر آسفالت شود، می‌توانند با هماهنگی و مجوز شهرداری هزینه را خودشان بپردازند. مراحل کامل در <a href="/alley-asphalt/">آسفالت کوچه</a> آمده است.' ],
 					[ 'ضخامت مناسب آسفالت حیاط و پارکینگ چقدر است؟', 'برای خودروهای سواری معمولاً یک لایه توپکا با ضخامت حدود ۴ تا ۵ سانتی‌متر کوبیده، روی زیرسازی کوبیده و قیرپاشی‌شده کافی است. برای تردد کامیون، لایه‌ی بیندر هم لازم می‌شود. جزئیات در <a href="/asphalt-yard-parking/">آسفالت حیاط و پارکینگ</a>.' ],
@@ -50,14 +50,14 @@ function asfaltbama_clusters() {
 				'label'  => 'قیمت آسفالت',
 				'anchor' => 'قیمت آسفالت ۱۴۰۵',
 				'desc'   => 'قیمت روز هر تن آسفالت توپکا و بیندر، تبدیل قیمت تنی به متری و روش مقایسه‌ی پیشنهادها.',
-				'posts'  => [ 'asphalt-price-per-ton', 'asphalt-price-factors', 'asphalt-tonnage-calculation', 'asphalt-contract-checklist', 'asphalt-isogam-warranty-guide' ],
+				'posts'  => [ 'asphalt-price-per-ton', 'asphalt-price-factors', 'cold-asphalt-bag', 'asphalt-plant', 'asphalt-tonnage-calculation', 'asphalt-contract-checklist', 'asphalt-isogam-warranty-guide' ],
 			],
 			'isogam-waterproofing'   => [
 				'url'    => '/isogam-waterproofing/',
 				'label'  => 'ایزوگام، قیرگونی و قیر',
 				'anchor' => 'اجرای ایزوگام پشت بام',
 				'desc'   => 'نصب ایزوگام و قیرگونی بام، سرویس بهداشتی و فونداسیون با تست آب‌بندی و ضمانت کتبی، و فروش قیر.',
-				'posts'  => [ 'isogam-price-guide', 'isogam-delijan', 'isogam-installation-steps', 'bitumen-roofing-vs-isogam', 'isogam-over-old-isogam', 'roof-leak-after-isogam', 'roof-waterproofing-methods', 'bitumen-roofing-steps', 'bathroom-waterproofing', 'foundation-waterproofing', 'roof-winter-checklist', 'isogam-cost-responsibility', 'nano-liquid-waterproofing', 'bitumen-price', 'bitumen-types', 'asphalt-isogam-warranty-guide' ],
+				'posts'  => [ 'isogam-price-guide', 'isogam-delijan', 'best-isogam', 'isogam-installation-steps', 'bitumen-roofing-vs-isogam', 'isogam-over-old-isogam', 'roof-leak-after-isogam', 'roof-waterproofing-methods', 'bitumen-roofing-steps', 'bathroom-waterproofing', 'foundation-waterproofing', 'roof-winter-checklist', 'isogam-cost-responsibility', 'nano-liquid-waterproofing', 'bitumen-price', 'bitumen-types', 'asphalt-isogam-warranty-guide' ],
 				'faq'    => [
 					[ 'اجرای ایزوگام پشت بام متری چند است؟', 'قیمت اجرای ایزوگام به نوع و برند ایزوگام، متراژ، تعداد لایه‌ها، دورچینی و وضعیت سطح (نیاز به جمع‌آوری ایزوگام قدیمی یا اصلاح شیب) بستگی دارد و پس از بازدید اعلام می‌شود. عوامل قیمت و محاسبه‌ی تعداد رول در <a href="/isogam-price-guide/">قیمت ایزوگام</a> آمده است.' ],
 					[ 'هزینه‌ی ایزوگام پشت بام به عهده‌ی کیست؟', 'در ساختمان‌های آپارتمانی، بام معمولاً جزو مشاعات است و هزینه‌ی تعمیر و نگهداری آن بین مالکان تقسیم می‌شود. در ملک اجاره‌ای، تعمیرات اساسی مثل عایق بام معمولاً با مالک است، مگر قرارداد اجاره ترتیب دیگری گذاشته باشد. جزئیات در <a href="/isogam-cost-responsibility/">هزینه‌ی ایزوگام به عهده‌ی کیست</a>.' ],
@@ -83,7 +83,7 @@ function asfaltbama_clusters() {
 				'label'  => 'تخریب و ضایعات آهن',
 				'anchor' => 'تخریب ساختمان کلنگی و خرید ضایعات آهن',
 				'desc'   => 'تخریب اصولی ساختمان کلنگی، بتنی و فلزی، حمل نخاله و خرید نقدی ضایعات آهن.',
-				'posts'  => [ 'demolition-cost-guide', 'scrap-iron-selling-guide', 'construction-debris-removal', 'demolition-permit-tehran', 'excavation-cost-guide' ],
+				'posts'  => [ 'scrap-iron-selling-guide', 'demolition-cost-guide', 'construction-debris-removal', 'demolition-permit-tehran', 'excavation-cost-guide' ],
 				'schema' => true,
 				'faq'    => [
 					[ 'هزینه‌ی تخریب ساختمان کلنگی چقدر است؟', 'به متراژ و نوع سازه (آجری، بتنی یا فلزی)، روش تخریب، دسترسی، حمل نخاله و ارزش ضایعات آهن بستگی دارد؛ ارزش آهن‌آلات گاهی بخش قابل توجهی از هزینه را جبران می‌کند. عوامل قیمت در <a href="/demolition-cost-guide/">قیمت تخریب ساختمان</a>.' ],
