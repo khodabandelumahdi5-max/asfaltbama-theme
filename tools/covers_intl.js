@@ -17,7 +17,7 @@ function split(t){
   const p = await b.newPage({viewport:{width:1200,height:675}});
   for (const it of items){
     const [h,sub]=split(it.title);
-    const rtl = it.lang==='ar';
+    const rtl = it.lang==='ar' || it.lang==='fa';
     const brand = rtl ? 'أسفلت با ما' : 'Asfaltbama';
     const size = h.length>44?52:h.length>30?60:h.length>20?68:76;
     const html=`<!doctype html><html dir="${rtl?'rtl':'ltr'}" lang="${it.lang}"><head><style>

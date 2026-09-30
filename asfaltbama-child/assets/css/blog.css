@@ -1744,3 +1744,10 @@
 .abm-post[dir="ltr"] .abm-links a::before {
 	content: "› ";
 }
+
+/* Daily price table ([abm_price_table]) */
+.abm-price-table{margin:1.5em 0;padding:1.25em;border:2px solid #f59e0b;border-radius:14px;background:#fffbeb}
+.abm-price-table table{margin:0;width:100%}
+.abm-price-table td strong{font-size:1.15em;color:#0f172a}
+.abm-price-table__date{margin:.75em 0 0;font-weight:700;color:#92400e}
+.abm-price-table__note,.abm-price-table__cta{margin:.5em 0 0;font-size:.95em;color:#475569}
