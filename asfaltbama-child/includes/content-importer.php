@@ -935,6 +935,22 @@ function asfaltbama_importer_auto_run() {
 		$log = array_merge( $log, asfaltbama_importer_images( $manifest ) );
 	}
 
+	// Prices shipped with the theme (the owner can change them afterwards
+	// under Settings → قیمت روز; they are only rewritten when prices_version changes).
+	if ( ! empty( $manifest['prices_version'] ) && ! empty( $manifest['prices'] ) && get_option( 'asfaltbama_prices_version' ) !== $manifest['prices_version'] ) {
+		update_option( 'asfaltbama_prices_version', $manifest['prices_version'], false );
+		$all = (array) get_option( 'asfaltbama_prices', [] );
+		foreach ( (array) $manifest['prices'] as $group => $data ) {
+			$all[ $group ] = [
+				'prices'  => array_map( 'strval', (array) ( $data['prices'] ?? [] ) ),
+				'note'    => (string) ( $data['note'] ?? '' ),
+				'updated' => time(),
+			];
+			$log[] = '✅ قیمت روز «' . $group . '» ثبت شد';
+		}
+		update_option( 'asfaltbama_prices', $all );
+	}
+
 	// After the images step: it needs the imported media.
 	if ( ! empty( $manifest['elementor_version'] ) && get_option( 'asfaltbama_elementor_version' ) !== $manifest['elementor_version'] ) {
 		update_option( 'asfaltbama_elementor_version', $manifest['elementor_version'], false );
