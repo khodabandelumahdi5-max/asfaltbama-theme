@@ -35,7 +35,7 @@ function asfaltbama_footer_service_links() {
 		array_filter(
 			asfaltbama_service_links(),
 			function ( $link ) {
-				return ! in_array( $link[1], [ '/asphalt-price-factors/', '/service-areas/', '/industrial-asphalt-waterproofing/' ], true );
+				return ! in_array( $link[1], [ '/asphalt-price-per-ton/', '/service-areas/', '/industrial-asphalt-waterproofing/' ], true );
 			}
 		)
 	);

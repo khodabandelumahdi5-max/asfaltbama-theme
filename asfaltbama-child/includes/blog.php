@@ -209,6 +209,10 @@ function asfaltbama_breadcrumb_items() {
 	} elseif ( is_category() ) {
 		$items[] = [ 'مقالات', asfaltbama_articles_url() ];
 		$items[] = [ single_cat_title( '', false ), '' ];
+	} elseif ( is_singular( 'post' ) && function_exists( 'asfaltbama_cluster_of_post' ) && ( $cluster = asfaltbama_cluster_of_post( get_post_field( 'post_name', get_the_ID() ) ) ) && trim( $cluster['url'], '/' ) !== get_post_field( 'post_name', get_the_ID() ) ) { // phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition
+		// Home › topic page › article: the article sits under its service.
+		$items[] = [ $cluster['label'], home_url( $cluster['url'] ) ];
+		$items[] = [ get_the_title(), '' ];
 	} elseif ( is_singular( 'post' ) ) {
 		$items[] = [ 'مقالات', asfaltbama_articles_url() ];
 		$cat     = asfaltbama_primary_category();
@@ -417,7 +421,7 @@ function asfaltbama_service_links() {
 			[ 'درزگیری و ماستیک گرم', '/asphalt-joint-sealing/' ],
 			[ 'اجاره ماشین‌آلات راه‌سازی', '/machinery-rental/' ],
 			[ 'تخریب و خرید ضایعات', '/demolition-scrap/' ],
-			[ 'قیمت هر متر آسفالت', '/asphalt-price-factors/' ],
+			[ 'قیمت آسفالت ۱۴۰۵', '/asphalt-price-per-ton/' ],
 			[ 'مناطق تحت پوشش', '/service-areas/' ],
 			[ 'آسفالت و عایق کارخانه‌ها', '/industrial-asphalt-waterproofing/' ],
 		]

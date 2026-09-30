@@ -1751,3 +1751,22 @@
 .abm-price-table td strong{font-size:1.15em;color:#0f172a}
 .abm-price-table__date{margin:.75em 0 0;font-weight:700;color:#92400e}
 .abm-price-table__note,.abm-price-table__cta{margin:.5em 0 0;font-size:.95em;color:#475569}
+
+/* Topic families: home grid, service page lists, article links */
+.abm-families__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.abm-family{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;display:flex;flex-direction:column}
+.abm-family__title{margin:0 0 6px;font-size:1.1rem;line-height:1.6}
+.abm-family__title a{color:#0f172a;text-decoration:none}
+.abm-family__title a:hover{color:#b45309}
+.abm-family__desc{margin:0 0 10px;color:#475569;font-size:.92rem;line-height:1.8}
+.abm-family__list{margin:0 0 12px;padding-inline-start:1.1em;line-height:1.9;font-size:.93rem}
+.abm-family__list a{color:#1e293b}
+.abm-family__more{margin-top:auto;font-weight:700;color:#b45309;text-decoration:none}
+.abm-family-page .abm-family__list{columns:2 280px;column-gap:32px}
+.abm-family__faq details{border:1px solid #e2e8f0;border-radius:10px;padding:12px 16px;margin-bottom:10px;background:#fff}
+.abm-family__faq summary{cursor:pointer;font-weight:700}
+.abm-family__faq p{margin:10px 0 0;line-height:1.9}
+.abm-family__siblings{margin-top:18px}
+.abm-family__parent{padding:10px 14px;border-inline-start:4px solid #f59e0b;background:#fffbeb;border-radius:8px;font-size:.95rem}
+.abm-family__more-guides{margin-top:2em;padding:18px 20px;border:1px solid #e2e8f0;border-radius:14px;background:#f8fafc}
+.abm-family__heading{font-weight:800;margin:0 0 8px}
