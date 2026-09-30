@@ -104,9 +104,11 @@ function asfaltbama_perf_html( $html ) {
 	// Carousel wrapper: role="list" without listitem children.
 	$html = preg_replace( '/(<div class="swiper elementor-loop-container[^"]*")\s+role="list"/', '$1', $html );
 
-	// Skip link target: Elementor full-width pages have no #content.
+	// Skip link target: Elementor full-width pages have no #content, and no
+	// <main> either, so the page content is also marked as the main landmark.
 	if ( false === strpos( $html, 'id="content"' ) ) {
-		$html = preg_replace( '/<div data-elementor-type="wp-page"/', '<div id="content" tabindex="-1" data-elementor-type="wp-page"', $html, 1 );
+		$main = false === strpos( $html, '<main' ) ? ' role="main"' : '';
+		$html = preg_replace( '/<div data-elementor-type="wp-page"/', '<div id="content" tabindex="-1"' . $main . ' data-elementor-type="wp-page"', $html, 1 );
 	}
 
 	if ( is_front_page() && asfaltbama_front_hero() ) {
@@ -220,3 +222,39 @@ function asfaltbama_purge_page_cache() {
 	}
 }
 add_action( 'update_option_asfaltbama_prices', 'asfaltbama_purge_page_cache' );
+
+/**
+ * Home page: stylesheets of sections below the first screen (FAQ accordion,
+ * article carousel, video widget, dividers, the guides grid) no longer
+ * block the first paint; they load right after it. The hero and header
+ * styles stay render-blocking, so the first screen does not flash.
+ *
+ * @param string $tag  Link tag.
+ * @param string $handle Handle.
+ * @param string $href Stylesheet URL.
+ * @return string
+ */
+function asfaltbama_async_below_fold_css( $tag, $handle, $href ) {
+	if ( is_admin() || ! is_front_page() || false !== strpos( $tag, 'onload=' ) ) {
+		return $tag;
+	}
+	$later = [
+		'widget-video-rtl',
+		'widget-nested-accordion-rtl',
+		'swiper/v8/css/swiper.min.css',
+		'conditionals/e-swiper.min.css',
+		'widget-loop-common-rtl',
+		'widget-loop-carousel-rtl',
+		'widget-divider-rtl',
+		'spam-protect-for-contact-form7',
+		'asfaltbama-child/assets/css/blog.css',
+	];
+	foreach ( $later as $part ) {
+		if ( false !== strpos( $href, $part ) ) {
+			$async = preg_replace( "/media=(['\"])all\\1/", "media='print' onload=\"this.media='all'\"", $tag, 1 );
+			return $async === $tag ? $tag : $async . '<noscript>' . $tag . '</noscript>';
+		}
+	}
+	return $tag;
+}
+add_filter( 'style_loader_tag', 'asfaltbama_async_below_fold_css', 20, 3 );
