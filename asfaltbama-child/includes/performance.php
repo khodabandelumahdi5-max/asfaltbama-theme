@@ -203,12 +203,15 @@ function asfaltbama_defer_scripts( $tag, $handle, $src ) {
 add_filter( 'script_loader_tag', 'asfaltbama_defer_scripts', 10, 3 );
 
 /**
- * Clear the LiteSpeed page cache (if the plugin is used) when prices are
+ * Clear the page cache (LiteSpeed Cache or WP Super Cache, if used) when prices are
  * saved, so visitors see the new table at once.
  *
  * @return void
  */
 function asfaltbama_purge_page_cache() {
 	do_action( 'litespeed_purge_all' );
+	if ( function_exists( 'wp_cache_clear_cache' ) ) { // WP Super Cache.
+		wp_cache_clear_cache();
+	}
 }
 add_action( 'update_option_asfaltbama_prices', 'asfaltbama_purge_page_cache' );
