@@ -18,7 +18,7 @@ function split(t){
   for (const it of items){
     const [h,sub]=split(it.title);
     const rtl = it.lang==='ar' || it.lang==='fa';
-    const brand = rtl ? 'أسفلت با ما' : 'Asfaltbama';
+    const brand = it.lang==='ar' ? 'أسفلت با ما' : (it.lang==='fa' ? 'آسفالت با ما' : 'Asfaltbama');
     const size = h.length>44?52:h.length>30?60:h.length>20?68:76;
     const html=`<!doctype html><html dir="${rtl?'rtl':'ltr'}" lang="${it.lang}"><head><style>
 @font-face{font-family:V;src:url(${font}) format('woff2');font-weight:100 900}
