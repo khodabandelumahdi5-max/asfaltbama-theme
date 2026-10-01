@@ -1770,3 +1770,69 @@
 .abm-family__parent{padding:10px 14px;border-inline-start:4px solid #f59e0b;background:#fffbeb;border-radius:8px;font-size:.95rem}
 .abm-family__more-guides{margin-top:2em;padding:18px 20px;border:1px solid #e2e8f0;border-radius:14px;background:#f8fafc}
 .abm-family__heading{font-weight:800;margin:0 0 8px}
+
+/* 1.43 — stronger article background: textured page, raised card, banded headings. */
+.abm-post {
+	background-color: #e9edf3;
+	background-image:
+		radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.07) 1px, transparent 0),
+		linear-gradient(180deg, #e2e8f0 0, #eef2f6 420px, #f1f5f9 100%);
+	background-size: 18px 18px, 100% 100%;
+}
+
+.abm-post__article {
+	border-color: #d5dde8;
+	box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 12px 32px -8px rgba(15, 23, 42, 0.16);
+}
+
+.abm-post__aside .abm-post__sticky > * {
+	box-shadow: 0 8px 24px -10px rgba(15, 23, 42, 0.18);
+}
+
+.abm-prose h2 {
+	padding: 12px 16px;
+	border-right-width: 5px;
+	border-radius: 0 0 0 10px;
+	background: linear-gradient(270deg, #fff7e6 0, #fffdf8 70%, rgba(255, 255, 255, 0) 100%);
+}
+
+.abm-prose h3 {
+	padding-right: 10px;
+	border-right: 3px solid #fcd34d;
+}
+
+.abm-prose table {
+	box-shadow: 0 6px 18px -10px rgba(15, 23, 42, 0.25);
+}
+
+.abm-prose thead th {
+	background: var(--abm-navy);
+	color: #ffffff;
+}
+
+.abm-prose tbody tr:nth-child(even) {
+	background: #f8fafc;
+}
+
+.abm-prose blockquote,
+.abm-prose .abm-summary {
+	box-shadow: 0 6px 16px -10px rgba(180, 83, 9, 0.35);
+}
+
+.abm-price-table {
+	background: linear-gradient(180deg, #fffbeb 0, #ffffff 100%);
+	box-shadow: 0 10px 28px -12px rgba(217, 119, 6, 0.45);
+}
+
+.abm-price-table__cta strong {
+	color: #b45309;
+}
+
+@media (max-width: 600px) {
+	.abm-post__article {
+		border-radius: 10px;
+	}
+	.abm-prose h2 {
+		padding: 10px 12px;
+	}
+}

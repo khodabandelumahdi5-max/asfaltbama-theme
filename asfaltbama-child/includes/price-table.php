@@ -125,7 +125,7 @@ function asfaltbama_price_groups() {
 				'گونی قیرگونی',
 				[
 					'jute_chatai'  => [ 'گونی چتایی', 'متر' ],
-					'jute_bengal'  => [ 'گونی بنگال', 'متر' ],
+					'jute_bengal'  => [ 'گونی بنگال', 'یارد' ],
 					'jute_roll'    => [ 'گونی چتایی (طاقه)', 'طاقه' ],
 					'jute_curing'  => [ 'گونی عمل‌آوری بتن', 'متر' ],
 				],
@@ -237,7 +237,7 @@ function asfaltbama_price_groups() {
 					'cem_1_425'  => [ 'سیمان تیپ ۱-۴۲۵ پاکتی', 'پاکت' ],
 					'cem_5_bag'  => [ 'سیمان تیپ ۵ پاکتی', 'پاکت' ],
 					'cem_pozz'   => [ 'سیمان پوزولانی پاکتی', 'پاکت' ],
-					'cem_white'  => [ 'سیمان سفید', 'کیسه' ],
+					'cem_white'  => [ 'سیمان سفید (۵۰ کیلویی)', 'پاکت' ],
 				],
 			],
 		]
@@ -335,13 +335,14 @@ function asfaltbama_price_page() {
 			$prices = [];
 			foreach ( array_keys( $groups[ $group ][2] ) as $key ) {
 				$raw = isset( $_POST['abm_price'][ $key ] ) ? sanitize_text_field( wp_unslash( $_POST['abm_price'][ $key ] ) ) : '';
-				$num = preg_replace( '/\D/', '', strtr( $raw, $digits ) );
+				$num = asfaltbama_price_clean( strtr( $raw, $digits ) );
 				if ( '' !== $num ) {
 					$prices[ $key ] = $num;
 				}
 			}
 			$all           = (array) get_option( 'asfaltbama_prices', [] );
 			$all[ $group ] = [
+				'source'  => 'owner',
 				'prices'  => $prices,
 				'note'    => isset( $_POST['abm_price_note'] ) ? sanitize_textarea_field( wp_unslash( $_POST['abm_price_note'] ) ) : '',
 				'updated' => time(),
@@ -362,6 +363,7 @@ function asfaltbama_price_page() {
 	if ( $saved ) {
 		echo '<div class="notice notice-success"><p>' . esc_html( $saved ) . ' ذخیره شد؛ جدول و تاریخ به‌روزرسانی در مقاله‌های مربوط و عنوان گوگل آن‌ها اعمال شد.</p></div>';
 	}
+	echo '<p>برای بازه‌ی قیمت، حداقل و حداکثر را با خط تیره بنویسید (مثلاً <code>600000 - 650000</code>).</p>';
 	echo '<p>قیمت‌ها را به <strong>تومان</strong> وارد کنید. ردیف خالی در سایت نمایش داده نمی‌شود. هر بخش جداگانه ذخیره می‌شود و تاریخ ذخیره، «تاریخ به‌روزرسانی» همان بخش در سایت و عنوان گوگل است؛ پس فقط وقتی ذخیره کنید که قیمت‌ها را واقعاً بررسی کرده‌اید.</p>';
 
 	foreach ( $groups as $group => $def ) {
@@ -374,7 +376,7 @@ function asfaltbama_price_page() {
 		wp_nonce_field( 'abm_prices', 'abm_prices_nonce' );
 		echo '<input type="hidden" name="abm_group" value="' . esc_attr( $group ) . '"><table class="form-table" role="presentation">';
 		foreach ( $def[2] as $key => $row ) {
-			$val = isset( $data['prices'][ $key ] ) ? number_format( (float) $data['prices'][ $key ] ) : '';
+			$val = isset( $data['prices'][ $key ] ) ? implode( ' - ', array_map( 'number_format', array_map( 'floatval', explode( '-', $data['prices'][ $key ] ) ) ) ) : '';
 			printf(
 				'<tr><th scope="row"><label for="abm-%1$s">%2$s</label></th><td><input type="text" inputmode="numeric" id="abm-%1$s" name="abm_price[%1$s]" value="%3$s" class="regular-text" dir="ltr"> تومان / %4$s</td></tr>',
 				esc_attr( $key ),
@@ -406,6 +408,35 @@ function asfaltbama_fa_number( $num ) {
 }
 
 /**
+ * Normalise a price input: «600000» or a range «600000-650000».
+ *
+ * @param string $raw Latin digits, separators, an optional dash.
+ * @return string '' when there is no number.
+ */
+function asfaltbama_price_clean( $raw ) {
+	$parts = array_values( array_filter( array_map( static function ( $p ) {
+		return preg_replace( '/\D/', '', $p );
+	}, preg_split( '/[-–—]|تا/u', (string) $raw ) ), 'strlen' ) );
+	if ( ! $parts ) {
+		return '';
+	}
+	if ( count( $parts ) > 1 && (float) $parts[1] > (float) $parts[0] ) {
+		return $parts[0] . '-' . $parts[1];
+	}
+	return $parts[0];
+}
+
+/**
+ * A stored price or range in Persian digits: «۶۰۰٬۰۰۰ تا ۶۵۰٬۰۰۰».
+ *
+ * @param string $value Stored value.
+ * @return string
+ */
+function asfaltbama_fa_price( $value ) {
+	return implode( ' تا ', array_map( 'asfaltbama_fa_number', explode( '-', (string) $value ) ) );
+}
+
+/**
  * [abm_price_table group="…"] shortcode.
  *
  * @param array $atts Attributes.
@@ -422,12 +453,12 @@ function asfaltbama_price_table_shortcode( $atts ) {
 	$rows = '';
 	foreach ( $def[2] as $key => $row ) {
 		if ( ! empty( $data['prices'][ $key ] ) ) {
-			$rows .= '<tr><td>' . esc_html( $row[0] ) . '</td><td><strong>' . esc_html( asfaltbama_fa_number( $data['prices'][ $key ] ) ) . '</strong> تومان</td><td>' . esc_html( $row[1] ) . '</td></tr>';
+			$rows .= '<tr><td>' . esc_html( $row[0] ) . '</td><td><strong>' . esc_html( asfaltbama_fa_price( $data['prices'][ $key ] ) ) . '</strong> تومان</td><td>' . esc_html( $row[1] ) . '</td></tr>';
 		}
 	}
 
 	if ( '' === $rows ) {
-		return '<div class="abm-callout abm-callout--info"><p class="abm-callout__title">' . esc_html( $def[0] ) . '</p><p>' . esc_html( 'قیمت ' . $def[1] ) . ' با شرایط بازار و محل پروژه تغییر می‌کند. برای قیمت امروز با ' . $tel . ' تماس بگیرید یا از <a href="https://asfaltbama.com/contact-us/">فرم استعلام قیمت</a> درخواست بدهید.</p></div>';
+		return '<div class="abm-callout abm-callout--info"><p class="abm-callout__title">' . esc_html( $def[0] ) . '</p><p>' . esc_html( 'قیمت ' . $def[1] ) . ' با شرایط بازار و محل پروژه تغییر می‌کند. به دلیل نوسانات قیمت، لطفاً برای قیمت امروز با ' . $tel . ' تماس بگیرید یا از <a href="https://asfaltbama.com/contact-us/">فرم استعلام قیمت</a> درخواست بدهید.</p></div>';
 	}
 
 	$out  = '<div class="abm-price-table">';
@@ -438,7 +469,7 @@ function asfaltbama_price_table_shortcode( $atts ) {
 	if ( '' !== $data['note'] ) {
 		$out .= '<p class="abm-price-table__note">' . esc_html( $data['note'] ) . '</p>';
 	}
-	$out .= '<p class="abm-price-table__cta">قیمت نهایی پس از بازدید و با توجه به حجم کار، دسترسی و شرایط محل مشخص می‌شود. استعلام: ' . $tel . '</p>';
+	$out .= '<p class="abm-price-table__cta"><strong>به دلیل نوسانات قیمت، لطفاً پیش از خرید یا عقد قرارداد تماس حاصل بفرمایید:</strong> ' . $tel . '. قیمت نهایی پس از بازدید و با توجه به حجم کار، دسترسی و شرایط محل مشخص می‌شود.</p>';
 	$out .= '</div>';
 	return $out;
 }

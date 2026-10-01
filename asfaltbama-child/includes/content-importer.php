@@ -941,10 +941,18 @@ function asfaltbama_importer_auto_run() {
 		update_option( 'asfaltbama_prices_version', $manifest['prices_version'], false );
 		$all = (array) get_option( 'asfaltbama_prices', [] );
 		foreach ( (array) $manifest['prices'] as $group => $data ) {
+			// Never replace prices the owner saved under Settings → قیمت روز.
+			// Saves from before 1.43 carry no source: they are the owner's too.
+			$prev = $all[ $group ] ?? [];
+			if ( ( $prev['source'] ?? '' ) === 'owner' || ( ! isset( $prev['source'] ) && ! empty( $prev['prices'] ) ) ) {
+				$log[] = 'ℹ️ قیمت روز «' . $group . '» را خودتان ثبت کرده‌اید؛ دست‌نخورده ماند';
+				continue;
+			}
 			$all[ $group ] = [
+				'source'  => 'theme',
 				'prices'  => array_map( 'strval', (array) ( $data['prices'] ?? [] ) ),
 				'note'    => (string) ( $data['note'] ?? '' ),
-				'updated' => time(),
+				'updated' => ! empty( $data['updated'] ) ? (int) strtotime( $data['updated'] ) : time(),
 			];
 			$log[] = '✅ قیمت روز «' . $group . '» ثبت شد';
 		}
