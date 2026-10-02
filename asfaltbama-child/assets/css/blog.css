@@ -1771,82 +1771,343 @@
 .abm-family__more-guides{margin-top:2em;padding:18px 20px;border:1px solid #e2e8f0;border-radius:14px;background:#f8fafc}
 .abm-family__heading{font-weight:800;margin:0 0 8px}
 
-/* 1.44 — article pages in the home page palette: dark hero with orange glow
-   (as the Elementor home hero, #16181D), white page, white cards with an
-   orange top border and a thin navy outline (as the home service cards). */
-body.abm-single {
-	background: #16181d;
+/* 1.45 — articles in the design system of the Elementor service pages
+   (/asphalt-paving/): white page, navy hero box with an orange title and
+   outlined orange badges, white section boxes (1px #e2e8f0, radius 12),
+   headings with a 4px orange bar, light cards with a 3px orange top,
+   light table heads. No blur, fixed backgrounds or large shadows, so
+   scrolling stays smooth on weak laptops and phones. */
+body.abm-single,
+body.abm-single .abm-post,
+body.abm-single .abm-related {
+	background: #ffffff;
+	background-image: none;
 }
 
-.abm-post {
-	background-color: #f6f7f9;
-	background-image: radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.05) 1px, transparent 0);
-	background-size: 20px 20px;
+body.abm-single .abm-post {
+	color: #334155;
 }
 
-.abm-hero--post {
-	background:
-		radial-gradient(ellipse 60% 90% at 78% 0%, rgba(234, 88, 12, 0.38), transparent 70%),
-		radial-gradient(ellipse 50% 80% at 10% 100%, rgba(245, 158, 11, 0.16), transparent 70%),
-		#16181d;
-	border-bottom: 3px solid var(--abm-amber);
+body.abm-single .abm-wrap {
+	max-width: 1180px;
 }
 
-.abm-post__article {
-	border-color: rgba(15, 23, 42, 0.28);
-	border-top: 4px solid var(--abm-amber);
-	border-radius: 16px;
-	box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 12px 32px -8px rgba(15, 23, 42, 0.16);
+/* Hero: the .hero-box of the service pages. */
+body.abm-single .abm-hero--post {
+	overflow: visible;
+	padding: 24px 0 0;
+	background: none;
+	border: 0;
 }
 
-.abm-post__aside .abm-post__sticky > * {
-	box-shadow: 0 8px 24px -10px rgba(15, 23, 42, 0.18);
+body.abm-single .abm-hero--post::before,
+body.abm-single .abm-hero--post::after {
+	content: none;
+	display: none;
 }
 
-.abm-prose h2 {
-	padding: 12px 16px;
-	border-right-width: 5px;
-	border-radius: 0 0 0 10px;
-	background: linear-gradient(270deg, #fff7e6 0, #fffdf8 70%, rgba(255, 255, 255, 0) 100%);
-}
-
-.abm-prose h3 {
-	padding-right: 10px;
-	border-right: 3px solid #fcd34d;
-}
-
-.abm-prose table {
-	box-shadow: 0 6px 18px -10px rgba(15, 23, 42, 0.25);
-}
-
-.abm-prose thead th {
-	background: var(--abm-navy);
+body.abm-single .abm-hero--post > .abm-wrap {
+	max-width: 1180px;
+	padding: 32px 26px;
+	border: 1px solid #334155;
+	border-radius: 14px;
+	background: linear-gradient(135deg, #0b0f19 0%, #1e293b 100%);
+	box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
 	color: #ffffff;
 }
 
-.abm-prose tbody tr:nth-child(even) {
+body.abm-single .abm-hero--post > .abm-wrap {
+	box-sizing: border-box;
+	width: auto;
+}
+
+@media (max-width: 1228px) {
+	body.abm-single .abm-hero--post > .abm-wrap {
+		margin-right: 16px;
+		margin-left: 16px;
+	}
+}
+
+body.abm-single .abm-crumbs a,
+body.abm-single .abm-crumbs li {
+	color: #94a3b8;
+}
+
+body.abm-single .abm-hero__title {
+	margin: 12px 0 12px;
+	color: #ea580c;
+	font-size: clamp(22px, 2.6vw, 30px);
+	font-weight: 900;
+	line-height: 1.55;
+}
+
+body.abm-single .abm-hero__lead {
+	max-width: 900px;
+	color: #cbd5e1;
+	font-size: 14.5px;
+	line-height: 1.9;
+}
+
+body.abm-single .abm-badge--hero {
+	padding: 6px 14px;
+	border: 1px solid #ea580c;
+	border-radius: 20px;
+	background: rgba(234, 88, 12, 0.15);
+	color: #ea580c !important;
+	font-size: 12.5px;
+	font-weight: 700;
+}
+
+body.abm-single .abm-post__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 16px;
+}
+
+body.abm-single .abm-post__meta li {
+	padding: 5px 12px;
+	border: 1px solid #ea580c;
+	border-radius: 20px;
+	background: rgba(234, 88, 12, 0.15);
+	color: #fdba74;
+	font-size: 12.5px;
+	font-weight: 700;
+}
+
+body.abm-single .abm-post__meta li::before {
+	content: "✔";
+	margin-left: 6px;
+	color: #ea580c;
+	font-size: 11px;
+}
+
+.abm-hero__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 22px 0 0;
+}
+
+.abm-hero__call,
+.abm-hero__alt {
+	display: inline-block;
+	padding: 12px 24px;
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 800;
+	line-height: 1.5;
+	text-decoration: none !important;
+}
+
+.abm-hero__call {
+	background: #ea580c;
+	color: #ffffff !important;
+}
+
+.abm-hero__call:hover {
+	background: #c2410c;
+}
+
+.abm-hero__alt {
+	border: 1px solid #64748b;
+	color: #ffffff !important;
+	font-weight: 700;
+}
+
+.abm-hero__alt:hover {
+	border-color: #ea580c;
+}
+
+/* Layout boxes: the .content-box of the service pages. */
+body.abm-single .abm-post__layout {
+	padding-top: 25px;
+}
+
+body.abm-single .abm-post__article,
+body.abm-single .abm-panel {
+	padding: 25px 22px;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	background: #ffffff;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+body.abm-single .abm-post__article {
+	padding: 28px clamp(16px, 3vw, 34px);
+}
+
+body.abm-single .abm-post__aside .abm-post__sticky > * {
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+body.abm-single .abm-panel__title {
+	padding-right: 12px;
+	border-right: 4px solid #ea580c;
+	color: #0f172a;
+	font-size: 16px;
+	font-weight: 800;
+}
+
+body.abm-single .abm-panel--dark {
+	border-color: #1e293b;
+	background: #0f172a;
+}
+
+body.abm-single .abm-panel--dark .abm-panel__title {
+	color: #ea580c;
+}
+
+/* Text */
+body.abm-single .abm-prose {
+	color: #334155;
+	font-size: 15.5px;
+	line-height: 2.05;
+}
+
+body.abm-single .abm-prose h2 {
+	margin: 2em 0 0.9em;
+	padding: 0 12px 0 0;
+	border-right: 4px solid #ea580c;
+	border-radius: 0;
+	background: none;
+	color: #0f172a;
+	font-size: clamp(18px, 2vw, 21px);
+	font-weight: 800;
+	line-height: 1.6;
+}
+
+body.abm-single .abm-prose h3 {
+	padding-right: 0;
+	border-right: 0;
+	color: #0f172a;
+	font-size: 16px;
+	font-weight: 800;
+}
+
+body.abm-single .abm-prose a {
+	color: #c2410c;
+}
+
+/* Tables: the .specs-tbl of the service pages. */
+body.abm-single .abm-prose table {
+	border: 1px solid #cbd5e1;
+	border-radius: 0;
+	box-shadow: none;
+	font-size: 14px;
+}
+
+body.abm-single .abm-prose th,
+body.abm-single .abm-prose thead th {
+	border: 1px solid #cbd5e1;
+	background: #f1f5f9;
+	color: #0f172a;
+	font-weight: 800;
+}
+
+body.abm-single .abm-prose td {
+	border: 1px solid #e2e8f0;
+	color: #334155;
+}
+
+body.abm-single .abm-prose tbody tr:nth-child(even) {
 	background: #f8fafc;
 }
 
-.abm-prose blockquote,
-.abm-prose .abm-summary {
-	box-shadow: 0 6px 16px -10px rgba(180, 83, 9, 0.35);
+/* Boxes inside the article: the .card-item of the service pages. */
+body.abm-single .abm-prose .abm-summary,
+body.abm-single .abm-prose .abm-callout,
+body.abm-single .abm-prose .abm-stat,
+body.abm-single .abm-toc--inline,
+body.abm-single .abm-prose .abm-compare > div {
+	border: 1px solid #e2e8f0;
+	border-top: 3px solid #ea580c;
+	border-radius: 9px;
+	background: #f8fafc;
+	box-shadow: none;
+	color: #334155;
 }
 
-.abm-price-table {
-	background: linear-gradient(180deg, #fffbeb 0, #ffffff 100%);
-	box-shadow: 0 10px 28px -12px rgba(217, 119, 6, 0.45);
+body.abm-single .abm-prose .abm-summary__title,
+body.abm-single .abm-prose .abm-callout__title {
+	color: #0f172a;
+	font-weight: 800;
 }
 
-.abm-price-table__cta strong {
-	color: #b45309;
+body.abm-single .abm-prose .abm-stat b {
+	color: #ea580c;
+}
+
+body.abm-single .abm-prose .abm-stat {
+	color: #475569;
+}
+
+/* Price table: the dashed formula box of the service pages. */
+body.abm-single .abm-price-table {
+	padding: 18px;
+	border: 1px dashed #ea580c;
+	border-radius: 10px;
+	background: #fff7ed;
+	box-shadow: none;
+}
+
+body.abm-single .abm-price-table th {
+	background: #f1f5f9;
+	color: #0f172a;
+}
+
+body.abm-single .abm-price-table td {
+	background: #ffffff;
+}
+
+body.abm-single .abm-price-table__date {
+	color: #c2410c;
+	font-weight: 800;
+}
+
+body.abm-single .abm-price-table__cta strong {
+	color: #c2410c;
+}
+
+/* End of article CTA: the navy box of the service pages. */
+body.abm-single .abm-cta--box {
+	padding: 28px 20px;
+	border: 1px solid #1e293b;
+	border-radius: 12px;
+	background: #0f172a;
+	text-align: center;
+}
+
+body.abm-single .abm-cta--box .abm-cta__title {
+	color: #ea580c;
+}
+
+body.abm-single .abm-cta--box .abm-cta__desc {
+	color: #cbd5e1;
+}
+
+body.abm-single .abm-btn--amber {
+	border-color: #ea580c;
+	background: #ea580c;
+	color: #ffffff !important;
+}
+
+body.abm-single .abm-tags a {
+	border-radius: 6px;
+	background: #f1f5f9;
+	color: #334155 !important;
 }
 
 @media (max-width: 600px) {
-	.abm-post__article {
-		border-radius: 10px;
+	body.abm-single .abm-hero--post > .abm-wrap {
+		padding: 24px 16px;
 	}
-	.abm-prose h2 {
-		padding: 10px 12px;
+	body.abm-single .abm-post__article {
+		padding: 20px 14px;
+	}
+	.abm-hero__call,
+	.abm-hero__alt {
+		width: 100%;
+		text-align: center;
 	}
 }

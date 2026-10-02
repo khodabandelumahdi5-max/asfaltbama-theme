@@ -51,6 +51,10 @@ while ( have_posts() ) :
 					</li>
 					<li>نویسنده: <?php echo esc_html( asfaltbama_author_name() ); ?></li>
 				</ul>
+				<p class="abm-hero__actions">
+					<a class="abm-hero__call" href="tel:<?php echo esc_attr( ASFALTBAMA_PHONE ); ?>">استعلام قیمت و مشاوره: <span dir="ltr"><?php echo esc_html( ASFALTBAMA_PHONE_DISPLAY ); ?></span></a>
+					<a class="abm-hero__alt" href="<?php echo esc_url( ASFALTBAMA_WHATSAPP ); ?>" target="_blank" rel="noopener">مشاوره در واتساپ</a>
+				</p>
 				<?php
 				$versions = function_exists( 'asfaltbama_article_versions' ) ? asfaltbama_article_versions() : [];
 				if ( isset( $versions['en'] ) || isset( $versions['ar'] ) ) :
