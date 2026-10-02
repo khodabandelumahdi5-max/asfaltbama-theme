@@ -86,5 +86,45 @@ function asfaltbama_alias_redirect() {
 		}
 		return;
 	}
+
+	// Old Persian-slug articles that Google still sends visitors to
+	// (e.g. «قیمت-آسفالت-در-سال-۱۴۰۵-راهنمای-جامع-…»): send them to the
+	// current article on the same topic instead of a 404.
+	foreach ( asfaltbama_topic_redirects() as $needle => $target_slug ) {
+		if ( false === mb_strpos( $slug, $needle ) ) {
+			continue;
+		}
+		$post = get_page_by_path( $target_slug, OBJECT, 'post' );
+		if ( $post && 'publish' === $post->post_status ) {
+			wp_safe_redirect( get_permalink( $post ), 301 );
+			exit;
+		}
+		return;
+	}
+}
+
+/**
+ * Topic words in old Persian slugs => slug of the current article.
+ * The first match wins, so more specific words come first.
+ *
+ * @return array<string,string>
+ */
+function asfaltbama_topic_redirects() {
+	return apply_filters(
+		'asfaltbama_topic_redirects',
+		[
+			'قیرگونی'      => 'bitumen-roofing-price',
+			'ایزوگام'      => 'isogam-price-guide',
+			'درزگیری'      => 'crack-sealing-cost',
+			'لکه-گیری'     => 'asphalt-patching-guide',
+			'گودبرداری'    => 'deep-excavation-price',
+			'خاکبرداری'    => 'excavation-cost-guide',
+			'تخریب'        => 'demolition-cost-guide',
+			'ضایعات'       => 'scrap-iron-selling-guide',
+			'نخاله'        => 'construction-debris-removal',
+			'قیمت-آسفالت' => 'asphalt-price-per-ton',
+			'آسفالت'       => 'asphalt-price-per-ton',
+		]
+	);
 }
 add_action( 'template_redirect', 'asfaltbama_alias_redirect', 1 );
