@@ -2111,3 +2111,266 @@ body.abm-single .abm-tags a {
 		text-align: center;
 	}
 }
+
+/* 1.46 — wider desktop layout, compact floating buttons, sticky sidebar that
+   fits the screen, and a mobile layout that shows the content in the first
+   screen instead of covering it. */
+
+/* Desktop: use more of the screen width. */
+body.abm-single .abm-wrap,
+body.abm-single .abm-hero--post > .abm-wrap {
+	max-width: 1360px;
+}
+
+body.abm-single .abm-post__layout {
+	padding-right: 24px;
+	padding-left: 24px;
+}
+
+@media (min-width: 1024px) {
+	body.abm-single .abm-post__layout {
+		grid-template-columns: minmax(0, 1fr) 300px;
+		gap: 28px;
+	}
+
+	/* The whole sidebar stays reachable: it scrolls inside itself when
+	   taller than the screen instead of hiding its lower panels. */
+	body.abm-single .abm-post__sticky {
+		max-height: calc(100vh - 48px);
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		scrollbar-width: thin;
+		padding-bottom: 4px;
+	}
+}
+
+@media (max-width: 1408px) {
+	body.abm-single .abm-hero--post > .abm-wrap {
+		margin-right: 24px;
+		margin-left: 24px;
+	}
+}
+
+/* Floating call/WhatsApp buttons (Elementor header widget): on desktop
+   articles they become small round icons so they do not cover the sidebar. */
+@media (min-width: 768px) {
+	html body.abm-single .abm-float-wrapper {
+		bottom: 20px !important;
+		left: 20px !important;
+	}
+
+	html body.abm-single .abm-float-btn {
+		justify-content: center !important;
+		width: 50px !important;
+		height: 50px !important;
+		padding: 0 !important;
+		font-size: 22px !important;
+	}
+
+	html body.abm-single .abm-float-btn span + span {
+		position: absolute !important;
+		width: 1px !important;
+		height: 1px !important;
+		overflow: hidden !important;
+		clip: rect(0 0 0 0) !important;
+		white-space: nowrap !important;
+	}
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+	/* Floating buttons become one slim bar at the bottom that never covers text. */
+	html body.abm-single .abm-float-wrapper {
+		right: 0 !important;
+		bottom: 0 !important;
+		left: 0 !important;
+		flex-direction: row !important;
+		gap: 0 !important;
+		box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.18) !important;
+	}
+
+	html body.abm-single .abm-float-btn {
+		flex: 1 1 50% !important;
+		justify-content: center !important;
+		height: 52px !important;
+		padding: 0 8px !important;
+		border: 0 !important;
+		border-radius: 0 !important;
+		box-shadow: none !important;
+		font-size: 14px !important;
+		transform: none !important;
+	}
+
+	body.abm-single {
+		padding-bottom: 52px;
+	}
+
+	/* Hero: compact, so the article starts in the first screen. */
+	body.abm-single .abm-hero--post {
+		padding-top: 14px;
+	}
+
+	body.abm-single .abm-hero--post > .abm-wrap {
+		margin-right: 12px;
+		margin-left: 12px;
+		padding: 18px 16px 20px;
+		border-radius: 12px;
+	}
+
+	body.abm-single .abm-crumbs ol {
+		flex-wrap: nowrap;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	body.abm-single .abm-crumbs li:last-child {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	body.abm-single .abm-badge--hero {
+		margin-top: 4px;
+		padding: 4px 11px;
+		font-size: 11.5px;
+	}
+
+	body.abm-single .abm-hero__title {
+		margin: 10px 0 8px;
+		font-size: 21px;
+		line-height: 1.6;
+	}
+
+	body.abm-single .abm-hero__lead {
+		display: -webkit-box;
+		overflow: hidden;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3;
+		font-size: 13.5px;
+		line-height: 1.85;
+	}
+
+	body.abm-single .abm-post__meta {
+		gap: 6px;
+		margin-top: 12px;
+	}
+
+	body.abm-single .abm-post__meta li {
+		padding: 3px 9px;
+		font-size: 11.5px;
+	}
+
+	body.abm-single .abm-post__meta li:last-child,
+	body.abm-single .abm-hero__actions {
+		display: none;
+	}
+
+	/* The cover repeats the title: hide it on phones. */
+	body.abm-single .abm-post__cover {
+		display: none;
+	}
+
+	/* Article: no box inside a box on a narrow screen. */
+	body.abm-single .abm-post__layout {
+		gap: 24px;
+		padding: 16px 14px 32px;
+	}
+
+	body.abm-single .abm-post__article {
+		padding: 0;
+		border: 0;
+		border-radius: 0;
+		background: none;
+		box-shadow: none;
+	}
+
+	body.abm-single .abm-prose {
+		font-size: 15px;
+		line-height: 2;
+	}
+
+	body.abm-single .abm-prose h2 {
+		font-size: 18px;
+	}
+
+	body.abm-single .abm-prose .abm-summary,
+	body.abm-single .abm-prose .abm-callout {
+		padding-right: 14px;
+		padding-left: 14px;
+	}
+
+	body.abm-single .abm-prose th,
+	body.abm-single .abm-prose td {
+		padding: 8px 9px;
+		font-size: 13px;
+	}
+
+	/* Price table: each row becomes a small card (name, then price and unit). */
+	body.abm-single .abm-price-table {
+		padding: 12px;
+	}
+
+	body.abm-single .abm-price-table table,
+	body.abm-single .abm-price-table tbody,
+	body.abm-single .abm-price-table tr {
+		display: block;
+		width: 100%;
+		border: 0;
+	}
+
+	body.abm-single .abm-price-table thead {
+		display: none;
+	}
+
+	body.abm-single .abm-price-table tr {
+		margin: 0 0 8px;
+		padding: 10px 12px;
+		border: 1px solid #fed7aa;
+		border-radius: 8px;
+		background: #ffffff;
+	}
+
+	body.abm-single .abm-price-table td {
+		display: inline;
+		padding: 0;
+		border: 0;
+		background: none;
+		font-size: 14px;
+	}
+
+	body.abm-single .abm-price-table td:first-child {
+		display: block;
+		margin-bottom: 4px;
+		color: #0f172a;
+		font-weight: 700;
+	}
+
+	body.abm-single .abm-price-table td:first-child + td {
+		color: #c2410c;
+	}
+
+	body.abm-single .abm-price-table td:last-child::before {
+		content: " / ";
+		color: #94a3b8;
+	}
+
+	body.abm-single .abm-price-table__note,
+	body.abm-single .abm-price-table__cta {
+		font-size: 13px;
+		line-height: 1.9;
+	}
+
+	body.abm-single .abm-cta--box {
+		padding: 22px 16px;
+	}
+}
+
+body.abm-single .abm-hero--post {
+	padding-top: 8px;
+}
+
+@media (max-width: 767px) {
+	body.abm-single .abm-prose .abm-price-table tbody tr:nth-child(even),
+	body.abm-single .abm-price-table tbody tr {
+		background: #ffffff;
+	}
+}
