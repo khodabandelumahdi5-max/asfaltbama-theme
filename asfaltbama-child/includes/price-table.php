@@ -497,6 +497,28 @@ function asfaltbama_price_title_date( $title ) {
 	// «۸ مهر ۱۴۰۵» → «۸ مهر»: the year is usually in the title already.
 	$date  = preg_replace( '/\s*[۰-۹]{4}$/u', '', asfaltbama_price_date( $data['updated'] ) );
 	$title = preg_replace( '/\s*\|\s*آسفالت با ما\s*$/u', '', $title );
-	return $title . ' | به‌روز ' . $date;
+	$dated = $title . ' | به‌روز ' . $date;
+	// Google cuts Persian titles after about 60 characters: add the date
+	// only when the whole title still fits, so the keywords stay visible.
+	return mb_strlen( $dated ) <= 62 ? $dated : $title;
 }
+
+/**
+ * Keep the article headline in the schema clean of the «| به‌روز …» suffix.
+ *
+ * @param array $data Rank Math JSON-LD entities.
+ * @return array
+ */
+function asfaltbama_price_clean_headline( $data ) {
+	foreach ( $data as $key => $entity ) {
+		if ( is_array( $entity ) && isset( $entity['headline'] ) && is_string( $entity['headline'] ) ) {
+			$data[ $key ]['headline'] = preg_replace( '/\s*\|\s*به‌روز[^|]*$/u', '', $entity['headline'] );
+			if ( isset( $entity['name'] ) && is_string( $entity['name'] ) ) {
+				$data[ $key ]['name'] = preg_replace( '/\s*\|\s*به‌روز[^|]*$/u', '', $entity['name'] );
+			}
+		}
+	}
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'asfaltbama_price_clean_headline', 99 );
 add_filter( 'rank_math/frontend/title', 'asfaltbama_price_title_date', 20 );
