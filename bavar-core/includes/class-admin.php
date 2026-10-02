@@ -187,7 +187,7 @@ class Bavar_Admin {
 		?>
 		<div class="wrap">
 			<h1 class="wp-heading-inline">مخاطبان و لیدها</h1>
-			<a class="page-title-action" href="<?php echo esc_url( $export ); ?>">خروجی اکسل (CSV)</a>
+			<a class="page-title-action" href="<?php echo esc_url( $export ); ?>">دانلود فایل اکسل</a>
 			<p>
 				<?php foreach ( $statuses as $k => $l ) : ?>
 					<span style="display:inline-block;margin-left:18px"><?php echo esc_html( $l ); ?>: <strong><?php echo esc_html( isset( $stats[ $k ] ) ? $stats[ $k ]->n : 0 ); ?></strong></span>
@@ -383,7 +383,8 @@ class Bavar_Admin {
 	}
 
 	/**
-	 * CSV export (UTF-8 with BOM so Excel shows Persian correctly).
+	 * Download contacts (and their activity) as an Excel file; CSV when the
+	 * server cannot build .xlsx files.
 	 */
 	public static function export() {
 		if ( ! current_user_can( 'manage_woocommerce' ) || ! check_admin_referer( 'bavar_export' ) ) {
@@ -391,6 +392,7 @@ class Bavar_Admin {
 		}
 		global $wpdb;
 		$table    = Bavar_CRM::contacts_table();
+		$etable   = Bavar_CRM::events_table();
 		$where    = self::where( self::filters() );
 		$rows     = $wpdb->get_results( "SELECT c.* FROM {$table} c WHERE {$where} ORDER BY c.id DESC" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$touched  = self::paths_for( wp_list_pluck( $rows, 'id' ) );
@@ -399,32 +401,77 @@ class Bavar_Admin {
 		$sources  = Bavar_CRM::sources();
 		$types    = Bavar_CRM::event_types();
 
+		$contacts = [ [ 'نام', 'نام خانوادگی', 'موبایل', 'شغل', 'منبع ورود', 'بخش‌های موردنظر', 'وضعیت پیگیری', 'آخرین فعالیت', 'زمان آخرین فعالیت', 'تاریخ ثبت', 'توضیحات' ] ];
+		$by_id    = [];
+		foreach ( $rows as $r ) {
+			$by_id[ (int) $r->id ] = $r;
+			$contacts[]            = [
+				self::csv_safe( $r->first_name ),
+				self::csv_safe( $r->last_name ),
+				$r->phone,
+				self::csv_safe( $r->job ),
+				$sources[ $r->source ] ?? $r->source,
+				implode( '، ', array_map( function ( $p ) use ( $paths ) {
+					return $paths[ $p ] ?? $p;
+				}, $touched[ (int) $r->id ] ?? [] ) ),
+				$statuses[ $r->status ] ?? $r->status,
+				$types[ $r->last_activity ] ?? '',
+				self::date( $r->last_activity_at ),
+				self::date( $r->created_at ),
+				self::csv_safe( (string) $r->notes ),
+			];
+		}
+
+		$activity = [ [ 'تاریخ', 'نام', 'موبایل', 'فعالیت', 'بخش', 'محصول', 'سفارش', 'پاسخ‌ها' ] ];
+		if ( $by_id ) {
+			$in     = implode( ',', array_keys( $by_id ) );
+			$events = $wpdb->get_results( "SELECT * FROM {$etable} WHERE contact_id IN ({$in}) AND type <> 'product_viewed' ORDER BY id DESC LIMIT 50000" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			foreach ( $events as $e ) {
+				$c       = $by_id[ (int) $e->contact_id ];
+				$data    = json_decode( (string) $e->data, true );
+				$answers = [];
+				foreach ( (array) ( $data['answers'] ?? [] ) as $qa ) {
+					$answers[] = $qa['q'] . ' ' . $qa['a'];
+				}
+				$activity[] = [
+					self::date( $e->created_at ),
+					self::csv_safe( trim( $c->first_name . ' ' . $c->last_name ) ),
+					$c->phone,
+					$types[ $e->type ] ?? $e->type,
+					$paths[ $e->path ] ?? '',
+					$e->product_id ? get_the_title( (int) $e->product_id ) : '',
+					$e->order_id ? '#' . $e->order_id : '',
+					self::csv_safe( implode( "\n", $answers ) ),
+				];
+			}
+		}
+
+		$filename = 'bavar-leads-' . wp_date( 'Y-m-d' );
 		nocache_headers();
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( Bavar_Xlsx::available() && empty( $_GET['csv'] ) ) {
+			$file = Bavar_Xlsx::build(
+				[
+					'مخاطبان'           => $contacts,
+					'فعالیت‌ها و پاسخ‌ها' => $activity,
+				]
+			);
+			if ( $file ) {
+				header( 'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' );
+				header( 'Content-Disposition: attachment; filename="' . $filename . '.xlsx"' );
+				header( 'Content-Length: ' . filesize( $file ) );
+				readfile( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+				wp_delete_file( $file );
+				exit;
+			}
+		}
+
 		header( 'Content-Type: text/csv; charset=utf-8' );
-		header( 'Content-Disposition: attachment; filename="bavar-contacts-' . gmdate( 'Y-m-d' ) . '.csv"' );
+		header( 'Content-Disposition: attachment; filename="' . $filename . '.csv"' );
 		$out = fopen( 'php://output', 'w' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		fwrite( $out, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions
-		fputcsv( $out, [ 'نام', 'نام خانوادگی', 'موبایل', 'شغل', 'منبع ورود', 'بخش‌های موردنظر', 'وضعیت پیگیری', 'آخرین فعالیت', 'زمان آخرین فعالیت', 'تاریخ ثبت', 'توضیحات' ], ',', '"', '\\' );
-		foreach ( $rows as $r ) {
-			fputcsv(
-				$out,
-				[
-					self::csv_safe( $r->first_name ),
-					self::csv_safe( $r->last_name ),
-					$r->phone,
-					self::csv_safe( $r->job ),
-					$sources[ $r->source ] ?? $r->source,
-					implode( '، ', array_map( fn( $p ) => $paths[ $p ] ?? $p, $touched[ (int) $r->id ] ?? [] ) ),
-					$statuses[ $r->status ] ?? $r->status,
-					$types[ $r->last_activity ] ?? '',
-					(string) $r->last_activity_at,
-					$r->created_at,
-					self::csv_safe( (string) $r->notes ),
-				],
-				',',
-				'"',
-				'\\'
-			);
+		foreach ( $contacts as $line ) {
+			fputcsv( $out, $line, ',', '"', '\\' );
 		}
 		fclose( $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		exit;
@@ -569,6 +616,13 @@ class Bavar_Admin {
 			'gate_mode'    => in_array( $input['gate_mode'] ?? '', [ 'required', 'dismissible', 'off' ], true ) ? $input['gate_mode'] : 'required',
 			'gate_title'   => sanitize_text_field( $input['gate_title'] ?? '' ),
 			'gate_text'    => sanitize_textarea_field( $input['gate_text'] ?? '' ),
+			'notify_email'  => implode( ', ', array_filter( array_map( 'sanitize_email', array_map( 'trim', explode( ',', (string) ( $input['notify_email'] ?? '' ) ) ) ) ) ),
+			'notify_events' => array_values( array_intersect( array_keys( Bavar_Notify::events() ), array_map( 'sanitize_key', (array) ( $input['notify_events'] ?? [] ) ) ) ),
+			'sms_api_key'   => sanitize_text_field( $input['sms_api_key'] ?? '' ),
+			'sms_sender'    => sanitize_text_field( $input['sms_sender'] ?? '' ),
+			'sms_to'        => sanitize_text_field( bavar_latin_digits( $input['sms_to'] ?? '' ) ),
+			'tg_token'      => sanitize_text_field( $input['tg_token'] ?? '' ),
+			'tg_chat'       => sanitize_text_field( $input['tg_chat'] ?? '' ),
 			'spot_api_key' => sanitize_text_field( $input['spot_api_key'] ?? '' ),
 			'spot_offline' => (string) absint( $input['spot_offline'] ?? 30 ),
 			'page_library' => absint( $input['page_library'] ?? 0 ),
@@ -679,6 +733,24 @@ class Bavar_Admin {
 					?>
 				</table>
 
+				<h2 id="bavar-notify">ارسال لیدها برای شما</h2>
+				<p>هر وقت کسی اطلاعاتش را ثبت کند، مشخصاتش (نام، موبایل، شغل، بخش و پاسخ‌ها) برای شما فرستاده می‌شود. همه‌ی لیدها همیشه در «مخاطبان و لیدها» هم ذخیره می‌شوند.</p>
+				<table class="form-table">
+					<?php $field( 'ایمیل دریافت لیدها', $name . '[notify_email]', $s['notify_email'], 'text', 'چند ایمیل را با ویرگول (,) جدا کنید. خالی = ایمیل ارسال نشود.' ); ?>
+					<tr><th scope="row">چه زمانی خبر بدهد؟</th><td>
+						<?php foreach ( Bavar_Notify::events() as $ek => $el ) : ?>
+							<label style="display:block;margin-bottom:6px"><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[notify_events][]" value="<?php echo esc_attr( $ek ); ?>" <?php checked( in_array( $ek, (array) $s['notify_events'], true ) ); ?>> <?php echo esc_html( $el ); ?></label>
+						<?php endforeach; ?>
+					</td></tr>
+					<?php
+					$field( 'پیامک — کلید API کاوه‌نگار (اختیاری)', $name . '[sms_api_key]', $s['sms_api_key'], 'password', 'از پنل kavenegar.com ← تنظیمات ← API Key.' );
+					$field( 'پیامک — شماره‌ی فرستنده (اختیاری)', $name . '[sms_sender]', $s['sms_sender'], 'text', 'خط اختصاصی شما در کاوه‌نگار. خالی = خط پیش‌فرض.' );
+					$field( 'پیامک — موبایل دریافت‌کننده', $name . '[sms_to]', $s['sms_to'], 'text', 'مثلاً 09121234567 — چند شماره را با ویرگول جدا کنید.' );
+					$field( 'تلگرام — توکن ربات (اختیاری)', $name . '[tg_token]', $s['tg_token'], 'password', 'از @BotFather. ممکن است روی هاست‌های داخل ایران کار نکند.' );
+					$field( 'تلگرام — شناسه‌ی چت', $name . '[tg_chat]', $s['tg_chat'], 'text' );
+					?>
+				</table>
+
 				<h2>اسپات‌پلیر (اختیاری)</h2>
 				<table class="form-table">
 					<?php
@@ -688,6 +760,22 @@ class Bavar_Admin {
 				</table>
 
 				<?php submit_button( 'ذخیره‌ی تنظیمات' ); ?>
+			</form>
+
+			<hr>
+			<h2>آزمایش ارسال لیدها</h2>
+			<?php
+			$report = get_transient( 'bavar_notify_test' );
+			if ( $report ) {
+				delete_transient( 'bavar_notify_test' );
+				echo '<div class="notice notice-info"><p>' . implode( '<br>', array_map( 'esc_html', (array) $report ) ) . '</p></div>';
+			}
+			?>
+			<p>اول تنظیمات را ذخیره کنید، بعد این دکمه را بزنید تا یک پیام آزمایشی به همه‌ی روش‌های تنظیم‌شده فرستاده شود.</p>
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+				<input type="hidden" name="action" value="bavar_test_notify">
+				<?php wp_nonce_field( 'bavar_test_notify' ); ?>
+				<?php submit_button( 'ارسال پیام آزمایشی', 'secondary' ); ?>
 			</form>
 		</div>
 		<?php

@@ -521,13 +521,22 @@ class Bavar_CRM {
 		$inline     = ! empty( $_POST['inline'] );
 		// phpcs:enable
 
-		$id   = self::save_person( $person, $key );
-		$args = [
+		$id       = self::save_person( $person, $key );
+		$specific = 'consult' === $key || ( 'simorgh' === $key && $inline ) || $answers;
+		$args     = [
 			'path'       => $key,
 			'product_id' => $product_id,
 			'data'       => $answers ? [ 'answers' => $answers ] : [],
 		];
-		self::log( $id, 'phone_submitted', [ 'path' => $key ] );
+		// "followed": a more specific event follows, so notify only once.
+		self::log(
+			$id,
+			'phone_submitted',
+			[
+				'path'     => $key,
+				'followed' => (bool) $specific,
+			]
+		);
 		if ( 'consult' === $key ) {
 			self::log( $id, 'consultation_requested', $args );
 		} elseif ( 'simorgh' === $key && $inline ) {

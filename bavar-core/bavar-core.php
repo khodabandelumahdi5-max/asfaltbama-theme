@@ -2,7 +2,7 @@
 /**
  * Plugin Name: BAVAR Core — گروه باور
  * Description: هسته‌ی سایت گروه باور — مدیریت مخاطبان و فعالیت‌ها، آمار، فرم‌های هر بخش، پک‌های کتاب، تحویل محتوای خریداری‌شده، پرداخت کارت‌به‌کارت با ارسال فیش و لایسنس اسپات‌پلیر.
- * Version: 1.1.1
+ * Version: 1.2.0
  * Author: BAVAR GROUP
  * Requires at least: 6.2
  * Requires PHP: 7.4
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BAVAR_CORE_VERSION', '1.1.1' );
+define( 'BAVAR_CORE_VERSION', '1.2.0' );
 define( 'BAVAR_CORE_FILE', __FILE__ );
 define( 'BAVAR_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BAVAR_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -21,6 +21,8 @@ define( 'BAVAR_CORE_URL', plugin_dir_url( __FILE__ ) );
 require_once BAVAR_CORE_DIR . 'includes/helpers.php';
 require_once BAVAR_CORE_DIR . 'includes/class-settings.php';
 require_once BAVAR_CORE_DIR . 'includes/class-crm.php';
+require_once BAVAR_CORE_DIR . 'includes/class-notify.php';
+require_once BAVAR_CORE_DIR . 'includes/class-xlsx.php';
 require_once BAVAR_CORE_DIR . 'includes/class-frontend.php';
 require_once BAVAR_CORE_DIR . 'includes/class-books.php';
 require_once BAVAR_CORE_DIR . 'includes/class-products.php';
@@ -38,6 +40,7 @@ add_action(
 	'plugins_loaded',
 	function () {
 		Bavar_CRM::init();
+		Bavar_Notify::init();
 		Bavar_Frontend::init();
 		Bavar_Books::init();
 		Bavar_Admin::init();
