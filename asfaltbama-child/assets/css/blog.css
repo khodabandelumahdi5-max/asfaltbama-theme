@@ -1771,17 +1771,31 @@
 .abm-family__more-guides{margin-top:2em;padding:18px 20px;border:1px solid #e2e8f0;border-radius:14px;background:#f8fafc}
 .abm-family__heading{font-weight:800;margin:0 0 8px}
 
-/* 1.43 — stronger article background: textured page, raised card, banded headings. */
+/* 1.44 — article pages in the home page palette: dark hero with orange glow
+   (as the Elementor home hero, #16181D), white page, white cards with an
+   orange top border and a thin navy outline (as the home service cards). */
+body.abm-single {
+	background: #16181d;
+}
+
 .abm-post {
-	background-color: #e9edf3;
-	background-image:
-		radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.07) 1px, transparent 0),
-		linear-gradient(180deg, #e2e8f0 0, #eef2f6 420px, #f1f5f9 100%);
-	background-size: 18px 18px, 100% 100%;
+	background-color: #f6f7f9;
+	background-image: radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.05) 1px, transparent 0);
+	background-size: 20px 20px;
+}
+
+.abm-hero--post {
+	background:
+		radial-gradient(ellipse 60% 90% at 78% 0%, rgba(234, 88, 12, 0.38), transparent 70%),
+		radial-gradient(ellipse 50% 80% at 10% 100%, rgba(245, 158, 11, 0.16), transparent 70%),
+		#16181d;
+	border-bottom: 3px solid var(--abm-amber);
 }
 
 .abm-post__article {
-	border-color: #d5dde8;
+	border-color: rgba(15, 23, 42, 0.28);
+	border-top: 4px solid var(--abm-amber);
+	border-radius: 16px;
 	box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 12px 32px -8px rgba(15, 23, 42, 0.16);
 }
 

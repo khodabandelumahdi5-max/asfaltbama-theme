@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'ASFALTBAMA_CHILD_VERSION', '1.43.0' );
+define( 'ASFALTBAMA_CHILD_VERSION', '1.44.0' );
 define( 'ASFALTBAMA_CHILD_PATH', get_stylesheet_directory() );
 
 /**
@@ -35,6 +35,7 @@ require ASFALTBAMA_CHILD_PATH . '/includes/site-fixes.php';
 require ASFALTBAMA_CHILD_PATH . '/includes/landing.php';
 require ASFALTBAMA_CHILD_PATH . '/includes/quote-form.php';
 require ASFALTBAMA_CHILD_PATH . '/includes/articles-intl.php';
+require ASFALTBAMA_CHILD_PATH . '/includes/single-template.php';
 require ASFALTBAMA_CHILD_PATH . '/includes/price-table.php';
 require ASFALTBAMA_CHILD_PATH . '/includes/topic-clusters.php';
 require ASFALTBAMA_CHILD_PATH . '/includes/performance.php';
