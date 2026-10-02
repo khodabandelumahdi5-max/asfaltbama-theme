@@ -5,7 +5,7 @@
 	Author: Asfaltbama
 	Author URI: https://asfaltbama.com/
 	Template: hello-elementor
-	Version: 1.49.0
+	Version: 1.50.0
 	Requires at least: 6.0
 	Requires PHP: 7.4
 	License: GNU General Public License v3 or later.
@@ -157,4 +157,235 @@ body :where(h1, h2, h3, h4, h5, h6, p, a, span, strong, b, em, small, li, dt, dd
    orange meets the 4.5:1 contrast minimum for small bold text. */
 .card-category-badge {
 	background-color: #c2410c !important;
+}
+
+/*
+ * Mobile menu (markup and script: asfaltbama_mobile_nav() in
+ * includes/site-fixes.php). The header widget hides its menu below 900px;
+ * a menu button opens it as a panel under the header, in the header's navy
+ * and amber, with the services as tappable cards and call/WhatsApp buttons.
+ */
+.abm-hdr-wrap .abm-menu-toggle,
+.abm-hdr-wrap .abm-nav-cta {
+	display: none !important;
+}
+
+@media (max-width: 900px) {
+	.abm-hdr-wrap .abm-hdr-inner {
+		gap: 10px !important;
+		padding: 10px 14px !important;
+	}
+
+	/* Brand on the right; call and menu buttons together on the left. */
+	.abm-hdr-wrap .abm-hdr-call {
+		margin-inline-start: auto !important;
+	}
+
+	.abm-hdr-wrap .abm-menu-toggle {
+		display: inline-flex !important;
+		flex: none !important;
+		flex-direction: column !important;
+		justify-content: center !important;
+		gap: 5px !important;
+		order: 3 !important;
+		width: 46px !important;
+		height: 46px !important;
+		margin: 0 !important;
+		padding: 0 12px !important;
+		border: 1px solid #334155 !important;
+		border-radius: 10px !important;
+		background: #1e293b !important;
+		cursor: pointer !important;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.abm-hdr-wrap .abm-menu-toggle span {
+		display: block !important;
+		height: 2px !important;
+		border-radius: 2px !important;
+		background: #f8fafc !important;
+		transition: transform 0.2s ease, opacity 0.2s ease !important;
+	}
+
+	.abm-hdr-wrap.is-menu-open .abm-menu-toggle {
+		border-color: #f59e0b !important;
+	}
+
+	.abm-hdr-wrap.is-menu-open .abm-menu-toggle span:nth-child(1) {
+		transform: translateY(7px) rotate(45deg) !important;
+	}
+
+	.abm-hdr-wrap.is-menu-open .abm-menu-toggle span:nth-child(2) {
+		opacity: 0 !important;
+	}
+
+	.abm-hdr-wrap.is-menu-open .abm-menu-toggle span:nth-child(3) {
+		transform: translateY(-7px) rotate(-45deg) !important;
+	}
+
+	/* The panel. */
+	.abm-hdr-wrap.is-menu-open .abm-nav-menu {
+		display: block !important;
+		position: fixed !important;
+		top: var(--abm-menu-top, 72px) !important;
+		right: 0 !important;
+		left: 0 !important;
+		z-index: 99999 !important;
+		max-height: calc(100vh - var(--abm-menu-top, 72px)) !important;
+		max-height: calc(100dvh - var(--abm-menu-top, 72px)) !important;
+		overflow-y: auto !important;
+		padding: 6px 16px 72px !important;
+		border-bottom: 3px solid #f59e0b !important;
+		background: #0f172a !important;
+		box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35) !important;
+		overscroll-behavior: contain;
+	}
+
+	.abm-hdr-wrap .abm-nav-item {
+		border-bottom: 1px solid #1e293b !important;
+	}
+
+	.abm-hdr-wrap .abm-nav-link {
+		justify-content: space-between !important;
+		padding: 14px 4px !important;
+		font-size: 16px !important;
+	}
+
+	/* Services: always open inside the panel, as a two-column grid. */
+	.abm-hdr-wrap.is-menu-open .abm-dropdown {
+		display: grid !important;
+		grid-template-columns: 1fr 1fr !important;
+		gap: 8px !important;
+		position: static !important;
+		width: auto !important;
+		padding: 0 0 14px !important;
+		border: 0 !important;
+		background: none !important;
+		box-shadow: none !important;
+	}
+
+	.abm-hdr-wrap.is-menu-open .abm-dropdown a {
+		padding: 11px 10px !important;
+		border: 1px solid #334155 !important;
+		border-radius: 9px !important;
+		background: #1e293b !important;
+		color: #e2e8f0 !important;
+		font-size: 13.5px !important;
+		line-height: 1.6 !important;
+	}
+
+	.abm-hdr-wrap .abm-nav-cta {
+		gap: 10px !important;
+		padding: 16px 0 0 !important;
+		border: 0 !important;
+	}
+
+	.abm-hdr-wrap.is-menu-open .abm-nav-cta {
+		display: flex !important;
+	}
+
+	.abm-hdr-wrap .abm-nav-cta a {
+		flex: 1 1 50% !important;
+		padding: 13px 8px !important;
+		border-radius: 10px !important;
+		font-size: 14.5px !important;
+		font-weight: 800 !important;
+		text-align: center !important;
+		text-decoration: none !important;
+	}
+
+	.abm-hdr-wrap .abm-nav-cta__call {
+		background: #f59e0b !important;
+		color: #0f172a !important;
+	}
+
+	.abm-hdr-wrap .abm-nav-cta__wa {
+		background: #22c55e !important;
+		color: #ffffff !important;
+	}
+}
+
+/* Small phones: brand name only and a round call icon, so the brand,
+   call and menu buttons fit on one line. */
+@media (max-width: 480px) {
+	.abm-hdr-wrap .abm-hdr-title span {
+		display: none !important;
+	}
+
+	.abm-hdr-wrap .abm-call-btn {
+		justify-content: center !important;
+		width: 46px !important;
+		height: 46px !important;
+		padding: 0 !important;
+		border-radius: 10px !important;
+		font-size: 0 !important;
+	}
+
+	.abm-hdr-wrap .abm-call-btn > span {
+		display: none !important;
+	}
+
+	.abm-hdr-wrap .abm-call-btn::before {
+		margin: 0 !important;
+		font-size: 20px !important;
+	}
+}
+
+/* Phones, every page: the floating call/WhatsApp buttons become one slim
+   bar at the bottom that never covers text (was articles only). */
+@media (max-width: 767px) {
+	html body .abm-float-wrapper {
+		right: 0 !important;
+		bottom: 0 !important;
+		left: 0 !important;
+		flex-direction: row !important;
+		gap: 0 !important;
+		box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.18) !important;
+	}
+
+	html body .abm-float-btn {
+		flex: 1 1 50% !important;
+		justify-content: center !important;
+		height: 52px !important;
+		padding: 0 8px !important;
+		border: 0 !important;
+		border-radius: 0 !important;
+		box-shadow: none !important;
+		font-size: 14px !important;
+		transform: none !important;
+	}
+
+	body {
+		padding-bottom: 52px;
+	}
+}
+
+/*
+ * Sticky header on every page: the Elementor header location stays at the
+ * top while scrolling (below the WordPress admin bar when logged in).
+ */
+.elementor-location-header {
+	position: -webkit-sticky;
+	position: sticky;
+	top: var(--wp-admin--admin-bar--height, 0px);
+	z-index: 9990;
+}
+
+/* The header template has three more containers under the menu bar that
+   hold only hidden code (schema, floating buttons) but add 75–100px of
+   blank space. Collapse them: the gap under the header disappears and the
+   sticky header no longer drags a white band over the content. */
+.elementor-location-header > .e-con ~ .e-con {
+	height: 0 !important;
+	min-height: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	overflow: visible !important;
+}
+
+@media (max-width: 600px) {
+	/* The admin bar scrolls away on phones, so stick to the very top. */
+	.elementor-location-header {
+		top: 0;
+	}
 }

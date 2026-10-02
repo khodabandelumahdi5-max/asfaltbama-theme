@@ -126,6 +126,8 @@ function asfaltbama_filter_page_html( $html ) {
 		}
 	}
 
+	$html = asfaltbama_mobile_nav( $html );
+
 	if ( function_exists( 'asfaltbama_wire_quote_form' ) ) {
 		$html = asfaltbama_wire_quote_form( $html );
 	}
@@ -756,3 +758,46 @@ function asfaltbama_jalali_the_date( $the_date, $format, $post ) {
 	return $post ? asfaltbama_date( $post->post_date ) : $the_date;
 }
 add_filter( 'get_the_date', 'asfaltbama_jalali_the_date', 10, 3 );
+
+/**
+ * Mobile menu for the header (Elementor HTML widget, .abm-hdr-*).
+ *
+ * The widget hides its menu below 900px and has no menu button, so on
+ * phones there was no way to reach the services, articles, about or
+ * contact pages. Add a menu button, call/WhatsApp buttons inside the menu,
+ * and a small script that opens and closes it (styles in style.css). Also
+ * point «توزیع قیر و مصالح عایق» at the bitumen page; it repeated the
+ * isogam link.
+ *
+ * @param string $html Page HTML.
+ * @return string
+ */
+function asfaltbama_mobile_nav( $html ) {
+	if ( false === strpos( $html, '<ul class="abm-nav-menu">' ) ) {
+		return $html;
+	}
+
+	$html = str_replace( '<a href="/isogam-waterproofing/">📦', '<a href="/bitumen-price/">📦', $html );
+
+	$button = '<button type="button" class="abm-menu-toggle" aria-controls="abm-nav-menu" aria-expanded="false" aria-label="منوی سایت">'
+		. '<span></span><span></span><span></span></button>';
+	$html   = preg_replace( '#<ul class="abm-nav-menu">#', $button . '<ul class="abm-nav-menu" id="abm-nav-menu">', $html, 1 );
+
+	$cta  = '<li class="abm-nav-item abm-nav-cta">'
+		. '<a class="abm-nav-cta__call" href="tel:' . esc_attr( ASFALTBAMA_PHONE ) . '">📞 تماس: <span dir="ltr">' . esc_html( ASFALTBAMA_PHONE_DISPLAY ) . '</span></a>'
+		. '<a class="abm-nav-cta__wa" href="' . esc_url( ASFALTBAMA_WHATSAPP ) . '" target="_blank" rel="noopener">💬 مشاوره در واتساپ</a>'
+		. '</li>';
+	$html = preg_replace( '#(<ul class="abm-nav-menu" id="abm-nav-menu">.*?)(</ul>)#s', '$1' . $cta . '$2', $html, 1 );
+
+	$script = '<script id="abm-mobile-nav">(function(){var b=document.querySelector(".abm-menu-toggle"),m=document.getElementById("abm-nav-menu"),h=b&&b.closest(".abm-hdr-wrap");if(!b||!m||!h)return;'
+		. 'function s(o){h.classList.toggle("is-menu-open",o);b.setAttribute("aria-expanded",o?"true":"false");if(o){h.style.setProperty("--abm-menu-top",Math.max(h.getBoundingClientRect().bottom,0)+"px")}}'
+		. 'b.addEventListener("click",function(e){e.stopPropagation();s(!h.classList.contains("is-menu-open"))});'
+		. 'm.addEventListener("click",function(e){if(e.target.closest("a"))s(false)});'
+		. 'document.addEventListener("click",function(e){if(!h.contains(e.target))s(false)});'
+		. 'document.addEventListener("keydown",function(e){if(e.key==="Escape")s(false)});'
+		. 'window.addEventListener("resize",function(){if(window.innerWidth>900)s(false)});'
+		. 'window.addEventListener("scroll",function(){if(h.classList.contains("is-menu-open"))h.style.setProperty("--abm-menu-top",Math.max(h.getBoundingClientRect().bottom,0)+"px")},{passive:true});})();</script>';
+
+	$pos = strripos( $html, '</body>' );
+	return false === $pos ? $html : substr_replace( $html, $script, $pos, 0 );
+}
