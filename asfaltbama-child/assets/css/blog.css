@@ -2374,3 +2374,127 @@ body.abm-single .abm-hero--post {
 		background: #ffffff;
 	}
 }
+
+/* 1.47 — desktop sizing: nearly full width and larger type. */
+@media (min-width: 1024px) {
+	body.abm-single .abm-wrap,
+	body.abm-single .abm-hero--post > .abm-wrap {
+		max-width: 1500px;
+	}
+
+	body.abm-single .abm-post__layout {
+		grid-template-columns: minmax(0, 1fr) 340px;
+		gap: 32px;
+		padding-right: 28px;
+		padding-left: 28px;
+	}
+
+	body.abm-single .abm-hero--post > .abm-wrap {
+		padding: 38px 34px;
+	}
+
+	body.abm-single .abm-crumbs {
+		font-size: 14px;
+	}
+
+	body.abm-single .abm-badge--hero {
+		padding: 7px 16px;
+		font-size: 14px;
+	}
+
+	body.abm-single .abm-hero__title {
+		font-size: clamp(28px, 2.4vw, 36px);
+	}
+
+	body.abm-single .abm-hero__lead {
+		max-width: 1050px;
+		font-size: 16.5px;
+	}
+
+	body.abm-single .abm-post__meta li {
+		padding: 6px 14px;
+		font-size: 14px;
+	}
+
+	.abm-hero__call,
+	.abm-hero__alt {
+		padding: 14px 28px;
+		font-size: 16px;
+	}
+
+	body.abm-single .abm-post__article {
+		padding: 34px clamp(24px, 3vw, 44px);
+	}
+
+	body.abm-single .abm-prose {
+		font-size: 17px;
+		line-height: 2.05;
+	}
+
+	body.abm-single .abm-prose h2 {
+		font-size: clamp(21px, 1.7vw, 25px);
+	}
+
+	body.abm-single .abm-prose h3 {
+		font-size: 18.5px;
+	}
+
+	body.abm-single .abm-prose table,
+	body.abm-single .abm-prose th,
+	body.abm-single .abm-prose td {
+		font-size: 15.5px;
+	}
+
+	body.abm-single .abm-prose th,
+	body.abm-single .abm-prose td {
+		padding: 13px 16px;
+	}
+
+	body.abm-single .abm-panel {
+		padding: 26px 24px;
+	}
+
+	body.abm-single .abm-panel__title {
+		font-size: 18px;
+	}
+
+	body.abm-single .abm-toc__list a,
+	body.abm-single .abm-links a,
+	body.abm-single .abm-panel p {
+		font-size: 15.5px;
+	}
+
+	body.abm-single .abm-price-table__note,
+	body.abm-single .abm-price-table__cta,
+	body.abm-single .abm-price-table__date {
+		font-size: 15.5px;
+	}
+
+	body.abm-single .abm-cta--box .abm-cta__title {
+		font-size: 24px;
+	}
+
+	body.abm-single .abm-cta--box .abm-cta__desc {
+		font-size: 16px;
+	}
+}
+
+@media (min-width: 1024px) and (max-width: 1548px) {
+	body.abm-single .abm-hero--post > .abm-wrap {
+		margin-right: 28px;
+		margin-left: 28px;
+	}
+}
+
+@media (min-width: 1024px) {
+	body.abm-single .abm-prose {
+		font-size: 17.5px;
+	}
+
+	body.abm-single .abm-prose li,
+	body.abm-single .abm-prose .abm-summary li,
+	body.abm-single .abm-prose .abm-callout p,
+	body.abm-single .abm-prose .abm-stat {
+		font-size: 16.5px;
+	}
+}
