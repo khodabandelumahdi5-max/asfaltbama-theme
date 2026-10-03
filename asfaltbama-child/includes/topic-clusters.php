@@ -57,7 +57,7 @@ function asfaltbama_clusters() {
 				'label'  => 'ایزوگام، قیرگونی و قیر',
 				'anchor' => 'اجرای ایزوگام پشت بام',
 				'desc'   => 'نصب ایزوگام و قیرگونی بام، سرویس بهداشتی و فونداسیون با تست آب‌بندی و ضمانت کتبی، و فروش قیر.',
-				'posts'  => [ 'isogam-price-guide', 'isogam-roll-price', 'isogam-brands-price', 'isogam-delijan', 'best-isogam', 'isogam-installation-steps', 'isogam-gas-torch', 'bitumen-roofing-vs-isogam', 'isogam-over-old-isogam', 'roof-leak-after-isogam', 'roof-waterproofing-methods', 'bitumen-roofing-steps', 'bitumen-roofing-price', 'bathroom-waterproofing', 'foundation-waterproofing', 'roof-winter-checklist', 'isogam-cost-responsibility', 'nano-liquid-waterproofing', 'bitumen-price', 'bitumen-types', 'jute-burlap-price', 'asphalt-isogam-warranty-guide' ],
+				'posts'  => [ 'isogam-price-guide', 'isogam-roll-price', 'isogam-brands-price', 'isogam-delijan', 'best-isogam', 'isogam-installation-steps', 'isogam-gas-torch', 'bitumen-roofing-vs-isogam', 'isogam-over-old-isogam', 'roof-leak-after-isogam', 'roof-waterproofing-methods', 'bitumen-roofing-steps', 'bitumen-roofing-price', 'bathroom-waterproofing', 'foundation-waterproofing', 'roof-winter-checklist', 'isogam-cost-responsibility', 'nano-liquid-waterproofing', 'bitumen-price', 'bitumen-types', 'buy-drum-bitumen', 'cold-bitumen', 'bathroom-bitumen-roofing', 'jute-burlap-price', 'asphalt-isogam-warranty-guide' ],
 				'faq'    => [
 					[ 'اجرای ایزوگام پشت بام متری چند است؟', 'قیمت اجرای ایزوگام به نوع و برند ایزوگام، متراژ، تعداد لایه‌ها، دورچینی و وضعیت سطح (نیاز به جمع‌آوری ایزوگام قدیمی یا اصلاح شیب) بستگی دارد و پس از بازدید اعلام می‌شود. عوامل قیمت و محاسبه‌ی تعداد رول در <a href="/isogam-price-guide/">قیمت ایزوگام</a> آمده است.' ],
 					[ 'هزینه‌ی ایزوگام پشت بام به عهده‌ی کیست؟', 'در ساختمان‌های آپارتمانی، بام معمولاً جزو مشاعات است و هزینه‌ی تعمیر و نگهداری آن بین مالکان تقسیم می‌شود. در ملک اجاره‌ای، تعمیرات اساسی مثل عایق بام معمولاً با مالک است، مگر قرارداد اجاره ترتیب دیگری گذاشته باشد. جزئیات در <a href="/isogam-cost-responsibility/">هزینه‌ی ایزوگام به عهده‌ی کیست</a>.' ],
@@ -70,7 +70,7 @@ function asfaltbama_clusters() {
 				'label'  => 'خاکبرداری و گودبرداری',
 				'anchor' => 'خاکبرداری و گودبرداری در تهران',
 				'desc'   => 'خاکبرداری، گودبرداری ساختمانی، تسطیح زمین و آماده‌سازی بستر با بیل مکانیکی و لودر.',
-				'posts'  => [ 'excavation-cost-guide', 'deep-excavation-price', 'shoring-price', 'excavation-methods', 'excavation-safety-guide', 'soil-nailing', 'engineered-backfill', 'land-grading-guide', 'subgrade-preparation-compaction', 'washed-sand-price', 'cement-type2-price' ],
+				'posts'  => [ 'excavation-cost-guide', 'deep-excavation-price', 'shoring-price', 'excavation-contract', 'manual-excavation', 'excavation-methods', 'excavation-safety-guide', 'soil-nailing', 'engineered-backfill', 'land-grading-guide', 'subgrade-preparation-compaction', 'washed-sand-price', 'cement-type2-price' ],
 				'faq'    => [
 					[ 'قیمت خاکبرداری هر متر مکعب چطور محاسبه می‌شود؟', 'مبنای معمول، حجم خاک برداشته‌شده بر حسب متر مکعب است و قیمت به جنس خاک، عمق، دسترسی ماشین‌آلات، فاصله‌ی حمل و محل تخلیه بستگی دارد. در پروژه‌های دولتی فهرست بها مرجع است و در پروژه‌های خصوصی قیمت پس از بازدید توافق می‌شود. روش محاسبه در <a href="/excavation-cost-guide/">قیمت خاکبرداری هر متر مکعب</a>.' ],
 					[ 'خاکبرداری با بیل مکانیکی بهتر است یا لودر؟', 'بیل مکانیکی برای کندن در عمق و گودبرداری مناسب است و لودر برای جابه‌جایی و بارگیری خاک سست و تسطیح؛ در بیشتر پروژه‌ها ترکیبی از هر دو، و در فضاهای تنگ بابکت یا مینی‌بیل به کار می‌رود.' ],
@@ -83,7 +83,7 @@ function asfaltbama_clusters() {
 				'label'  => 'تخریب و ضایعات آهن',
 				'anchor' => 'تخریب ساختمان کلنگی و خرید ضایعات آهن',
 				'desc'   => 'تخریب اصولی ساختمان کلنگی، بتنی و فلزی، حمل نخاله و خرید نقدی ضایعات آهن.',
-				'posts'  => [ 'scrap-iron-selling-guide', 'iron-types-scrap', 'demolition-cost-guide', 'demolition-methods', 'construction-debris-removal', 'demolition-permit-tehran', 'excavation-cost-guide' ],
+				'posts'  => [ 'scrap-iron-selling-guide', 'iron-types-scrap', 'demolition-cost-guide', 'wall-demolition', 'demolition-methods', 'construction-debris-removal', 'demolition-permit-tehran', 'excavation-contract', 'excavation-cost-guide' ],
 				'schema' => true,
 				'faq'    => [
 					[ 'هزینه‌ی تخریب ساختمان کلنگی چقدر است؟', 'به متراژ و نوع سازه (آجری، بتنی یا فلزی)، روش تخریب، دسترسی، حمل نخاله و ارزش ضایعات آهن بستگی دارد؛ ارزش آهن‌آلات گاهی بخش قابل توجهی از هزینه را جبران می‌کند. عوامل قیمت در <a href="/demolition-cost-guide/">قیمت تخریب ساختمان</a>.' ],
@@ -97,7 +97,7 @@ function asfaltbama_clusters() {
 				'label'  => 'درزگیری و لکه‌گیری',
 				'anchor' => 'درزگیری آسفالت با ماستیک گرم',
 				'desc'   => 'درزگیری ترک‌های طولی و عرضی آسفالت با قیر پلیمری و ماستیک گرم، و لکه‌گیری اصولی.',
-				'posts'  => [ 'asphalt-crack-sealing-guide', 'crack-sealing-cost', 'asphalt-patching-guide' ],
+				'posts'  => [ 'asphalt-crack-sealing-guide', 'crack-sealing-cost', 'bitumen-mastic', 'asphalt-patching-guide' ],
 				'faq'    => [
 					[ 'درزگیری آسفالت چیست؟', 'پر کردن و آب‌بندی ترک‌های آسفالت با ماستیک گرم یا قیر پلیمری، تا آب به لایه‌های زیرین نرسد و ترک‌ها گسترش پیدا نکنند. کی و چطور در <a href="/asphalt-crack-sealing-guide/">درزگیری ترک‌های آسفالت</a>.' ],
 					[ 'قیمت درزگیری آسفالت چطور محاسبه می‌شود؟', 'معمولاً بر اساس طول ترک‌ها (متر طول)، عرض و عمق آن‌ها، نوع ماستیک و حجم کار. روش محاسبه در <a href="/crack-sealing-cost/">قیمت درزگیری آسفالت</a>.' ],
@@ -110,7 +110,7 @@ function asfaltbama_clusters() {
 				'label'  => 'اجاره ماشین‌آلات',
 				'anchor' => 'اجاره بابکت و ماشین‌آلات راه‌سازی',
 				'desc'   => 'اجاره روزانه‌ی بابکت، مینی‌بیل، بیل مکانیکی، فینیشر و غلتک با اپراتور.',
-				'posts'  => [ 'bobcat-rental-guide', 'roller-finisher-rental', 'excavation-cost-guide', 'land-grading-guide' ],
+				'posts'  => [ 'bobcat-rental-guide', 'roller-finisher-rental', 'excavation-cost-guide', 'manual-excavation', 'land-grading-guide' ],
 				'schema' => true,
 				'faq'    => [
 					[ 'اجاره‌ی بابکت روزانه است یا ساعتی؟', 'معمولاً روزانه (یک شیفت کاری) و با اپراتور؛ برای کارهای کوتاه گاهی ساعتی هم توافق می‌شود. هزینه‌ی رفت‌وبرگشت دستگاه هم باید مشخص باشد. عوامل نرخ اجاره در <a href="/bobcat-rental-guide/">اجاره بابکت</a>.' ],
