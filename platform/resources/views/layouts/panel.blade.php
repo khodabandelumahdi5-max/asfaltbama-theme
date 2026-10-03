@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'پنل کاربری') | {{ config('app.name') }}</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/app.css?v=1">
+    <link rel="preload" href="/fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/app.css?v=2">
     <meta name="robots" content="noindex">
 </head>
 <body>

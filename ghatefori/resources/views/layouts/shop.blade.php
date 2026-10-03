@@ -6,10 +6,8 @@
     <title>@yield('title', 'قطعات خودروهای چینی، کره‌ای و ژاپنی') | {{ config('shop.name') }}</title>
     <meta name="description" content="@yield('description', config('shop.tagline').'. بررسی تطبیق قطعه با خودرو پیش از نهایی شدن سفارش.')">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/app.css?v=1">
+    <link rel="preload" href="/fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/app.css?v=2">
     @stack('head')
 </head>
 <body>
