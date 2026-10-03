@@ -128,3 +128,35 @@ function asfaltbama_topic_redirects() {
 	);
 }
 add_action( 'template_redirect', 'asfaltbama_alias_redirect', 1 );
+
+/**
+ * Old archive URLs that used to land on the home page.
+ *
+ * - /author/<login>/… listed the articles; Rank Math sent it to the home
+ *   page, so searches that matched an article landed on the home page.
+ *   Send it to the articles list instead.
+ * - /page/2/, /page/3/… on the static front page answered 200 with the
+ *   home page content (endless duplicates): send them to the home page.
+ *
+ * Runs on parse_request, before Rank Math's own author redirect.
+ *
+ * @param WP $wp Current request.
+ * @return void
+ */
+function asfaltbama_archive_redirects( $wp ) {
+	if ( is_admin() || wp_doing_ajax() ) {
+		return;
+	}
+	$path = trim( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+
+	if ( preg_match( '#^author(/|$)#', $path ) ) {
+		wp_safe_redirect( asfaltbama_articles_url(), 301 );
+		exit;
+	}
+
+	if ( preg_match( '#^page/\d+$#', $path ) && 'page' === get_option( 'show_on_front' ) ) {
+		wp_safe_redirect( home_url( '/' ), 301 );
+		exit;
+	}
+}
+add_action( 'parse_request', 'asfaltbama_archive_redirects', 0 );
