@@ -60,7 +60,7 @@
     "32190": "اجرای آسفالت معابر با فینیشر و غلتک در تهران و کرج",
     "31902": "لوگوی آسفالت با ما"
   },
-  "page_seo_version": "2026-09-30.2",
+  "page_seo_version": "2026-10-03.1",
   "page_seo": {
     "__front__": {
       "seo_title": "آسفالت با ما | اجرای آسفالت، خاکبرداری و ایزوگام تهران و کرج",
@@ -121,6 +121,48 @@
     "about-us": {
       "focus_keyword": "درباره ما",
       "seo_title": "درباره ما | شرکت افق آپادانا پاسارگاد (آسفالت با ما)"
+    },
+    "asphalt-waterproofing-iraq": {
+      "focus_keyword": "Asphalt Paving in Iraq,asphalt paving,roof waterproofing Iraq"
+    },
+    "asphalt-waterproofing-kuwait": {
+      "focus_keyword": "Asphalt Paving in Kuwait,asphalt paving,roof waterproofing Kuwait"
+    },
+    "asphalt-waterproofing-oman": {
+      "focus_keyword": "Asphalt Paving in Oman,asphalt paving,roof waterproofing Oman"
+    },
+    "asphalt-waterproofing-bahrain": {
+      "focus_keyword": "Asphalt Paving in Bahrain,asphalt paving,roof waterproofing Bahrain"
+    },
+    "asphalt-waterproofing-dubai-uae": {
+      "focus_keyword": "Asphalt Paving in Dubai and the UAE,asphalt paving,roof waterproofing Dubai"
+    },
+    "asphalt-waterproofing-iraq-ar": {
+      "focus_keyword": "رصف الأسفلت في العراق,رصف الأسفلت,عزل الأسطح العراق,قير وجنفاص"
+    },
+    "asphalt-waterproofing-kuwait-ar": {
+      "focus_keyword": "رصف الأسفلت في الكويت,رصف الأسفلت,عزل الأسطح الكويت"
+    },
+    "asphalt-waterproofing-oman-ar": {
+      "focus_keyword": "رصف الأسفلت في سلطنة عُمان,رصف الأسفلت,عزل الأسطح عمان"
+    },
+    "asphalt-waterproofing-bahrain-ar": {
+      "focus_keyword": "رصف الأسفلت في البحرين,رصف الأسفلت,عزل الأسطح البحرين"
+    },
+    "asphalt-waterproofing-dubai-uae-ar": {
+      "focus_keyword": "رصف الأسفلت في دبي والإمارات,رصف الأسفلت,عزل الأسطح دبي"
+    },
+    "asphalt-waterproofing-karbala": {
+      "focus_keyword": "رصف الأسفلت في كربلاء,رصف الأسفلت,عزل الأسطح كربلاء"
+    },
+    "asphalt-waterproofing-najaf": {
+      "focus_keyword": "رصف الأسفلت في النجف,رصف الأسفلت,عزل الأسطح النجف"
+    },
+    "asphalt-waterproofing-basra": {
+      "focus_keyword": "رصف الأسفلت في البصرة,رصف الأسفلت,عزل الأسطح البصرة"
+    },
+    "asphalt-waterproofing-erbil": {
+      "focus_keyword": "رصف الأسفلت في أربيل,رصف الأسفلت,عزل الأسطح أربيل"
     }
   },
   "images_version": "2026-09-30.8",
@@ -1359,7 +1401,7 @@
       "excerpt": "Asphalt paving, isogam membranes and hot bitumen roofing in Iraq: Karbala, Najaf, Basra and Erbil. Specifications for 50 °C heat. WhatsApp or email us.",
       "seo_title": "Asphalt Paving, Isogam & Bitumen Roofing in Iraq | Asfaltbama",
       "seo_description": "Asphalt paving, isogam membranes and hot bitumen roofing in Iraq: Karbala, Najaf, Basra and Erbil. Specifications for 50 °C heat. WhatsApp or email us.",
-      "focus_keyword": "Asphalt Paving,roof waterproofing Iraq",
+      "focus_keyword": "Asphalt Paving in Iraq,asphalt paving,roof waterproofing Iraq",
       "layout": "landing",
       "managed": true,
       "lang": "en",
@@ -1379,7 +1421,7 @@
       "excerpt": "Asphalt paving of yards and car parks, reflective isogam membranes and bitumen roofing in Kuwait City, Shuwaikh, Sabhan and Ahmadi. WhatsApp or email us.",
       "seo_title": "Asphalt Paving, Isogam & Bitumen Roofing in Kuwait | Asfaltbama",
       "seo_description": "Asphalt paving of yards and car parks, reflective isogam membranes and bitumen roofing in Kuwait City, Shuwaikh, Sabhan and Ahmadi. WhatsApp or email us.",
-      "focus_keyword": "Asphalt Paving,roof waterproofing Kuwait",
+      "focus_keyword": "Asphalt Paving in Kuwait,asphalt paving,roof waterproofing Kuwait",
       "layout": "landing",
       "managed": true,
       "lang": "en",
@@ -1395,7 +1437,7 @@
       "excerpt": "Asphalt paving, isogam membranes and bitumen roofing in Oman with drainage planned first: Muscat, Sohar, Barka and Nizwa. WhatsApp or email us.",
       "seo_title": "Asphalt Paving, Isogam & Bitumen Roofing in Oman | Asfaltbama",
       "seo_description": "Asphalt paving, isogam membranes and bitumen roofing in Oman with drainage planned first: Muscat, Sohar, Barka and Nizwa. WhatsApp or email us.",
-      "focus_keyword": "Asphalt Paving,roof waterproofing Oman",
+      "focus_keyword": "Asphalt Paving in Oman,asphalt paving,roof waterproofing Oman",
       "layout": "landing",
       "managed": true,
       "lang": "en",
@@ -1411,7 +1453,7 @@
       "excerpt": "Asphalt paving, isogam membranes and bitumen roofing in Bahrain for humid coastal sites: Manama, Muharraq, Sitra and Hidd. WhatsApp or email us.",
       "seo_title": "Asphalt Paving, Isogam & Bitumen Roofing in Bahrain | Asfaltbama",
       "seo_description": "Asphalt paving, isogam membranes and bitumen roofing in Bahrain for humid coastal sites: Manama, Muharraq, Sitra and Hidd. WhatsApp or email us.",
-      "focus_keyword": "Asphalt Paving,roof waterproofing Bahrain",
+      "focus_keyword": "Asphalt Paving in Bahrain,asphalt paving,roof waterproofing Bahrain",
       "layout": "landing",
       "managed": true,
       "lang": "en",
@@ -1427,7 +1469,7 @@
       "excerpt": "Asphalt paving of warehouse yards and car parks and reflective isogam roof membranes in Dubai, Sharjah and Ajman, to specification. WhatsApp or email us.",
       "seo_title": "Asphalt Paving, Isogam & Bitumen Roofing in Dubai, UAE | Asfaltbama",
       "seo_description": "Asphalt paving of warehouse yards and car parks and reflective isogam roof membranes in Dubai, Sharjah and Ajman, to specification. WhatsApp or email us.",
-      "focus_keyword": "Asphalt Paving,roof waterproofing Dubai",
+      "focus_keyword": "Asphalt Paving in Dubai and the UAE,asphalt paving,roof waterproofing Dubai",
       "layout": "landing",
       "managed": true,
       "lang": "en",
@@ -1464,7 +1506,7 @@
       "excerpt": "رصف الأسفلت وعزل الأسطح بالإيزوجام والقير والجنفاص في العراق: كربلاء والنجف والبصرة وأربيل، بمواصفات لحرارة ٥٠ درجة. تواصلوا عبر واتساب.",
       "seo_title": "رصف الأسفلت والعزل بالإيزوجام والقير والجنفاص في العراق",
       "seo_description": "رصف الأسفلت وعزل الأسطح بالإيزوجام والقير والجنفاص في العراق: كربلاء والنجف والبصرة وأربيل، بمواصفات لحرارة ٥٠ درجة. تواصلوا عبر واتساب.",
-      "focus_keyword": "رصف الأسفلت,عزل الأسطح العراق,قير وجنفاص",
+      "focus_keyword": "رصف الأسفلت في العراق,رصف الأسفلت,عزل الأسطح العراق,قير وجنفاص",
       "layout": "landing",
       "managed": true,
       "lang": "ar",
@@ -1484,7 +1526,7 @@
       "excerpt": "رصف الأسفلت لساحات المستودعات والمواقف، وعزل الأسطح بلفائف إيزوجام عاكسة وبالقير والجنفاص في الكويت والشويخ وصبحان والأحمدي. تواصلوا عبر واتساب.",
       "seo_title": "رصف الأسفلت والعزل بالإيزوجام في الكويت | أسفلت با ما",
       "seo_description": "رصف الأسفلت لساحات المستودعات والمواقف، وعزل الأسطح بلفائف إيزوجام عاكسة وبالقير والجنفاص في الكويت والشويخ وصبحان والأحمدي. تواصلوا عبر واتساب.",
-      "focus_keyword": "رصف الأسفلت,عزل الأسطح الكويت",
+      "focus_keyword": "رصف الأسفلت في الكويت,رصف الأسفلت,عزل الأسطح الكويت",
       "layout": "landing",
       "managed": true,
       "lang": "ar",
@@ -1500,7 +1542,7 @@
       "excerpt": "رصف الأسفلت وعزل الأسطح بالإيزوجام والقير والجنفاص في عُمان مع أولوية للتصريف: مسقط وصحار وبركاء ونزوى. تواصلوا عبر واتساب.",
       "seo_title": "رصف الأسفلت والعزل بالإيزوجام في سلطنة عُمان | أسفلت با ما",
       "seo_description": "رصف الأسفلت وعزل الأسطح بالإيزوجام والقير والجنفاص في عُمان مع أولوية للتصريف: مسقط وصحار وبركاء ونزوى. تواصلوا عبر واتساب.",
-      "focus_keyword": "رصف الأسفلت,عزل الأسطح عمان",
+      "focus_keyword": "رصف الأسفلت في سلطنة عُمان,رصف الأسفلت,عزل الأسطح عمان",
       "layout": "landing",
       "managed": true,
       "lang": "ar",
@@ -1516,7 +1558,7 @@
       "excerpt": "رصف الأسفلت وعزل الأسطح بالإيزوجام والقير والجنفاص في البحرين للمواقع الساحلية الرطبة: المنامة والمحرق وسترة والحد. تواصلوا عبر واتساب.",
       "seo_title": "رصف الأسفلت والعزل بالإيزوجام في البحرين | أسفلت با ما",
       "seo_description": "رصف الأسفلت وعزل الأسطح بالإيزوجام والقير والجنفاص في البحرين للمواقع الساحلية الرطبة: المنامة والمحرق وسترة والحد. تواصلوا عبر واتساب.",
-      "focus_keyword": "رصف الأسفلت,عزل الأسطح البحرين",
+      "focus_keyword": "رصف الأسفلت في البحرين,رصف الأسفلت,عزل الأسطح البحرين",
       "layout": "landing",
       "managed": true,
       "lang": "ar",
@@ -1532,7 +1574,7 @@
       "excerpt": "رصف الأسفلت لساحات المستودعات والمواقف وعزل الأسطح بلفائف إيزوجام عاكسة في دبي والشارقة وعجمان وفق المواصفات. تواصلوا عبر واتساب.",
       "seo_title": "رصف الأسفلت والعزل بالإيزوجام في دبي والإمارات | أسفلت با ما",
       "seo_description": "رصف الأسفلت لساحات المستودعات والمواقف وعزل الأسطح بلفائف إيزوجام عاكسة في دبي والشارقة وعجمان وفق المواصفات. تواصلوا عبر واتساب.",
-      "focus_keyword": "رصف الأسفلت,عزل الأسطح دبي",
+      "focus_keyword": "رصف الأسفلت في دبي والإمارات,رصف الأسفلت,عزل الأسطح دبي",
       "layout": "landing",
       "managed": true,
       "lang": "ar",
@@ -1549,7 +1591,7 @@
       "excerpt": "عزل أسطح الفنادق والحسينيات بالإيزوجام والقير والجنفاص ورصف الأسفلت للساحات ومواقف الحافلات في كربلاء، مع تنفيذ قبل مواسم الزيارة. تواصلوا عبر واتساب.",
       "seo_title": "رصف الأسفلت وعزل الأسطح بالإيزوجام في كربلاء | أسفلت با ما",
       "seo_description": "عزل أسطح الفنادق والحسينيات بالإيزوجام والقير والجنفاص ورصف الأسفلت للساحات ومواقف الحافلات في كربلاء، مع تنفيذ قبل مواسم الزيارة. تواصلوا عبر واتساب.",
-      "focus_keyword": "رصف الأسفلت,عزل الأسطح كربلاء",
+      "focus_keyword": "رصف الأسفلت في كربلاء,رصف الأسفلت,عزل الأسطح كربلاء",
       "layout": "landing",
       "managed": true,
       "lang": "ar",
@@ -1564,7 +1606,7 @@
       "excerpt": "عزل أسطح الفنادق والمجمعات بالإيزوجام العاكس والقير والجنفاص ورصف الأسفلت للساحات والمواقف في النجف. تواصلوا عبر واتساب.",
       "seo_title": "رصف الأسفلت وعزل الأسطح بالإيزوجام في النجف | أسفلت با ما",
       "seo_description": "عزل أسطح الفنادق والمجمعات بالإيزوجام العاكس والقير والجنفاص ورصف الأسفلت للساحات والمواقف في النجف. تواصلوا عبر واتساب.",
-      "focus_keyword": "رصف الأسفلت,عزل الأسطح النجف",
+      "focus_keyword": "رصف الأسفلت في النجف,رصف الأسفلت,عزل الأسطح النجف",
       "layout": "landing",
       "managed": true,
       "lang": "ar",
@@ -1579,7 +1621,7 @@
       "excerpt": "رصف الأسفلت للساحات الصناعية والمستودعات بطبقتين وعزل الأسطح بالإيزوجام والقير والجنفاص في البصرة، لحرارة ورطوبة وتربة مالحة. تواصلوا عبر واتساب.",
       "seo_title": "رصف الأسفلت وعزل الأسطح بالإيزوجام في البصرة | أسفلت با ما",
       "seo_description": "رصف الأسفلت للساحات الصناعية والمستودعات بطبقتين وعزل الأسطح بالإيزوجام والقير والجنفاص في البصرة، لحرارة ورطوبة وتربة مالحة. تواصلوا عبر واتساب.",
-      "focus_keyword": "رصف الأسفلت,عزل الأسطح البصرة",
+      "focus_keyword": "رصف الأسفلت في البصرة,رصف الأسفلت,عزل الأسطح البصرة",
       "layout": "landing",
       "managed": true,
       "lang": "ar",
@@ -1594,7 +1636,7 @@
       "excerpt": "رصف الأسفلت لساحات المجمعات والمواقف وعزل الأسطح بالإيزوجام والقير والجنفاص في أربيل، لصيف حار وشتاء بصقيع. تواصلوا عبر واتساب.",
       "seo_title": "رصف الأسفلت وعزل الأسطح بالإيزوجام في أربيل | أسفلت با ما",
       "seo_description": "رصف الأسفلت لساحات المجمعات والمواقف وعزل الأسطح بالإيزوجام والقير والجنفاص في أربيل، لصيف حار وشتاء بصقيع. تواصلوا عبر واتساب.",
-      "focus_keyword": "رصف الأسفلت,عزل الأسطح أربيل",
+      "focus_keyword": "رصف الأسفلت في أربيل,رصف الأسفلت,عزل الأسطح أربيل",
       "layout": "landing",
       "managed": true,
       "lang": "ar",
@@ -2096,7 +2138,7 @@
       "excerpt": "کاربردهای بابکت، اتصالات رایج مثل پیکور و جارو، عوامل تعیین نرخ اجاره‌ی ساعتی و روزانه و مقایسه‌ی بابکت با مینی‌بیل، بیل و لودر.",
       "seo_title": "بابکت چیست؟ اجاره بابکت، کاربردها و قیمت اجاره یا خرید",
       "seo_description": "اجاره بابکت برای بارگیری، تخریب سبک و تسطیح. اتصالات رایج، عوامل تعیین نرخ اجاره ساعتی و روزانه و مقایسه با مینی‌بیل و لودر.",
-      "focus_keyword": "اجاره بابکت,بابکت چیست,قیمت بابکت",
+      "focus_keyword": "بابکت چیست,کاربرد بابکت,قیمت بابکت",
       "category_name": "اجاره ماشین‌آلات",
       "prev_hashes": [
         "760935a39ad29211775435ce56f14a81",
@@ -2194,7 +2236,7 @@
       "excerpt": "علت‌های ریزش گود، مراحل گودبرداری اصولی، روش‌های پایدارسازی مثل نیلینگ و سازه‌ی نگهبان، و نکات ایمنی در کنار ساختمان‌های مجاور.",
       "seo_title": "گودبرداری اصولی؛ ضوابط، مراحل، پایدارسازی و ایمنی | آسفالت با ما",
       "seo_description": "چرا گود ریزش می‌کند؟ مراحل گودبرداری اصولی، روش‌های پایدارسازی مثل نیلینگ، انکراژ و سازه نگهبان، و نکات ایمنی گود شهری.",
-      "focus_keyword": "گودبرداری,ضوابط گودبرداری",
+      "focus_keyword": "گودبرداری اصولی,ضوابط گودبرداری,ایمنی گودبرداری",
       "prev_hashes": [
         "7a64c7fa4ca97c08fd29f63fc3e35359",
         "1ff1619526da5b6365d66f38eac538b2",
@@ -2639,8 +2681,8 @@
       "category": "asphalt-paving",
       "file": "articles/cold-asphalt-bag.html",
       "excerpt": "آسفالت سرد کیسه‌ای چیست، کجا مناسب است، روش اجرای اصولی برای دوام بیشتر، محاسبه‌ی تعداد کیسه، عوامل قیمت و تشخیص کیفیت.",
-      "seo_title": "آسفالت سرد کیسه ای؛ قیمت ۱۴۰۵، روش مصرف و تعداد کیسه",
-      "seo_description": "قیمت آسفالت سرد کیسه ای و فله، روش صحیح پر کردن چاله با آسفالت سرد، محاسبه تعداد کیسه، دوام و مقایسه با لکه گیری آسفالت گرم.",
+      "seo_title": "آسفالت سرد کیسه‌ای؛ قیمت ۱۴۰۵، روش مصرف و تعداد کیسه",
+      "seo_description": "قیمت آسفالت سرد کیسه‌ای و فله، روش صحیح پر کردن چاله با آسفالت سرد، محاسبه تعداد کیسه، دوام و مقایسه با لکه گیری آسفالت گرم.",
       "focus_keyword": "آسفالت سرد کیسه ای,قیمت آسفالت سرد کیسه ای,قیمت آسفالت سرد",
       "prev_hashes": [
         "97a4ababa0560feff08581cc03ea5fff",
@@ -2742,7 +2784,7 @@
       "category": "excavation-grading",
       "file": "articles/excavation-methods.html",
       "excerpt": "انواع خاکبرداری بر اساس هدف، خاکبرداری دستی و ماشینی، روش‌های گودبرداری شیب‌دار، پلکانی، با سازه‌ی نگهبان و تاپ‌دان، و خاکبرداری در سنگ.",
-      "seo_title": "روش های خاکبرداری و انواع گودبرداری | راهنمای کامل",
+      "seo_title": "روش‌های خاکبرداری و انواع گودبرداری | راهنمای کامل",
       "seo_description": "انواع خاکبرداری و روش‌های گودبرداری: دستی و ماشینی، شیب‌دار، پلکانی، سازه نگهبان و تاپ‌دان؛ ماشین‌آلات هر روش و معیار انتخاب.",
       "focus_keyword": "روش های خاکبرداری,انواع خاکبرداری,روش های گودبرداری",
       "prev_hashes": [
@@ -2757,7 +2799,7 @@
       "category": "demolition",
       "file": "articles/demolition-methods.html",
       "excerpt": "روش‌های تخریب ساختمان: تخریب دستی، مکانیکی با بیل و قیچی هیدرولیک، پیکور، برش بتن، انفجار و تخریب داخلی؛ مقایسه‌ی سرعت، هزینه و کاربرد.",
-      "seo_title": "روش های تخریب ساختمان؛ دستی، مکانیکی و برش بتن",
+      "seo_title": "روش‌های تخریب ساختمان؛ دستی، مکانیکی و برش بتن",
       "seo_description": "انواع روش تخریب ساختمان: دستی، مکانیکی، پیکور، برش بتن، انفجار و تخریب داخلی؛ مقایسه سرعت، هزینه و کاربرد هر روش و نکات ایمنی.",
       "focus_keyword": "روش های تخریب ساختمان,انواع تخریب,تخریب مکانیکی",
       "prev_hashes": [
@@ -2882,7 +2924,7 @@
       ]
     }
   },
-  "post_seo_version": "2026-10-01.2",
+  "post_seo_version": "2026-10-03.1",
   "tags_version": "2026-09-30.8",
   "tags_cleanup": {
     "delete_slugs": [

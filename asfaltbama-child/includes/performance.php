@@ -111,6 +111,9 @@ function asfaltbama_perf_html( $html ) {
 		$html = preg_replace( '/<div data-elementor-type="wp-page"/', '<div id="content" tabindex="-1"' . $main . ' data-elementor-type="wp-page"', $html, 1 );
 	}
 
+	$html = asfaltbama_size_upload_images( $html );
+	$html = asfaltbama_describe_read_more( $html );
+
 	if ( is_front_page() && asfaltbama_front_hero() ) {
 		// The hero background is the priority image now.
 		$html = str_replace( 'fetchpriority="high" ', '', $html );
@@ -223,3 +226,70 @@ function asfaltbama_purge_page_cache() {
 }
 add_action( 'update_option_asfaltbama_prices', 'asfaltbama_purge_page_cache' );
 
+
+/**
+ * Uploaded images written by hand in Elementor HTML widgets (the service
+ * page galleries) had no width/height, no srcset and no lazy loading: the
+ * full-size photo (up to 300 KB) loaded on phones and the layout jumped.
+ * Look the file up in the media library and add its size, a srcset with
+ * the generated smaller sizes, and lazy loading.
+ *
+ * @param string $html Page HTML.
+ * @return string
+ */
+function asfaltbama_size_upload_images( $html ) {
+	$uploads = wp_get_upload_dir();
+	$base    = preg_quote( $uploads['baseurl'], '#' );
+
+	return preg_replace_callback(
+		'#<img\b(?![^>]*\bwidth=)[^>]*\bsrc="(' . $base . '/[^"]+)"[^>]*>#',
+		function ( $m ) {
+			$tag = $m[0];
+			$id  = attachment_url_to_postid( $m[1] );
+			if ( ! $id ) {
+				return $tag;
+			}
+			$meta = wp_get_attachment_metadata( $id );
+			if ( empty( $meta['width'] ) || empty( $meta['height'] ) ) {
+				return $tag;
+			}
+			$add = ' width="' . (int) $meta['width'] . '" height="' . (int) $meta['height'] . '"';
+			if ( false === strpos( $tag, 'srcset=' ) ) {
+				$srcset = wp_get_attachment_image_srcset( $id, 'full', $meta );
+				if ( $srcset ) {
+					$add .= ' srcset="' . esc_attr( $srcset ) . '" sizes="(max-width: 768px) 100vw, 400px"';
+				}
+			}
+			if ( false === strpos( $tag, 'loading=' ) ) {
+				$add .= ' loading="lazy" decoding="async"';
+			}
+			return preg_replace( '#^<img\b#', '<img' . $add, $tag );
+		},
+		$html
+	);
+}
+
+/**
+ * «ادامه مطلب» links (the home page article loop) tell Google and screen
+ * readers nothing about the target. Add the article title as hidden text,
+ * so the link reads «ادامه مطلب: قیمت رول ایزوگام …».
+ *
+ * @param string $html Page HTML.
+ * @return string
+ */
+function asfaltbama_describe_read_more( $html ) {
+	if ( false === strpos( $html, 'ادامه مطلب</a>' ) ) {
+		return $html;
+	}
+	return preg_replace_callback(
+		'#(<a\b[^>]*href="([^"]+)"[^>]*>)\s*ادامه مطلب\s*</a>#u',
+		function ( $m ) {
+			$id = url_to_postid( $m[2] );
+			if ( ! $id ) {
+				return $m[0];
+			}
+			return $m[1] . 'ادامه مطلب<span class="screen-reader-text">: ' . esc_html( get_the_title( $id ) ) . '</span></a>';
+		},
+		$html
+	);
+}

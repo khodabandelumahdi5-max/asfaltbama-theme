@@ -5,7 +5,7 @@
 	Author: Asfaltbama
 	Author URI: https://asfaltbama.com/
 	Template: hello-elementor
-	Version: 1.52.0
+	Version: 1.53.0
 	Requires at least: 6.0
 	Requires PHP: 7.4
 	License: GNU General Public License v3 or later.
@@ -388,4 +388,17 @@ body :where(h1, h2, h3, h4, h5, h6, p, a, span, strong, b, em, small, li, dt, dd
 	.elementor-location-header {
 		top: 0;
 	}
+}
+
+/* Hidden text for screen readers and search engines (read-more titles). */
+.screen-reader-text {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	margin: -1px !important;
+	padding: 0 !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	white-space: nowrap !important;
+	border: 0 !important;
 }
