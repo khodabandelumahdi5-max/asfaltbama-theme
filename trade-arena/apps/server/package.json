@@ -1,0 +1,43 @@
+{
+  "name": "@arena/server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=../../.env src/index.ts",
+    "build": "tsup",
+    "start": "node --env-file-if-exists=../../.env dist/index.js",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx --env-file-if-exists=../../.env src/db/migrate-cli.ts",
+    "db:studio": "drizzle-kit studio",
+    "mock:deposit": "tsx --env-file-if-exists=../../.env scripts/mock-deposit.ts",
+    "test:e2e": "tsx --env-file-if-exists=../../.env scripts/e2e-smoke.ts",
+    "sim:traders": "tsx --env-file-if-exists=../../.env scripts/simulate-traders.ts"
+  },
+  "dependencies": {
+    "@arena/shared": "workspace:*",
+    "@fastify/cors": "11.3.0",
+    "@fastify/helmet": "13.1.1",
+    "@fastify/rate-limit": "10.3.0",
+    "@socket.io/redis-adapter": "8.3.0",
+    "better-sqlite3": "12.11.1",
+    "drizzle-orm": "0.45.3",
+    "fastify": "5.12.5",
+    "ioredis": "5.11.1",
+    "pino": "9.14.0",
+    "socket.io": "4.8.4",
+    "socket.io-adapter": "2.5.8",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "7.6.13",
+    "@types/node": "22.20.5",
+    "drizzle-kit": "0.31.11",
+    "pino-pretty": "13.2.0",
+    "socket.io-client": "4.8.4",
+    "tsup": "8.5.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  }
+}

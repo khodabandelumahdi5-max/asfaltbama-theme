@@ -1,0 +1,23 @@
+# systemd unit for the 24/7 YouTube broadcast.
+#   sudo cp arena-stream.service /etc/systemd/system/ && sudo systemctl enable --now arena-stream
+[Unit]
+Description=Trade Arena 24/7 YouTube Live stream
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=arena
+WorkingDirectory=/opt/trade-arena/apps/stream-overlay
+Environment=LAYOUT=landscape
+Environment=OVERLAY_URL=http://127.0.0.1:5174
+EnvironmentFile=/opt/trade-arena/.env
+ExecStart=/usr/bin/env bash scripts/stream_to_youtube.sh
+Restart=always
+RestartSec=5
+KillMode=control-group
+TimeoutStopSec=20
+Nice=-5
+
+[Install]
+WantedBy=multi-user.target
