@@ -4,7 +4,12 @@ const schema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
   TELEGRAM_BOT_TOKEN: z.string().min(20),
   TELEGRAM_BOT_USERNAME: z.string().default("TradeArenaBot"),
-  WEBAPP_URL: z.string().url().refine((u) => u.startsWith("https://"), "WEBAPP_URL must be HTTPS (Telegram requirement)"),
+  /** Public HTTPS URL of the Mini App. Optional: without it the bot runs chat-only (no Open Arena buttons). */
+  WEBAPP_URL: z
+    .string()
+    .optional()
+    .transform((u) => (u ? u.trim() : undefined))
+    .refine((u) => !u || /^https:\/\/[^\s]+$/.test(u), "WEBAPP_URL must be an HTTPS URL (Telegram requirement)"),
   SERVER_INTERNAL_URL: z.string().url().default("http://127.0.0.1:4000"),
   INTERNAL_API_KEY: z.string().min(16),
   REDIS_URL: z.string().url().default("redis://127.0.0.1:6379"),

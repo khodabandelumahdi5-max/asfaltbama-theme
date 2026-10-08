@@ -119,11 +119,34 @@ pnpm dev:bot
 Then try the pieces:
 
 - **Mini App in a browser:** open http://localhost:3000. With `ALLOW_DEV_AUTH=true` you get a dev identity and 3 welcome tickets.
-- **Inside Telegram:** Telegram requires HTTPS. Expose the webapp and the server with a tunnel, for example `cloudflared tunnel --url http://localhost:3000` and the same for `:4000`. Set `WEBAPP_URL` to the webapp tunnel URL and `NEXT_PUBLIC_SERVER_URL` to the server tunnel URL, then add the webapp origin to `CORS_ORIGINS`. Register the Mini App with BotFather (`/newapp`) using the same URL, then send `/start` to the bot.
+- **Inside Telegram:** see [Testing inside Telegram](#testing-inside-telegram) below.
 - **Stream overlay:** portrait is http://localhost:5174/?layout=portrait and landscape is `?layout=landscape`.
 - **Demo traders:** `pnpm --filter @arena/server sim:traders -- --count 25` (needs `ALLOW_DEV_AUTH=true`).
 - **Mock a deposit:** create one in the Wallet tab or via `/deposit` in the bot, then run `pnpm --filter @arena/server mock:deposit -- --reference TA-XXXX-XXXX`.
 - **E2E smoke test:** `pnpm --filter @arena/server test:e2e`.
+
+### Testing inside Telegram
+
+Telegram only opens Mini Apps over HTTPS, so run two quick tunnels on your own machine. One serves the Mini App and one serves the API and WebSocket.
+
+```bash
+# 1. Two terminals, two public HTTPS URLs (no account needed)
+cloudflared tunnel --url http://localhost:3000    # → https://<webapp>.trycloudflare.com
+cloudflared tunnel --url http://localhost:4000    # → https://<api>.trycloudflare.com
+
+# 2. In .env
+WEBAPP_URL=https://<webapp>.trycloudflare.com
+NEXT_PUBLIC_SERVER_URL=https://<api>.trycloudflare.com
+CORS_ORIGINS=http://localhost:3000,http://localhost:5174,https://<webapp>.trycloudflare.com
+ALLOW_DEV_AUTH=false        # the API is now public: accept only real Telegram initData
+
+# 3. Restart server, webapp and bot so they pick up the new values
+pnpm dev
+```
+
+Then, in @BotFather, run `/newapp` (or open your bot → **Bot Settings → Configure Mini App**) and set the URL to `WEBAPP_URL`. Open the bot and send `/start`. The **Open Arena** button and the **Trade** menu button now launch the Mini App inside Telegram.
+
+Without `WEBAPP_URL` the bot still runs, chat-only: `/start`, `/rank`, `/deposit` and `/invite` work, and the Mini App buttons are hidden. Only one process may poll a bot token at a time; stop any other running instance first.
 
 ### Video capture & 24/7 YouTube Live
 

@@ -9,10 +9,12 @@ const bot = new Telegraf(config.TELEGRAM_BOT_TOKEN, { handlerTimeout: 15_000 });
 
 const TICKET_PACKS = [1, 5, 10, 25] as const;
 
-const openArenaButton = (label = "🚀 Open Arena") => Markup.button.webApp(label, config.WEBAPP_URL);
+const webAppUrl = config.WEBAPP_URL;
+/** Mini App launch row, or no row at all when WEBAPP_URL is not configured yet. */
+const arenaRow = (label = "🚀 Open Arena") => (webAppUrl ? [[Markup.button.webApp(label, webAppUrl)]] : []);
 
 const mainKeyboard = Markup.inlineKeyboard([
-  [openArenaButton()],
+  ...arenaRow(),
   [Markup.button.callback("💳 Buy tickets", "deposit"), Markup.button.callback("📊 My rank", "rank")],
   [Markup.button.callback("🎁 Invite friends", "invite")],
 ]);
@@ -58,13 +60,17 @@ bot.start(async (ctx) => {
   }
 });
 
-bot.command(["play", "app"], (ctx) => ctx.reply("Jump into the arena 👇", Markup.inlineKeyboard([[openArenaButton()]])));
+bot.command(["play", "app"], (ctx) =>
+  webAppUrl
+    ? ctx.reply("Jump into the arena 👇", Markup.inlineKeyboard(arenaRow()))
+    : ctx.reply("The trading arena is being set up — the Mini App link will appear here soon."),
+);
 
 async function sendRank(ctx: Context) {
   try {
     await syncUser(ctx);
     const s = await api.summary(ctx.from!.id);
-    await ctx.replyWithHTML(summary(s), Markup.inlineKeyboard([[openArenaButton("⚡️ Trade now")]]));
+    await ctx.replyWithHTML(summary(s), Markup.inlineKeyboard(arenaRow("⚡️ Trade now")));
   } catch (err) {
     await ctx.reply(userError(err));
   }
@@ -157,9 +163,11 @@ async function main() {
     { command: "invite", description: "Invite friends, earn tickets" },
     { command: "help", description: "Help" },
   ]);
-  await bot.telegram.setChatMenuButton({
-    menuButton: { type: "web_app", text: "Trade", web_app: { url: config.WEBAPP_URL } },
-  });
+  if (webAppUrl) {
+    await bot.telegram.setChatMenuButton({ menuButton: { type: "web_app", text: "Trade", web_app: { url: webAppUrl } } });
+  } else {
+    console.warn("[bot] WEBAPP_URL not set — running chat-only; set it to the Mini App's HTTPS URL to enable the Open Arena buttons");
+  }
 
   const stopNotifier = startNotifier(bot.telegram);
 

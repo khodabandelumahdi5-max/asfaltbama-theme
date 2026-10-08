@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
   transpilePackages: ["@arena/shared"],
   poweredByHeader: false,
   devIndicators: false,
+  // Dev server reached through a public HTTPS tunnel (needed to open the Mini App inside Telegram).
+  allowedDevOrigins: ["*.trycloudflare.com", "*.ngrok-free.app", "*.ngrok.app"],
   // Telegram renders the Mini App inside its own WebView/iframe; allow it to be framed by Telegram Web.
   async headers() {
     return [
