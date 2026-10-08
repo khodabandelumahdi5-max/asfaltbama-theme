@@ -41,10 +41,10 @@ export function Header() {
       </div>
       <div className="flex shrink-0 items-center gap-3">
         <div className="flex items-center gap-1 text-xs text-muted" title={`${online} online`}>
-          <span className={`size-2 rounded-full ${connection === "online" ? "bg-up" : "animate-pulse bg-gold"}`} />
+          <span data-testid="conn" data-state={connection} className={`size-2 rounded-full ${connection === "online" ? "bg-up" : "animate-pulse bg-gold"}`} />
           {online > 0 && <span className="tabular">{online}</span>}
         </div>
-        <div className="rounded-lg bg-panel-2 px-2.5 py-1 text-sm font-semibold tabular">{tickets} 🎟</div>
+        <div data-testid="tickets" data-value={tickets} className="rounded-lg bg-panel-2 px-2.5 py-1 text-sm font-semibold tabular">{tickets} 🎟</div>
       </div>
     </header>
   );

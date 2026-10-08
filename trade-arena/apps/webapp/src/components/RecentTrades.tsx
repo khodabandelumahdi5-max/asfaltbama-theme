@@ -12,7 +12,7 @@ export function RecentTrades() {
       <div className="border-b border-line px-4 py-2 text-xs font-semibold uppercase tracking-wide text-muted">Your trades</div>
       <ul className="divide-y divide-line">
         {trades.slice(0, 6).map((t) => (
-          <li key={t.tradeId} className="flex items-center justify-between px-4 py-2 text-sm">
+          <li key={t.tradeId} data-testid="recent-trade" className="flex items-center justify-between px-4 py-2 text-sm">
             <div>
               <span className={t.side === "LONG" ? "text-up" : "text-down"}>
                 {t.side} {t.leverage}×

@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      puppeteer:
+        specifier: 24.43.1
+        version: 24.43.1(typescript@5.9.3)
       typescript:
         specifier: 5.9.3
         version: 5.9.3

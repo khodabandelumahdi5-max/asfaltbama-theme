@@ -11,3 +11,4 @@ recordings/
 *.log
 logs/
 dump.rdb
+ui-smoke-output/

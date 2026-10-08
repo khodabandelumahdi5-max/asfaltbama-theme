@@ -118,6 +118,7 @@ export function OrderPanel() {
       <div className="grid grid-cols-2 gap-3">
         <button
           disabled={!valid || !live || busy !== null}
+          data-testid="long"
           onClick={() => submit("LONG")}
           className="h-14 rounded-xl bg-up text-base font-bold text-black active:scale-[0.98] disabled:opacity-40"
         >
@@ -125,6 +126,7 @@ export function OrderPanel() {
         </button>
         <button
           disabled={!valid || !live || busy !== null}
+          data-testid="short"
           onClick={() => submit("SHORT")}
           className="h-14 rounded-xl bg-down text-base font-bold text-white active:scale-[0.98] disabled:opacity-40"
         >

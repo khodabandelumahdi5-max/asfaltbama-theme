@@ -24,6 +24,7 @@ export function JoinCard({ onNeedTickets }: { onNeedTickets?: () => void }) {
         <div className="mt-3 text-sm text-muted">Registration closed — the next round opens in a moment.</div>
       ) : enough ? (
         <button
+          data-testid="join"
           disabled={busy}
           onClick={async () => {
             setBusy(true);

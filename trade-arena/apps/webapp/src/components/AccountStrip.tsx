@@ -8,7 +8,7 @@ export function AccountStrip() {
   const live = useLiveEquity();
   if (!account || !live) return null;
   return (
-    <div className="mx-4 grid grid-cols-3 gap-2 rounded-xl border border-line bg-panel p-3 text-center">
+    <div data-testid="account-strip" className="mx-4 grid grid-cols-3 gap-2 rounded-xl border border-line bg-panel p-3 text-center">
       <div>
         <div className="text-[10px] uppercase tracking-wide text-muted">Equity</div>
         <div className="tabular text-sm font-semibold">{fmtUsd(live.equity)}</div>

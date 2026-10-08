@@ -58,6 +58,7 @@ export function ArenaApp() {
           {TABS.map((t) => (
             <button
               key={t.id}
+              data-testid={`tab-${t.id}`}
               onClick={() => setTab(t.id)}
               className={`flex h-16 flex-col items-center justify-center gap-0.5 text-xs font-medium transition-colors ${
                 tab === t.id ? "text-gold" : "text-muted"

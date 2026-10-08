@@ -114,13 +114,13 @@ export function WalletPanel() {
             </button>
           ))}
         </div>
-        <button disabled={busy} onClick={create} className="h-12 w-full rounded-xl bg-gold font-bold text-black disabled:opacity-50">
+        <button data-testid="create-deposit" disabled={busy} onClick={create} className="h-12 w-full rounded-xl bg-gold font-bold text-black disabled:opacity-50">
           {busy ? "Creating…" : `Get deposit address`}
         </button>
       </div>
 
       {active && (
-        <div className="space-y-2 rounded-2xl border border-gold/40 bg-panel p-4">
+        <div data-testid="deposit-card" data-reference={active.reference} data-status={active.status} className="space-y-2 rounded-2xl border border-gold/40 bg-panel p-4">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold">
               Deposit {active.tickets} 🎟 · {active.network}

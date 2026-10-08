@@ -91,5 +91,5 @@ export function PriceChart({ height = 260 }: { height?: number }) {
     );
   }, [position]);
 
-  return <div ref={containerRef} style={{ height }} className="w-full" />;
+  return <div ref={containerRef} data-testid="chart" style={{ height }} className="w-full" />;
 }

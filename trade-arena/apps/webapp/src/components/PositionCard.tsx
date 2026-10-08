@@ -12,7 +12,7 @@ export function PositionCard() {
   const long = p.side === "LONG";
 
   return (
-    <div className={`mx-4 rounded-2xl border p-4 ${long ? "border-up/40 bg-up/5" : "border-down/40 bg-down/5"}`}>
+    <div data-testid="position" className={`mx-4 rounded-2xl border p-4 ${long ? "border-up/40 bg-up/5" : "border-down/40 bg-down/5"}`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className={`rounded-md px-2 py-0.5 text-xs font-bold ${long ? "bg-up text-black" : "bg-down text-white"}`}>
@@ -24,7 +24,7 @@ export function PositionCard() {
       </div>
 
       <div className="mt-2 flex items-end justify-between">
-        <div className={`tabular text-3xl font-bold ${pnlColor(pnl)}`}>{fmtSigned(pnl)}</div>
+        <div data-testid="position-pnl" className={`tabular text-3xl font-bold ${pnlColor(pnl)}`}>{fmtSigned(pnl)}</div>
         <div className={`tabular text-lg font-semibold ${pnlColor(roe)}`}>{fmtPct(roe)}</div>
       </div>
 
@@ -57,6 +57,7 @@ export function PositionCard() {
       </div>
 
       <button
+        data-testid="close-position"
         disabled={busy}
         onClick={async () => {
           setBusy(true);

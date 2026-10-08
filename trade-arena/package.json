@@ -17,10 +17,14 @@
     "typecheck": "pnpm -r run typecheck",
     "db:migrate": "pnpm --filter @arena/server db:migrate",
     "redis:up": "docker compose up -d redis",
-    "redis:down": "docker compose down"
+    "redis:down": "docker compose down",
+    "test:ui": "node scripts/ui-smoke.mjs",
+    "test:e2e": "pnpm --filter @arena/server test:e2e",
+    "sim:traders": "pnpm --filter @arena/server sim:traders"
   },
   "devDependencies": {
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "puppeteer": "24.43.1"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

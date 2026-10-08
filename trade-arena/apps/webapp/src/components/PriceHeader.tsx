@@ -24,7 +24,7 @@ export function PriceHeader() {
     <div className="flex items-end justify-between px-4 pt-3">
       <div>
         <div className="text-xs font-medium text-muted">{SYMBOL_LABEL} · Perp (sim)</div>
-        <div key={key.current} className={`tabular -mx-1 rounded px-1 font-mono text-3xl font-bold ${price >= prev ? "text-up" : "text-down"} ${flash}`}>
+        <div key={key.current} data-testid="price" className={`tabular -mx-1 rounded px-1 font-mono text-3xl font-bold ${price >= prev ? "text-up" : "text-down"} ${flash}`}>
           {price ? fmtPrice(price) : "—"}
         </div>
       </div>

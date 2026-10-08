@@ -24,6 +24,7 @@ export function Leaderboard() {
         {lb?.entries.map((e) => (
           <li
             key={e.userId}
+            data-testid="lb-row"
             className={`flex items-center justify-between border-b border-line px-4 py-3 last:border-b-0 ${e.userId === me?.id ? "bg-gold/10" : ""}`}
           >
             <span className="flex min-w-0 items-center gap-3">
