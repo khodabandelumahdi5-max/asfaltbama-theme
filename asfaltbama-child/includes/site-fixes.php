@@ -80,7 +80,8 @@ function asfaltbama_fix_business_footer( $html ) {
 	// «مناطق تحت پوشش» after «مقالات» in the quick links.
 	$html = preg_replace(
 		'#(<a href="[^"]*/articles/"\s*>\s*مقالات\s*</a>)#u',
-		'$1' . "\n" . '<a href="' . esc_url( home_url( '/service-areas/' ) ) . '">مناطق تحت پوشش</a>'
+		'$1' . "\n" . '<a href="' . esc_url( home_url( '/services/' ) ) . '">همه‌ی خدمات</a>'
+			. "\n" . '<a href="' . esc_url( home_url( '/service-areas/' ) ) . '">مناطق تحت پوشش</a>'
 			. "\n" . '<a href="' . esc_url( home_url( '/industrial-asphalt-waterproofing/' ) ) . '">آسفالت و عایق کارخانه‌ها</a>'
 			. "\n" . '<a href="' . esc_url( home_url( '/asphalt-contractor-middle-east/' ) ) . '" lang="en" dir="ltr">English</a>'
 			. "\n" . '<a href="' . esc_url( home_url( '/asphalt-contractor-middle-east-ar/' ) ) . '" lang="ar">العربية</a>',
@@ -127,6 +128,8 @@ function asfaltbama_filter_page_html( $html ) {
 	}
 
 	$html = asfaltbama_mobile_nav( $html );
+	$html = asfaltbama_fix_heading_order( $html );
+	$html = asfaltbama_fix_inline_service_schema( $html );
 
 	if ( function_exists( 'asfaltbama_wire_quote_form' ) ) {
 		$html = asfaltbama_wire_quote_form( $html );
@@ -801,3 +804,201 @@ function asfaltbama_mobile_nav( $html ) {
 	$pos = strripos( $html, '</body>' );
 	return false === $pos ? $html : substr_replace( $html, $script, $pos, 0 );
 }
+
+/**
+ * Heading order on pages built in Elementor: the service pages jump from
+ * h2 to h4 (feature boxes) and the contact page from h1 to h3. Search
+ * engines and screen readers read headings as an outline, so a skipped
+ * level is reported as an error. Each heading that skips a level is
+ * raised to the next level (h4 → h3) and keeps its look: it gets the
+ * class abm-hN, and the page's own CSS rules for hN also match it.
+ *
+ * @param string $html Page HTML.
+ * @return string
+ */
+function asfaltbama_fix_heading_order( $html ) {
+	if ( ! is_page() ) {
+		return $html;
+	}
+	$start = strpos( $html, '<body' );
+	if ( false === $start ) {
+		return $html;
+	}
+	$prev    = 0;
+	$changed = [];
+	$body    = preg_replace_callback(
+		'#<h([1-6])(\s[^>]*)?>(.*?)</h\1>#s',
+		static function ( $m ) use ( &$prev, &$changed ) {
+			$level = (int) $m[1];
+			if ( $prev && $level > $prev + 1 ) {
+				$new   = $prev + 1;
+				$attrs = isset( $m[2] ) ? $m[2] : '';
+				if ( preg_match( '/\sclass="([^"]*)"/', $attrs ) ) {
+					$attrs = preg_replace( '/\sclass="([^"]*)"/', ' class="$1 abm-h' . $level . '"', $attrs, 1 );
+				} else {
+					$attrs .= ' class="abm-h' . $level . '"';
+				}
+				$changed[ $level ] = true;
+				// Following siblings of the same original level end up
+				// at the same new level, because $prev stays one above.
+				$prev = $new - 1;
+				return '<h' . $new . $attrs . '>' . $m[3] . '</h' . $new . '>';
+			}
+			$prev = $level;
+			return $m[0];
+		},
+		substr( $html, $start )
+	);
+	if ( ! $changed || null === $body ) {
+		return $html;
+	}
+	$html = substr( $html, 0, $start ) . $body;
+	// Let the page's CSS rules for the old tag style the raised heading too:
+	// «.box h4 {…}» → «.box :is(h4,.abm-h4) {…}». Only selectors are touched.
+	return preg_replace_callback(
+		'#<style\b[^>]*>(.*?)</style>#s',
+		static function ( $m ) use ( $changed ) {
+			$css = preg_replace_callback(
+				'/([^{}]+)\{/',
+				static function ( $r ) use ( $changed ) {
+					$sel = $r[1];
+					foreach ( array_keys( $changed ) as $lv ) {
+						$sel = preg_replace( '/(?<![\w\-.#:])h' . $lv . '(?![\w\-])/', ':is(h' . $lv . ',.abm-h' . $lv . ')', $sel );
+					}
+					return $sel . '{';
+				},
+				$m[1]
+			);
+			return str_replace( $m[1], $css, $m[0] );
+		},
+		$html
+	);
+}
+
+/**
+ * Schema written by hand in the Elementor service pages:
+ * - an AggregateOffer with no price (lowPrice is required, so Search
+ *   Console reports it invalid) is dropped;
+ * - the Service provider, a nameless LocalBusiness, points at the site's
+ *   organization entity, which carries the full business details;
+ * - a page with two HTML widgets had two FAQPage and two Service entities
+ *   (Search Console: «Duplicate field FAQPage»): the questions are merged
+ *   into the first FAQPage and the later duplicates are removed.
+ *
+ * @param string $html Page HTML.
+ * @return string
+ */
+function asfaltbama_fix_inline_service_schema( $html ) {
+	if ( ! preg_match_all( '#<script type="application/ld\+json"[^>]*>(.*?)</script>#s', $html, $all, PREG_OFFSET_CAPTURE ) ) {
+		return $html;
+	}
+	$blocks = [];
+	foreach ( $all[1] as $i => $match ) {
+		if ( false !== strpos( $all[0][ $i ][0], 'rank-math' ) ) {
+			continue;
+		}
+		$data = json_decode( $match[0], true );
+		if ( is_array( $data ) && ( false !== strpos( $match[0], '"Service"' ) || false !== strpos( $match[0], '"FAQPage"' ) ) ) {
+			$blocks[ $i ] = $data;
+		}
+	}
+	if ( ! $blocks ) {
+		return $html;
+	}
+
+	$fix = static function ( $node ) use ( &$fix ) {
+		if ( ! is_array( $node ) ) {
+			return $node;
+		}
+		if ( isset( $node['offers']['@type'] ) && 'AggregateOffer' === $node['offers']['@type'] && empty( $node['offers']['lowPrice'] ) ) {
+			unset( $node['offers'] );
+		}
+		if ( isset( $node['@type'] ) && 'Service' === $node['@type'] && isset( $node['provider']['@type'] ) && empty( $node['provider']['@id'] ) ) {
+			$node['provider'] = [ '@id' => home_url( '/#organization' ) ];
+		}
+		foreach ( $node as $k => $v ) {
+			if ( is_array( $v ) ) {
+				$node[ $k ] = $fix( $v );
+			}
+		}
+		return $node;
+	};
+
+	// Merge FAQPage and Service entities across the blocks.
+	$faq     = null; // [block index, entity index or null for a top-level entity].
+	$service = false;
+	foreach ( $blocks as $i => $data ) {
+		$data  = $fix( $data );
+		$graph = isset( $data['@graph'] ) && is_array( $data['@graph'] ) ? $data['@graph'] : [ $data ];
+		foreach ( $graph as $j => $entity ) {
+			$type = $entity['@type'] ?? '';
+			if ( 'FAQPage' === $type ) {
+				if ( null === $faq ) {
+					$faq = [ $i, $j ];
+				} else {
+					$first = &$blocks[ $faq[0] ];
+					$target = isset( $first['@graph'] ) ? $first['@graph'][ $faq[1] ] : $first;
+					$target['mainEntity'] = array_merge( (array) ( $target['mainEntity'] ?? [] ), (array) ( $entity['mainEntity'] ?? [] ) );
+					if ( isset( $first['@graph'] ) ) {
+						$first['@graph'][ $faq[1] ] = $target;
+					} else {
+						$first = $target;
+					}
+					unset( $first );
+					unset( $graph[ $j ] );
+				}
+			} elseif ( 'Service' === $type ) {
+				if ( $service ) {
+					unset( $graph[ $j ] );
+				}
+				$service = true;
+			}
+		}
+		if ( isset( $data['@graph'] ) ) {
+			$data['@graph'] = array_values( $graph );
+			$blocks[ $i ]   = $data;
+		} else {
+			$blocks[ $i ] = $graph ? $data : null;
+		}
+	}
+
+	// Write back from the end, so earlier offsets stay valid.
+	foreach ( array_reverse( array_keys( $all[0] ) ) as $i ) {
+		if ( ! array_key_exists( $i, $blocks ) ) {
+			continue;
+		}
+		$data = $blocks[ $i ];
+		$tag  = $all[0][ $i ];
+		$out  = ( null === $data || ( isset( $data['@graph'] ) && ! $data['@graph'] ) )
+			? ''
+			: '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>';
+		$html = substr_replace( $html, $out, $tag[1], strlen( $tag[0] ) );
+	}
+	return $html;
+}
+
+/**
+ * Rank Math adds an Article rich snippet to every page. On landing,
+ * service, area and contact pages that is the wrong type (they are not
+ * articles), and on the English and Arabic guides it duplicates the
+ * BlogPosting entity this theme adds. Keep it on posts only.
+ *
+ * @param array $data Schema entities.
+ * @return array
+ */
+function asfaltbama_page_drop_article_schema( $data ) {
+	if ( ! is_array( $data ) || ! is_page() ) {
+		return $data;
+	}
+	foreach ( $data as $key => $entity ) {
+		$id = is_array( $entity ) && isset( $entity['@id'] ) && is_string( $entity['@id'] ) ? $entity['@id'] : '';
+		if ( 'richSnippet' !== $key && '#richSnippet' !== substr( $id, -12 ) ) {
+			continue;
+		}
+		if ( array_intersect( (array) ( $entity['@type'] ?? [] ), [ 'Article', 'BlogPosting', 'NewsArticle' ] ) ) {
+			unset( $data[ $key ] );
+		}
+	}
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'asfaltbama_page_drop_article_schema', 98 );

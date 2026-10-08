@@ -60,7 +60,7 @@
     "32190": "اجرای آسفالت معابر با فینیشر و غلتک در تهران و کرج",
     "31902": "لوگوی آسفالت با ما"
   },
-  "page_seo_version": "2026-10-03.1",
+  "page_seo_version": "2026-10-08.1",
   "page_seo": {
     "__front__": {
       "seo_title": "آسفالت با ما | اجرای آسفالت، خاکبرداری و ایزوگام تهران و کرج",
@@ -120,7 +120,8 @@
     },
     "about-us": {
       "focus_keyword": "درباره ما",
-      "seo_title": "درباره ما | شرکت افق آپادانا پاسارگاد (آسفالت با ما)"
+      "seo_title": "درباره ما | شرکت افق آپادانا پاسارگاد (آسفالت با ما)",
+      "seo_description": "معرفی شرکت افق آپادانا پاسارگاد (آسفالت با ما): مجری آسفالت، زیرسازی، خاکبرداری، تخریب و عایق‌کاری رطوبتی با ۲۵ سال سابقه در تهران و البرز."
     },
     "asphalt-waterproofing-iraq": {
       "focus_keyword": "Asphalt Paving in Iraq,asphalt paving,roof waterproofing Iraq"
@@ -135,7 +136,8 @@
       "focus_keyword": "Asphalt Paving in Bahrain,asphalt paving,roof waterproofing Bahrain"
     },
     "asphalt-waterproofing-dubai-uae": {
-      "focus_keyword": "Asphalt Paving in Dubai and the UAE,asphalt paving,roof waterproofing Dubai"
+      "focus_keyword": "Asphalt Paving in Dubai and the UAE,asphalt paving,roof waterproofing Dubai",
+      "seo_title": "Asphalt Paving & Isogam Roofing in Dubai, UAE | Asfaltbama"
     },
     "asphalt-waterproofing-iraq-ar": {
       "focus_keyword": "رصف الأسفلت في العراق,رصف الأسفلت,عزل الأسطح العراق,قير وجنفاص"
