@@ -525,3 +525,104 @@ function asfaltbama_price_clean_headline( $data ) {
 }
 add_filter( 'rank_math/json_ld', 'asfaltbama_price_clean_headline', 99 );
 add_filter( 'rank_math/frontend/title', 'asfaltbama_price_title_date', 20 );
+
+/**
+ * Row whose price leads the search snippet of an article, by slug.
+ * '' = the first priced row of the article's table; 'none' = no price
+ * in the snippet (the table's first row is not what the article is about).
+ *
+ * @return array<string,string>
+ */
+function asfaltbama_price_lead_rows() {
+	return apply_filters(
+		'asfaltbama_price_lead_rows',
+		[
+			'cold-asphalt-bag'         => 'cold_bag',
+			'bobcat-rental-guide'      => 'bobcat_day',
+			'cold-bitumen'             => 'bit_cold',
+			'bathroom-bitumen-roofing' => 'qg_bathroom',
+			'wall-demolition'          => 'demo_wall',
+			'crack-sealing-cost'       => 'none',
+			'excavation-contract'      => 'none',
+			'manual-excavation'        => 'none',
+			'bitumen-mastic'           => 'none',
+		]
+	);
+}
+
+/**
+ * A price in short form for snippets: «۲٫۷ تا ۲٫۸۵ میلیون», «۴۵۰ تا ۶۰۰ هزار».
+ *
+ * @param string $value Stored value («2700000» or «2700000-2850000»).
+ * @return string
+ */
+function asfaltbama_short_price( $value ) {
+	$parts = array_map( 'floatval', explode( '-', (string) $value ) );
+	$fmt   = static function ( $n, $div ) {
+		$s = rtrim( rtrim( number_format( $n / $div, 2, '.', '' ), '0' ), '.' );
+		return strtr( $s, [ '.' => '٫', '0' => '۰', '1' => '۱', '2' => '۲', '3' => '۳', '4' => '۴', '5' => '۵', '6' => '۶', '7' => '۷', '8' => '۸', '9' => '۹' ] );
+	};
+	$scale = static function ( $n ) {
+		return $n >= 1000000 ? [ 1000000, 'میلیون' ] : ( $n >= 1000 ? [ 1000, 'هزار' ] : [ 1, '' ] );
+	};
+	$low = $scale( $parts[0] );
+	if ( count( $parts ) < 2 ) {
+		return trim( $fmt( $parts[0], $low[0] ) . ' ' . $low[1] );
+	}
+	$high = $scale( $parts[1] );
+	if ( $low === $high ) {
+		return trim( $fmt( $parts[0], $low[0] ) . ' تا ' . $fmt( $parts[1], $low[0] ) . ' ' . $low[1] );
+	}
+	return trim( $fmt( $parts[0], $low[0] ) . ' ' . $low[1] ) . ' تا ' . trim( $fmt( $parts[1], $high[0] ) . ' ' . $high[1] );
+}
+
+/**
+ * Search snippet: start the description of a price article with today's
+ * price from its table, e.g. «آسفالت توپکا: ۲٫۷ تا ۲٫۸۵ میلیون تومان هر تن
+ * (به‌روز ۸ مهر).» People searching «قیمت …» see the number in Google and
+ * click more often. It follows the saved prices, so it never goes stale.
+ *
+ * @param string $desc Description from Rank Math.
+ * @return string
+ */
+function asfaltbama_price_description( $desc ) {
+	if ( ! is_singular( 'post' ) ) {
+		return $desc;
+	}
+	$post    = get_queried_object();
+	$content = $post ? (string) $post->post_content : '';
+	$group   = asfaltbama_price_group_of( $content );
+	$groups  = asfaltbama_price_groups();
+	if ( '' === $group || ! isset( $groups[ $group ] ) ) {
+		return $desc;
+	}
+	$leads = asfaltbama_price_lead_rows();
+	$lead  = $leads[ $post->post_name ] ?? '';
+	if ( 'none' === $lead ) {
+		return $desc;
+	}
+	$rows = $groups[ $group ][2];
+	$data = asfaltbama_price_data( $group );
+	foreach ( '' === $lead ? array_keys( $rows ) : [ $lead ] as $key ) {
+		if ( empty( $data['prices'][ $key ] ) || ! isset( $rows[ $key ] ) ) {
+			continue;
+		}
+		// Short label: «آسفالت گرم توپکا — بدون اجرا…» → «آسفالت گرم توپکا»;
+		// drop notes in brackets unless they say what the price covers.
+		$label = preg_replace( '/\s+—.*$/u', '', $rows[ $key ][0] );
+		$label = preg_replace_callback(
+			'/\s*\(([^)]*)\)/u',
+			static function ( $m ) {
+				return preg_match( '/دستمزد|مصالح|اجرا/u', $m[1] ) ? $m[0] : '';
+			},
+			$label
+		);
+		$text = $label . ': ' . asfaltbama_short_price( $data['prices'][ $key ] ) . ' تومان هر ' . $rows[ $key ][1];
+		if ( $data['updated'] ) {
+			$text .= ' (به‌روز ' . preg_replace( '/\s*[۰-۹]{4}$/u', '', asfaltbama_price_date( $data['updated'] ) ) . ')';
+		}
+		return $text . '. ' . $desc;
+	}
+	return $desc;
+}
+add_filter( 'rank_math/frontend/description', 'asfaltbama_price_description', 20 );
