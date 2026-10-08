@@ -136,6 +136,8 @@ function asfaltbama_price_groups() {
 				'قیمت روز اجرای ایزوگام',
 				'ایزوگام و قیرگونی',
 				[
+					'isogam_foil'     => [ 'ایزوگام فویل‌دار با مصالح و اجرا', 'متر مربع' ],
+					'isogam_plain'    => [ 'ایزوگام ساده با مصالح و اجرا', 'متر مربع' ],
 					'isogam_install'  => [ 'اجرای ایزوگام با مصالح (یک لایه)', 'متر مربع' ],
 					'isogam_labor'    => [ 'اجرای ایزوگام بدون مصالح (دستمزد)', 'متر مربع' ],
 					'isogam_roll'     => [ 'رول ایزوگام (خرید بدون نصب)', 'رول' ],
@@ -540,7 +542,7 @@ function asfaltbama_price_lead_rows() {
 			'cold-asphalt-bag'         => 'cold_bag',
 			'bobcat-rental-guide'      => 'bobcat_day',
 			'cold-bitumen'             => 'bit_cold',
-			'bathroom-bitumen-roofing' => 'qg_bathroom',
+			'bathroom-bitumen-roofing' => 'none',
 			'wall-demolition'          => 'demo_wall',
 			'crack-sealing-cost'       => 'none',
 			'excavation-contract'      => 'none',
