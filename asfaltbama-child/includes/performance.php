@@ -42,14 +42,36 @@ function asfaltbama_front_hero() {
 		$bg = $el['settings']['background_image'] ?? null;
 		if ( ! empty( $bg['id'] ) && ! empty( $el['id'] ) ) {
 			$hero = [
-				'el'   => (string) $el['id'],
-				'id'   => (int) $bg['id'],
-				'page' => $page,
+				'el'       => (string) $el['id'],
+				'id'       => (int) $bg['id'],
+				'page'     => $page,
+				'overlay'  => (int) ( $el['settings']['background_overlay_image']['id'] ?? 0 ) === (int) $bg['id'],
+				'children' => asfaltbama_hero_children( $el['elements'] ?? [], (int) $bg['id'] ),
 			];
 			break;
 		}
 	}
 	return $hero;
+}
+
+/**
+ * Inner elements of the hero that use the same image as a background
+ * with background-size: cover (so a smaller copy looks identical).
+ *
+ * @param array $elements Elementor elements.
+ * @param int   $id       Attachment ID of the hero image.
+ * @return string[] Element IDs.
+ */
+function asfaltbama_hero_children( $elements, $id ) {
+	$out = [];
+	foreach ( (array) $elements as $el ) {
+		$s = $el['settings'] ?? [];
+		if ( (int) ( $s['background_image']['id'] ?? 0 ) === $id && 'cover' === ( $s['background_size'] ?? '' ) && ! empty( $el['id'] ) ) {
+			$out[] = preg_replace( '/[^a-z0-9]/', '', (string) $el['id'] );
+		}
+		$out = array_merge( $out, asfaltbama_hero_children( $el['elements'] ?? [], $id ) );
+	}
+	return $out;
 }
 
 /**
@@ -91,6 +113,31 @@ function asfaltbama_hero_preload() {
 		esc_url( $tablet ),
 		esc_url( $wide )
 	);
+
+	// Phones and tablets: a card inside the hero (the LCP element on
+	// phones) and the hero's 50 % overlay used the full 2560 px, 700 KB
+	// file. The card uses background-size: cover, so a 1024 px copy looks
+	// the same; the overlay keeps its geometry with an explicit size equal
+	// to the full image width.
+	$mid  = wp_get_attachment_image_src( $hero['id'], '1536x1536' );
+	$mid  = $mid ? $mid[0] : $tablet;
+	$big  = wp_get_attachment_image_src( $hero['id'], 'large' );
+	$card = $big ? $big[0] : $tablet;
+	$css  = '';
+	foreach ( (array) ( $hero['children'] ?? [] ) as $child ) {
+		$sel  = sprintf( '.elementor-%1$d .elementor-element.elementor-element-%2$s:not(.elementor-motion-effects-element-type-background)', $hero['page'], $child );
+		$css .= sprintf( '@media (max-width:767px){%1$s{background-image:url("%2$s")!important}}@media (min-width:768px) and (max-width:1600px){%1$s{background-image:url("%3$s")!important}}', $sel, esc_url( $card ), esc_url( $mid ) );
+	}
+	if ( ! empty( $hero['overlay'] ) && ! empty( $full[1] ) ) {
+		$sel  = sprintf( '.elementor-%1$d .elementor-element.elementor-element-%2$s::before', $hero['page'], preg_replace( '/[^a-z0-9]/', '', $hero['el'] ) );
+		$css .= sprintf( '@media (max-width:1024px){%1$s{background-image:url("%2$s")!important;background-size:%3$dpx auto!important}}', $sel, esc_url( $mid ), (int) $full[1] );
+	}
+	if ( '' !== $css ) {
+		echo '<style id="abm-hero-bg-inner">' . $css . "</style>\n"; // phpcs:ignore WordPress.Security.EscapeOutput -- built from escaped URLs and sanitized IDs.
+		if ( ! empty( $hero['children'] ) ) {
+			printf( '<link rel="preload" as="image" href="%s" media="(max-width: 767px)" fetchpriority="high">' . "\n", esc_url( $card ) );
+		}
+	}
 }
 add_action( 'wp_head', 'asfaltbama_hero_preload', 1 );
 
@@ -110,6 +157,11 @@ function asfaltbama_perf_html( $html ) {
 		$main = false === strpos( $html, '<main' ) ? ' role="main"' : '';
 		$html = preg_replace( '/<div data-elementor-type="wp-page"/', '<div id="content" tabindex="-1"' . $main . ' data-elementor-type="wp-page"', $html, 1 );
 	}
+
+	// Elementor background videos carry role="presentation", which a <video>
+	// may not have (Lighthouse: ARIA role on incompatible element). They
+	// are decorative: hide them from assistive technology instead.
+	$html = preg_replace( '#(<video\b[^>]*class="elementor-background-video-hosted"[^>]*?)\s+role="presentation"#', '$1 aria-hidden="true"', $html );
 
 	$html = asfaltbama_size_upload_images( $html );
 	$html = asfaltbama_describe_read_more( $html );
