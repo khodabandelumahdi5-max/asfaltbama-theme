@@ -178,7 +178,9 @@ add_action( 'parse_request', 'asfaltbama_archive_redirects', 0 );
  * «سلام دنیا»).
  *
  * - Old categories, tags and pages go (301) to the page on the same topic.
- * - Demo posts answer 410 Gone, so Google drops them faster than a 404.
+ * - Demo posts and the demo categories and tags of the original template
+ *   (gas-oil, oil-factory, robotic) answer 410 Gone, so Google drops them
+ *   faster than a 404.
  *
  * @return void
  */
@@ -191,7 +193,7 @@ function asfaltbama_legacy_redirects() {
 		return;
 	}
 
-	if ( preg_match( '#(farming|soil-health|irrigation|crop-yield|سلام-دنیا|hello-world)#u', $path ) ) {
+	if ( preg_match( '#(farming|soil-health|irrigation|crop-yield|سلام-دنیا|hello-world|^category/(gas-oil|oil-factory)(/|$)|^tag/robotic(/|$))#u', $path ) ) {
 		status_header( 410 );
 		nocache_headers();
 		return;
