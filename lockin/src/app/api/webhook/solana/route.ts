@@ -1,8 +1,8 @@
-import { timingSafeEqual } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
 import { STAKE_LAMPORTS, TREASURY_ADDRESS } from "@/lib/constants";
 import { db } from "@/lib/db";
 import { extractDeposits, heliusPayload, type DepositCandidate } from "@/lib/helius";
+import { headerMatches } from "@/lib/secret-header";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -11,11 +11,7 @@ type DepositOutcome = "MATCHED" | "UNMATCHED" | "WRONG_AMOUNT" | "DUPLICATE_ENTR
 
 function isAuthorized(req: NextRequest): boolean {
   const secret = process.env.HELIUS_WEBHOOK_SECRET;
-  const header = req.headers.get("authorization");
-  if (!secret || !header) return false;
-  const a = Buffer.from(header);
-  const b = Buffer.from(secret);
-  return a.length === b.length && timingSafeEqual(a, b);
+  return !!secret && headerMatches(req.headers.get("authorization"), secret);
 }
 
 /**

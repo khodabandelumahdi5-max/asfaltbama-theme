@@ -35,9 +35,12 @@ function ConnectedArena({ wallet }: { wallet: string }) {
   if (!state.participant) return <JoinPanel wallet={wallet} state={state} onJoined={refresh} />;
 
   const { pool, participant, myProofs, reviewQueue } = state;
-  const inProgress = pool.currentDay >= 1 && pool.currentDay <= 21;
-  const submittedToday = myProofs.some((p) => p.dayNumber === pool.currentDay);
-  const canSubmit = inProgress && !participant.isEliminated && !submittedToday;
+  const submitted = new Set(myProofs.map((p) => p.dayNumber));
+  const submittedToday = submitted.has(pool.currentDay);
+  // Yesterday (while its grace period runs) comes before today.
+  const dueDay = participant.isEliminated
+    ? null
+    : ([pool.graceDay, pool.currentDay].find((d) => d !== null && d >= 1 && d <= 21 && !submitted.has(d)) ?? null);
 
   async function vote(submissionId: string, v: 1 | -1) {
     await signedPost("/api/reviews", "review", { submissionId, vote: v });
@@ -52,7 +55,10 @@ function ConnectedArena({ wallet }: { wallet: string }) {
         <div role="status" className="border-3 border-fatal bg-fatal/10 p-5 shadow-brutal-fatal">
           <p className="font-display text-3xl font-black uppercase text-fatal">Eliminated</p>
           <p className="font-mono text-sm text-bone">
-            Your day {participant.eliminatedOnDay} proof was rejected by the jury. Your stake stays in the pool.
+            {participant.eliminationReason === "MISSED_DEADLINE"
+              ? `No proof for day ${participant.eliminatedOnDay} before the deadline.`
+              : `Your day ${participant.eliminatedOnDay} proof was rejected by the jury.`}{" "}
+            Your stake stays in the pool.
           </p>
         </div>
       )}
@@ -60,11 +66,19 @@ function ConnectedArena({ wallet }: { wallet: string }) {
       <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
         <StreakTracker
           currentDay={pool.currentDay}
+          graceDay={pool.graceDay}
+          eliminatedOnDay={participant.eliminatedOnDay}
           currentStreak={participant.currentStreak}
           proofs={myProofs}
         />
-        {canSubmit ? (
-          <UploadProofCard poolId={pool.id} dayNumber={pool.currentDay} onSubmitted={refresh} />
+        {dueDay !== null ? (
+          <UploadProofCard
+            key={dueDay}
+            poolId={pool.id}
+            dayNumber={dueDay}
+            deadline={dayDeadline(pool.startDate, dueDay, pool.graceHours)}
+            onSubmitted={refresh}
+          />
         ) : (
           <EmptyPanel
             title={submittedToday ? "Today's proof is in" : pool.currentDay < 1 ? "Pool starts soon" : "Nothing due"}
@@ -96,6 +110,12 @@ function ConnectedArena({ wallet }: { wallet: string }) {
       </CardSection>
     </div>
   );
+}
+
+/** Day N closes at (start_date + N) 00:00 UTC plus the grace period. */
+function dayDeadline(startDate: string, day: number, graceHours: number): Date {
+  const [y, m, d] = startDate.split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d + day, graceHours));
 }
 
 function PoolStats({ state }: { state: ArenaState }) {

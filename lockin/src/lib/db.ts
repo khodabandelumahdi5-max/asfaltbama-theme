@@ -9,6 +9,8 @@ export const db =
   new Pool({
     connectionString: process.env.DATABASE_URL,
     max: 10,
+    // Challenge days are UTC calendar days; make CURRENT_DATE agree everywhere.
+    options: "-c TimeZone=UTC",
   });
 
 if (process.env.NODE_ENV !== "production") globalForPg.pgPool = db;

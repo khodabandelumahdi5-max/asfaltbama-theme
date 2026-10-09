@@ -16,10 +16,12 @@ const PHASE_LABEL: Record<Phase, string> = {
 export function UploadProofCard({
   poolId,
   dayNumber,
+  deadline,
   onSubmitted,
 }: {
   poolId: string;
   dayNumber: number;
+  deadline: Date;
   onSubmitted: () => void;
 }) {
   const signedPost = useSignedPost();
@@ -60,12 +62,14 @@ export function UploadProofCard({
   return (
     <section className="flex flex-col gap-4 border-3 border-dashed border-cyan bg-obsidian-900 p-5 shadow-brutal-cyan">
       <div>
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan">Due before 00:00 UTC</p>
+        <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan">
+          Due {deadline.toISOString().slice(0, 16).replace("T", " ")} UTC
+        </p>
         <h3 className="font-display text-2xl font-bold uppercase text-bone">
           Day {String(dayNumber).padStart(2, "0")} proof
         </h3>
         <p className="mt-1 text-sm text-bone-muted">
-          Record up to 2 minutes. Your peers vote it legit or fraud. Miss the day and you&apos;re out.
+          Record up to 2 minutes. Your peers vote it legit or fraud. Miss the deadline and you&apos;re out.
         </p>
       </div>
 

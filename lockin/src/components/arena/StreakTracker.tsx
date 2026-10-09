@@ -17,7 +17,7 @@ const LABEL: Record<DayState, string> = {
   pending: "Under review",
   rejected: "Rejected",
   missed: "Missed",
-  today: "Today",
+  today: "Due",
   locked: "Locked",
 };
 
@@ -32,12 +32,20 @@ const SWATCH: Record<DayState, string> = {
 
 const LEGEND: DayState[] = ["verified", "pending", "rejected", "missed", "today", "locked"];
 
-function dayState(day: number, currentDay: number, proof: ProofCardData | undefined): DayState {
+function dayState(
+  day: number,
+  currentDay: number,
+  graceDay: number | null,
+  eliminatedOnDay: number | null,
+  proof: ProofCardData | undefined,
+): DayState {
   if (proof) {
     if (proof.status === "VERIFIED") return "verified";
     if (proof.status === "REJECTED") return "rejected";
     return "pending";
   }
+  if (eliminatedOnDay !== null && day > eliminatedOnDay) return "locked";
+  if (day === graceDay) return "today";
   if (day < currentDay) return "missed";
   if (day === currentDay) return "today";
   return "locked";
@@ -45,10 +53,14 @@ function dayState(day: number, currentDay: number, proof: ProofCardData | undefi
 
 export function StreakTracker({
   currentDay,
+  graceDay,
+  eliminatedOnDay,
   currentStreak,
   proofs,
 }: {
   currentDay: number;
+  graceDay: number | null;
+  eliminatedOnDay: number | null;
   currentStreak: number;
   proofs: ProofCardData[];
 }) {
@@ -72,7 +84,7 @@ export function StreakTracker({
 
       <ol className="grid grid-cols-7 gap-2 sm:gap-3">
         {days.map((day) => {
-          const state = dayState(day, currentDay, byDay.get(day));
+          const state = dayState(day, currentDay, graceDay, eliminatedOnDay, byDay.get(day));
           return (
             <li
               key={day}

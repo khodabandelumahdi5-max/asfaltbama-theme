@@ -12,12 +12,16 @@ export interface ArenaPool {
   participantCount: number;
   eliminatedCount: number;
   currentDay: number; // 1..21, 0 before start, 22 after end
+  /** Yesterday's day number while its grace period is still open, else null. */
+  graceDay: number | null;
+  graceHours: number;
 }
 
 export interface ArenaParticipant {
   currentStreak: number;
   isEliminated: boolean;
   eliminatedOnDay: number | null;
+  eliminationReason: "MISSED_DEADLINE" | "PEER_REJECTED" | null;
   joinedAt: string;
 }
 

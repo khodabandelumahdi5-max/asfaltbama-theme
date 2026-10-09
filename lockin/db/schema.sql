@@ -37,10 +37,27 @@ CREATE TABLE IF NOT EXISTS pool_participants (
     current_streak    INT NOT NULL DEFAULT 0 CHECK (current_streak BETWEEN 0 AND 21),
     is_eliminated     BOOLEAN NOT NULL DEFAULT FALSE,
     eliminated_on_day INT CHECK (eliminated_on_day BETWEEN 1 AND 21),
+    elimination_reason VARCHAR(20)
+                      CHECK (elimination_reason IN ('MISSED_DEADLINE', 'PEER_REJECTED')),
     joined_at         TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     UNIQUE (pool_id, wallet_address),
-    CHECK (is_eliminated = (eliminated_on_day IS NOT NULL))
+    CHECK (is_eliminated = (eliminated_on_day IS NOT NULL)),
+    CONSTRAINT pool_participants_reason_consistent
+        CHECK (is_eliminated = (elimination_reason IS NOT NULL))
 );
+
+-- Upgrade path for databases created before elimination_reason existed.
+ALTER TABLE pool_participants ADD COLUMN IF NOT EXISTS elimination_reason VARCHAR(20)
+    CHECK (elimination_reason IN ('MISSED_DEADLINE', 'PEER_REJECTED'));
+UPDATE pool_participants SET elimination_reason = 'PEER_REJECTED'
+ WHERE is_eliminated AND elimination_reason IS NULL;
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'pool_participants_reason_consistent') THEN
+        ALTER TABLE pool_participants ADD CONSTRAINT pool_participants_reason_consistent
+            CHECK (is_eliminated = (elimination_reason IS NOT NULL));
+    END IF;
+END $$;
 CREATE INDEX IF NOT EXISTS pool_participants_wallet_idx ON pool_participants (wallet_address);
 
 -- 4. Video proof submissions (Cloudflare Stream)
@@ -104,15 +121,32 @@ CREATE TRIGGER pool_participants_locked_total
     AFTER INSERT ON pool_participants
     FOR EACH ROW EXECUTE FUNCTION lockin_sync_locked_total();
 
--- A proof may only be filed for today's day number, and only by a non-eliminated participant.
+-- Day N is the UTC date start_date + N - 1. Its proof is due by the end of that
+-- day plus this grace period (00:00 UTC + 6h = 06:00 UTC the next morning).
+-- Single source of truth for the submission trigger, the jobs and the API.
+CREATE OR REPLACE FUNCTION lockin_grace() RETURNS interval
+    LANGUAGE sql IMMUTABLE AS $$ SELECT interval '6 hours' $$;
+
+-- A proof may only be filed for today's day number (or yesterday's while the
+-- grace period is still running), in an ACTIVE pool, by a non-eliminated participant.
 CREATE OR REPLACE FUNCTION lockin_check_submission() RETURNS trigger AS $$
 DECLARE
-    p_start DATE;
+    p_start    DATE;
+    p_status   VARCHAR(20);
     eliminated BOOLEAN;
+    utc_today  DATE := (now() AT TIME ZONE 'UTC')::date;
+    today_day  INT;
+    in_grace   BOOLEAN;
 BEGIN
-    SELECT start_date INTO p_start FROM challenge_pools WHERE id = NEW.pool_id;
-    IF NEW.day_number <> (CURRENT_DATE - p_start) + 1 THEN
-        RAISE EXCEPTION 'day_number % is not today''s challenge day', NEW.day_number;
+    SELECT start_date, status INTO p_start, p_status FROM challenge_pools WHERE id = NEW.pool_id;
+    IF p_status <> 'ACTIVE' THEN
+        RAISE EXCEPTION 'pool is not active';
+    END IF;
+
+    today_day := utc_today - p_start + 1;
+    in_grace  := now() < (utc_today::timestamp AT TIME ZONE 'UTC') + lockin_grace();
+    IF NOT (NEW.day_number = today_day OR (in_grace AND NEW.day_number = today_day - 1)) THEN
+        RAISE EXCEPTION 'day_number % is not open for submission', NEW.day_number;
     END IF;
 
     SELECT is_eliminated INTO eliminated FROM pool_participants
@@ -128,3 +162,36 @@ DROP TRIGGER IF EXISTS proof_submissions_check ON proof_submissions;
 CREATE TRIGGER proof_submissions_check
     BEFORE INSERT ON proof_submissions
     FOR EACH ROW EXECUTE FUNCTION lockin_check_submission();
+
+-- 7. Settlement: one row per settled pool. The platform receives the 10% fee
+--    plus the integer-division remainder ("dust"), so every lamport is accounted for.
+CREATE TABLE IF NOT EXISTS pool_settlements (
+    pool_id                      UUID PRIMARY KEY REFERENCES challenge_pools(id),
+    total_lamports               BIGINT NOT NULL CHECK (total_lamports >= 0),
+    platform_fee_lamports        BIGINT NOT NULL CHECK (platform_fee_lamports >= 0),
+    dust_lamports                BIGINT NOT NULL CHECK (dust_lamports >= 0),
+    survivor_count               INT NOT NULL CHECK (survivor_count >= 0),
+    payout_per_survivor_lamports BIGINT NOT NULL CHECK (payout_per_survivor_lamports >= 0),
+    escrow_wallet                VARCHAR(44) NOT NULL,
+    platform_wallet              VARCHAR(44) NOT NULL,
+    settled_at                   TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    CHECK (platform_fee_lamports + dust_lamports
+           + survivor_count * payout_per_survivor_lamports = total_lamports)
+);
+
+-- 8. Payout ledger: one transfer per row, grouped into Solana transaction batches.
+--    An executor signs each batch, then records tx_sig and moves status forward.
+CREATE TABLE IF NOT EXISTS payouts (
+    id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    pool_id          UUID NOT NULL REFERENCES pool_settlements(pool_id),
+    recipient_wallet VARCHAR(44) NOT NULL,
+    kind             VARCHAR(20) NOT NULL CHECK (kind IN ('SURVIVOR', 'PLATFORM_FEE')),
+    amount_lamports  BIGINT NOT NULL CHECK (amount_lamports > 0),
+    batch_index      INT NOT NULL CHECK (batch_index >= 0),
+    status           VARCHAR(20) NOT NULL DEFAULT 'PENDING'
+                     CHECK (status IN ('PENDING', 'SENT', 'CONFIRMED', 'FAILED')),
+    tx_sig           VARCHAR(88),
+    created_at       TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    UNIQUE (pool_id, recipient_wallet, kind)
+);
+CREATE INDEX IF NOT EXISTS payouts_pending_idx ON payouts (pool_id, batch_index) WHERE status = 'PENDING';

@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
     const sub = await client.query(
       `SELECT s.id, s.pool_id, s.wallet_address, s.day_number, s.status
          FROM proof_submissions s
+         JOIN challenge_pools p ON p.id = s.pool_id AND p.status = 'ACTIVE'
          JOIN pool_participants me
            ON me.pool_id = s.pool_id AND me.wallet_address = $2 AND NOT me.is_eliminated
         WHERE s.id = $1
@@ -68,7 +69,7 @@ export async function POST(req: NextRequest) {
       status = "REJECTED";
       await client.query(`UPDATE proof_submissions SET status = 'REJECTED' WHERE id = $1`, [submissionId]);
       await client.query(
-        `UPDATE pool_participants SET is_eliminated = TRUE, eliminated_on_day = $3
+        `UPDATE pool_participants SET is_eliminated = TRUE, eliminated_on_day = $3, elimination_reason = 'PEER_REJECTED'
           WHERE pool_id = $1 AND wallet_address = $2 AND NOT is_eliminated`,
         [s.pool_id, s.wallet_address, s.day_number],
       );

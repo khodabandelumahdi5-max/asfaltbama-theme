@@ -49,6 +49,8 @@ export async function GET(req: NextRequest) {
     `SELECT p.id, p.title, p.stake_lamports, p.start_date::text, p.end_date::text,
             p.total_locked_lamports, p.status,
             (CURRENT_DATE - p.start_date + 1) AS current_day,
+            now() < (CURRENT_DATE::timestamp AT TIME ZONE 'UTC') + lockin_grace() AS in_grace,
+            EXTRACT(EPOCH FROM lockin_grace())::int / 3600 AS grace_hours,
             (SELECT COUNT(*) FROM pool_participants pp WHERE pp.pool_id = p.id)::int AS participant_count,
             (SELECT COUNT(*) FROM pool_participants pp WHERE pp.pool_id = p.id AND pp.is_eliminated)::int AS eliminated_count
        FROM challenge_pools p
@@ -64,6 +66,8 @@ export async function GET(req: NextRequest) {
   if (poolRes.rowCount === 0) return NextResponse.json(empty);
 
   const row = poolRes.rows[0];
+  const currentDay = Math.max(0, Math.min(22, Number(row.current_day)));
+  const graceDay = row.in_grace && currentDay - 1 >= 1 && currentDay - 1 <= 21 ? currentDay - 1 : null;
   const pool: ArenaPool = {
     id: row.id,
     title: row.title,
@@ -74,14 +78,16 @@ export async function GET(req: NextRequest) {
     status: row.status,
     participantCount: row.participant_count,
     eliminatedCount: row.eliminated_count,
-    currentDay: Math.max(0, Math.min(22, Number(row.current_day))),
+    currentDay,
+    graceDay,
+    graceHours: row.grace_hours,
   };
 
   if (!wallet) return NextResponse.json({ ...empty, pool } satisfies ArenaState);
 
   const [partRes, mineRes, queueRes] = await Promise.all([
     db.query(
-      `SELECT current_streak, is_eliminated, eliminated_on_day, joined_at
+      `SELECT current_streak, is_eliminated, eliminated_on_day, elimination_reason, joined_at
          FROM pool_participants WHERE pool_id = $1 AND wallet_address = $2`,
       [pool.id, wallet],
     ),
@@ -110,6 +116,7 @@ export async function GET(req: NextRequest) {
         currentStreak: p.current_streak,
         isEliminated: p.is_eliminated,
         eliminatedOnDay: p.eliminated_on_day,
+        eliminationReason: p.elimination_reason,
         joinedAt: p.joined_at.toISOString(),
       }
     : null;
