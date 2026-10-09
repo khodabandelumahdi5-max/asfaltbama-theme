@@ -217,3 +217,37 @@ CREATE UNIQUE INDEX IF NOT EXISTS payout_attempts_one_open_per_batch
     ON payout_attempts (pool_id, batch_index) WHERE status = 'SENT';
 
 ALTER TABLE pool_settlements ADD COLUMN IF NOT EXISTS paid_out_at TIMESTAMPTZ;
+
+-- 10. Refunds for deposits that could not be enrolled (WRONG_AMOUNT, UNMATCHED,
+--     DUPLICATE_ENTRY). The deposit signature is the primary key, so a deposit
+--     can be refunded at most once. The executor creates these rows and verifies
+--     each deposit on-chain before sending; anything that does not check out is
+--     HELD for manual review instead of being paid.
+CREATE TABLE IF NOT EXISTS refunds (
+    deposit_tx_sig   VARCHAR(88) PRIMARY KEY REFERENCES deposits(tx_sig),
+    recipient_wallet VARCHAR(44) NOT NULL,
+    amount_lamports  BIGINT NOT NULL CHECK (amount_lamports > 0),
+    escrow_wallet    VARCHAR(44) NOT NULL,
+    status           VARCHAR(20) NOT NULL DEFAULT 'PENDING'
+                     CHECK (status IN ('PENDING', 'SENT', 'CONFIRMED', 'HELD')),
+    tx_sig           VARCHAR(88),
+    note             TEXT,
+    created_at       TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS refunds_recipient_idx ON refunds (recipient_wallet);
+CREATE INDEX IF NOT EXISTS refunds_pending_idx ON refunds (created_at) WHERE status = 'PENDING';
+CREATE INDEX IF NOT EXISTS deposits_from_wallet_idx ON deposits (from_wallet);
+
+-- Attempts now cover refund batches too: those have no pool or batch index.
+ALTER TABLE payout_attempts ALTER COLUMN pool_id DROP NOT NULL;
+ALTER TABLE payout_attempts ALTER COLUMN batch_index DROP NOT NULL;
+ALTER TABLE payout_attempts ADD COLUMN IF NOT EXISTS kind VARCHAR(20) NOT NULL DEFAULT 'POOL_PAYOUT'
+    CHECK (kind IN ('POOL_PAYOUT', 'REFUND'));
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'payout_attempts_kind_shape') THEN
+        ALTER TABLE payout_attempts ADD CONSTRAINT payout_attempts_kind_shape CHECK (
+            (kind = 'POOL_PAYOUT' AND pool_id IS NOT NULL AND batch_index IS NOT NULL)
+         OR (kind = 'REFUND' AND pool_id IS NULL AND batch_index IS NULL));
+    END IF;
+END $$;

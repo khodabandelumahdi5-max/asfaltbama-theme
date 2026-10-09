@@ -37,9 +37,45 @@ export interface ProofCardData {
   myVote: -1 | 1 | null;
 }
 
+export interface PoolResult {
+  poolId: string;
+  title: string;
+  startDate: string;
+  endDate: string;
+  status: "COMPLETED" | "SETTLED";
+  survived: boolean;
+  eliminatedOnDay: number | null;
+  eliminationReason: "MISSED_DEADLINE" | "PEER_REJECTED" | null;
+  currentStreak: number;
+  stakeLamports: string;
+  /** null until settle-pool has run (status COMPLETED). Lamport amounts are decimal strings. */
+  settlement: {
+    survivorCount: number;
+    totalLamports: string;
+    platformFeeLamports: string;
+    payoutPerSurvivorLamports: string;
+    paidOutAt: string | null;
+  } | null;
+  /** This wallet's survivor payout; null if eliminated or not settled yet. */
+  payout: { amountLamports: string; status: "PENDING" | "SENT" | "CONFIRMED"; txSig: string | null } | null;
+}
+
+export interface RefundView {
+  depositTxSig: string;
+  amountLamports: string;
+  reason: "WRONG_AMOUNT" | "UNMATCHED" | "DUPLICATE_ENTRY";
+  receivedAt: string;
+  status: "QUEUED" | "SENDING" | "REFUNDED" | "UNDER_REVIEW";
+  refundTxSig: string | null;
+}
+
 export interface ArenaState {
   pool: ArenaPool | null;
   participant: ArenaParticipant | null;
   myProofs: ProofCardData[];
   reviewQueue: ProofCardData[];
+  /** Finished pools for the connected wallet. */
+  results: PoolResult[];
+  /** Deposits from the connected wallet that are being or were refunded. */
+  refunds: RefundView[];
 }

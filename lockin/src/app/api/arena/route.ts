@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { walletAddress } from "@/lib/signed-request";
+import { loadPoolResults, loadRefunds } from "@/lib/wallet-history";
 import type { ArenaParticipant, ArenaPool, ArenaState, ProofCardData } from "@/lib/types";
 
 export const runtime = "nodejs";
@@ -62,7 +63,8 @@ export async function GET(req: NextRequest) {
     [wallet],
   );
 
-  const empty: ArenaState = { pool: null, participant: null, myProofs: [], reviewQueue: [] };
+  const [results, refunds] = wallet ? await Promise.all([loadPoolResults(wallet), loadRefunds(wallet)]) : [[], []];
+  const empty: ArenaState = { pool: null, participant: null, myProofs: [], reviewQueue: [], results, refunds };
   if (poolRes.rowCount === 0) return NextResponse.json(empty);
 
   const row = poolRes.rows[0];
@@ -127,5 +129,7 @@ export async function GET(req: NextRequest) {
     myProofs: mineRes.rows.map(toCard),
     // Only participants get to review.
     reviewQueue: participant && !participant.isEliminated ? queueRes.rows.map(toCard) : [],
+    results,
+    refunds,
   } satisfies ArenaState);
 }

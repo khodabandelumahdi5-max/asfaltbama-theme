@@ -100,7 +100,8 @@ The response contains each batch as unsigned `SystemProgram.transfer` instructio
 # ESCROW_KEYPAIR_PATH, PLATFORM_KEYPAIR_PATH (Solana CLI keypair JSON, chmod 600)
 npm run payouts                         # dry run: lists what would be sent
 npm run payouts -- --execute            # pay every settled, unpaid pool
-npm run payouts -- --execute --pool <uuid>
+npm run payouts -- --execute --pool <uuid>   # one pool, skips refunds
+npm run payouts -- --execute --only refunds  # or --only pools
 ```
 
 **No double payments.** For each batch, the executor:
@@ -122,8 +123,33 @@ If the executor dies at any point, the next run reconciles each `SENT` attempt w
 
 The exit code is non-zero if any pool failed. Rerunning is always safe.
 
+### Refunds
+
+Deposits the webhook could not enroll (`WRONG_AMOUNT`, `UNMATCHED`, `DUPLICATE_ENTRY`) are refunded in full by the same executor, after pool payouts. The platform wallet pays the network fee.
+
+1. Each refundable deposit gets a `refunds` row. Its key is the deposit signature, so a deposit can be refunded at most once.
+2. Before anything is sent, the deposit transaction is re-read from the chain at finalized commitment. It must show exactly the recorded lamports moving from the depositor to the escrow through System transfers, top-level or inner.
+3. A deposit that fails this check is set to `HELD` with a `note`, and is never sent automatically:
+   - the transaction failed;
+   - it went somewhere else;
+   - the amount doesn't match;
+   - it was made to a different escrow;
+   - it still can't be found 10 minutes after it was received.
+
+   This protects the escrow against forged ledger rows (for example, a leaked webhook secret) and against deposits that never finalized. A deposit that is simply not final yet stays `PENDING` and is retried on the next run.
+4. Verified refunds are sent in batches of up to 18, with the same record-before-broadcast and reconcile-on-rerun guarantees as payouts.
+
+`HELD` refunds need a human. Look at the `note`, and if the refund is genuinely owed, pay it by hand.
+
+## Dashboard: results and refunds
+
+For the connected wallet, the arena shows two extra sections under the current pool:
+- **Results:** the last 5 finished pools the wallet played in. Each shows survived or eliminated (and why), the settlement summary, and the wallet's payout: queued, sending, or paid with an explorer link.
+- **Refunds:** the wallet's deposits that couldn't be enrolled, with their status (queued, sending, refunded with a link, or under review). Internal hold reasons are not exposed.
+
+If a stake deposit ends up refundable (for example, enrollment closed while it was in flight), the join button says so instead of timing out. Set `NEXT_PUBLIC_SOLANA_CLUSTER` so explorer links point at the right cluster.
+
 ## Not built yet
 
-- Refunds for `UNMATCHED`, `WRONG_AMOUNT` and `DUPLICATE_ENTRY` deposits.
-- After settlement the arena only shows `ACTIVE` pools, so survivors don't see their payout in the UI yet.
+- The webhook credits only the first sender in a transaction. A transaction where several wallets pay into escrow records only that first sender, so the others are neither enrolled nor refunded automatically.
 - The treasury is a plain wallet. A production version should hold stakes in an on-chain escrow program.

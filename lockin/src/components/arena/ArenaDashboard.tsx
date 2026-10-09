@@ -11,6 +11,7 @@ import { useArena, useSignedPost, useStakeDeposit } from "./hooks";
 import { ProofSubmissionCard } from "./ProofSubmissionCard";
 import { StreakTracker } from "./StreakTracker";
 import { UploadProofCard } from "./UploadProofCard";
+import { RefundsSection, ResultsSection } from "./WalletHistory";
 
 export function ArenaDashboard() {
   // Wallet state only exists in the browser. Until hydration finishes we render
@@ -26,15 +27,39 @@ export function ArenaDashboard() {
 
 function ConnectedArena({ wallet }: { wallet: string }) {
   const { state, error, loading, refresh } = useArena(wallet);
-  const signedPost = useSignedPost();
 
   if (!state) {
     return error ? <ErrorPanel message={error} onRetry={refresh} /> : <ArenaSkeleton />;
   }
-  if (!state.pool) return <EmptyPanel title="No active pool" body="The next 21-day pool hasn't opened yet." />;
-  if (!state.participant) return <JoinPanel wallet={wallet} state={state} onJoined={refresh} />;
 
-  const { pool, participant, myProofs, reviewQueue } = state;
+  return (
+    <div className="flex flex-col gap-12">
+      {!state.pool ? (
+        <EmptyPanel title="No active pool" body="The next 21-day pool hasn't opened yet." />
+      ) : !state.participant ? (
+        <JoinPanel wallet={wallet} state={state} onJoined={refresh} />
+      ) : (
+        <ActivePool state={state} loading={loading} refresh={refresh} />
+      )}
+      <ResultsSection results={state.results} />
+      <RefundsSection refunds={state.refunds} />
+    </div>
+  );
+}
+
+function ActivePool({
+  state,
+  loading,
+  refresh,
+}: {
+  state: ArenaState;
+  loading: boolean;
+  refresh: () => Promise<void>;
+}) {
+  const signedPost = useSignedPost();
+  const pool = state.pool!;
+  const participant = state.participant!;
+  const { myProofs, reviewQueue } = state;
   const submitted = new Set(myProofs.map((p) => p.dayNumber));
   const submittedToday = submitted.has(pool.currentDay);
   // Yesterday (while its grace period runs) comes before today.
@@ -173,15 +198,22 @@ function JoinPanel({
     setError(null);
     setPhase("sending");
     try {
-      await deposit();
+      const depositSig = await deposit();
       setPhase("waiting");
-      // The Helius webhook enrolls us; poll until the participant row exists.
+      // The Helius webhook enrolls us; poll until the participant row exists,
+      // or until the deposit shows up as refundable (e.g. enrollment just closed).
       for (let i = 0; i < 20; i++) {
         await new Promise((r) => setTimeout(r, 3000));
         const res = await fetch(`/api/arena?wallet=${encodeURIComponent(wallet)}`, { cache: "no-store" });
-        if (res.ok && ((await res.json()) as ArenaState).participant) {
+        if (!res.ok) continue;
+        const next = (await res.json()) as ArenaState;
+        if (next.participant) {
           onJoined();
           return;
+        }
+        if (next.refunds.some((r) => r.depositTxSig === depositSig)) {
+          onJoined();
+          throw new Error("Your deposit couldn't be enrolled, so it will be refunded in full. See Refunds below.");
         }
       }
       throw new Error("Deposit confirmed on-chain but not yet indexed. Refresh in a minute.");
