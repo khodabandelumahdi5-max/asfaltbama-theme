@@ -71,6 +71,8 @@ function asfaltbama_alias_redirect() {
 
 	$path = wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 	$slug = strtolower( trim( rawurldecode( (string) $path ), '/' ) );
+	// Old posts used date permalinks (/2026/06/21/<slug>/): match on the slug.
+	$slug = preg_replace( '#^\d{4}/\d{2}/\d{2}/#', '', $slug );
 	if ( '' === $slug || false !== strpos( $slug, '/' ) ) {
 		return;
 	}
@@ -113,6 +115,14 @@ function asfaltbama_topic_redirects() {
 	return apply_filters(
 		'asfaltbama_topic_redirects',
 		[
+			'تفاوت-قیرگونی-و-ایزوگام' => 'bitumen-roofing-vs-isogam',
+			'ترکخوردگی'    => 'asphalt-crack-sealing-guide',
+			'ترک‌خوردگی'   => 'asphalt-crack-sealing-guide',
+			'بابکت'        => 'bobcat-rental-guide',
+			'کامپکت'       => 'subgrade-preparation-compaction',
+			'زیرسازی'      => 'subgrade-preparation-compaction',
+			'گرم-یا-سرد'   => 'cold-vs-hot-asphalt',
+			'فرسوده'       => 'asphalt-patching-guide',
 			'قیرگونی'      => 'bitumen-roofing-price',
 			'ایزوگام'      => 'isogam-price-guide',
 			'درزگیری'      => 'crack-sealing-cost',
@@ -160,3 +170,59 @@ function asfaltbama_archive_redirects( $wp ) {
 	}
 }
 add_action( 'parse_request', 'asfaltbama_archive_redirects', 0 );
+
+/**
+ * Old URLs that Search Console still shows with impressions but that now
+ * answer 404: the categories and tags of the previous theme, old service
+ * pages, and the demo posts of the original template (farming articles,
+ * «سلام دنیا»).
+ *
+ * - Old categories, tags and pages go (301) to the page on the same topic.
+ * - Demo posts answer 410 Gone, so Google drops them faster than a 404.
+ *
+ * @return void
+ */
+function asfaltbama_legacy_redirects() {
+	if ( ! is_404() ) {
+		return;
+	}
+	$path = strtolower( trim( rawurldecode( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ) ), '/' ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+	if ( '' === $path ) {
+		return;
+	}
+
+	if ( preg_match( '#(farming|soil-health|irrigation|crop-yield|سلام-دنیا|hello-world)#u', $path ) ) {
+		status_header( 410 );
+		nocache_headers();
+		return;
+	}
+
+	$map = apply_filters(
+		'asfaltbama_legacy_redirects',
+		[
+			'خدمات-کامیون'          => '/machinery-rental/',
+			'اجاره-ماشینآلات'       => '/machinery-rental/',
+			'اجاره-ماشین‌آلات'      => '/machinery-rental/',
+			'road-landscaping'      => '/site-landscaping-asphalt/',
+			'category/excavation'   => '/category/excavation-grading/',
+			'category/company'      => '/about-us/',
+			'category/manufacture'  => '/asphalt-plant/',
+			'category/guide'        => '/articles/',
+			'category/asphalt'      => '/category/asphalt-paving/',
+			'category/insulation'   => '/category/waterproofing-isogam/',
+			'category/industry'     => '/industrial-asphalt-waterproofing/',
+			'category/compaction'   => '/subgrade-preparation-compaction/',
+			'tag/oil'               => '/bitumen-price/',
+			'tag/construction'      => '/services/',
+			'tag/factory'           => '/asphalt-plant/',
+			'tag/manufacture'       => '/asphalt-plant/',
+		]
+	);
+	foreach ( $map as $old => $target ) {
+		if ( $path === $old || 0 === strpos( $path, $old . '/' ) ) {
+			wp_safe_redirect( home_url( $target ), 301 );
+			exit;
+		}
+	}
+}
+add_action( 'template_redirect', 'asfaltbama_legacy_redirects', 0 );
