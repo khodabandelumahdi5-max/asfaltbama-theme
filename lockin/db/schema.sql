@@ -195,3 +195,25 @@ CREATE TABLE IF NOT EXISTS payouts (
     UNIQUE (pool_id, recipient_wallet, kind)
 );
 CREATE INDEX IF NOT EXISTS payouts_pending_idx ON payouts (pool_id, batch_index) WHERE status = 'PENDING';
+
+-- 9. Payout attempts: one row per signed batch transaction, written BEFORE it is
+--    broadcast. Its signature is the transaction id, so after a crash the
+--    executor can ask the chain what happened instead of guessing. raw_tx lets it
+--    rebroadcast the identical bytes, which can never land twice.
+CREATE TABLE IF NOT EXISTS payout_attempts (
+    tx_sig                 VARCHAR(88) PRIMARY KEY,
+    pool_id                UUID NOT NULL REFERENCES pool_settlements(pool_id),
+    batch_index            INT NOT NULL,
+    raw_tx_base64          TEXT NOT NULL,
+    last_valid_block_height BIGINT NOT NULL,
+    status                 VARCHAR(20) NOT NULL DEFAULT 'SENT'
+                           CHECK (status IN ('SENT', 'CONFIRMED', 'FAILED', 'EXPIRED')),
+    error                  TEXT,
+    created_at             TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    resolved_at            TIMESTAMPTZ
+);
+-- At most one unresolved attempt per batch.
+CREATE UNIQUE INDEX IF NOT EXISTS payout_attempts_one_open_per_batch
+    ON payout_attempts (pool_id, batch_index) WHERE status = 'SENT';
+
+ALTER TABLE pool_settlements ADD COLUMN IF NOT EXISTS paid_out_at TIMESTAMPTZ;

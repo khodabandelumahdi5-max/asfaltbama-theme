@@ -16,7 +16,7 @@
 cp .env.example .env.local   # fill in values
 npm install
 npm run db:migrate           # applies db/schema.sql (idempotent, also upgrades older schemas)
-npm test                     # settlement math unit tests
+npm test                     # settlement math + payout outcome unit tests
 npm run dev
 ```
 
@@ -91,16 +91,39 @@ For every `ACTIVE` or `COMPLETED` pool past its final deadline, in one transacti
 
 The response contains each batch as unsigned `SystemProgram.transfer` instructions (program ID, account keys, base64 data). Every transfer sends from the escrow (`NEXT_PUBLIC_TREASURY_ADDRESS`). The platform wallet (`PLATFORM_TREASURY_ADDRESS`) is the fee payer, so network fees never eat into escrow. Each batch therefore needs both signatures.
 
+## Sending payouts
+
+`scripts/execute-payouts.mts` signs and broadcasts the batches that `settle-pool` prepared. Run it from an operator machine that holds the keys, never from the web server.
+
+```bash
+# .env.local (or exported): DATABASE_URL, NEXT_PUBLIC_SOLANA_RPC_URL,
+# ESCROW_KEYPAIR_PATH, PLATFORM_KEYPAIR_PATH (Solana CLI keypair JSON, chmod 600)
+npm run payouts                         # dry run: lists what would be sent
+npm run payouts -- --execute            # pay every settled, unpaid pool
+npm run payouts -- --execute --pool <uuid>
+```
+
+**No double payments.** For each batch, the executor:
+1. Signs the transaction. The fee payer's signature is the transaction id, so it is known before anything is sent.
+2. Commits that signature to the database before broadcasting: the payout rows become `SENT`, and a `payout_attempts` row stores the signed bytes and the blockhash's last valid block height.
+3. Broadcasts, then waits until the chain gives a final answer. While waiting it rebroadcasts the identical bytes, which can land at most once.
+4. Records the answer:
+   - **finalized, success:** payouts become `CONFIRMED`.
+   - **finalized, failed:** the transaction is atomic, so nothing moved. Payouts go back to `PENDING` and the pool stops.
+   - **never landed and its blockhash expired:** it can never land, so payouts go back to `PENDING` and a fresh transaction is signed (up to 3 tries).
+
+If the executor dies at any point, the next run reconciles each `SENT` attempt with the chain first. It never signs a replacement while the old transaction could still land. When every payout of a pool is `CONFIRMED`, `pool_settlements.paid_out_at` is set.
+
+**Safety checks:**
+- It refuses to start if another executor is running (Postgres advisory lock).
+- It refuses mainnet unless you pass `--allow-mainnet`.
+- It skips a pool whose settlement wallets don't match the loaded keys.
+- Before signing, it checks that the escrow covers the batch and won't be left between zero and the rent-exempt minimum, and that the fee payer can cover the network fee.
+
+The exit code is non-zero if any pool failed. Rerunning is always safe.
+
 ## Not built yet
 
-- **Payout executor.** Settlement *generates* the batches; nothing signs or sends them yet. An executor would:
-  - load PENDING batches;
-  - add a blockhash;
-  - sign with the escrow and platform keys;
-  - mark the batch rows `SENT` with `tx_sig` *before* broadcasting, then confirm, so a crash can't cause a double payment;
-  - check the escrow balance first.
-
-  Keep those keys out of the web server.
 - Refunds for `UNMATCHED`, `WRONG_AMOUNT` and `DUPLICATE_ENTRY` deposits.
 - After settlement the arena only shows `ACTIVE` pools, so survivors don't see their payout in the UI yet.
 - The treasury is a plain wallet. A production version should hold stakes in an on-chain escrow program.

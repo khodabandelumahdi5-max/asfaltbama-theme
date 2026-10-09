@@ -8,8 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "db:migrate": "node scripts/migrate.mjs",
-    "test": "node --test src/**/*.test.ts"
+    "db:migrate": "node --env-file-if-exists=.env.local scripts/migrate.mjs",
+    "test": "node --test src/**/*.test.ts",
+    "payouts": "node --env-file-if-exists=.env.local scripts/execute-payouts.mts"
   },
   "dependencies": {
     "@solana/wallet-adapter-base": "^0.9.28",
@@ -36,5 +37,6 @@
     "postcss": "^8.5.29",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.9.3"
-  }
+  },
+  "type": "module"
 }
