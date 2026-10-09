@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-obsidian text-bone font-display antialiased;
+  /* Faint scanline grid */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+::selection {
+  @apply bg-acid text-obsidian;
+}
+
+:focus-visible {
+  outline: 3px solid #00e5ff;
+  outline-offset: 2px;
+}
+
+/* Re-skin the wallet-adapter button/modal to match the brutalist system. */
+.wallet-adapter-button {
+  @apply rounded-none border-3 border-acid bg-obsidian font-mono uppercase text-acid shadow-brutal-sm transition;
+  border-style: solid; /* adapter CSS sets border: none */
+  height: 3rem;
+}
+.wallet-adapter-button:not([disabled]):hover {
+  @apply bg-acid text-obsidian;
+}
+.wallet-adapter-modal-wrapper {
+  @apply rounded-none border-3 border-bone bg-obsidian-900 shadow-brutal;
+}
+.wallet-adapter-dropdown-list {
+  @apply rounded-none border-3 border-bone bg-obsidian-900;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
