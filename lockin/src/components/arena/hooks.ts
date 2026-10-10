@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { STAKE_LAMPORTS, TREASURY_ADDRESS } from "@/lib/constants";
 import { buildSignedMessage, canonicalPayload } from "@/lib/signed-message";
 import type { ArenaState } from "@/lib/types";
+import { errorMessage } from "@/lib/errors";
 
 export function useArena(wallet: string | null) {
   const [state, setState] = useState<ArenaState | null>(null);
@@ -22,7 +23,7 @@ export function useArena(wallet: string | null) {
       setState((await res.json()) as ArenaState);
       setError(null);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "failed to load arena");
+      setError(errorMessage(e, "Failed to load the arena."));
     } finally {
       setLoading(false);
     }

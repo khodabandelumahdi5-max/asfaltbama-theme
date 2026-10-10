@@ -25,9 +25,10 @@ function pickMimeType(): string | undefined {
 type Phase = "idle" | "starting" | "live" | "recording";
 
 /**
- * Records a vertical proof video from the camera. When the camera delivers
- * portrait frames (phones) they are recorded as-is; landscape frames (laptops)
- * are centre-cropped to 9:16 through a canvas, so every proof is vertical.
+ * Records a vertical proof video from the camera. Every frame goes through a
+ * canvas that centre-crops it to 9:16 at 720x1280, whatever the camera delivers
+ * (landscape laptop webcams, 3:4 or extra-tall phone sensors, 4K), so every
+ * proof has the same shape and a predictable size.
  */
 export function ProofRecorder({
   disabled,
@@ -87,12 +88,9 @@ export function ProofRecorder({
     }
   }
 
-  /** Returns a stream whose video is 9:16, cropping on a canvas if the camera is landscape. */
+  /** Returns a 720x1280 stream: the camera centre-cropped to 9:16, plus its audio. */
   function verticalStream(camera: MediaStream): MediaStream {
-    const track = camera.getVideoTracks()[0];
-    const { width = 0, height = 0 } = track.getSettings();
-    if (height >= width) return camera;
-
+    const { width = 0, height = 0 } = camera.getVideoTracks()[0].getSettings();
     const video = videoRef.current!;
     const canvas = document.createElement("canvas");
     canvas.width = OUT_W;
@@ -103,8 +101,11 @@ export function ProofRecorder({
       if (!running) return;
       const vw = video.videoWidth || width;
       const vh = video.videoHeight || height;
-      const sw = Math.min(vw, (vh * 9) / 16);
-      ctx.drawImage(video, (vw - sw) / 2, 0, sw, vh, 0, 0, OUT_W, OUT_H);
+      if (!vw || !vh) return;
+      // Largest 9:16 window centred in the frame.
+      const sw = vw / vh > 9 / 16 ? (vh * 9) / 16 : vw;
+      const sh = vw / vh > 9 / 16 ? vh : (vw * 16) / 9;
+      ctx.drawImage(video, (vw - sw) / 2, (vh - sh) / 2, sw, sh, 0, 0, OUT_W, OUT_H);
     };
     // setInterval keeps drawing when the tab is in the background (rAF would pause).
     const id = setInterval(draw, 1000 / FPS);

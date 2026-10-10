@@ -8,7 +8,7 @@
 - `@solana/web3.js` and `@solana/wallet-adapter-react` (Wallet Standard auto-detection, devnet)
 - PostgreSQL via `pg`
 - Helius enhanced-transaction webhook for deposit verification
-- Cloudflare Stream for proof videos
+- Cloudflare Stream for proof videos (direct creator uploads over TUS)
 
 ## Setup
 
@@ -43,7 +43,7 @@ In the Helius dashboard, create an **Enhanced** webhook on **devnet**:
 | Stake: wallet sends 0.05 SOL to the treasury | `components/arena/hooks.ts` (`useStakeDeposit`) |
 | Deposit verification and enrollment | `app/api/webhook/solana/route.ts` |
 | Dashboard data | `app/api/arena/route.ts` |
-| Video upload (Cloudflare direct upload) | `app/api/proofs/upload-url/route.ts` |
+| Video upload (Cloudflare Stream, TUS) | `app/api/proofs/tus/route.ts`, `lib/tus-upload.ts`, `components/arena/ProofRecorder.tsx` |
 | Proof submission | `app/api/proofs/route.ts` |
 | Peer review and consensus | `app/api/reviews/route.ts` |
 | Daily missed-day elimination | `jobs/dailyElimination.ts` via `app/api/cron/daily-check` |
@@ -56,6 +56,27 @@ In the Helius dashboard, create an **Enhanced** webhook on **devnet**:
 **Consensus.** A net vote of +3 verifies a proof and extends the submitter's streak. A net vote of −3 rejects it and eliminates the submitter. Self-votes, double votes and votes from non-participants are rejected.
 
 **Hydration.** Wallet state only exists in the browser. `WalletButton` is loaded with `ssr: false`, and `ArenaDashboard` renders the server skeleton until `useHasMounted()` flips. Server and first client render therefore always match, including when `autoConnect` restores a wallet.
+
+## Proof videos
+
+Players record a vertical proof in the browser or pick a video file. On phones the file picker opens the native camera. The bytes go **straight from the browser to Cloudflare Stream** over the resumable TUS protocol; they never pass through this server.
+
+1. **Record or pick.**
+   - **Record:** the in-browser recorder (`ProofRecorder`) centre-crops every camera frame to 9:16 at 720×1280 through a canvas. It records up to 2 minutes and stops automatically. Phone, laptop or 4K camera, the result has the same shape and a predictable size.
+   - **Pick a file:** it is checked in the browser first. It must be vertical, at most 2 minutes, and at most 512 MiB. Files the browser can't decode, such as HEVC on some desktops, skip the shape check; Cloudflare still enforces the duration.
+2. **Start the upload.** `tus-js-client` sends the TUS creation request to `POST /api/proofs/tus` with wallet-signed `X-LockIn-*` headers. The server checks:
+   - the wallet is a live participant;
+   - that day is open and not yet submitted;
+   - the size limit;
+   - at most 5 upload attempts per day.
+
+   It then creates the upload at Cloudflare (`/stream?direct_user=true`) and returns the one-time upload URL (`Location`) and video UID (`stream-media-id`). The server alone sets the Cloudflare metadata (`maxDurationSeconds`, `Upload-Creator`); nothing the client sends is forwarded.
+3. **Send the bytes.** They go to that URL in 50 MiB chunks, with automatic retries. The auth headers are only attached to the creation request, never to Cloudflare. If the tab is closed mid-upload, picking the same file again resumes where it stopped.
+4. **Submit.** `POST /api/proofs` submits the UID. Each UID is recorded in `video_uploads` against the wallet, pool and day that requested it, so a player can only submit a video they uploaded themselves for that day.
+
+The rule for which days are open lives in one SQL function, `lockin_day_is_open()`, used by both the upload endpoint and the submission trigger.
+
+Configure `CF_ACCOUNT_ID` and `CF_STREAM_API_TOKEN` (a token with *Stream: Edit*). In-browser recording needs HTTPS, or `localhost` in development.
 
 ## Deadlines
 

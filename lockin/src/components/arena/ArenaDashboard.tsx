@@ -12,6 +12,7 @@ import { ProofSubmissionCard } from "./ProofSubmissionCard";
 import { StreakTracker } from "./StreakTracker";
 import { UploadProofCard } from "./UploadProofCard";
 import { RefundsSection, ResultsSection } from "./WalletHistory";
+import { errorMessage } from "@/lib/errors";
 
 export function ArenaDashboard() {
   // Wallet state only exists in the browser. Until hydration finishes we render
@@ -218,7 +219,7 @@ function JoinPanel({
       }
       throw new Error("Deposit confirmed on-chain but not yet indexed. Refresh in a minute.");
     } catch (e) {
-      setError(e instanceof Error ? e.message : "deposit failed");
+      setError(errorMessage(e, "Deposit failed."));
       setPhase("idle");
     }
   }

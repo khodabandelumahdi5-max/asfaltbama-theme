@@ -5,6 +5,7 @@ import { uploadProofVideo, type ProofUploadHandle } from "@/lib/tus-upload";
 import { MAX_VIDEO_BYTES, MAX_VIDEO_SECONDS } from "@/lib/video";
 import { useSignedPost, useWalletSigner } from "./hooks";
 import { ProofRecorder } from "./ProofRecorder";
+import { errorMessage } from "@/lib/errors";
 
 type Phase = "pick" | "ready" | "authorizing" | "uploading" | "submitting" | "done";
 
@@ -135,7 +136,7 @@ export function UploadProofCard({
     } catch (e) {
       uploadRef.current = null;
       setPhase(file ? "ready" : "pick");
-      setError(e instanceof Error ? e.message : "submission failed");
+      setError(errorMessage(e, "Submission failed."));
     }
   }
 

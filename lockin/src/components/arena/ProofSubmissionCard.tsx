@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { ProofCardData } from "@/lib/types";
+import { errorMessage } from "@/lib/errors";
 
 const STATUS_STYLE = {
   PENDING: { badge: "bg-cyan text-obsidian", frame: "shadow-brutal-cyan", label: "Pending" },
@@ -37,7 +38,7 @@ export function ProofSubmissionCard({
     try {
       await onVote(proof.id, v);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "vote failed");
+      setError(errorMessage(e, "Vote failed."));
     } finally {
       setBusy(false);
     }
