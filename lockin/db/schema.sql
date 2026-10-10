@@ -127,25 +127,29 @@ CREATE TRIGGER pool_participants_locked_total
 CREATE OR REPLACE FUNCTION lockin_grace() RETURNS interval
     LANGUAGE sql IMMUTABLE AS $$ SELECT interval '6 hours' $$;
 
--- A proof may only be filed for today's day number (or yesterday's while the
--- grace period is still running), in an ACTIVE pool, by a non-eliminated participant.
+-- Is challenge day `day` of a pool starting `p_start` open for a proof right now?
+-- Today's day always is; yesterday's is while the grace period runs. Shared by the
+-- submission trigger and the video upload endpoint.
+CREATE OR REPLACE FUNCTION lockin_day_is_open(p_start DATE, day INT) RETURNS boolean AS $$
+    SELECT day BETWEEN 1 AND 21 AND (
+           day = ((now() AT TIME ZONE 'UTC')::date - p_start + 1)
+        OR (day = ((now() AT TIME ZONE 'UTC')::date - p_start)
+            AND now() < (((now() AT TIME ZONE 'UTC')::date)::timestamp AT TIME ZONE 'UTC') + lockin_grace()))
+$$ LANGUAGE sql STABLE;
+
+-- A proof may only be filed for an open day, in an ACTIVE pool, by a non-eliminated participant.
 CREATE OR REPLACE FUNCTION lockin_check_submission() RETURNS trigger AS $$
 DECLARE
     p_start    DATE;
     p_status   VARCHAR(20);
     eliminated BOOLEAN;
-    utc_today  DATE := (now() AT TIME ZONE 'UTC')::date;
-    today_day  INT;
-    in_grace   BOOLEAN;
 BEGIN
     SELECT start_date, status INTO p_start, p_status FROM challenge_pools WHERE id = NEW.pool_id;
     IF p_status <> 'ACTIVE' THEN
         RAISE EXCEPTION 'pool is not active';
     END IF;
 
-    today_day := utc_today - p_start + 1;
-    in_grace  := now() < (utc_today::timestamp AT TIME ZONE 'UTC') + lockin_grace();
-    IF NOT (NEW.day_number = today_day OR (in_grace AND NEW.day_number = today_day - 1)) THEN
+    IF NOT lockin_day_is_open(p_start, NEW.day_number) THEN
         RAISE EXCEPTION 'day_number % is not open for submission', NEW.day_number;
     END IF;
 
@@ -251,3 +255,17 @@ BEGIN
          OR (kind = 'REFUND' AND pool_id IS NULL AND batch_index IS NULL));
     END IF;
 END $$;
+
+-- 11. Video uploads: every Cloudflare Stream upload URL handed out, bound to the
+--     wallet, pool and day that requested it. A proof may only reference a video
+--     its own wallet uploaded for that pool and day.
+CREATE TABLE IF NOT EXISTS video_uploads (
+    uid            VARCHAR(64) PRIMARY KEY,
+    wallet_address VARCHAR(44) NOT NULL,
+    pool_id        UUID NOT NULL,
+    day_number     INT NOT NULL CHECK (day_number BETWEEN 1 AND 21),
+    upload_length  BIGINT NOT NULL CHECK (upload_length > 0),
+    created_at     TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    FOREIGN KEY (pool_id, wallet_address) REFERENCES pool_participants (pool_id, wallet_address)
+);
+CREATE INDEX IF NOT EXISTS video_uploads_owner_idx ON video_uploads (pool_id, wallet_address, day_number);

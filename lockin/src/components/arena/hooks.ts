@@ -35,29 +35,46 @@ export function useArena(wallet: string | null) {
   return { state, error, loading, refresh };
 }
 
-/** POSTs `payload` signed by the connected wallet, matching lib/signed-request.ts. */
-export function useSignedPost() {
+export interface WalletSignature {
+  wallet: string;
+  issuedAt: number;
+  signature: string;
+}
+
+/** Signs `action` + payload with the connected wallet, matching lib/signed-request.ts. */
+export function useWalletSigner() {
   const { publicKey, signMessage } = useWallet();
 
   return useCallback(
-    async <T,>(url: string, action: string, payload: Record<string, unknown>): Promise<T> => {
+    async (action: string, payload: Record<string, unknown>): Promise<WalletSignature> => {
       if (!publicKey) throw new Error("Connect a wallet first.");
       if (!signMessage) throw new Error("This wallet cannot sign messages.");
-
       const issuedAt = Date.now();
       const message = buildSignedMessage(action, canonicalPayload(payload), issuedAt);
       const signature = bs58.encode(await signMessage(new TextEncoder().encode(message)));
+      return { wallet: publicKey.toBase58(), issuedAt, signature };
+    },
+    [publicKey, signMessage],
+  );
+}
 
+/** POSTs `payload` signed by the connected wallet. */
+export function useSignedPost() {
+  const sign = useWalletSigner();
+
+  return useCallback(
+    async <T,>(url: string, action: string, payload: Record<string, unknown>): Promise<T> => {
+      const auth = await sign(action, payload);
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, wallet: publicKey.toBase58(), issuedAt, signature }),
+        body: JSON.stringify({ ...payload, ...auth }),
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error((json as { error?: string }).error ?? `request failed (${res.status})`);
       return json as T;
     },
-    [publicKey, signMessage],
+    [sign],
   );
 }
 

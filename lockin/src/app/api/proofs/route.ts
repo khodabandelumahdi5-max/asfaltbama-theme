@@ -17,6 +17,16 @@ export async function POST(req: NextRequest) {
   if (!parsed.ok) return NextResponse.json({ error: parsed.error }, { status: 400 });
 
   const { poolId, dayNumber, videoCfId } = parsed.data;
+
+  // The video must be one this wallet uploaded, for this pool and day.
+  const owned = await db.query(
+    `SELECT 1 FROM video_uploads WHERE uid = $1 AND wallet_address = $2 AND pool_id = $3 AND day_number = $4`,
+    [videoCfId, parsed.wallet, poolId, dayNumber],
+  );
+  if (owned.rowCount === 0) {
+    return NextResponse.json({ error: "video was not uploaded by this wallet for this day" }, { status: 403 });
+  }
+
   try {
     const res = await db.query(
       `INSERT INTO proof_submissions (pool_id, wallet_address, day_number, video_cf_id)
