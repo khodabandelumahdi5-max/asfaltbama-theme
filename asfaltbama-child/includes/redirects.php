@@ -203,6 +203,12 @@ function asfaltbama_legacy_redirects() {
 		'asfaltbama_legacy_redirects',
 		[
 			'خدمات-کامیون'          => '/machinery-rental/',
+			'خدمات-آسفالت'          => '/asphalt-paving/',
+			'خدمات-خاکبرداری'       => '/excavation-and-grading/',
+			'خدمات-ایزوگام'         => '/isogam-waterproofing/',
+			'خدمات-قیرگونی'         => '/isogam-waterproofing/',
+			'خدمات-درزگیری'         => '/asphalt-joint-sealing/',
+			'خدمات-تخریب'           => '/demolition-scrap/',
 			'اجاره-ماشینآلات'       => '/machinery-rental/',
 			'اجاره-ماشین‌آلات'      => '/machinery-rental/',
 			'road-landscaping'      => '/site-landscaping-asphalt/',
