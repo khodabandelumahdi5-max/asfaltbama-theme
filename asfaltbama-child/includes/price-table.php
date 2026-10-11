@@ -548,6 +548,7 @@ function asfaltbama_price_lead_rows() {
 			'excavation-contract'      => 'none',
 			'manual-excavation'        => 'none',
 			'bitumen-mastic'           => 'none',
+			'plain-powder-isogam'      => 'isogam_plain',
 		]
 	);
 }
