@@ -1,5 +1,5 @@
 {
-  "content_version": "2026-10-11.2",
+  "content_version": "2026-10-13.1",
   "site_version": "2026-09-26.1",
   "site": {
     "blogname": "آسفالت با ما",
@@ -167,7 +167,7 @@
       "focus_keyword": "رصف الأسفلت في أربيل,رصف الأسفلت,عزل الأسطح أربيل"
     }
   },
-  "images_version": "2026-10-11.1",
+  "images_version": "2026-10-13.1",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -1226,6 +1226,12 @@
       "featured_for": [
         "plain-powder-isogam"
       ]
+    },
+    {
+      "file": "images/ghirkeshi-isogam-foildar-poshtbam.jpg",
+      "title": "قیرکشی و ایزوگام فویل‌دار پشت‌بام",
+      "alt": "قیرکشی پشت‌بام و اجرای ایزوگام فویل‌دار؛ پروژه‌ی آسفالت با ما",
+      "featured_for": []
     }
   ],
   "replace_featured_ids": [
@@ -2103,6 +2109,7 @@
       "focus_keyword": "ایزوگام پشت‌بام,مراحل اجرای ایزوگام",
       "hreflang_group": "art-isogam-installation-steps",
       "prev_hashes": [
+        "e1b217849c2940d26d7872b6ee98e285",
         "80b46f453ff571aa00739d4096b10b7d",
         "5d1fe5fa1bc0613dca33c3879c084615",
         "22b7c7aec7667474c91839225f4190c5"
@@ -3053,6 +3060,7 @@
       "seo_description": "قیر سرد چیست و چه انواعی دارد؛ روش اجرای قیر سرد کف کولر و پشت بام، زمان خشک شدن، مصرف در هر متر و قیمت روز قیر سرد. مشاوره: 09191299559",
       "focus_keyword": "قیر سرد,قیر سرد کف کولر,قیر سرد چیست",
       "prev_hashes": [
+        "26c135acabfa142c79dde2cd708c8936",
         "57ff5426cc28ca97d41bdd78e751515f"
       ]
     },
@@ -3181,8 +3189,9 @@
   "service_galleries": {
     "isogam-waterproofing": {
       "title": "نمونه‌کار اخیر ایزوگام پشت‌بام",
-      "intro": "تصاویر یک پروژه‌ی اجرای ایزوگام پشت‌بام مسکونی در تهران توسط تیم آسفالت با ما: هم‌پوشانی رول‌ها، درزگیری قیری، برگشت عایق روی دیوار جان‌پناه و آب‌بندی دور پایه‌ی کولرها.",
+      "intro": "تصاویر پروژه‌های اجرای ایزوگام پشت‌بام مسکونی در تهران توسط تیم آسفالت با ما: قیرکشی کامل بام پیش از ایزوگام، اجرای ایزوگام فویل‌دار، هم‌پوشانی رول‌ها، درزگیری قیری، برگشت عایق روی دیوار جان‌پناه و آب‌بندی دور پایه‌ی کولرها.",
       "images": [
+        "ghirkeshi-isogam-foildar-poshtbam.jpg",
         "isogam-poshtbam-hampooshani-darz-ghiri.jpg",
         "isogam-poshtbam-paye-kooler.jpg",
         "isogam-divar-jan-panah-labe-bam.jpg",
