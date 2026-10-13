@@ -680,3 +680,54 @@ function asfaltbama_video_schema( $data ) {
 	return $data;
 }
 add_filter( 'rank_math/json_ld', 'asfaltbama_video_schema', 20 );
+
+/**
+ * Image sitemap: Rank Math reads images from the stored HTML, but the
+ * project photos are [abm_img] shortcodes and the service galleries and
+ * post videos are added at display time, so Google never saw them in the
+ * sitemap. Add every photo a post or page shows, with its alt text, plus
+ * the featured image.
+ *
+ * @param array $images  Images Rank Math found.
+ * @param int   $post_id Post ID.
+ *
+ * @return array
+ */
+function asfaltbama_sitemap_images( $images, $post_id ) {
+	$post = get_post( $post_id );
+	if ( ! $post ) {
+		return $images;
+	}
+	$ids = [];
+	if ( preg_match_all( '/\[abm_img[^\]]*\bfile="([^"]+)"/', (string) $post->post_content, $m ) ) {
+		foreach ( $m[1] as $file ) {
+			$ids[] = asfaltbama_imported_media_id( $file );
+		}
+	}
+	$manifest = asfaltbama_content_manifest();
+	foreach ( (array) ( $manifest['service_galleries'][ $post->post_name ]['images'] ?? [] ) as $file ) {
+		$ids[] = asfaltbama_imported_media_id( $file );
+	}
+	foreach ( (array) ( $manifest['post_videos'] ?? [] ) as $video ) {
+		if ( $video['slug'] === $post->post_name ) {
+			$ids[] = asfaltbama_imported_media_id( $video['poster'] );
+		}
+	}
+	$ids[] = (int) get_post_thumbnail_id( $post );
+
+	$seen = array_column( (array) $images, 'src' );
+	foreach ( array_unique( array_filter( $ids ) ) as $id ) {
+		$src = wp_get_attachment_url( $id );
+		if ( ! $src || in_array( $src, $seen, true ) ) {
+			continue;
+		}
+		$seen[]   = $src;
+		$images[] = [
+			'src'   => $src,
+			'title' => get_the_title( $id ),
+			'alt'   => (string) get_post_meta( $id, '_wp_attachment_image_alt', true ),
+		];
+	}
+	return $images;
+}
+add_filter( 'rank_math/sitemap/urlimages', 'asfaltbama_sitemap_images', 10, 2 );

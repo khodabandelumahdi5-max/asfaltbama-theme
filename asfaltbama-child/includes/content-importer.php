@@ -386,6 +386,7 @@ function asfaltbama_importer_images( $manifest ) {
 
 		if ( $existing ) {
 			$attachment_id = (int) $existing[0];
+			$log           = array_merge( $log, asfaltbama_importer_refresh_media( $attachment_id, $image ) );
 		} else {
 			$contents = asfaltbama_importer_read( $image['file'] );
 			if ( '' === $contents ) {
@@ -412,6 +413,7 @@ function asfaltbama_importer_images( $manifest ) {
 			}
 			wp_update_attachment_metadata( $attachment_id, wp_generate_attachment_metadata( $attachment_id, $upload['file'] ) );
 			update_post_meta( $attachment_id, '_asfaltbama_source', $source );
+			update_post_meta( $attachment_id, '_asfaltbama_md5', md5( $contents ) );
 			$log[] = '✅ فایل «' . $image['title'] . '» به کتابخانه‌ی رسانه اضافه شد';
 		}
 
@@ -545,6 +547,43 @@ function asfaltbama_importer_site( $manifest ) {
 	}
 
 	return $log;
+}
+
+/**
+ * Replace an imported file in place when the theme ships a new version of
+ * it (e.g. the project photos re-saved with the Asfaltbama watermark). The
+ * attachment, its URL and every page that uses it stay the same; the file
+ * and its resized copies are rewritten.
+ *
+ * @param int   $attachment_id Attachment ID.
+ * @param array $image         Manifest image.
+ *
+ * @return string[] Log lines.
+ */
+function asfaltbama_importer_refresh_media( $attachment_id, $image ) {
+	$contents = asfaltbama_importer_read( $image['file'] );
+	$path     = get_attached_file( $attachment_id );
+	if ( '' === $contents || ! $path || ! file_exists( $path ) ) {
+		return [];
+	}
+	$new   = md5( $contents );
+	$known = get_post_meta( $attachment_id, '_asfaltbama_md5', true );
+	$old   = $known ? $known : md5_file( $path );
+	if ( $old === $new ) {
+		if ( ! $known ) {
+			update_post_meta( $attachment_id, '_asfaltbama_md5', $new );
+		}
+		return [];
+	}
+	if ( false === file_put_contents( $path, $contents ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions
+		return [ '❌ ' . basename( $path ) . ': نوشتن فایل جدید ناموفق بود' ];
+	}
+	if ( 0 === strpos( (string) get_post_mime_type( $attachment_id ), 'image/' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+		wp_update_attachment_metadata( $attachment_id, wp_generate_attachment_metadata( $attachment_id, $path ) );
+	}
+	update_post_meta( $attachment_id, '_asfaltbama_md5', $new );
+	return [ '✅ فایل «' . $image['title'] . '» با نسخه‌ی جدید جایگزین شد' ];
 }
 
 /**
