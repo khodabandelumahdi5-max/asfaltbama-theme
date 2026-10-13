@@ -1,5 +1,5 @@
 {
-  "content_version": "2026-10-13.3",
+  "content_version": "2026-10-13.4",
   "site_version": "2026-09-26.1",
   "site": {
     "blogname": "آسفالت با ما",
@@ -167,7 +167,7 @@
       "focus_keyword": "رصف الأسفلت في أربيل,رصف الأسفلت,عزل الأسطح أربيل"
     }
   },
-  "images_version": "2026-10-13.3",
+  "images_version": "2026-10-13.4",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -1234,9 +1234,9 @@
       "featured_for": []
     },
     {
-      "file": "images/nasb-isogam-foildar-bam-gostar-delijan.jpg",
-      "title": "نصب ایزوگام فویل‌دار، رول‌های بام گستر دلیجان",
-      "alt": "نصب ایزوگام فویل‌دار با مشعل؛ رول‌های بام گستر دلیجان، آسفالت با ما",
+      "file": "images/nasb-isogam-foildar-delijan.jpg",
+      "title": "نصب ایزوگام فویل‌دار دلیجان با مشعل",
+      "alt": "نصب ایزوگام فویل‌دار دلیجان با مشعل روی پشت‌بام؛ آسفالت با ما",
       "featured_for": []
     },
     {
@@ -2738,6 +2738,7 @@
       "seo_description": "ایزوگام دلیجان یک برند نیست؛ ساختار ایزوگام، روش تشخیص ایزوگام مرغوب، ضخامت ۳ یا ۴ میل، انواع فویل‌دار و طرح‌دار و قیمت رول ایزوگام دلیجان.",
       "focus_keyword": "ایزوگام دلیجان,ایزوگام دلیجان چیست,قیمت ایزوگام دلیجان",
       "prev_hashes": [
+        "f70222d3f513409aca6f477b95104e7c",
         "025405f68b49610042c6d875c5fb39e1",
         "3297a48bb79cc9eb33121f8efd74de83",
         "0ceb6012f170187a0bf5a7a9673ea6f3"
@@ -2904,6 +2905,7 @@
       "seo_description": "نصب ایزوگام با کپسول گاز مایع: کپسول مناسب، انواع مشعل ایزوگام قوی، کوچک و کلاج‌دار، مصرف گاز، نصب با گاز شهری و نکات ایمنی روی بام.",
       "focus_keyword": "کپسول گاز ایزوگام,مشعل ایزوگام,نصب ایزوگام با کپسول,نصب ایزوگام با گاز شهری",
       "prev_hashes": [
+        "a7a1d5317850ed8519d48d806c834504",
         "85a968bf6516f92486e48b1261daac41",
         "bd185fa97e6345ddb4bd517f4582fc79",
         "5a584d1bb8e6bf30961ccc3246f6fec7"
@@ -3191,7 +3193,7 @@
       "seo_description": "ایزوگام بام گستر دلیجان ثبت ۱۱۷: تشخیص اصل از نام‌های مشابه، فویل‌دار و ساده، مشخصات، قیمت هر رول، قیمت با نصب و بدون نصب و نکات خرید.",
       "focus_keyword": "ایزوگام بام گستر دلیجان,ایزوگام بام گستر 117,قیمت ایزوگام بام گستر,ایزوگام بام گستر",
       "prev_hashes": [
-        "b5e89ce209318af93c9be2236a4f2bcd"
+        "23efc1b6752366d3b1e3510d8da2269f"
       ]
     },
     {
@@ -3239,7 +3241,7 @@
       "intro": "تصاویر پروژه‌های اجرای ایزوگام پشت‌بام در تهران، از جمله الهیه، توسط تیم آسفالت با ما: قیرکشی کامل بام پیش از ایزوگام، نصب ایزوگام فویل‌دار با مشعل، دورچینی روی دیوار، هم‌پوشانی رول‌ها، درزگیری قیری و آب‌بندی دور پایه‌ی کولرها.",
       "images": [
         "ghirkeshi-isogam-foildar-poshtbam.jpg",
-        "nasb-isogam-foildar-bam-gostar-delijan.jpg",
+        "nasb-isogam-foildar-delijan.jpg",
         "isogam-foildar-poshtbam-elahieh.jpg",
         "isogam-foildar-doorchini-divar.jpg",
         "isogam-poshtbam-hampooshani-darz-ghiri.jpg",
