@@ -24,6 +24,36 @@ remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 remove_action( 'wp_enqueue_scripts', 'wp_enqueue_emoji_styles' );
 add_filter( 'feed_links_show_comments_feed', '__return_false' );
+remove_action( 'wp_head', 'feed_links_extra', 3 );
+
+/**
+ * Only the main /feed/ is a real feed. Comment, tag, category, author and
+ * per-post feeds have no subscribers and fill Search Console with
+ * "Crawled – currently not indexed"; send them (301) to the page they
+ * belong to. The main feed stays, marked noindex.
+ *
+ * @return void
+ */
+function asfaltbama_feed_redirects() {
+	if ( ! is_feed() ) {
+		return;
+	}
+	$path = (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+	if ( preg_match( '#^/feed(/(rss2?|atom|rdf))?/?$#', $path ) ) {
+		header( 'X-Robots-Tag: noindex, follow', true );
+		return;
+	}
+	$parent = preg_replace( '#/feed(/(rss2?|atom|rdf))?/?$#', '/', $path );
+	if ( $parent === $path ) {
+		return;
+	}
+	if ( '/comments/' === $parent ) {
+		$parent = '/';
+	}
+	wp_safe_redirect( home_url( $parent ), 301 );
+	exit;
+}
+add_action( 'template_redirect', 'asfaltbama_feed_redirects', 0 );
 
 /**
  * Service links for the footer: [label, path].
