@@ -167,42 +167,31 @@
       "focus_keyword": "رصف الأسفلت في أربيل,رصف الأسفلت,عزل الأسطح أربيل"
     }
   },
-  "images_version": "2026-10-15.3",
+  "images_version": "2026-10-15.5",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
       "title": "آسفالت محوطه‌ی مجتمع مسکونی با فینیشر و غلتک",
       "alt": "آسفالت‌کاری محوطه‌ی مجتمع مسکونی با فینیشر و غلتک دوچرخ؛ پروژه‌ی آسفالت با ما",
-      "featured_for": [
-        "site-landscaping-asphalt",
-        "asphalt-yard-parking"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/gheirpashi-bastar-asfalt-mohavate-mojtame.jpg",
       "title": "قیرپاشی بستر شنی پیش از پخش آسفالت در محوطه‌ی مجتمع",
       "alt": "قیرپاشی (پریم‌کت) روی بستر شنی کوبیده‌شده و کامیون حمل آسفالت پیش از پخش با فینیشر در محوطه‌ی مجتمع مسکونی",
-      "featured_for": [
-        "subgrade-preparation-compaction",
-        "bitumen-types"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/bobcat-bargiri-nakhale-kamyon.jpg",
       "title": "بارگیری نخاله با بابکت در کامیون",
       "alt": "بابکت S250 در حال بارگیری نخاله و خاک در کامیون کمپرسی در یک کارگاه شهری؛ آسفالت با ما",
-      "featured_for": [
-        "bobcat-rental-guide"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/bargiri-khak-nakhale-bobcat-kargah-shahri.jpg",
       "title": "بارگیری خاک و نخاله با بابکت در کارگاه شهری",
       "alt": "بارگیری خاک و نخاله‌ی تخریب با بابکت در کامیون برای حمل به محل مجاز تخلیه",
-      "featured_for": [
-        "excavation-cost-guide",
-        "demolition-cost-guide"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/bobcat-bargiri-nakhale-video-poster.jpg",
@@ -220,17 +209,13 @@
       "file": "images/covers/isogam-installation-steps-cover.webp",
       "title": "تصویر شاخص: مراحل اجرای اصولی ایزوگام پشت‌بام",
       "alt": "مراحل اجرای اصولی ایزوگام پشت‌بام | آسفالت با ما",
-      "featured_for": [
-        "isogam-installation-steps"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/isogam-price-guide-cover.webp",
       "title": "تصویر شاخص: قیمت ایزوگام: عوامل مؤثر، تشخیص ایزوگام مرغوب و محاسبه‌ی تعداد رول",
       "alt": "قیمت ایزوگام: عوامل مؤثر، تشخیص ایزوگام مرغوب و محاسبه‌ی تعداد رول | آسفالت با ما",
-      "featured_for": [
-        "isogam-price-guide"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/demolition-permit-tehran-cover.webp",
@@ -244,17 +229,13 @@
       "file": "images/covers/asphalt-patching-guide-cover.webp",
       "title": "تصویر شاخص: لکه‌گیری آسفالت: مراحل اصولی و این‌که کی لکه‌گیری و کی روکش",
       "alt": "لکه‌گیری آسفالت: مراحل اصولی و این‌که کی لکه‌گیری و کی روکش | آسفالت با ما",
-      "featured_for": [
-        "asphalt-patching-guide"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/roof-leak-after-isogam-cover.webp",
       "title": "تصویر شاخص: نشتی پشت‌بام بعد از ایزوگام: ۷ علت رایج و راه تعمیر",
       "alt": "نشتی پشت‌بام بعد از ایزوگام: ۷ علت رایج و راه تعمیر | آسفالت با ما",
-      "featured_for": [
-        "roof-leak-after-isogam"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/crack-sealing-cost-cover.webp",
@@ -268,9 +249,7 @@
       "file": "images/covers/bitumen-roofing-vs-isogam-cover.webp",
       "title": "تصویر شاخص: قیرگونی یا ایزوگام؟ مقایسه‌ی کامل و راهنمای انتخاب",
       "alt": "قیرگونی یا ایزوگام؟ مقایسه‌ی کامل و راهنمای انتخاب | آسفالت با ما",
-      "featured_for": [
-        "bitumen-roofing-vs-isogam"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/excavation-safety-guide-cover.webp",
@@ -292,41 +271,31 @@
       "file": "images/covers/roof-waterproofing-methods-cover.webp",
       "title": "تصویر شاخص: عایق‌کاری پشت‌بام: مقایسه‌ی روش‌ها و انتخاب بهترین گزینه",
       "alt": "عایق‌کاری پشت‌بام: مقایسه‌ی روش‌ها و انتخاب بهترین گزینه | آسفالت با ما",
-      "featured_for": [
-        "roof-waterproofing-methods"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/cold-vs-hot-asphalt-cover.webp",
       "title": "تصویر شاخص: آسفالت سرد یا گرم؟ تفاوت‌ها، کاربردها و انتخاب درست",
       "alt": "آسفالت سرد یا گرم؟ تفاوت‌ها، کاربردها و انتخاب درست | آسفالت با ما",
-      "featured_for": [
-        "cold-vs-hot-asphalt"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/asphalt-paving-season-cover.webp",
       "title": "تصویر شاخص: بهترین فصل آسفالت‌کاری؛ آیا در پاییز و زمستان می‌شود آسفالت کرد؟",
       "alt": "بهترین فصل آسفالت‌کاری؛ آیا در پاییز و زمستان می‌شود آسفالت کرد؟ | آسفالت با ما",
-      "featured_for": [
-        "asphalt-paving-season"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/bathroom-waterproofing-cover.webp",
       "title": "تصویر شاخص: عایق‌کاری سرویس بهداشتی و حمام: مراحل اصولی و نقاط حساس نشتی",
       "alt": "عایق‌کاری سرویس بهداشتی و حمام: مراحل اصولی و نقاط حساس نشتی | آسفالت با ما",
-      "featured_for": [
-        "bathroom-waterproofing"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/land-grading-guide-cover.webp",
       "title": "تصویر شاخص: تسطیح زمین: مراحل، ماشین‌آلات و نکات کیفیت",
       "alt": "تسطیح زمین: مراحل، ماشین‌آلات و نکات کیفیت | آسفالت با ما",
-      "featured_for": [
-        "land-grading-guide"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/scrap-iron-selling-guide-cover.webp",
@@ -340,25 +309,19 @@
       "file": "images/covers/roof-winter-checklist-cover.webp",
       "title": "تصویر شاخص: آماده‌سازی پشت‌بام برای زمستان: چک‌لیست کامل پیش از بارندگی",
       "alt": "آماده‌سازی پشت‌بام برای زمستان: چک‌لیست کامل پیش از بارندگی | آسفالت با ما",
-      "featured_for": [
-        "roof-winter-checklist"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/asphalt-contract-checklist-cover.webp",
       "title": "تصویر شاخص: قرارداد پیمانکاری آسفالت: چک‌لیست ۱۰ موردی پیش از امضا",
       "alt": "قرارداد پیمانکاری آسفالت: چک‌لیست ۱۰ موردی پیش از امضا | آسفالت با ما",
-      "featured_for": [
-        "asphalt-contract-checklist"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/asphalt-isogam-warranty-guide-cover.webp",
       "title": "تصویر شاخص: ضمانت‌نامه‌ی آسفالت و ایزوگام: چه چیزی را پوشش می‌دهد و چه چیزی را نه",
       "alt": "ضمانت‌نامه‌ی آسفالت و ایزوگام: چه چیزی را پوشش می‌دهد و چه چیزی را نه | آسفالت با ما",
-      "featured_for": [
-        "asphalt-isogam-warranty-guide"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/mohandes-asfaltbama-25-sal-tajrobe.webp",
@@ -395,7 +358,6 @@
       "title": "ایزوگام پشت‌بام با هم‌پوشانی و درزهای قیری",
       "alt": "اجرای ایزوگام فویل‌دار روی پشت‌بام با هم‌پوشانی رول‌ها و درزگیری قیری؛ پروژه‌ی آسفالت با ما در تهران",
       "featured_for": [
-        "isogam-installation-steps",
         "isogam-roof-membrane-installation",
         "isogam-roof-installation-ar"
       ]
@@ -405,7 +367,6 @@
       "title": "ایزوگام پشت‌بام دور پایه‌ی کولرها",
       "alt": "ایزوگام پشت‌بام مسکونی دور پایه‌ی کولرها و تجهیزات؛ اجرای آسفالت با ما",
       "featured_for": [
-        "roof-waterproofing-methods",
         "roof-waterproofing-systems",
         "roof-waterproofing-systems-ar"
       ]
@@ -415,7 +376,6 @@
       "title": "ایزوگام دیوار جان‌پناه و لبه‌ی بام",
       "alt": "ایزوگام دیوار جان‌پناه و لبه‌ی بام با برگشت عایق روی دیوار برای جلوگیری از نشت آب",
       "featured_for": [
-        "isogam-price-guide",
         "isogam-membrane-price-guide",
         "isogam-price-guide-ar"
       ]
@@ -425,7 +385,6 @@
       "title": "ایزوگام محل اتصال بام به دیوار",
       "alt": "اجرای ایزوگام در محل اتصال بام به دیوار و دور لوله‌ها با آب‌بندی قیری لبه‌ها",
       "featured_for": [
-        "roof-leak-after-isogam",
         "roof-leak-after-waterproofing",
         "roof-leak-after-waterproofing-ar"
       ]
@@ -434,65 +393,49 @@
       "file": "images/covers/asphalt-tonnage-calculation-cover.webp",
       "title": "تصویر شاخص: محاسبه‌ی تناژ آسفالت: فرمول وزن آسفالت هر متر مربع با مثال",
       "alt": "محاسبه‌ی تناژ آسفالت: فرمول وزن آسفالت هر متر مربع با مثال | آسفالت با ما",
-      "featured_for": [
-        "asphalt-tonnage-calculation"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/parking-ramp-asphalt-cover.webp",
       "title": "تصویر شاخص: آسفالت رمپ پارکینگ: شیب مجاز، ضخامت و نکات اجرا روی شیب",
       "alt": "آسفالت رمپ پارکینگ: شیب مجاز، ضخامت و نکات اجرا روی شیب | آسفالت با ما",
-      "featured_for": [
-        "parking-ramp-asphalt"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/curb-installation-guide-cover.webp",
       "title": "تصویر شاخص: جدول‌گذاری محوطه و خیابان: انواع جدول، مراحل نصب و نکات اجرا",
       "alt": "جدول‌گذاری محوطه و خیابان: انواع جدول، مراحل نصب و نکات اجرا | آسفالت با ما",
-      "featured_for": [
-        "curb-installation-guide"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/asphalt-drainage-ponding-cover.webp",
       "title": "تصویر شاخص: آب‌گرفتگی آسفالت: علت‌ها، شیب‌بندی درست و راه‌های رفع",
       "alt": "آب‌گرفتگی آسفالت: علت‌ها، شیب‌بندی درست و راه‌های رفع | آسفالت با ما",
-      "featured_for": [
-        "asphalt-drainage-ponding"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/isogam-over-old-isogam-cover.webp",
       "title": "تصویر شاخص: ایزوگام روی ایزوگام قدیمی: کی می‌شود و کی باید جمع کرد؟",
       "alt": "ایزوگام روی ایزوگام قدیمی: کی می‌شود و کی باید جمع کرد؟ | آسفالت با ما",
-      "featured_for": [
-        "isogam-over-old-isogam"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/asphalt-over-concrete-cover.webp",
       "title": "تصویر شاخص: آسفالت روی بتن: کی ممکن است و چطور اجرا می‌شود؟",
       "alt": "آسفالت روی بتن: کی ممکن است و چطور اجرا می‌شود؟ | آسفالت با ما",
-      "featured_for": [
-        "asphalt-over-concrete"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/asphalt-milling-cover.webp",
       "title": "تصویر شاخص: تراش آسفالت: کاربرد، مراحل اجرا و تفاوت با روکش مستقیم",
       "alt": "تراش آسفالت: کاربرد، مراحل اجرا و تفاوت با روکش مستقیم | آسفالت با ما",
-      "featured_for": [
-        "asphalt-milling"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/alley-asphalt-cover.webp",
       "title": "تصویر شاخص: آسفالت کوچه: هماهنگی با همسایه‌ها، مجوز و مراحل اجرا",
       "alt": "آسفالت کوچه: هماهنگی با همسایه‌ها، مجوز و مراحل اجرا | آسفالت با ما",
-      "featured_for": [
-        "alley-asphalt"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/foundation-waterproofing-cover.webp",
@@ -506,9 +449,7 @@
       "file": "images/covers/bitumen-roofing-steps-cover.webp",
       "title": "تصویر شاخص: اجرای قیرگونی پشت‌بام: مواد، مراحل دو لایه و نکات دوام",
       "alt": "اجرای قیرگونی پشت‌بام: مواد، مراحل دو لایه و نکات دوام | آسفالت با ما",
-      "featured_for": [
-        "bitumen-roofing-steps"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/og/asphalt-contractor-middle-east-ar-og.jpg",
@@ -905,25 +846,19 @@
       "file": "images/covers/asphalt-price-per-ton-v2-cover.webp",
       "title": "تصویر شاخص: قیمت هر تن آسفالت ۱۴۰۵: توپکا، بیندر و آسفالت گرم با اجرا",
       "alt": "قیمت هر تن آسفالت ۱۴۰۵: توپکا، بیندر و آسفالت گرم با اجرا | آسفالت با ما",
-      "featured_for": [
-        "asphalt-price-per-ton"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/bitumen-price-v2-cover.webp",
       "title": "تصویر شاخص: قیمت قیر ۱۴۰۵: قیر ۶۰/۷۰، قیر دمیده، محلول و امولسیون؛ بشکه‌ای و فله",
       "alt": "قیمت قیر ۱۴۰۵: قیر ۶۰/۷۰، قیر دمیده، محلول و امولسیون؛ بشکه‌ای و فله | آسفالت با ما",
-      "featured_for": [
-        "bitumen-price"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/isogam-delijan-v2-cover.webp",
       "title": "تصویر شاخص: ایزوگام دلیجان چیست؟ برندها، تشخیص ایزوگام مرغوب و قیمت رول",
       "alt": "ایزوگام دلیجان چیست؟ برندها، تشخیص ایزوگام مرغوب و قیمت رول | آسفالت با ما",
-      "featured_for": [
-        "isogam-delijan"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/nano-liquid-waterproofing-v2-cover.webp",
@@ -937,9 +872,7 @@
       "file": "images/covers/isogam-cost-responsibility-v2-cover.webp",
       "title": "تصویر شاخص: هزینه‌ی ایزوگام پشت بام به عهده‌ی کیست؟ آپارتمان، مالک و مستأجر",
       "alt": "هزینه‌ی ایزوگام پشت بام به عهده‌ی کیست؟ آپارتمان، مالک و مستأجر | آسفالت با ما",
-      "featured_for": [
-        "isogam-cost-responsibility"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/soil-nailing-v2-cover.webp",
@@ -953,17 +886,13 @@
       "file": "images/covers/engineered-backfill-v2-cover.webp",
       "title": "تصویر شاخص: خاکریزی مهندسی چیست؟ خاک مناسب، مراحل لایه‌ای و کنترل تراکم",
       "alt": "خاکریزی مهندسی چیست؟ خاک مناسب، مراحل لایه‌ای و کنترل تراکم | آسفالت با ما",
-      "featured_for": [
-        "engineered-backfill"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/roller-finisher-rental-v2-cover.webp",
       "title": "تصویر شاخص: اجاره غلتک و فینیشر: انواع، کاربرد و عوامل نرخ اجاره",
       "alt": "اجاره غلتک و فینیشر: انواع، کاربرد و عوامل نرخ اجاره | آسفالت با ما",
-      "featured_for": [
-        "roller-finisher-rental"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/colored-asphalt-v2-cover.webp",
@@ -977,9 +906,7 @@
       "file": "images/covers/construction-debris-removal-v2-cover.webp",
       "title": "تصویر شاخص: حمل نخاله‌ی ساختمانی: محل تخلیه‌ی مجاز، شهرداری و هزینه",
       "alt": "حمل نخاله‌ی ساختمانی: محل تخلیه‌ی مجاز، شهرداری و هزینه | آسفالت با ما",
-      "featured_for": [
-        "construction-debris-removal"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/cold-asphalt-bag-v2-cover.webp",
@@ -993,33 +920,25 @@
       "file": "images/covers/asphalt-plant-v2-cover.webp",
       "title": "تصویر شاخص: کارخانه آسفالت: تولید، انواع کارخانه و خرید آسفالت درب کارخانه",
       "alt": "کارخانه آسفالت: تولید، انواع کارخانه و خرید آسفالت درب کارخانه | آسفالت با ما",
-      "featured_for": [
-        "asphalt-plant"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/best-isogam-v2-cover.webp",
       "title": "تصویر شاخص: بهترین ایزوگام کدام است؟ معیارهای انتخاب، چسب ایزوگام و جایگزین‌ها",
       "alt": "بهترین ایزوگام کدام است؟ معیارهای انتخاب، چسب ایزوگام و جایگزین‌ها | آسفالت با ما",
-      "featured_for": [
-        "best-isogam"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/isogam-gas-torch-v2-cover.webp",
       "title": "تصویر شاخص: نصب ایزوگام با کپسول گاز: کپسول، مشعل ایزوگام و نکات ایمنی",
       "alt": "نصب ایزوگام با کپسول گاز: کپسول، مشعل ایزوگام و نکات ایمنی | آسفالت با ما",
-      "featured_for": [
-        "isogam-gas-torch"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/isogam-brands-price-cover.webp",
       "title": "تصویر شاخص: قیمت ایزوگام امید گستر، بام گستر، حلزون و برندهای دیگر ۱۴۰۵",
       "alt": "قیمت ایزوگام امید گستر، بام گستر، حلزون و برندهای دیگر ۱۴۰۵ | آسفالت با ما",
-      "featured_for": [
-        "isogam-brands-price"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/jute-burlap-price-cover.webp",
@@ -1057,17 +976,13 @@
       "file": "images/covers/asphalt-price-per-cm-cover.webp",
       "title": "تصویر شاخص: قیمت سانتی آسفالت ۱۴۰۵؛ قیمت هر متر مربع آسفالت بر اساس ضخامت",
       "alt": "قیمت سانتی آسفالت ۱۴۰۵؛ قیمت هر متر مربع آسفالت بر اساس ضخامت | آسفالت با ما",
-      "featured_for": [
-        "asphalt-price-per-cm"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/bitumen-roofing-price-cover.webp",
       "title": "تصویر شاخص: قیمت قیرگونی ۱۴۰۵؛ قیرگونی یک لایه و دو لایه با مصالح و بدون مصالح",
       "alt": "قیمت قیرگونی ۱۴۰۵؛ قیرگونی یک لایه و دو لایه با مصالح و بدون مصالح | آسفالت با ما",
-      "featured_for": [
-        "bitumen-roofing-price"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/deep-excavation-price-cover.webp",
@@ -1105,33 +1020,25 @@
       "file": "images/covers/isogam-roll-price-cover.webp",
       "title": "تصویر شاخص: قیمت رول ایزوگام ۱۴۰۵ بر اساس نوع؛ فویل‌دار، ساده، طرح‌دار و ۴ میل",
       "alt": "قیمت رول ایزوگام ۱۴۰۵ بر اساس نوع؛ فویل‌دار، ساده، طرح‌دار و ۴ میل | آسفالت با ما",
-      "featured_for": [
-        "isogam-roll-price"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/cold-bitumen-cover.webp",
       "title": "تصویر شاخص: قیر سرد چیست؟ قیر سرد کف کولر و پشت بام، زمان خشک شدن و قیمت",
       "alt": "قیر سرد چیست؟ قیر سرد کف کولر و پشت بام، زمان خشک شدن و قیمت | آسفالت با ما",
-      "featured_for": [
-        "cold-bitumen"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/buy-drum-bitumen-cover.webp",
       "title": "تصویر شاخص: خرید قیر بشکه‌ای و قیر حلبی ۱۴۰۵؛ وزن بشکه، قیمت و نکات خرید",
       "alt": "خرید قیر بشکه‌ای و قیر حلبی ۱۴۰۵؛ وزن بشکه، قیمت و نکات خرید | آسفالت با ما",
-      "featured_for": [
-        "buy-drum-bitumen"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/bathroom-bitumen-roofing-cover.webp",
       "title": "تصویر شاخص: قیرگونی سرویس بهداشتی و حمام؛ ارتفاع، مراحل اجرا، قیمت و مقایسه با ایزوگام",
       "alt": "قیرگونی سرویس بهداشتی و حمام؛ ارتفاع، مراحل اجرا، قیمت و مقایسه با ایزوگام | آسفالت با ما",
-      "featured_for": [
-        "bathroom-bitumen-roofing"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/excavation-contract-cover.webp",
@@ -1199,9 +1106,7 @@
       "file": "images/covers/glass-wool-isogam-cover.webp",
       "title": "تصویر شاخص: ایزوگام پشم شیشه؛ پشم شیشه ایران و دلیجان، مشخصات، وزن و قیمت",
       "alt": "ایزوگام پشم شیشه؛ پشم شیشه ایران و دلیجان، مشخصات، وزن و قیمت | آسفالت با ما",
-      "featured_for": [
-        "glass-wool-isogam"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/bam-gostar-isogam-117-cover.webp",
@@ -1215,9 +1120,7 @@
       "file": "images/covers/exir-isogam-cover.webp",
       "title": "تصویر شاخص: ایزوگام اکسیر صادراتی؛ مشخصات فنی، معنای صادراتی و قیمت",
       "alt": "ایزوگام اکسیر صادراتی؛ مشخصات فنی، معنای صادراتی و قیمت | آسفالت با ما",
-      "featured_for": [
-        "exir-isogam"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/plain-powder-isogam-cover.webp",
@@ -1292,30 +1195,475 @@
       "title": "قیرگونی سرویس بهداشتی آماده‌ی کف‌سازی، الهیه",
       "alt": "قیرگونی سرویس بهداشتی آماده‌ی کف‌سازی، الهیه؛ آسفالت با ما",
       "featured_for": []
+    },
+    {
+      "file": "images/covers/asphalt-price-per-ton-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت هر تن آسفالت ۱۴۰۵؛ توپکا و بیندر، با اجرا",
+      "alt": "قیمت هر تن آسفالت ۱۴۰۵؛ توپکا و بیندر، با اجرا | آسفالت با ما",
+      "featured_for": [
+        "asphalt-price-per-ton"
+      ]
+    },
+    {
+      "file": "images/covers/asphalt-price-factors-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت هر متر آسفالت ۱۴۰۵؛ ۶ عامل تعیین‌کننده",
+      "alt": "قیمت هر متر آسفالت ۱۴۰۵؛ ۶ عامل تعیین‌کننده | آسفالت با ما",
+      "featured_for": [
+        "asphalt-price-factors"
+      ]
+    },
+    {
+      "file": "images/covers/asphalt-tonnage-calculation-photo-cover.jpg",
+      "title": "تصویر شاخص: محاسبه تناژ آسفالت و وزن مخصوص آسفالت؛ فرمول و جدول",
+      "alt": "محاسبه تناژ آسفالت و وزن مخصوص آسفالت؛ فرمول و جدول | آسفالت با ما",
+      "featured_for": [
+        "asphalt-tonnage-calculation"
+      ]
+    },
+    {
+      "file": "images/covers/asphalt-price-per-cm-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت سانتی آسفالت ۱۴۰۵؛ آسفالت ۴، ۵ و ۶ سانت متری چند؟",
+      "alt": "قیمت سانتی آسفالت ۱۴۰۵؛ آسفالت ۴، ۵ و ۶ سانت متری چند؟ | آسفالت با ما",
+      "featured_for": [
+        "asphalt-price-per-cm"
+      ]
+    },
+    {
+      "file": "images/covers/topeka-vs-binder-asphalt-photo-cover.jpg",
+      "title": "تصویر شاخص: تفاوت آسفالت توپکا و بیندر؛ کاربرد، ضخامت و انتخاب درست",
+      "alt": "تفاوت آسفالت توپکا و بیندر؛ کاربرد، ضخامت و انتخاب درست | آسفالت با ما",
+      "featured_for": [
+        "topeka-vs-binder-asphalt"
+      ]
+    },
+    {
+      "file": "images/covers/cold-vs-hot-asphalt-photo-cover.jpg",
+      "title": "تصویر شاخص: آسفالت سرد یا گرم؟ تفاوت‌ها و کاربردها",
+      "alt": "آسفالت سرد یا گرم؟ تفاوت‌ها و کاربردها | آسفالت با ما",
+      "featured_for": [
+        "cold-vs-hot-asphalt"
+      ]
+    },
+    {
+      "file": "images/covers/asphalt-plant-photo-cover.jpg",
+      "title": "تصویر شاخص: کارخانه آسفالت؛ خرید آسفالت درب کارخانه در تهران و کرج",
+      "alt": "کارخانه آسفالت؛ خرید آسفالت درب کارخانه در تهران و کرج | آسفالت با ما",
+      "featured_for": [
+        "asphalt-plant"
+      ]
+    },
+    {
+      "file": "images/covers/asphalt-yard-parking-photo-cover.jpg",
+      "title": "تصویر شاخص: آسفالت حیاط و پارکینگ؛ ضخامت، مراحل و هزینه",
+      "alt": "آسفالت حیاط و پارکینگ؛ ضخامت، مراحل و هزینه | آسفالت با ما",
+      "featured_for": [
+        "asphalt-yard-parking"
+      ]
+    },
+    {
+      "file": "images/covers/parking-ramp-asphalt-photo-cover.jpg",
+      "title": "تصویر شاخص: آسفالت رمپ پارکینگ؛ شیب، ضخامت و اجرا",
+      "alt": "آسفالت رمپ پارکینگ؛ شیب، ضخامت و اجرا | آسفالت با ما",
+      "featured_for": [
+        "parking-ramp-asphalt"
+      ]
+    },
+    {
+      "file": "images/covers/asphalt-drainage-ponding-photo-cover.jpg",
+      "title": "تصویر شاخص: آب‌گرفتگی آسفالت؛ علت، شیب مناسب و راه رفع",
+      "alt": "آب‌گرفتگی آسفالت؛ علت، شیب مناسب و راه رفع | آسفالت با ما",
+      "featured_for": [
+        "asphalt-drainage-ponding"
+      ]
+    },
+    {
+      "file": "images/covers/site-landscaping-asphalt-photo-cover.jpg",
+      "title": "تصویر شاخص: محوطه‌سازی و آسفالت کارخانه و مجتمع؛ مراحل اجرا",
+      "alt": "محوطه‌سازی و آسفالت کارخانه و مجتمع؛ مراحل اجرا | آسفالت با ما",
+      "featured_for": [
+        "site-landscaping-asphalt"
+      ]
+    },
+    {
+      "file": "images/covers/asphalt-paving-season-photo-cover.jpg",
+      "title": "تصویر شاخص: بهترین فصل آسفالت‌کاری؛ پاییز و زمستان",
+      "alt": "بهترین فصل آسفالت‌کاری؛ پاییز و زمستان | آسفالت با ما",
+      "featured_for": [
+        "asphalt-paving-season"
+      ]
+    },
+    {
+      "file": "images/covers/roller-finisher-rental-photo-cover.jpg",
+      "title": "تصویر شاخص: اجاره غلتک و فینیشر در تهران و کرج؛ انواع و نرخ اجاره",
+      "alt": "اجاره غلتک و فینیشر در تهران و کرج؛ انواع و نرخ اجاره | آسفالت با ما",
+      "featured_for": [
+        "roller-finisher-rental"
+      ]
+    },
+    {
+      "file": "images/covers/subgrade-preparation-compaction-photo-cover.jpg",
+      "title": "تصویر شاخص: زیرسازی و تراکم بستر آسفالت؛ مراحل اجرا",
+      "alt": "زیرسازی و تراکم بستر آسفالت؛ مراحل اجرا | آسفالت با ما",
+      "featured_for": [
+        "subgrade-preparation-compaction"
+      ]
+    },
+    {
+      "file": "images/covers/engineered-backfill-photo-cover.jpg",
+      "title": "تصویر شاخص: خاکریزی مهندسی چیست؟ مراحل، تراکم و خاک مناسب",
+      "alt": "خاکریزی مهندسی چیست؟ مراحل، تراکم و خاک مناسب | آسفالت با ما",
+      "featured_for": [
+        "engineered-backfill"
+      ]
+    },
+    {
+      "file": "images/covers/asphalt-over-concrete-photo-cover.jpg",
+      "title": "تصویر شاخص: آسفالت روی بتن؛ شرایط، مراحل اجرا و ضخامت",
+      "alt": "آسفالت روی بتن؛ شرایط، مراحل اجرا و ضخامت | آسفالت با ما",
+      "featured_for": [
+        "asphalt-over-concrete"
+      ]
+    },
+    {
+      "file": "images/covers/asphalt-milling-photo-cover.jpg",
+      "title": "تصویر شاخص: تراش آسفالت؛ کاربرد، مراحل و تفاوت با روکش",
+      "alt": "تراش آسفالت؛ کاربرد، مراحل و تفاوت با روکش | آسفالت با ما",
+      "featured_for": [
+        "asphalt-milling"
+      ]
+    },
+    {
+      "file": "images/covers/asphalt-patching-guide-photo-cover.jpg",
+      "title": "تصویر شاخص: لکه‌گیری آسفالت؛ مراحل اصولی و مقایسه با روکش",
+      "alt": "لکه‌گیری آسفالت؛ مراحل اصولی و مقایسه با روکش | آسفالت با ما",
+      "featured_for": [
+        "asphalt-patching-guide"
+      ]
+    },
+    {
+      "file": "images/covers/curb-installation-guide-photo-cover.jpg",
+      "title": "تصویر شاخص: جدول گذاری محوطه و خیابان؛ کانیو، مراحل و قیمت با و بدون مصالح",
+      "alt": "جدول گذاری محوطه و خیابان؛ کانیو، مراحل و قیمت با و بدون مصالح | آسفالت با ما",
+      "featured_for": [
+        "curb-installation-guide"
+      ]
+    },
+    {
+      "file": "images/covers/alley-asphalt-photo-cover.jpg",
+      "title": "تصویر شاخص: آسفالت کوچه؛ درخواست از شهرداری، استشهاد محلی و هزینه",
+      "alt": "آسفالت کوچه؛ درخواست از شهرداری، استشهاد محلی و هزینه | آسفالت با ما",
+      "featured_for": [
+        "alley-asphalt"
+      ]
+    },
+    {
+      "file": "images/covers/asphalt-contract-checklist-photo-cover.jpg",
+      "title": "تصویر شاخص: قرارداد پیمانکاری آسفالت؛ چک‌لیست پیش از امضا",
+      "alt": "قرارداد پیمانکاری آسفالت؛ چک‌لیست پیش از امضا | آسفالت با ما",
+      "featured_for": [
+        "asphalt-contract-checklist"
+      ]
+    },
+    {
+      "file": "images/covers/asphalt-isogam-warranty-guide-photo-cover.jpg",
+      "title": "تصویر شاخص: ضمانت‌نامه‌ی آسفالت و ایزوگام؛ پوشش و استثناها",
+      "alt": "ضمانت‌نامه‌ی آسفالت و ایزوگام؛ پوشش و استثناها | آسفالت با ما",
+      "featured_for": [
+        "asphalt-isogam-warranty-guide"
+      ]
+    },
+    {
+      "file": "images/covers/bitumen-price-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت قیر ۱۴۰۵؛ قیر ۶۰/۷۰، دمیده و امولسیون بشکه‌ای و فله",
+      "alt": "قیمت قیر ۱۴۰۵؛ قیر ۶۰/۷۰، دمیده و امولسیون بشکه‌ای و فله | آسفالت با ما",
+      "featured_for": [
+        "bitumen-price"
+      ]
+    },
+    {
+      "file": "images/covers/bitumen-types-photo-cover.jpg",
+      "title": "تصویر شاخص: قیر چیست؟ انواع قیر ۶۰/۷۰، MC، RC، امولسیونی و دمیده",
+      "alt": "قیر چیست؟ انواع قیر ۶۰/۷۰، MC، RC، امولسیونی و دمیده | آسفالت با ما",
+      "featured_for": [
+        "bitumen-types"
+      ]
+    },
+    {
+      "file": "images/covers/cold-bitumen-photo-cover.jpg",
+      "title": "تصویر شاخص: قیر سرد چیست؟ قیر سرد کف کولر و پشت بام + قیمت ۱۴۰۵",
+      "alt": "قیر سرد چیست؟ قیر سرد کف کولر و پشت بام + قیمت ۱۴۰۵ | آسفالت با ما",
+      "featured_for": [
+        "cold-bitumen"
+      ]
+    },
+    {
+      "file": "images/covers/buy-drum-bitumen-photo-cover.jpg",
+      "title": "تصویر شاخص: خرید قیر بشکه‌ای و حلبی ۱۴۰۵؛ وزن بشکه، قیمت و فروش قیر",
+      "alt": "خرید قیر بشکه‌ای و حلبی ۱۴۰۵؛ وزن بشکه، قیمت و فروش قیر | آسفالت با ما",
+      "featured_for": [
+        "buy-drum-bitumen"
+      ]
+    },
+    {
+      "file": "images/covers/isogam-installation-steps-photo-cover.jpg",
+      "title": "تصویر شاخص: مراحل اجرای ایزوگام پشت‌بام؛ ۱۱ گام اصولی",
+      "alt": "مراحل اجرای ایزوگام پشت‌بام؛ ۱۱ گام اصولی | آسفالت با ما",
+      "featured_for": [
+        "isogam-installation-steps"
+      ]
+    },
+    {
+      "file": "images/covers/isogam-gas-torch-photo-cover.jpg",
+      "title": "تصویر شاخص: کپسول گاز ایزوگام و مشعل ایزوگام؛ نصب ایزوگام با کپسول",
+      "alt": "کپسول گاز ایزوگام و مشعل ایزوگام؛ نصب ایزوگام با کپسول | آسفالت با ما",
+      "featured_for": [
+        "isogam-gas-torch"
+      ]
+    },
+    {
+      "file": "images/covers/isogam-delijan-photo-cover.jpg",
+      "title": "تصویر شاخص: ایزوگام دلیجان چیست؟ تشخیص مرغوب و قیمت رول ۱۴۰۵",
+      "alt": "ایزوگام دلیجان چیست؟ تشخیص مرغوب و قیمت رول ۱۴۰۵ | آسفالت با ما",
+      "featured_for": [
+        "isogam-delijan"
+      ]
+    },
+    {
+      "file": "images/covers/isogam-price-guide-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت ایزوگام ۱۴۰۵ با نصب؛ ایزوگام پشت بام متری چند؟",
+      "alt": "قیمت ایزوگام ۱۴۰۵ با نصب؛ ایزوگام پشت بام متری چند؟ | آسفالت با ما",
+      "featured_for": [
+        "isogam-price-guide"
+      ]
+    },
+    {
+      "file": "images/covers/isogam-roll-price-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت رول ایزوگام ۱۴۰۵؛ فویل‌دار، ساده، طرح‌دار و ۴ میل",
+      "alt": "قیمت رول ایزوگام ۱۴۰۵؛ فویل‌دار، ساده، طرح‌دار و ۴ میل | آسفالت با ما",
+      "featured_for": [
+        "isogam-roll-price"
+      ]
+    },
+    {
+      "file": "images/covers/isogam-brands-price-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت ایزوگام امید گستر، بام گستر و حلزون ۱۴۰۵",
+      "alt": "قیمت ایزوگام امید گستر، بام گستر و حلزون ۱۴۰۵ | آسفالت با ما",
+      "featured_for": [
+        "isogam-brands-price"
+      ]
+    },
+    {
+      "file": "images/covers/roof-waterproofing-methods-photo-cover.jpg",
+      "title": "تصویر شاخص: عایق‌کاری پشت‌بام؛ مقایسه روش‌ها و انتخاب عایق",
+      "alt": "عایق‌کاری پشت‌بام؛ مقایسه روش‌ها و انتخاب عایق | آسفالت با ما",
+      "featured_for": [
+        "roof-waterproofing-methods"
+      ]
+    },
+    {
+      "file": "images/covers/glass-wool-isogam-photo-cover.jpg",
+      "title": "تصویر شاخص: ایزوگام پشم شیشه ایران و دلیجان؛ مشخصات، وزن و قیمت ۱۴۰۵",
+      "alt": "ایزوگام پشم شیشه ایران و دلیجان؛ مشخصات، وزن و قیمت ۱۴۰۵ | آسفالت با ما",
+      "featured_for": [
+        "glass-wool-isogam"
+      ]
+    },
+    {
+      "file": "images/covers/best-isogam-photo-cover.jpg",
+      "title": "تصویر شاخص: بهترین ایزوگام کدام است؟ معیار انتخاب و چسب ایزوگام",
+      "alt": "بهترین ایزوگام کدام است؟ معیار انتخاب و چسب ایزوگام | آسفالت با ما",
+      "featured_for": [
+        "best-isogam"
+      ]
+    },
+    {
+      "file": "images/covers/roof-leak-after-isogam-photo-cover.jpg",
+      "title": "تصویر شاخص: نشتی پشت‌بام بعد از ایزوگام؛ ۱۲ علت و راه تعمیر",
+      "alt": "نشتی پشت‌بام بعد از ایزوگام؛ ۱۲ علت و راه تعمیر | آسفالت با ما",
+      "featured_for": [
+        "roof-leak-after-isogam"
+      ]
+    },
+    {
+      "file": "images/covers/isogam-over-old-isogam-photo-cover.jpg",
+      "title": "تصویر شاخص: ایزوگام روی ایزوگام قدیمی؛ مجاز است یا نه؟",
+      "alt": "ایزوگام روی ایزوگام قدیمی؛ مجاز است یا نه؟ | آسفالت با ما",
+      "featured_for": [
+        "isogam-over-old-isogam"
+      ]
+    },
+    {
+      "file": "images/covers/roof-winter-checklist-photo-cover.jpg",
+      "title": "تصویر شاخص: آماده‌سازی پشت‌بام برای زمستان؛ چک‌لیست کامل",
+      "alt": "آماده‌سازی پشت‌بام برای زمستان؛ چک‌لیست کامل | آسفالت با ما",
+      "featured_for": [
+        "roof-winter-checklist"
+      ]
+    },
+    {
+      "file": "images/covers/isogam-cost-responsibility-photo-cover.jpg",
+      "title": "تصویر شاخص: هزینه ایزوگام پشت بام به عهده کیست؟ آپارتمان و اجاره",
+      "alt": "هزینه ایزوگام پشت بام به عهده کیست؟ آپارتمان و اجاره | آسفالت با ما",
+      "featured_for": [
+        "isogam-cost-responsibility"
+      ]
+    },
+    {
+      "file": "images/covers/exir-isogam-photo-cover.jpg",
+      "title": "تصویر شاخص: ایزوگام اکسیر صادراتی؛ مشخصات، صادراتی یعنی چه و قیمت",
+      "alt": "ایزوگام اکسیر صادراتی؛ مشخصات، صادراتی یعنی چه و قیمت | آسفالت با ما",
+      "featured_for": [
+        "exir-isogam"
+      ]
+    },
+    {
+      "file": "images/covers/bitumen-roofing-vs-isogam-photo-cover.jpg",
+      "title": "تصویر شاخص: قیرگونی یا ایزوگام؟ مقایسه و راهنمای انتخاب",
+      "alt": "قیرگونی یا ایزوگام؟ مقایسه و راهنمای انتخاب | آسفالت با ما",
+      "featured_for": [
+        "bitumen-roofing-vs-isogam"
+      ]
+    },
+    {
+      "file": "images/covers/bathroom-waterproofing-photo-cover.jpg",
+      "title": "تصویر شاخص: عایق‌کاری سرویس بهداشتی و حمام؛ مراحل اصولی",
+      "alt": "عایق‌کاری سرویس بهداشتی و حمام؛ مراحل اصولی | آسفالت با ما",
+      "featured_for": [
+        "bathroom-waterproofing"
+      ]
+    },
+    {
+      "file": "images/covers/bathroom-bitumen-roofing-photo-cover.jpg",
+      "title": "تصویر شاخص: قیرگونی سرویس بهداشتی و حمام؛ ارتفاع، روش اجرا و قیمت",
+      "alt": "قیرگونی سرویس بهداشتی و حمام؛ ارتفاع، روش اجرا و قیمت | آسفالت با ما",
+      "featured_for": [
+        "bathroom-bitumen-roofing"
+      ]
+    },
+    {
+      "file": "images/covers/bitumen-roofing-steps-photo-cover.jpg",
+      "title": "تصویر شاخص: اجرای قیرگونی پشت‌بام؛ مراحل دو لایه و نکات",
+      "alt": "اجرای قیرگونی پشت‌بام؛ مراحل دو لایه و نکات | آسفالت با ما",
+      "featured_for": [
+        "bitumen-roofing-steps"
+      ]
+    },
+    {
+      "file": "images/covers/bitumen-roofing-price-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت قیرگونی ۱۴۰۵؛ یک لایه و دو لایه متری چند؟",
+      "alt": "قیمت قیرگونی ۱۴۰۵؛ یک لایه و دو لایه متری چند؟ | آسفالت با ما",
+      "featured_for": [
+        "bitumen-roofing-price"
+      ]
+    },
+    {
+      "file": "images/covers/bobcat-rental-guide-photo-cover.jpg",
+      "title": "تصویر شاخص: بابکت چیست؟ اجاره بابکت، کاربردها و قیمت اجاره یا خرید",
+      "alt": "بابکت چیست؟ اجاره بابکت، کاربردها و قیمت اجاره یا خرید | آسفالت با ما",
+      "featured_for": [
+        "bobcat-rental-guide"
+      ]
+    },
+    {
+      "file": "images/covers/construction-debris-removal-photo-cover.jpg",
+      "title": "تصویر شاخص: حمل نخاله ساختمانی ۱۴۰۵؛ قیمت و حمل نخاله توسط شهرداری",
+      "alt": "حمل نخاله ساختمانی ۱۴۰۵؛ قیمت و حمل نخاله توسط شهرداری | آسفالت با ما",
+      "featured_for": [
+        "construction-debris-removal"
+      ]
+    },
+    {
+      "file": "images/covers/demolition-cost-guide-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت تخریب ساختمان ۱۴۰۵؛ کلنگی، بتنی و تخریب بتن با پیکور",
+      "alt": "قیمت تخریب ساختمان ۱۴۰۵؛ کلنگی، بتنی و تخریب بتن با پیکور | آسفالت با ما",
+      "featured_for": [
+        "demolition-cost-guide"
+      ]
+    },
+    {
+      "file": "images/covers/excavation-cost-guide-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت و هزینه خاکبرداری ۱۴۰۵؛ هر متر مکعب با بیل و حمل",
+      "alt": "قیمت و هزینه خاکبرداری ۱۴۰۵؛ هر متر مکعب با بیل و حمل | آسفالت با ما",
+      "featured_for": [
+        "excavation-cost-guide"
+      ]
+    },
+    {
+      "file": "images/covers/land-grading-guide-photo-cover.jpg",
+      "title": "تصویر شاخص: تسطیح زمین؛ مراحل، ماشین‌آلات و هزینه",
+      "alt": "تسطیح زمین؛ مراحل، ماشین‌آلات و هزینه | آسفالت با ما",
+      "featured_for": [
+        "land-grading-guide"
+      ]
     }
   ],
   "replace_featured_ids": [
     31902
   ],
   "replace_featured_sources": [
-    "isogam-installation-steps-cover.webp",
-    "roof-waterproofing-methods-cover.webp",
-    "isogam-price-guide-cover.webp",
-    "roof-leak-after-isogam-cover.webp",
+    "alley-asphalt-cover.webp",
+    "asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
+    "asphalt-contract-checklist-cover.webp",
+    "asphalt-drainage-ponding-cover.webp",
+    "asphalt-isogam-warranty-guide-cover.webp",
+    "asphalt-milling-cover.webp",
+    "asphalt-over-concrete-cover.webp",
+    "asphalt-patching-guide-cover.webp",
+    "asphalt-paving-season-cover.webp",
+    "asphalt-plant-cover.webp",
+    "asphalt-plant-v2-cover.webp",
+    "asphalt-price-per-cm-cover.webp",
     "asphalt-price-per-ton-cover.webp",
+    "asphalt-price-per-ton-v2-cover.webp",
+    "asphalt-tonnage-calculation-cover.webp",
+    "bargiri-khak-nakhale-bobcat-kargah-shahri.jpg",
+    "bathroom-bitumen-roofing-cover.webp",
+    "bathroom-waterproofing-cover.webp",
+    "best-isogam-cover.webp",
+    "best-isogam-v2-cover.webp",
     "bitumen-price-cover.webp",
-    "isogam-delijan-cover.webp",
-    "nano-liquid-waterproofing-cover.webp",
-    "isogam-cost-responsibility-cover.webp",
-    "soil-nailing-cover.webp",
-    "engineered-backfill-cover.webp",
-    "roller-finisher-rental-cover.webp",
+    "bitumen-price-v2-cover.webp",
+    "bitumen-roofing-price-cover.webp",
+    "bitumen-roofing-steps-cover.webp",
+    "bitumen-roofing-vs-isogam-cover.webp",
+    "bobcat-bargiri-nakhale-kamyon.jpg",
+    "buy-drum-bitumen-cover.webp",
+    "cold-asphalt-bag-cover.webp",
+    "cold-bitumen-cover.webp",
+    "cold-vs-hot-asphalt-cover.webp",
     "colored-asphalt-cover.webp",
     "construction-debris-removal-cover.webp",
-    "cold-asphalt-bag-cover.webp",
-    "asphalt-plant-cover.webp",
-    "best-isogam-cover.webp",
-    "isogam-gas-torch-cover.webp"
+    "construction-debris-removal-v2-cover.webp",
+    "curb-installation-guide-cover.webp",
+    "engineered-backfill-cover.webp",
+    "engineered-backfill-v2-cover.webp",
+    "exir-isogam-cover.webp",
+    "gheirpashi-bastar-asfalt-mohavate-mojtame.jpg",
+    "glass-wool-isogam-cover.webp",
+    "isogam-brands-price-cover.webp",
+    "isogam-cost-responsibility-cover.webp",
+    "isogam-cost-responsibility-v2-cover.webp",
+    "isogam-delijan-cover.webp",
+    "isogam-delijan-v2-cover.webp",
+    "isogam-divar-jan-panah-labe-bam.jpg",
+    "isogam-gas-torch-cover.webp",
+    "isogam-gas-torch-v2-cover.webp",
+    "isogam-installation-steps-cover.webp",
+    "isogam-kenar-divar-mahiche-kesh.jpg",
+    "isogam-over-old-isogam-cover.webp",
+    "isogam-poshtbam-hampooshani-darz-ghiri.jpg",
+    "isogam-poshtbam-paye-kooler.jpg",
+    "isogam-price-guide-cover.webp",
+    "isogam-roll-price-cover.webp",
+    "land-grading-guide-cover.webp",
+    "nano-liquid-waterproofing-cover.webp",
+    "parking-ramp-asphalt-cover.webp",
+    "roller-finisher-rental-cover.webp",
+    "roller-finisher-rental-v2-cover.webp",
+    "roof-leak-after-isogam-cover.webp",
+    "roof-waterproofing-methods-cover.webp",
+    "roof-winter-checklist-cover.webp",
+    "soil-nailing-cover.webp"
   ],
   "elementor_version": "2026-09-27.2",
   "elementor_edits": [

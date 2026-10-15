@@ -14,6 +14,7 @@ unzip -Z1 release/asfaltbama-child.zip | grep -v '/$' > "$LIST"
 find asfaltbama-child -type f ! -path 'asfaltbama-child/content/images/*' >> "$LIST"
 find asfaltbama-child/content/images/covers/intl -type f >> "$LIST" 2>/dev/null || true
 find asfaltbama-child/content/images/covers -maxdepth 1 -type f -name "*-cover.webp" >> "$LIST"
+find asfaltbama-child/content/images/covers -maxdepth 1 -type f -name "*-photo-cover.jpg" >> "$LIST"
 # New project photos that the previous release did not carry yet.
 find asfaltbama-child/content/images -maxdepth 1 -type f -newer release/asfaltbama-child.zip >> "$LIST"
 sort -u "$LIST" | while read -r f; do [ -f "$f" ] && echo "$f"; done > "$LIST.ok"
