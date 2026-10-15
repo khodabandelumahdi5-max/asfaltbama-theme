@@ -160,6 +160,7 @@ function asfaltbama_filter_page_html( $html ) {
 	$html = asfaltbama_mobile_nav( $html );
 	// The header call button hides its text on phones: give it a name.
 	$html = str_replace( '<a href="tel:09191299559" class="abm-call-btn">', '<a href="tel:09191299559" class="abm-call-btn" aria-label="تماس با آسفالت با ما: ۰۹۱۹ ۱۲۹ ۹۵۵۹">', $html );
+	$html = asfaltbama_home_hero_fixes( $html );
 	$html = asfaltbama_fix_heading_order( $html );
 	$html = asfaltbama_fix_inline_service_schema( $html );
 
@@ -1041,3 +1042,43 @@ add_filter( 'rank_math/json_ld', 'asfaltbama_page_drop_article_schema', 98 );
  * whichever size a page uses.
  */
 add_filter( 'image_strip_meta', '__return_false' );
+
+/**
+ * Home page hero (Elementor page 31878):
+ * - the orange pill above the H1 (container eb51fe4) was an empty box: it
+ *   now carries the brand line «آسفالت با ما؛ … تهران و حومه»;
+ * - «آسفالت با ما» in the animated H1 was dark navy on the dark hero and
+ *   barely visible: amber, with an amber marker;
+ * - the floating call / WhatsApp buttons covered the «۸۵۰+ پروژه‌ی موفق»
+ *   figure on laptops and phones: they appear once the visitor scrolls
+ *   past the hero (the header keeps its call button meanwhile).
+ *
+ * @param string $html Page HTML.
+ * @return string
+ */
+function asfaltbama_home_hero_fixes( $html ) {
+	if ( ! is_front_page() ) {
+		return $html;
+	}
+	$kicker = '<span class="abm-hero-kicker"><b>آسفالت با ما</b><i aria-hidden="true">؛</i> پیمانکار آسفالت، خاکبرداری و ایزوگام در تهران و حومه</span>';
+	$html   = preg_replace(
+		'#(<div class="elementor-element elementor-element-eb51fe4 [^"]*"[^>]*>)\s*(</div>)#',
+		'$1' . $kicker . '$2',
+		$html,
+		1
+	);
+	$css = '<style id="abm-home-hero-fix">'
+		. '.elementor-31878 .elementor-element.elementor-element-eb51fe4{width:auto!important;max-width:100%;min-height:0!important;height:auto!important;align-self:flex-start;justify-content:center;padding:9px 22px!important;border-radius:999px}'
+		. '.abm-hero-kicker{display:block;color:#fff;font-size:16px;font-weight:600;line-height:1.7;text-align:right}'
+		. '.abm-hero-kicker b{color:#fbbf24;font-weight:800}.abm-hero-kicker i{font-style:normal;color:#fbbf24;margin-inline-end:4px}'
+		. '.elementor-31878 .elementor-element-a91acb1 .elementor-headline-dynamic-text{color:#f59e0b!important}'
+		. '.elementor-31878 .elementor-element-a91acb1 svg path{stroke:#f59e0b!important}'
+		. '.abm-float-wrapper{transition:opacity .25s,transform .25s}'
+		. 'body:not(.abm-past-hero) .abm-float-wrapper{opacity:0;transform:translateY(16px);pointer-events:none}'
+		. '@media (max-width:767px){.abm-hero-kicker{font-size:13.5px}.elementor-31878 .elementor-element.elementor-element-eb51fe4{padding:7px 14px!important}}'
+		. '</style>';
+	$js = '<script id="abm-home-hero-fix-js">(function(){var h=document.querySelector(".elementor-element-f94c4a5");function t(){var y=h?h.getBoundingClientRect().bottom:500;document.body.classList.toggle("abm-past-hero",y<window.innerHeight*0.6)}window.addEventListener("scroll",t,{passive:true});window.addEventListener("resize",t);t()})();</script>';
+	$html = preg_replace( '#</head>#', $css . '</head>', $html, 1 );
+	$html = preg_replace( '#</body>#', $js . '</body>', $html, 1 );
+	return $html;
+}
