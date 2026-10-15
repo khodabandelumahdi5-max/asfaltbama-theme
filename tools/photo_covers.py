@@ -74,7 +74,12 @@ COVERS = {
     # excavation, demolition, machinery
     "bobcat-rental-guide": "bobcat-bargiri-nakhale-kamyon.jpg",
     "construction-debris-removal": "bobcat-bargiri-nakhale-kamyon.jpg",
-    "demolition-cost-guide": "bargiri-khak-nakhale-bobcat-kargah-shahri.jpg",
+    "demolition-cost-guide": "takhrib-borj-15-tabaghe-shahrak-shahid-mahallati.jpg",
+    "demolition-methods": "takhrib-borj-15-tabaghe-shahrak-shahid-mahallati.jpg",
+    "demolition-permit-tehran": "takhrib-borj-15-tabaghe-shahrak-shahid-mahallati.jpg",
+    "scrap-iron-selling-guide": "takhrib-borj-15-tabaghe-shahrak-shahid-mahallati.jpg",
+    "iron-types-scrap": "takhrib-borj-15-tabaghe-shahrak-shahid-mahallati.jpg",
+    "excavation-contract": "takhrib-borj-15-tabaghe-shahrak-shahid-mahallati.jpg",
     "excavation-cost-guide": "bargiri-khak-nakhale-bobcat-kargah-shahri.jpg",
     "land-grading-guide": "bargiri-khak-nakhale-bobcat-kargah-shahri.jpg",
 }

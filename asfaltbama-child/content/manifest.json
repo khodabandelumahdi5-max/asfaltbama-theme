@@ -1,5 +1,5 @@
 {
-  "content_version": "2026-10-15.3",
+  "content_version": "2026-10-15.6",
   "site_version": "2026-09-26.1",
   "site": {
     "blogname": "آسفالت با ما",
@@ -167,7 +167,7 @@
       "focus_keyword": "رصف الأسفلت في أربيل,رصف الأسفلت,عزل الأسطح أربيل"
     }
   },
-  "images_version": "2026-10-15.5",
+  "images_version": "2026-10-15.7",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -221,9 +221,7 @@
       "file": "images/covers/demolition-permit-tehran-cover.webp",
       "title": "تصویر شاخص: مجوز تخریب ساختمان در تهران: مراحل، مدارک و نکات پیش از تخریب",
       "alt": "مجوز تخریب ساختمان در تهران: مراحل، مدارک و نکات پیش از تخریب | آسفالت با ما",
-      "featured_for": [
-        "demolition-permit-tehran"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/asphalt-patching-guide-cover.webp",
@@ -301,9 +299,7 @@
       "file": "images/covers/scrap-iron-selling-guide-cover.webp",
       "title": "تصویر شاخص: فروش ضایعات آهن ساختمانی: قیمت به چه عواملی بستگی دارد؟",
       "alt": "فروش ضایعات آهن ساختمانی: قیمت به چه عواملی بستگی دارد؟ | آسفالت با ما",
-      "featured_for": [
-        "scrap-iron-selling-guide"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/roof-winter-checklist-cover.webp",
@@ -952,9 +948,7 @@
       "file": "images/covers/iron-types-scrap-cover.webp",
       "title": "تصویر شاخص: انواع آهن‌آلات ساختمانی: نام‌ها، کاربرد و قیمت ضایعات هر نوع",
       "alt": "انواع آهن‌آلات ساختمانی: نام‌ها، کاربرد و قیمت ضایعات هر نوع | آسفالت با ما",
-      "featured_for": [
-        "iron-types-scrap"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/excavation-methods-cover.webp",
@@ -968,9 +962,7 @@
       "file": "images/covers/demolition-methods-cover.webp",
       "title": "تصویر شاخص: روش‌های تخریب ساختمان: دستی، مکانیکی، برش بتن و مقایسه",
       "alt": "روش‌های تخریب ساختمان: دستی، مکانیکی، برش بتن و مقایسه | آسفالت با ما",
-      "featured_for": [
-        "demolition-methods"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/asphalt-price-per-cm-cover.webp",
@@ -1044,9 +1036,7 @@
       "file": "images/covers/excavation-contract-cover.webp",
       "title": "تصویر شاخص: قرارداد خاکبرداری ساختمان؛ بندهای ضروری، مراحل خاکبرداری و نمونه قرارداد",
       "alt": "قرارداد خاکبرداری ساختمان؛ بندهای ضروری، مراحل خاکبرداری و نمونه قرارداد | آسفالت با ما",
-      "featured_for": [
-        "excavation-contract"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/manual-excavation-cover.webp",
@@ -1194,6 +1184,12 @@
       "file": "images/ghirgooni-sarvis-behdashti-ghabl-kafsazi.jpg",
       "title": "قیرگونی سرویس بهداشتی آماده‌ی کف‌سازی، الهیه",
       "alt": "قیرگونی سرویس بهداشتی آماده‌ی کف‌سازی، الهیه؛ آسفالت با ما",
+      "featured_for": []
+    },
+    {
+      "file": "images/takhrib-borj-15-tabaghe-shahrak-shahid-mahallati.jpg",
+      "title": "تخریب و خاکبرداری برج ۱۵ طبقه، شهرک شهید محلاتی",
+      "alt": "تخریب و خاکبرداری برج ۱۵ طبقه‌ی اسکلت فلزی در شهرک شهید محلاتی تهران؛ آسفالت با ما",
       "featured_for": []
     },
     {
@@ -1581,6 +1577,46 @@
       ]
     },
     {
+      "file": "images/covers/demolition-methods-photo-cover.jpg",
+      "title": "تصویر شاخص: روش‌های تخریب ساختمان؛ دستی، مکانیکی و برش بتن",
+      "alt": "روش‌های تخریب ساختمان؛ دستی، مکانیکی و برش بتن | آسفالت با ما",
+      "featured_for": [
+        "demolition-methods"
+      ]
+    },
+    {
+      "file": "images/covers/demolition-permit-tehran-photo-cover.jpg",
+      "title": "تصویر شاخص: مجوز تخریب ساختمان در تهران؛ مراحل و مدارک",
+      "alt": "مجوز تخریب ساختمان در تهران؛ مراحل و مدارک | آسفالت با ما",
+      "featured_for": [
+        "demolition-permit-tehran"
+      ]
+    },
+    {
+      "file": "images/covers/scrap-iron-selling-guide-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت ضایعات آهن و قراضه آهن امروز ۱۴۰۵؛ هر کیلو چند؟",
+      "alt": "قیمت ضایعات آهن و قراضه آهن امروز ۱۴۰۵؛ هر کیلو چند؟ | آسفالت با ما",
+      "featured_for": [
+        "scrap-iron-selling-guide"
+      ]
+    },
+    {
+      "file": "images/covers/iron-types-scrap-photo-cover.jpg",
+      "title": "تصویر شاخص: انواع آهن آلات ساختمانی و قیمت ضایعات هر نوع",
+      "alt": "انواع آهن آلات ساختمانی و قیمت ضایعات هر نوع | آسفالت با ما",
+      "featured_for": [
+        "iron-types-scrap"
+      ]
+    },
+    {
+      "file": "images/covers/excavation-contract-photo-cover.jpg",
+      "title": "تصویر شاخص: نمونه قرارداد خاکبرداری ساختمان؛ بندهای ضروری و مراحل",
+      "alt": "نمونه قرارداد خاکبرداری ساختمان؛ بندهای ضروری و مراحل | آسفالت با ما",
+      "featured_for": [
+        "excavation-contract"
+      ]
+    },
+    {
       "file": "images/covers/excavation-cost-guide-photo-cover.jpg",
       "title": "تصویر شاخص: قیمت و هزینه خاکبرداری ۱۴۰۵؛ هر متر مکعب با بیل و حمل",
       "alt": "قیمت و هزینه خاکبرداری ۱۴۰۵؛ هر متر مکعب با بیل و حمل | آسفالت با ما",
@@ -1635,11 +1671,15 @@
     "construction-debris-removal-cover.webp",
     "construction-debris-removal-v2-cover.webp",
     "curb-installation-guide-cover.webp",
+    "demolition-methods-cover.webp",
+    "demolition-permit-tehran-cover.webp",
     "engineered-backfill-cover.webp",
     "engineered-backfill-v2-cover.webp",
+    "excavation-contract-cover.webp",
     "exir-isogam-cover.webp",
     "gheirpashi-bastar-asfalt-mohavate-mojtame.jpg",
     "glass-wool-isogam-cover.webp",
+    "iron-types-scrap-cover.webp",
     "isogam-brands-price-cover.webp",
     "isogam-cost-responsibility-cover.webp",
     "isogam-cost-responsibility-v2-cover.webp",
@@ -1663,6 +1703,7 @@
     "roof-leak-after-isogam-cover.webp",
     "roof-waterproofing-methods-cover.webp",
     "roof-winter-checklist-cover.webp",
+    "scrap-iron-selling-guide-cover.webp",
     "soil-nailing-cover.webp"
   ],
   "elementor_version": "2026-09-27.2",
@@ -2602,6 +2643,7 @@
       "seo_description": "هزینه‌ی تخریب ساختمان کلنگی در تهران و کرج، قیمت تخریب بتن با پیکور، دیوار آجری و کاشی، تخریب تهاتری با ضایعات آهن و نکات قرارداد. تماس: 09191299559",
       "focus_keyword": "قیمت تخریب ساختمان,هزینه تخریب ساختمان کلنگی,قیمت تخریب بتن با پیکور",
       "prev_hashes": [
+        "bac4108a47d327c28136dcbbba77b21c",
         "9bae035c19d3463a4888d9a4bd09b101",
         "c570e94a43ed60abb0009d2cf81d4ac8",
         "28a2446f2dcfa199f0d2b542c8921493",
@@ -2621,6 +2663,7 @@
       "focus_keyword": "مجوز تخریب ساختمان",
       "category_name": "تخریب ساختمان",
       "prev_hashes": [
+        "3fd85ef423b8abbaf6e0ba0636af08dc",
         "ca693ca8b3aea28f5af4c56f2be8b979",
         "752f6427fa88b07d7319cf156d7aee91",
         "1e93b802c7d2b7ecf9a8d80afdc9dbb8",
@@ -2910,6 +2953,7 @@
       "seo_description": "قیمت روز ضایعات آهن سنگین، میلگرد، سبک و چدن در تهران و کرج؛ قیمت هر کیلو ضایعات آهن ۱۴۰۵ به چه بستگی دارد، انواع ضایعات و مراحل فروش با باسکول.",
       "focus_keyword": "قیمت ضایعات آهن,قیمت ضایعات آهن امروز,قیمت قراضه آهن,قیمت هر کیلو ضایعات آهن ۱۴۰۵,قیمت ضایعات آهن مخلوط",
       "prev_hashes": [
+        "28f0a94b0b53841b822e52dd22c46f6c",
         "94355abb436d1ae490eb3c60ee2ffb49",
         "04ce15d619c5beb7f423e719728d1f30",
         "6bd64780b1be9ebf44d5548c20966662",
@@ -3250,6 +3294,7 @@
       "seo_description": "حمل نخاله ساختمانی: محل تخلیه مجاز، حمل نخاله توسط شهرداری، عوامل هزینه، جداسازی آهن‌آلات و نکات قرارداد حمل نخاله.",
       "focus_keyword": "حمل نخاله ساختمانی,حمل نخاله ساختمانی توسط شهرداری,قیمت حمل نخاله,حمل نخاله,نخاله ساختمانی",
       "prev_hashes": [
+        "a523ae3da1cc04743fa5432df1ea5ed2",
         "5e099ab24704aca4ed5ed27643dd8d41",
         "839dddd48ad78fdd7feb9a3f08d50d6b",
         "cb2ddcfc019c813aab1ed549fd2f8612",
@@ -3361,6 +3406,7 @@
       "seo_description": "نام انواع آهن ساختمانی: تیرآهن، هاش، ناودانی، نبشی، میلگرد، قوطی و ورق؛ دسته‌بندی آهن سنگین و سبک در ضایعات و روش تخمین وزن.",
       "focus_keyword": "انواع آهن آلات ساختمانی,آهن سنگین و سبک,نام آهن آلات,وزن تیرآهن",
       "prev_hashes": [
+        "742b5529d5cd253fcd9aa744ccdd07d9",
         "1fada913b86eec1fc8011fcdd627f4c9",
         "1fcb66e60402f995126ce6c64c9c6d40",
         "e4b860a14b5db358850cd8220f31466a"
@@ -3391,6 +3437,7 @@
       "seo_description": "انواع روش تخریب ساختمان: دستی، مکانیکی، پیکور، برش بتن، انفجار و تخریب داخلی؛ مقایسه سرعت، هزینه و کاربرد هر روش و نکات ایمنی.",
       "focus_keyword": "روش های تخریب ساختمان,انواع تخریب,تخریب مکانیکی",
       "prev_hashes": [
+        "447c33793e6b03cd222902398f6a079d",
         "61f521c53c37233b7ba4d2a728a31d47",
         "da1ad62114525cf47ae6eae133e6cc84",
         "24b5951a73d36b436ed62083c437f50b",
@@ -3551,6 +3598,7 @@
       "seo_description": "نمونه قرارداد خاکبرداری و حمل خاک، بندهای ضروری، روش اندازه‌گیری حجم، قرارداد تخریب و خاکبرداری، مسئولیت خسارت به همسایه و مراحل خاکبرداری ساختمان.",
       "focus_keyword": "قرارداد خاکبرداری,نمونه قرارداد خاکبرداری,مراحل خاکبرداری ساختمان,مسئولیت گودبرداری با کیست,قرارداد تخریب و خاکبرداری",
       "prev_hashes": [
+        "69f90fa4379b73897d38427423fc2083",
         "15ad6807f35e3aa62e333386a4a2729a"
       ]
     },
@@ -3678,6 +3726,15 @@
         "ghirpashi-kenar-jadval-dariche-zaferanieh.jpg",
         "ghirpashi-ghabl-asfalt-koocheh-zaferanieh.jpg",
         "takhlie-asfalt-garm-roye-ghirpashi-ghaboos.jpg"
+      ]
+    },
+    "demolition-scrap": {
+      "title": "نمونه‌کار اخیر تخریب و خاکبرداری",
+      "intro": "تصاویر پروژه‌های تیم آسفالت با ما: تخریب و خاکبرداری برج ۱۵ طبقه‌ی اسکلت فلزی در شهرک شهید محلاتی تهران، جداسازی ضایعات و بارگیری نخاله و خاک با بابکت در کارگاه‌های شهری.",
+      "images": [
+        "takhrib-borj-15-tabaghe-shahrak-shahid-mahallati.jpg",
+        "bargiri-khak-nakhale-bobcat-kargah-shahri.jpg",
+        "bobcat-bargiri-nakhale-kamyon.jpg"
       ]
     }
   },
