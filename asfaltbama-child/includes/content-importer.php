@@ -417,8 +417,20 @@ function asfaltbama_importer_images( $manifest ) {
 			$log[] = '✅ فایل «' . $image['title'] . '» به کتابخانه‌ی رسانه اضافه شد';
 		}
 
-		if ( '' === trim( (string) get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) ) {
-			update_post_meta( $attachment_id, '_wp_attachment_image_alt', wp_slash( sanitize_text_field( $image['alt'] ) ) );
+		// Set the alt text when it is empty, or when it is still the one the
+		// importer wrote last time (so a corrected alt in the manifest
+		// reaches the site, but an alt edited in WordPress is kept).
+		$alt_now  = trim( (string) get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) );
+		$alt_new  = sanitize_text_field( $image['alt'] );
+		$alt_last = (string) get_post_meta( $attachment_id, '_asfaltbama_alt', true );
+		if ( '' === $alt_now || ( $alt_now === $alt_last && $alt_now !== $alt_new ) ) {
+			update_post_meta( $attachment_id, '_wp_attachment_image_alt', wp_slash( $alt_new ) );
+			if ( ! empty( $image['title'] ) && '' !== $alt_now ) {
+				wp_update_post( [ 'ID' => $attachment_id, 'post_title' => $image['title'] ] );
+			}
+		}
+		if ( '' === $alt_now || $alt_now === $alt_last || $alt_now === $alt_new ) {
+			update_post_meta( $attachment_id, '_asfaltbama_alt', $alt_new );
 		}
 
 		foreach ( (array) ( $image['featured_for'] ?? [] ) as $slug ) {

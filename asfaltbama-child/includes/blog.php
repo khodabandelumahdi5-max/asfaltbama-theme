@@ -572,6 +572,15 @@ function asfaltbama_imported_media_id( $source ) {
 			]
 		);
 		$cache[ $source ] = $ids ? (int) $ids[0] : 0;
+		// Photos the owner uploaded by hand (manifest upload_replacements).
+		if ( ! $cache[ $source ] ) {
+			foreach ( array_keys( (array) ( asfaltbama_content_manifest()['upload_replacements'] ?? [] ) ) as $upload ) {
+				if ( basename( $upload ) === $source ) {
+					$cache[ $source ] = (int) attachment_url_to_postid( trailingslashit( wp_get_upload_dir()['baseurl'] ) . $upload );
+					break;
+				}
+			}
+		}
 	}
 
 	return $cache[ $source ];
