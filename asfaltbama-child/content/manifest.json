@@ -1,5 +1,5 @@
 {
-  "content_version": "2026-10-13.4",
+  "content_version": "2026-10-15.2",
   "site_version": "2026-09-26.1",
   "site": {
     "blogname": "آسفالت با ما",
@@ -167,7 +167,7 @@
       "focus_keyword": "رصف الأسفلت في أربيل,رصف الأسفلت,عزل الأسطح أربيل"
     }
   },
-  "images_version": "2026-10-15.1",
+  "images_version": "2026-10-15.2",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -1261,6 +1261,36 @@
       "file": "images/isogam-foildar-bam-sanati-borj-khonak-kon.jpg",
       "title": "ایزوگام فویل‌دار بام صنعتی با برج‌های خنک‌کن",
       "alt": "ایزوگام فویل‌دار بام صنعتی زیر برج‌های خنک‌کن و تأسیسات؛ آسفالت با ما",
+      "featured_for": []
+    },
+    {
+      "file": "images/ghirgooni-sarvis-behdashti-ghir-dagh-kaf.jpg",
+      "title": "قیر داغ کف سرویس بهداشتی دور فریم توالت",
+      "alt": "اجرای قیر داغ کف سرویس بهداشتی؛ قیرگونی آسفالت با ما",
+      "featured_for": []
+    },
+    {
+      "file": "images/ghirgooni-sarvis-behdashti-dorchini-looleh.jpg",
+      "title": "قیرگونی سرویس بهداشتی دور لوله‌ها",
+      "alt": "قیرگونی سرویس بهداشتی دور لوله‌ها و دورچینی دیوار؛ آسفالت با ما",
+      "featured_for": []
+    },
+    {
+      "file": "images/ghirgooni-hammam-kaf-va-divar.jpg",
+      "title": "قیرگونی کف و دیوار حمام",
+      "alt": "قیرگونی کف و دیوار حمام پیش از کف‌سازی؛ آسفالت با ما",
+      "featured_for": []
+    },
+    {
+      "file": "images/ghirgooni-sarvis-behdashti-konj-dorchini.jpg",
+      "title": "دورچینی قیرگونی در کنج سرویس بهداشتی",
+      "alt": "دورچینی قیرگونی در کنج سرویس بهداشتی؛ آسفالت با ما",
+      "featured_for": []
+    },
+    {
+      "file": "images/ghirgooni-sarvis-behdashti-ghabl-kafsazi.jpg",
+      "title": "قیرگونی سرویس بهداشتی آماده‌ی کف‌سازی",
+      "alt": "قیرگونی سرویس بهداشتی آماده‌ی کف‌سازی؛ آسفالت با ما",
       "featured_for": []
     }
   ],
@@ -2485,6 +2515,7 @@
       "focus_keyword": "عایق‌کاری سرویس بهداشتی",
       "hreflang_group": "art-bathroom-waterproofing",
       "prev_hashes": [
+        "0fa572c33d6583ce176a2c7794a41e9d",
         "7eb069ab3c3c77e27abfac95152e89a0",
         "9f1281155227ed0a596b288377c6ba41",
         "e71c3d2a30a28374272b4cc7e2a93b85"
@@ -2724,6 +2755,7 @@
       "focus_keyword": "قیرگونی پشت بام,اجرای قیرگونی",
       "hreflang_group": "art-bitumen-roofing-steps",
       "prev_hashes": [
+        "1dbc6cdb8b0a038abe841a5072788afd",
         "5994ba95f104c77e14e3d113779b4107",
         "d0fc29dea0c04468a77b4bce702119ed"
       ]
@@ -3011,6 +3043,7 @@
       "seo_description": "قیمت روز قیرگونی یک لایه و دو لایه با مصالح و دستمزد؛ مصرف قیر و گونی هر متر، دورچینی، مثال برآورد و نشانه‌های قیمت غیرواقعی.",
       "focus_keyword": "قیمت قیرگونی,قیمت قیرگونی دو لایه,قیمت قیرگونی یک لایه,قیرگونی متری چند",
       "prev_hashes": [
+        "fb62046eccaa023bf9f4c3a1eef13642",
         "f341b91f886e42d1be2ada411e3cc302"
       ]
     },
@@ -3121,6 +3154,7 @@
       "seo_description": "قیرگونی سرویس بهداشتی و حمام: ارتفاع قیرگونی روی دیوار و دوش، مراحل اجرای دو لایه، آب‌بندی کف‌شور، تست آب، اجرت هر متر و مقایسه با ایزوگام.",
       "focus_keyword": "قیرگونی سرویس بهداشتی,قیرگونی حمام,ارتفاع قیرگونی سرویس بهداشتی,ایزوگام سرویس بهداشتی",
       "prev_hashes": [
+        "bd57d6c93fd46522d08de3757d4dd186",
         "0bf101aad7b252414d5883c4bad1563f"
       ]
     },
@@ -3237,13 +3271,15 @@
   ],
   "service_galleries": {
     "isogam-waterproofing": {
-      "title": "نمونه‌کار اخیر ایزوگام پشت‌بام",
-      "intro": "تصاویر پروژه‌های اجرای ایزوگام پشت‌بام در تهران، از جمله الهیه، توسط تیم آسفالت با ما: قیرکشی کامل بام پیش از ایزوگام، نصب ایزوگام فویل‌دار با مشعل، دورچینی روی دیوار، هم‌پوشانی رول‌ها، درزگیری قیری و آب‌بندی دور پایه‌ی کولرها.",
+      "title": "نمونه‌کار اخیر ایزوگام و قیرگونی",
+      "intro": "تصاویر پروژه‌های تیم آسفالت با ما در تهران، از جمله الهیه: قیرکشی کامل بام پیش از ایزوگام، نصب ایزوگام فویل‌دار با مشعل، دورچینی روی دیوار، قیرگونی سرویس بهداشتی با دورچینی کنج‌ها و دور لوله‌ها، هم‌پوشانی رول‌ها و آب‌بندی دور پایه‌ی کولرها.",
       "images": [
         "ghirkeshi-isogam-foildar-poshtbam.jpg",
         "nasb-isogam-foildar-delijan.jpg",
         "isogam-foildar-poshtbam-elahieh.jpg",
         "isogam-foildar-doorchini-divar.jpg",
+        "ghirgooni-sarvis-behdashti-konj-dorchini.jpg",
+        "ghirgooni-sarvis-behdashti-ghir-dagh-kaf.jpg",
         "isogam-poshtbam-hampooshani-darz-ghiri.jpg",
         "isogam-poshtbam-paye-kooler.jpg",
         "isogam-divar-jan-panah-labe-bam.jpg",
