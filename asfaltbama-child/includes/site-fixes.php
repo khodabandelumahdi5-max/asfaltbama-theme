@@ -1032,3 +1032,10 @@ function asfaltbama_page_drop_article_schema( $data ) {
 	return $data;
 }
 add_filter( 'rank_math/json_ld', 'asfaltbama_page_drop_article_schema', 98 );
+
+/*
+ * Keep the IPTC credit and copyright (XMP) of the project photos in the
+ * resized copies WordPress makes, so Google Images can show the credit for
+ * whichever size a page uses.
+ */
+add_filter( 'image_strip_meta', '__return_false' );

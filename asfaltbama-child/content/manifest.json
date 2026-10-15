@@ -167,7 +167,7 @@
       "focus_keyword": "رصف الأسفلت في أربيل,رصف الأسفلت,عزل الأسطح أربيل"
     }
   },
-  "images_version": "2026-10-13.5",
+  "images_version": "2026-10-15.1",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -3850,5 +3850,12 @@
       "note": "قیمت‌ها تقریبی و بر اساس جمع‌بندی نرخ‌های اعلام‌شده در بازار تهران در شهریور و مهر ۱۴۰۵ است. تیپ ۲ بسته به کارخانه (تهران، ساوه، آبیک، صوفیان) فرق می‌کند؛ سیمان سفید برای پاکت ۵۰ کیلویی.",
       "updated": "2026-10-01 10:00:00 +0330"
     }
+  },
+  "upload_replacements": {
+    "2026/09/IMG_1304.jpeg": "images/IMG_1304.jpeg",
+    "2026/09/amadehsazi-bastar-gheirpashi-tehran.jpg": "images/amadehsazi-bastar-gheirpashi-tehran.jpg",
+    "2026/09/amaliat-koobesh-ghaltak-asfaltbama.jpg": "images/amaliat-koobesh-ghaltak-asfaltbama.jpg",
+    "2026/09/padid-sang-tarakom-asfalt-tehran.jpg": "images/padid-sang-tarakom-asfalt-tehran.jpg",
+    "2026/09/pakhsh-asfalt-topka-mechanize.jpg": "images/pakhsh-asfalt-topka-mechanize.jpg"
   }
 }

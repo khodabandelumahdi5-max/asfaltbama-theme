@@ -550,6 +550,30 @@ function asfaltbama_importer_site( $manifest ) {
 }
 
 /**
+ * Files uploaded in WordPress by hand (not by the importer) that the theme
+ * ships a new version of, e.g. the owner's portfolio photos re-saved with
+ * the Asfaltbama watermark: manifest upload_replacements maps the path
+ * under wp-content/uploads to the theme file. Replaced in place, so pages
+ * using them keep working.
+ *
+ * @param array $manifest Manifest.
+ *
+ * @return string[] Log lines.
+ */
+function asfaltbama_importer_upload_replacements( $manifest ) {
+	$log     = [];
+	$uploads = wp_get_upload_dir();
+	foreach ( (array) ( $manifest['upload_replacements'] ?? [] ) as $upload => $file ) {
+		$id = attachment_url_to_postid( trailingslashit( $uploads['baseurl'] ) . $upload );
+		if ( ! $id ) {
+			continue;
+		}
+		$log = array_merge( $log, asfaltbama_importer_refresh_media( $id, [ 'file' => $file, 'title' => get_the_title( $id ) ] ) );
+	}
+	return $log;
+}
+
+/**
  * Replace an imported file in place when the theme ships a new version of
  * it (e.g. the project photos re-saved with the Asfaltbama watermark). The
  * attachment, its URL and every page that uses it stay the same; the file
@@ -972,6 +996,7 @@ function asfaltbama_importer_auto_run() {
 	if ( ! empty( $manifest['images_version'] ) && get_option( 'asfaltbama_images_version' ) !== $manifest['images_version'] ) {
 		update_option( 'asfaltbama_images_version', $manifest['images_version'], false );
 		$log = array_merge( $log, asfaltbama_importer_images( $manifest ) );
+		$log = array_merge( $log, asfaltbama_importer_upload_replacements( $manifest ) );
 	}
 
 	// Prices shipped with the theme (the owner can change them afterwards
