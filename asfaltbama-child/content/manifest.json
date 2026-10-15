@@ -1,5 +1,5 @@
 {
-  "content_version": "2026-10-15.6",
+  "content_version": "2026-10-15.8",
   "site_version": "2026-09-26.1",
   "site": {
     "blogname": "آسفالت با ما",
@@ -167,7 +167,7 @@
       "focus_keyword": "رصف الأسفلت في أربيل,رصف الأسفلت,عزل الأسطح أربيل"
     }
   },
-  "images_version": "2026-10-15.7",
+  "images_version": "2026-10-15.9",
   "images": [
     {
       "file": "images/asfalt-mohavate-mojtame-maskoni-finisher-ghaltak.jpg",
@@ -253,9 +253,7 @@
       "file": "images/covers/excavation-safety-guide-cover.webp",
       "title": "تصویر شاخص: گودبرداری اصولی: مراحل، روش‌های پایدارسازی و نکات ایمنی",
       "alt": "گودبرداری اصولی: مراحل، روش‌های پایدارسازی و نکات ایمنی | آسفالت با ما",
-      "featured_for": [
-        "excavation-safety-guide"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/reclaimed-asphalt-guide-cover.webp",
@@ -954,9 +952,7 @@
       "file": "images/covers/excavation-methods-cover.webp",
       "title": "تصویر شاخص: روش‌های خاکبرداری و گودبرداری: انواع، ماشین‌آلات و انتخاب روش",
       "alt": "روش‌های خاکبرداری و گودبرداری: انواع، ماشین‌آلات و انتخاب روش | آسفالت با ما",
-      "featured_for": [
-        "excavation-methods"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/demolition-methods-cover.webp",
@@ -980,17 +976,13 @@
       "file": "images/covers/deep-excavation-price-cover.webp",
       "title": "تصویر شاخص: قیمت گودبرداری ۱۴۰۵؛ هر متر مکعب، عمق، سنگ و حمل خاک",
       "alt": "قیمت گودبرداری ۱۴۰۵؛ هر متر مکعب، عمق، سنگ و حمل خاک | آسفالت با ما",
-      "featured_for": [
-        "deep-excavation-price"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/shoring-price-cover.webp",
       "title": "تصویر شاخص: قیمت سازه نگهبان ۱۴۰۵؛ نیلینگ، انکراژ، خرپا و مهار متقابل",
       "alt": "قیمت سازه نگهبان ۱۴۰۵؛ نیلینگ، انکراژ، خرپا و مهار متقابل | آسفالت با ما",
-      "featured_for": [
-        "shoring-price"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/washed-sand-price-cover.webp",
@@ -1050,9 +1042,7 @@
       "file": "images/covers/wall-demolition-cover.webp",
       "title": "تصویر شاخص: تخریب دیوار؛ روش تخریب انواع دیوار، دیوار باربر، دیوار مشترک و هزینه",
       "alt": "تخریب دیوار؛ روش تخریب انواع دیوار، دیوار باربر، دیوار مشترک و هزینه | آسفالت با ما",
-      "featured_for": [
-        "wall-demolition"
-      ]
+      "featured_for": []
     },
     {
       "file": "images/covers/bitumen-mastic-cover.webp",
@@ -1190,6 +1180,36 @@
       "file": "images/takhrib-borj-15-tabaghe-shahrak-shahid-mahallati.jpg",
       "title": "تخریب و خاکبرداری برج ۱۵ طبقه، شهرک شهید محلاتی",
       "alt": "تخریب و خاکبرداری برج ۱۵ طبقه‌ی اسکلت فلزی در شهرک شهید محلاتی تهران؛ آسفالت با ما",
+      "featured_for": []
+    },
+    {
+      "file": "images/sotoon-badband-eskelet-felezi-takhrib-mahallati.jpg",
+      "title": "ستون و بادبند اسکلت فلزی برج در حال تخریب، شهرک شهید محلاتی",
+      "alt": "ستون و بادبند اسکلت فلزی برج در حال تخریب، شهرک شهید محلاتی؛ آسفالت با ما",
+      "featured_for": []
+    },
+    {
+      "file": "images/tabaghe-hamkaf-borj-takhrib-mahallati.jpg",
+      "title": "طبقه‌ی همکف برج پس از تخریب داخلی، شهرک شهید محلاتی",
+      "alt": "طبقه‌ی همکف برج پس از تخریب داخلی، شهرک شهید محلاتی؛ آسفالت با ما",
+      "featured_for": []
+    },
+    {
+      "file": "images/sotoon-felezi-borj-takhrib-mahallati.jpg",
+      "title": "ستون فلزی برج در حال تخریب، شهرک شهید محلاتی",
+      "alt": "ستون فلزی برج در حال تخریب، شهرک شهید محلاتی؛ آسفالت با ما",
+      "featured_for": []
+    },
+    {
+      "file": "images/khakbardari-kenar-eskelet-borj-mahallati.jpg",
+      "title": "خاکبرداری کنار اسکلت برج در حال تخریب، شهرک شهید محلاتی",
+      "alt": "خاکبرداری کنار اسکلت برج در حال تخریب، شهرک شهید محلاتی؛ آسفالت با ما",
+      "featured_for": []
+    },
+    {
+      "file": "images/badband-zarbdari-eskelet-felezi-mahallati.jpg",
+      "title": "بادبند ضربدری اسکلت فلزی برج، شهرک شهید محلاتی",
+      "alt": "بادبند ضربدری اسکلت فلزی برج، شهرک شهید محلاتی؛ آسفالت با ما",
       "featured_for": []
     },
     {
@@ -1617,6 +1637,46 @@
       ]
     },
     {
+      "file": "images/covers/deep-excavation-price-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت گودبرداری ۱۴۰۵؛ هر متر مکعب با بیل و حمل خاک",
+      "alt": "قیمت گودبرداری ۱۴۰۵؛ هر متر مکعب با بیل و حمل خاک | آسفالت با ما",
+      "featured_for": [
+        "deep-excavation-price"
+      ]
+    },
+    {
+      "file": "images/covers/excavation-methods-photo-cover.jpg",
+      "title": "تصویر شاخص: روش‌های خاکبرداری و انواع گودبرداری",
+      "alt": "روش‌های خاکبرداری و انواع گودبرداری | آسفالت با ما",
+      "featured_for": [
+        "excavation-methods"
+      ]
+    },
+    {
+      "file": "images/covers/excavation-safety-guide-photo-cover.jpg",
+      "title": "تصویر شاخص: گودبرداری اصولی؛ ضوابط، مراحل، پایدارسازی و ایمنی",
+      "alt": "گودبرداری اصولی؛ ضوابط، مراحل، پایدارسازی و ایمنی | آسفالت با ما",
+      "featured_for": [
+        "excavation-safety-guide"
+      ]
+    },
+    {
+      "file": "images/covers/shoring-price-photo-cover.jpg",
+      "title": "تصویر شاخص: قیمت سازه نگهبان ۱۴۰۵؛ قیمت نیلینگ، انکراژ و خرپا",
+      "alt": "قیمت سازه نگهبان ۱۴۰۵؛ قیمت نیلینگ، انکراژ و خرپا | آسفالت با ما",
+      "featured_for": [
+        "shoring-price"
+      ]
+    },
+    {
+      "file": "images/covers/wall-demolition-photo-cover.jpg",
+      "title": "تصویر شاخص: تخریب دیوار؛ روش تخریب، دیوار باربر و هزینه تخریب دیوار",
+      "alt": "تخریب دیوار؛ روش تخریب، دیوار باربر و هزینه تخریب دیوار | آسفالت با ما",
+      "featured_for": [
+        "wall-demolition"
+      ]
+    },
+    {
       "file": "images/covers/excavation-cost-guide-photo-cover.jpg",
       "title": "تصویر شاخص: قیمت و هزینه خاکبرداری ۱۴۰۵؛ هر متر مکعب با بیل و حمل",
       "alt": "قیمت و هزینه خاکبرداری ۱۴۰۵؛ هر متر مکعب با بیل و حمل | آسفالت با ما",
@@ -1671,11 +1731,14 @@
     "construction-debris-removal-cover.webp",
     "construction-debris-removal-v2-cover.webp",
     "curb-installation-guide-cover.webp",
+    "deep-excavation-price-cover.webp",
     "demolition-methods-cover.webp",
     "demolition-permit-tehran-cover.webp",
     "engineered-backfill-cover.webp",
     "engineered-backfill-v2-cover.webp",
     "excavation-contract-cover.webp",
+    "excavation-methods-cover.webp",
+    "excavation-safety-guide-cover.webp",
     "exir-isogam-cover.webp",
     "gheirpashi-bastar-asfalt-mohavate-mojtame.jpg",
     "glass-wool-isogam-cover.webp",
@@ -1704,7 +1767,9 @@
     "roof-waterproofing-methods-cover.webp",
     "roof-winter-checklist-cover.webp",
     "scrap-iron-selling-guide-cover.webp",
-    "soil-nailing-cover.webp"
+    "shoring-price-cover.webp",
+    "soil-nailing-cover.webp",
+    "wall-demolition-cover.webp"
   ],
   "elementor_version": "2026-09-27.2",
   "elementor_edits": [
@@ -2643,6 +2708,7 @@
       "seo_description": "هزینه‌ی تخریب ساختمان کلنگی در تهران و کرج، قیمت تخریب بتن با پیکور، دیوار آجری و کاشی، تخریب تهاتری با ضایعات آهن و نکات قرارداد. تماس: 09191299559",
       "focus_keyword": "قیمت تخریب ساختمان,هزینه تخریب ساختمان کلنگی,قیمت تخریب بتن با پیکور",
       "prev_hashes": [
+        "d78ed10ece955ee47025e598bd3bd162",
         "bac4108a47d327c28136dcbbba77b21c",
         "9bae035c19d3463a4888d9a4bd09b101",
         "c570e94a43ed60abb0009d2cf81d4ac8",
@@ -2836,6 +2902,7 @@
       "seo_description": "چرا گود ریزش می‌کند؟ مراحل گودبرداری اصولی، روش‌های پایدارسازی مثل نیلینگ، انکراژ و سازه نگهبان، و نکات ایمنی گود شهری.",
       "focus_keyword": "گودبرداری اصولی,ضوابط گودبرداری,ایمنی گودبرداری",
       "prev_hashes": [
+        "86f1d977b35d5c2df3f8cfd643905349",
         "7a64c7fa4ca97c08fd29f63fc3e35359",
         "1ff1619526da5b6365d66f38eac538b2",
         "680cfe2cf2071780de793b460c9fa987",
@@ -2953,6 +3020,7 @@
       "seo_description": "قیمت روز ضایعات آهن سنگین، میلگرد، سبک و چدن در تهران و کرج؛ قیمت هر کیلو ضایعات آهن ۱۴۰۵ به چه بستگی دارد، انواع ضایعات و مراحل فروش با باسکول.",
       "focus_keyword": "قیمت ضایعات آهن,قیمت ضایعات آهن امروز,قیمت قراضه آهن,قیمت هر کیلو ضایعات آهن ۱۴۰۵,قیمت ضایعات آهن مخلوط",
       "prev_hashes": [
+        "4559ea65c266aa05acf7ec3335bb6025",
         "28f0a94b0b53841b822e52dd22c46f6c",
         "94355abb436d1ae490eb3c60ee2ffb49",
         "04ce15d619c5beb7f423e719728d1f30",
@@ -3406,6 +3474,7 @@
       "seo_description": "نام انواع آهن ساختمانی: تیرآهن، هاش، ناودانی، نبشی، میلگرد، قوطی و ورق؛ دسته‌بندی آهن سنگین و سبک در ضایعات و روش تخمین وزن.",
       "focus_keyword": "انواع آهن آلات ساختمانی,آهن سنگین و سبک,نام آهن آلات,وزن تیرآهن",
       "prev_hashes": [
+        "91ebdec9ed0cac65b7df6c6898e867a9",
         "742b5529d5cd253fcd9aa744ccdd07d9",
         "1fada913b86eec1fc8011fcdd627f4c9",
         "1fcb66e60402f995126ce6c64c9c6d40",
@@ -3422,6 +3491,7 @@
       "seo_description": "انواع خاکبرداری و روش‌های گودبرداری: دستی و ماشینی، شیب‌دار، پلکانی، سازه نگهبان و تاپ‌دان؛ ماشین‌آلات هر روش و معیار انتخاب.",
       "focus_keyword": "روش های خاکبرداری,انواع خاکبرداری,روش های گودبرداری",
       "prev_hashes": [
+        "d0fafa2b8aeacdb0c6f83fd798bceb7d",
         "3264ddade3a94f4267d2093cad18cc41",
         "da249de786659b5f92142fe568d896ba",
         "45dd94035c29857f92336808d448ee88"
@@ -3437,6 +3507,7 @@
       "seo_description": "انواع روش تخریب ساختمان: دستی، مکانیکی، پیکور، برش بتن، انفجار و تخریب داخلی؛ مقایسه سرعت، هزینه و کاربرد هر روش و نکات ایمنی.",
       "focus_keyword": "روش های تخریب ساختمان,انواع تخریب,تخریب مکانیکی",
       "prev_hashes": [
+        "77c3ebd801947b650bf3691e9a2a5fe0",
         "447c33793e6b03cd222902398f6a079d",
         "61f521c53c37233b7ba4d2a728a31d47",
         "da1ad62114525cf47ae6eae133e6cc84",
@@ -3483,6 +3554,7 @@
       "seo_description": "قیمت روز گودبرداری ساختمان: محاسبه حجم گود، ضریب پف خاک، تعداد سرویس کامیون، اثر عمق و سنگ، هزینه‌های جانبی و قرارداد گودبرداری.",
       "focus_keyword": "قیمت گودبرداری,هزینه گودبرداری ساختمان,قیمت گودبرداری هر متر مکعب,محاسبه عمق گودبرداری",
       "prev_hashes": [
+        "3202062f4b88aba60003d9a334744bb0",
         "cf9a546619372cf3206d032e04e25edb",
         "ec09a128ddc15bf2cc37560a6cd37194"
       ]
@@ -3497,6 +3569,7 @@
       "seo_description": "قیمت روز سازه نگهبان: نیلینگ و انکراژ متر مربعی، خرپا و مهار متقابل کیلویی؛ محاسبه مساحت دیواره گود، اجزای هزینه و چک‌لیست قرارداد.",
       "focus_keyword": "قیمت سازه نگهبان,قیمت نیلینگ,قیمت خرپا گودبرداری,قیمت انکراژ",
       "prev_hashes": [
+        "ccfd1c1a792a453c910cedc00f70407c",
         "c0cc9a8f71a8d5c88bf135924d6dd9a3",
         "1f69554ae70f87c541a2e0f0c82f87e6"
       ]
@@ -3622,6 +3695,7 @@
       "seo_description": "روش تخریب دیوار آجری، بلوکی، کناف و بتنی، تشخیص دیوار باربر، باز کردن جای پنجره، هزینه تخریب دیوار متری و قانون تخریب دیوار مشترک. 09191299559",
       "focus_keyword": "تخریب دیوار,روش تخریب دیوار,هزینه تخریب دیوار,تخریب داخلی ساختمان,تخریب دیوار مشترک",
       "prev_hashes": [
+        "452a77db8c255e5be2d4073fe6546ee7",
         "21627b59bf801ee1e5e723d004efae7b"
       ]
     },
@@ -3733,6 +3807,9 @@
       "intro": "تصاویر پروژه‌های تیم آسفالت با ما: تخریب و خاکبرداری برج ۱۵ طبقه‌ی اسکلت فلزی در شهرک شهید محلاتی تهران، جداسازی ضایعات و بارگیری نخاله و خاک با بابکت در کارگاه‌های شهری.",
       "images": [
         "takhrib-borj-15-tabaghe-shahrak-shahid-mahallati.jpg",
+        "khakbardari-kenar-eskelet-borj-mahallati.jpg",
+        "sotoon-badband-eskelet-felezi-takhrib-mahallati.jpg",
+        "tabaghe-hamkaf-borj-takhrib-mahallati.jpg",
         "bargiri-khak-nakhale-bobcat-kargah-shahri.jpg",
         "bobcat-bargiri-nakhale-kamyon.jpg"
       ]

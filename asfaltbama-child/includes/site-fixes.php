@@ -1067,6 +1067,8 @@ function asfaltbama_home_hero_fixes( $html ) {
 		$html,
 		1
 	);
+	// H1: «تهران و کرج» -> «تهران و حومه» (the owner's wording).
+	$html = preg_replace( '#(<h1 class="elementor-headline[^"]*">\s*<span class="elementor-headline-plain-text[^"]*">[^<]*?)تهران و کرج#u', '$1تهران و حومه', $html, 1 );
 	$css = '<style id="abm-home-hero-fix">'
 		. '.elementor-31878 .elementor-element.elementor-element-eb51fe4{width:auto!important;max-width:100%;min-height:0!important;height:auto!important;align-self:flex-start;justify-content:center;padding:9px 22px!important;border-radius:999px}'
 		. '.abm-hero-kicker{display:block;color:#fff;font-size:16px;font-weight:600;line-height:1.7;text-align:right}'
