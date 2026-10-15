@@ -158,6 +158,8 @@ function asfaltbama_filter_page_html( $html ) {
 	}
 
 	$html = asfaltbama_mobile_nav( $html );
+	// The header call button hides its text on phones: give it a name.
+	$html = str_replace( '<a href="tel:09191299559" class="abm-call-btn">', '<a href="tel:09191299559" class="abm-call-btn" aria-label="تماس با آسفالت با ما: ۰۹۱۹ ۱۲۹ ۹۵۵۹">', $html );
 	$html = asfaltbama_fix_heading_order( $html );
 	$html = asfaltbama_fix_inline_service_schema( $html );
 

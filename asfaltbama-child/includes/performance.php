@@ -89,13 +89,14 @@ function asfaltbama_hero_preload() {
 	}
 	$full   = wp_get_attachment_image_src( $hero['id'], 'full' );
 	$tablet = wp_get_attachment_image_src( $hero['id'], 'large' );
-	$phone  = wp_get_attachment_image_src( $hero['id'], 'medium_large' );
 	if ( ! $full ) {
 		return;
 	}
 	$wide   = wp_get_attachment_image_src( $hero['id'], '1536x1536' );
 	$tablet = $tablet ? $tablet[0] : $full[0];
-	$phone  = $phone ? $phone[0] : $tablet;
+	// Phones use the same 1024px copy as the hero card and overlay below,
+	// so a phone downloads one copy of the image instead of three.
+	$phone = $tablet;
 	// Laptops (up to 1600px wide) get the 1536px copy; only larger screens the full image.
 	$wide = $wide ? $wide[0] : $full[0];
 
@@ -130,11 +131,11 @@ function asfaltbama_hero_preload() {
 	}
 	if ( ! empty( $hero['overlay'] ) && ! empty( $full[1] ) ) {
 		$sel  = sprintf( '.elementor-%1$d .elementor-element.elementor-element-%2$s::before', $hero['page'], preg_replace( '/[^a-z0-9]/', '', $hero['el'] ) );
-		$css .= sprintf( '@media (max-width:1024px){%1$s{background-image:url("%2$s")!important;background-size:%3$dpx auto!important}}', $sel, esc_url( $mid ), (int) $full[1] );
+		$css .= sprintf( '@media (max-width:767px){%1$s{background-image:url("%2$s")!important;background-size:%4$dpx auto!important}}@media (min-width:768px) and (max-width:1024px){%1$s{background-image:url("%3$s")!important;background-size:%4$dpx auto!important}}', $sel, esc_url( $card ), esc_url( $mid ), (int) $full[1] );
 	}
 	if ( '' !== $css ) {
 		echo '<style id="abm-hero-bg-inner">' . $css . "</style>\n"; // phpcs:ignore WordPress.Security.EscapeOutput -- built from escaped URLs and sanitized IDs.
-		if ( ! empty( $hero['children'] ) ) {
+		if ( ! empty( $hero['children'] ) && $card !== $phone ) {
 			printf( '<link rel="preload" as="image" href="%s" media="(max-width: 767px)" fetchpriority="high">' . "\n", esc_url( $card ) );
 		}
 	}
@@ -345,3 +346,43 @@ function asfaltbama_describe_read_more( $html ) {
 		$html
 	);
 }
+
+/**
+ * jQuery (and the scripts that need it) load in the footer on the front
+ * end instead of blocking the first paint from <head>; jQuery Migrate,
+ * which nothing on the site needs, is dropped. Elementor's own scripts are
+ * already in the footer and run after jQuery as before.
+ *
+ * @return void
+ */
+function asfaltbama_jquery_to_footer() {
+	if ( is_admin() || is_customize_preview() || ( isset( $_GET['elementor-preview'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+		return;
+	}
+	$scripts = wp_scripts();
+	if ( isset( $scripts->registered['jquery'] ) ) {
+		$scripts->registered['jquery']->deps = array_values( array_diff( $scripts->registered['jquery']->deps, [ 'jquery-migrate' ] ) );
+	}
+	$needs_jquery = static function ( $handle ) use ( $scripts, &$needs_jquery ) {
+		static $seen = [];
+		if ( isset( $seen[ $handle ] ) ) {
+			return $seen[ $handle ];
+		}
+		$seen[ $handle ] = false;
+		if ( in_array( $handle, [ 'jquery', 'jquery-core', 'jquery-migrate' ], true ) ) {
+			return $seen[ $handle ] = true;
+		}
+		foreach ( (array) ( $scripts->registered[ $handle ]->deps ?? [] ) as $dep ) {
+			if ( $needs_jquery( $dep ) ) {
+				return $seen[ $handle ] = true;
+			}
+		}
+		return false;
+	};
+	foreach ( $scripts->registered as $handle => $script ) {
+		if ( $needs_jquery( $handle ) ) {
+			$scripts->add_data( $handle, 'group', 1 );
+		}
+	}
+}
+add_action( 'wp_enqueue_scripts', 'asfaltbama_jquery_to_footer', 999 );
