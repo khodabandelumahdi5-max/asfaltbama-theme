@@ -1052,6 +1052,37 @@
 /* Uses literal colours so it also works inside the Asphalt Business Suite
    single-post template, outside the .abm-post wrapper. */
 
+/* Short answer at the top of an article: the passage search snippets and
+   AI answers quote. */
+.abm-answer {
+	direction: rtl;
+	margin: 0 0 24px;
+	padding: 16px 20px;
+	border-radius: 12px;
+	background: #0f172a;
+	color: #f8fafc;
+	text-align: right;
+}
+
+.abm-answer__title {
+	margin: 0 0 6px !important;
+	color: #fbbf24 !important;
+	font-size: 15px;
+	font-weight: 900;
+}
+
+.abm-answer p {
+	margin: 0;
+	color: #f1f5f9;
+	font-size: 16.5px;
+	line-height: 2;
+}
+
+.abm-answer .abm-price-inline {
+	color: #fbbf24;
+	white-space: nowrap;
+}
+
 .abm-summary {
 	direction: rtl;
 	margin: 0 0 28px;

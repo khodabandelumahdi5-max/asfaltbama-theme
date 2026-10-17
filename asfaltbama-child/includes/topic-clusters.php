@@ -311,7 +311,11 @@ function asfaltbama_post_family( $content ) {
 	$is_pillar = trim( $cluster['url'], '/' ) === $slug;
 	if ( ! $is_pillar ) {
 		$parent = '<p class="abm-family__parent">این راهنما بخشی از مجموعه‌ی <a href="' . esc_url( home_url( $cluster['url'] ) ) . '">' . esc_html( $cluster['anchor'] ) . '</a> است.</p>';
-		$pos    = strpos( $content, '</p>' );
+		// After the first paragraph of the article itself, not inside the
+		// short-answer box at the top.
+		$start  = strpos( $content, '<div class="abm-answer">' );
+		$after  = false === $start ? 0 : (int) strpos( $content, '</div>', $start ) + 6;
+		$pos    = strpos( $content, '</p>', $after );
 		$content = false === $pos ? $parent . $content : substr( $content, 0, $pos + 4 ) . "\n" . $parent . substr( $content, $pos + 4 );
 	}
 

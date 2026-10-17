@@ -629,3 +629,47 @@ function asfaltbama_price_description( $desc ) {
 	return $desc;
 }
 add_filter( 'rank_math/frontend/description', 'asfaltbama_price_description', 20 );
+
+/**
+ * [abm_price row="sand_washed"]: one price from the price tables, in short
+ * form with its unit («۲۱۰ تا ۳۰۰ هزار تومان هر تن»), for the short answer
+ * at the top of an article. It follows the price the owner saves in
+ * Tools → قیمت‌ها, like the tables.
+ *
+ * @param array $atts Attributes: row, unit ("0" to leave the unit out).
+ * @return string
+ */
+function asfaltbama_price_shortcode( $atts ) {
+	$atts = shortcode_atts( [ 'row' => '', 'unit' => '1' ], $atts );
+	foreach ( asfaltbama_price_groups() as $group => $def ) {
+		if ( ! isset( $def[2][ $atts['row'] ] ) ) {
+			continue;
+		}
+		$data  = asfaltbama_price_data( $group );
+		$value = $data['prices'][ $atts['row'] ] ?? '';
+		if ( '' === $value ) {
+			return '';
+		}
+		$text = asfaltbama_short_price( $value ) . ' تومان';
+		if ( '0' !== $atts['unit'] ) {
+			$text .= ' هر ' . $def[2][ $atts['row'] ][1];
+		}
+		return '<strong class="abm-price-inline">' . esc_html( $text ) . '</strong>';
+	}
+	return '';
+}
+add_shortcode( 'abm_price', 'asfaltbama_price_shortcode' );
+
+/**
+ * Date the prices of a group were last updated, for the short answer:
+ * [abm_price_date group="sand"] → «۹ مهر ۱۴۰۵».
+ *
+ * @param array $atts Attributes: group.
+ * @return string
+ */
+function asfaltbama_price_date_shortcode( $atts ) {
+	$atts = shortcode_atts( [ 'group' => '' ], $atts );
+	$data = asfaltbama_price_data( $atts['group'] );
+	return empty( $data['updated'] ) ? '' : esc_html( asfaltbama_price_date( $data['updated'] ) );
+}
+add_shortcode( 'abm_price_date', 'asfaltbama_price_date_shortcode' );

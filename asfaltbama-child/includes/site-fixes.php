@@ -1084,3 +1084,58 @@ function asfaltbama_home_hero_fixes( $html ) {
 	$html = preg_replace( '#</body>#', $js . '</body>', $html, 1 );
 	return $html;
 }
+
+/**
+ * /llms.txt: a plain-text guide to the site for AI assistants and answer
+ * engines (llmstxt.org): who the company is, where it works, how to reach
+ * it, the service pages and every published article with its summary,
+ * grouped by topic. Built from content/manifest.json, so new articles
+ * appear automatically.
+ *
+ * @return void
+ */
+function asfaltbama_llms_txt() {
+	$path = (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+	if ( '/llms.txt' !== $path ) {
+		return;
+	}
+	$manifest = asfaltbama_content_manifest();
+	$home     = home_url( '/' );
+	$out      = "# آسفالت با ما (شرکت افق آپادانا پاسارگاد)\n\n";
+	$out     .= "> پیمانکار اجرای آسفالت، خاکبرداری و گودبرداری، تخریب ساختمان و خرید ضایعات آهن، ایزوگام و قیرگونی، درزگیری آسفالت و اجاره ماشین‌آلات راه‌سازی در تهران و حومه و استان البرز. اجرا با ماشین‌آلات و تیم خود شرکت و ضمانت‌نامه‌ی کتبی.\n\n";
+	$out     .= "- وب‌سایت: {$home}\n- تلفن و واتساپ: 09191299559\n- منطقه‌ی خدمات: تهران و حومه، کرج و استان البرز\n- قیمت‌ها در صفحه‌های قیمت با تاریخ به‌روزرسانی اعلام می‌شوند و تقریبی‌اند؛ قیمت قطعی پس از بازدید.\n\n";
+	$out     .= "## خدمات\n\n";
+	foreach (
+		[
+			'asphalt-paving'         => 'اجرای آسفالت معابر، حیاط، پارکینگ و محوطه',
+			'excavation-and-grading' => 'خاکبرداری، گودبرداری، تسطیح و زیرسازی',
+			'isogam-waterproofing'   => 'اجرای ایزوگام و قیرگونی بام، سرویس بهداشتی و فونداسیون',
+			'asphalt-joint-sealing'  => 'درزگیری آسفالت با ماستیک گرم',
+			'demolition-scrap'       => 'تخریب ساختمان و خرید ضایعات آهن',
+			'machinery-rental'       => 'اجاره بابکت، غلتک، فینیشر و ماشین‌آلات راه‌سازی',
+			'services'               => 'فهرست همه‌ی خدمات',
+			'about-us'               => 'درباره‌ی شرکت',
+			'contact-us'             => 'تماس و درخواست بازدید',
+		] as $slug => $label
+	) {
+		$out .= '- [' . $label . '](' . home_url( '/' . $slug . '/' ) . ")\n";
+	}
+	$cats = [];
+	foreach ( (array) ( $manifest['posts'] ?? [] ) as $post ) {
+		$cats[ $post['category'] ?? 'other' ][] = $post;
+	}
+	foreach ( $cats as $cat => $posts ) {
+		$name  = preg_replace( '/\s*\|.*$/u', '', (string) ( $manifest['categories'][ $cat ]['seo_title'] ?? $cat ) );
+		$out  .= "\n## " . $name . "\n\n";
+		foreach ( $posts as $post ) {
+			$out .= '- [' . $post['title'] . '](' . home_url( '/' . $post['slug'] . '/' ) . ')' . ( ! empty( $post['excerpt'] ) ? ': ' . $post['excerpt'] : '' ) . "\n";
+		}
+	}
+	$out .= "\n## راهنماهای انگلیسی و عربی\n\n- [Asphalt paving and waterproofing guides](" . home_url( '/asphalt-waterproofing-guides/' ) . ")\n- [أدلة الأسفلت والعزل](" . home_url( '/asphalt-waterproofing-guides-ar/' ) . ")\n";
+	status_header( 200 );
+	header( 'Content-Type: text/plain; charset=utf-8' );
+	header( 'X-Robots-Tag: noindex' );
+	echo $out; // phpcs:ignore WordPress.Security.EscapeOutput -- plain text.
+	exit;
+}
+add_action( 'parse_request', 'asfaltbama_llms_txt', 0 );
