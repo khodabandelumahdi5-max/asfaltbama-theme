@@ -86,6 +86,15 @@ COVERS = {
     "shoring-price": "khakbardari-kenar-eskelet-borj-mahallati.jpg",
     "wall-demolition": "tabaghe-hamkaf-borj-takhrib-mahallati.jpg",
     "excavation-cost-guide": "bargiri-khak-nakhale-bobcat-kargah-shahri.jpg",
+    # 1.64.0 keyword articles
+    "pool-bitumen-waterproofing": "ghirgooni-hammam-kaf-va-divar.jpg",
+    "excavation-machinery": "bargiri-khak-nakhale-bobcat-kargah-shahri.jpg",
+    "roof-asphalt": "isogam-poshtbam-hampooshani-darz-ghiri.jpg",
+    "isogam-metal-roof": "isogam-foildar-bam-sanati-borj-khonak-kon.jpg",
+    "mixed-drum-bitumen": "ghirgooni-sarvis-behdashti-ghir-dagh-kaf.jpg",
+    "jute-burlap-specs": "ghirgooni-sarvis-behdashti-ghabl-kafsazi.jpg",
+    "demolition-and-excavation": "sotoon-badband-eskelet-felezi-takhrib-mahallati.jpg",
+    "asphalt-sealing-materials": "ghirpashi-kenar-jadval-dariche-zaferanieh.jpg",
     "land-grading-guide": "bargiri-khak-nakhale-bobcat-kargah-shahri.jpg",
 }
 CATS = {
