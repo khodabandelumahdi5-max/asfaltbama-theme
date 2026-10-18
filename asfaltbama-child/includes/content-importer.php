@@ -1020,15 +1020,18 @@ function asfaltbama_importer_auto_run() {
 			// Never replace prices the owner saved under Settings → قیمت روز.
 			// Saves from before 1.43 carry no source: they are the owner's too.
 			$prev = $all[ $group ] ?? [];
-			if ( ( $prev['source'] ?? '' ) === 'owner' || ( ! isset( $prev['source'] ) && ! empty( $prev['prices'] ) ) ) {
+			$time = ! empty( $data['updated'] ) ? (int) strtotime( $data['updated'] ) : time();
+			// Prices the owner sent us to ship: newer than their last save, they win.
+			$sent = ( $data['source'] ?? '' ) === 'owner' && $time > (int) ( $prev['updated'] ?? 0 );
+			if ( ! $sent && ( ( $prev['source'] ?? '' ) === 'owner' || ( ! isset( $prev['source'] ) && ! empty( $prev['prices'] ) ) ) ) {
 				$log[] = 'ℹ️ قیمت روز «' . $group . '» را خودتان ثبت کرده‌اید؛ دست‌نخورده ماند';
 				continue;
 			}
 			$all[ $group ] = [
-				'source'  => 'theme',
+				'source'  => $sent ? 'owner' : 'theme',
 				'prices'  => array_map( 'strval', (array) ( $data['prices'] ?? [] ) ),
 				'note'    => (string) ( $data['note'] ?? '' ),
-				'updated' => ! empty( $data['updated'] ) ? (int) strtotime( $data['updated'] ) : time(),
+				'updated' => $time,
 			];
 			$log[] = '✅ قیمت روز «' . $group . '» ثبت شد';
 		}
