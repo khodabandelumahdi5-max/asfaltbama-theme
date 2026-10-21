@@ -35,7 +35,7 @@ function asfaltbama_clusters() {
 			'asphalt-paving'         => [
 				'url'    => '/asphalt-paving/',
 				'label'  => 'آسفالت‌کاری',
-				'anchor' => 'آسفالت کاری در تهران و کرج',
+				'anchor' => 'آسفالت کاری در تهران و حومه',
 				'desc'   => 'اجرای آسفالت گرم توپکا و بیندر برای حیاط، کوچه، پارکینگ، رمپ و محوطه با فینیشر و غلتک.',
 				'posts'  => [ 'asphalt-yard-parking', 'alley-asphalt', 'cold-asphalt-bag', 'asphalt-plant', 'topeka-vs-binder-asphalt', 'parking-ramp-asphalt', 'cold-vs-hot-asphalt', 'asphalt-paving-season', 'asphalt-milling', 'asphalt-over-concrete', 'reclaimed-asphalt-guide', 'asphalt-drainage-ponding', 'curb-installation-guide', 'colored-asphalt', 'site-landscaping-asphalt', 'asphalt-contract-checklist' ],
 				'faq'    => [

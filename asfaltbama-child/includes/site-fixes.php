@@ -161,6 +161,7 @@ function asfaltbama_filter_page_html( $html ) {
 	// The header call button hides its text on phones: give it a name.
 	$html = str_replace( '<a href="tel:09191299559" class="abm-call-btn">', '<a href="tel:09191299559" class="abm-call-btn" aria-label="تماس با آسفالت با ما: ۰۹۱۹ ۱۲۹ ۹۵۵۹">', $html );
 	$html = asfaltbama_home_hero_fixes( $html );
+	$html = asfaltbama_area_and_contact_fixes( $html );
 	$html = asfaltbama_fix_heading_order( $html );
 	$html = asfaltbama_fix_inline_service_schema( $html );
 
@@ -1139,3 +1140,34 @@ function asfaltbama_llms_txt() {
 	exit;
 }
 add_action( 'parse_request', 'asfaltbama_llms_txt', 0 );
+
+/**
+ * The owner's service area is «تهران و حومه»: Elementor pages, Rank Math
+ * titles and older article text still say «تهران و کرج» or «تهران و البرز».
+ * WhatsApp links open with a ready message asking for photos and size, and
+ * the service pages get a short trust strip under their title.
+ *
+ * @param string $html Page HTML.
+ *
+ * @return string
+ */
+function asfaltbama_area_and_contact_fixes( $html ) {
+	$html = str_replace( [ 'تهران و کرج', 'تهران و البرز' ], 'تهران و حومه', $html );
+
+	$wa   = add_query_arg( 'text', rawurlencode( 'سلام، برای استعلام قیمت، عکس و متراژ کار را می‌فرستم.' ), ASFALTBAMA_WHATSAPP );
+	$html = str_replace( 'href="' . ASFALTBAMA_WHATSAPP . '"', 'href="' . esc_url( $wa ) . '"', $html );
+
+	$services = [ 'asphalt-paving', 'isogam-waterproofing', 'excavation-and-grading', 'demolition-scrap', 'asphalt-joint-sealing', 'machinery-rental' ];
+	if ( is_page( $services ) ) {
+		$strip = '<ul class="abm-trust-strip">'
+			. '<li>✔ بازدید و برآورد رایگان</li>'
+			. '<li>✔ قرارداد کتبی</li>'
+			. '<li>✔ قیمت روز در سایت</li>'
+			. '<li>✔ تهران و حومه</li>'
+			. '<li><a href="' . esc_url( $wa ) . '" target="_blank" rel="noopener">📷 عکس بفرستید، قیمت بگیرید</a></li>'
+			. '</ul>';
+		$html = preg_replace( '#(<h1 class="entry-title">[^<]*</h1>)#u', '$1' . $strip, $html, 1 );
+	}
+
+	return $html;
+}
