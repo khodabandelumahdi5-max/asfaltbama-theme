@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="ar-IQ" dir="rtl" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>الرافدين ديجيتال | تصميم مواقع وتطبيقات وسيو في العراق — بغداد، أربيل، السليمانية</title>
+  <meta name="description" content="وكالة رقمية عراقية لتصميم المواقع المؤسسية، تطبيقات Flutter مع زين كاش وكي كارد وفاست باي، السيو المحلي والعالمي، ودعم فني 24/7 بعقد SLA في بغداد وأربيل والسليمانية والموصل وكركوك والنجف وكربلاء." />
+  <meta name="theme-color" content="#020617" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://www.your-domain.iq/" />
+  <link rel="alternate" hreflang="ar-IQ" href="https://www.your-domain.iq/" />
+  <link rel="alternate" hreflang="ckb-IQ" href="https://www.your-domain.iq/?lang=ckb" />
+  <link rel="alternate" hreflang="x-default" href="https://www.your-domain.iq/" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Al-Rafidain Digital | الرافدين ديجيتال" />
+  <meta property="og:locale" content="ar_IQ" />
+  <meta property="og:locale:alternate" content="ckb_IQ" />
+  <meta property="og:url" content="https://www.your-domain.iq/" />
+  <meta property="og:title" content="الرافدين ديجيتال — مواقع، تطبيقات، سيو ودعم 24/7 في العراق" />
+  <meta property="og:description" content="شريكك التقني من الصفر إلى التشغيل: مواقع مؤسسية فائقة السرعة، تطبيقات Flutter مع بوابات الدفع العراقية، سيو يتصدّر النتائج، ودعم VIP بعقد SLA." />
+  <meta property="og:image" content="https://www.your-domain.iq/assets/img/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <!-- Language bootstrap: runs before paint so Kurdish visitors never see a flash of Arabic. -->
+  <script>
+    (function () {
+      var d = document.documentElement, lang = 'ar';
+      d.classList.remove('no-js'); d.classList.add('js');
+      try {
+        var q = new URLSearchParams(location.search).get('lang');
+        var s = localStorage.getItem('rd-lang');
+        var n = (navigator.language || '').toLowerCase();
+        lang = q === 'ckb' || q === 'ar' ? q : s === 'ckb' || s === 'ar' ? s : /^(ckb|ku)/.test(n) ? 'ckb' : 'ar';
+      } catch (e) {}
+      if (lang === 'ckb') {
+        d.lang = 'ckb'; d.classList.add('i18n-pending');
+        setTimeout(function () { d.classList.remove('i18n-pending'); }, 1500);
+      }
+      window.RD_INITIAL_LANG = lang;
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="assets/css/app.css" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Organization", "ProfessionalService"],
+        "@id": "https://www.your-domain.iq/#org",
+        "name": "Al-Rafidain Digital",
+        "alternateName": ["الرافدين ديجيتال", "ڕافیدەین دیجیتاڵ"],
+        "url": "https://www.your-domain.iq/",
+        "logo": "https://www.your-domain.iq/assets/img/favicon.svg",
+        "email": "[INSERT_EMAIL_HERE]",
+        "telephone": "+9647XXXXXXXXX",
+        "priceRange": "$$-$$$$",
+        "address": { "@type": "PostalAddress", "addressLocality": "Baghdad", "addressCountry": "IQ" },
+        "areaServed": [
+          { "@type": "City", "name": "Baghdad", "alternateName": "بغداد" },
+          { "@type": "City", "name": "Erbil", "alternateName": ["أربيل", "هەولێر"] },
+          { "@type": "City", "name": "Sulaymaniyah", "alternateName": ["السليمانية", "سلێمانی"] },
+          { "@type": "City", "name": "Mosul", "alternateName": "الموصل" },
+          { "@type": "City", "name": "Kirkuk", "alternateName": ["كركوك", "کەرکووک"] },
+          { "@type": "City", "name": "Najaf", "alternateName": "النجف" },
+          { "@type": "City", "name": "Karbala", "alternateName": "كربلاء" },
+          { "@type": "Country", "name": "Iraq" }
+        ],
+        "knowsLanguage": ["ar", "ckb", "en"],
+        "contactPoint": [
+          { "@type": "ContactPoint", "contactType": "technical support", "telephone": "+9647XXXXXXXXX", "availableLanguage": ["Arabic", "Kurdish", "English"], "hoursAvailable": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59" } },
+          { "@type": "ContactPoint", "contactType": "sales", "email": "[INSERT_EMAIL_HERE]", "areaServed": "IQ", "availableLanguage": ["Arabic", "Kurdish", "English"] }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Digital services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Enterprise Web Design & Custom Development", "alternateName": "تصميم وتطوير المواقع المؤسسية" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Flutter Mobile App Development with ZainCash, Qi Card & FastPay", "alternateName": "تطوير تطبيقات الموبايل" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Technical, Local & Global SEO", "alternateName": "تحسين محركات البحث" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "24/7 SLA-backed Support & Maintenance", "alternateName": "الدعم الفني والصيانة" } }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.your-domain.iq/#website",
+        "url": "https://www.your-domain.iq/",
+        "name": "Al-Rafidain Digital",
+        "inLanguage": ["ar-IQ", "ckb-IQ"],
+        "publisher": { "@id": "https://www.your-domain.iq/#org" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "كم تستغرق عملية تصميم موقع شركة؟", "acceptedAnswer": { "@type": "Answer", "text": "الموقع التعريفي يُسلَّم عادة خلال 2–3 أسابيع، والمتجر الإلكتروني خلال 4–6 أسابيع، أما الأنظمة المؤسسية فيُحدَّد جدولها الزمني بعد دراسة المتطلبات مع خطة مراحل واضحة." } },
+          { "@type": "Question", "name": "هل تدعمون الدفع الإلكتروني بزين كاش وكي كارد وفاست باي؟", "acceptedAnswer": { "@type": "Answer", "text": "نعم. ننفّذ تكاملاً مباشراً مع زين كاش وكي كارد وفاست باي، إضافة إلى الدفع عند الاستلام والبطاقات الدولية، داخل المواقع وتطبيقات الموبايل." } },
+          { "@type": "Question", "name": "هل يمكن أن يكون الموقع باللغتين العربية والكوردية؟", "acceptedAnswer": { "@type": "Answer", "text": "بالتأكيد. نبني المواقع والتطبيقات بالعربية والكوردية السورانية مع هندسة RTL كاملة وخطوط أصلية، ويمكن إضافة الإنجليزية." } },
+          { "@type": "Question", "name": "ماذا يعني الدعم بعقد SLA؟", "acceptedAnswer": { "@type": "Answer", "text": "هو التزام مكتوب بزمن الاستجابة لكل مستوى من الأعطال وبنسبة تشغيل مضمونة تصل إلى 99.9%، مع مراقبة على مدار الساعة وتقارير شهرية." } },
+          { "@type": "Question", "name": "هل تعملون مع الجهات الحكومية والشركات الكبرى؟", "acceptedAnswer": { "@type": "Answer", "text": "نعم، لدينا قسم مخصّص للشركات الكبرى والجهات الحكومية يقدّم تسليم مفتاح كامل، ومدير حساب مخصّص، واتفاقيات عدم إفصاح، ووثائق فنية تناسب متطلبات المناقصات." } },
+          { "@type": "Question", "name": "من يملك الشيفرة المصدرية والنطاق بعد التسليم؟", "acceptedAnswer": { "@type": "Answer", "text": "أنت. تُسجَّل النطاقات والحسابات باسم جهتك، وتُسلَّم الشيفرة المصدرية والتوثيق كاملاً عند الانتهاء من المشروع." } }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/i18n.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+</head>
+
+<body class="overflow-x-hidden">
+  <!-- Icon sprite -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M8 11h6M11 8v6"/></symbol>
+    <symbol id="i-headset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 40 40"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde9b0"/><stop offset=".5" stop-color="#f5b342"/><stop offset="1" stop-color="#b97710"/></linearGradient></defs><rect x="1" y="1" width="38" height="38" rx="11" fill="#0f172a" stroke="url(#lg)" stroke-opacity=".6"/><path d="M10 9c6 4 6 9 2 13s-4 8 2 10" fill="none" stroke="url(#lg)" stroke-width="2.6" stroke-linecap="round"/><path d="M22 8c6 4 7 9 3 13s-3 9 4 11" fill="none" stroke="url(#lg)" stroke-width="2.6" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-gold-400 focus:px-4 focus:py-2 focus:text-slate-950" data-i18n="a11y.skip">انتقل إلى المحتوى</a>
+
+  <!-- ============================== HEADER ============================== -->
+  <header id="top" class="fixed inset-x-0 top-0 z-50 transition duration-300" data-header>
+    <div class="container-x">
+      <div class="mt-3 flex h-16 items-center justify-between gap-3 rounded-2xl border border-transparent px-3 transition duration-300 sm:px-4" data-header-bar>
+        <a href="#top" class="flex min-w-0 items-center gap-2 sm:gap-3" aria-label="Al-Rafidain Digital">
+          <svg class="h-9 w-9 shrink-0 sm:h-10 sm:w-10" aria-hidden="true"><use href="#i-logo" /></svg>
+          <span class="leading-tight">
+            <span class="block whitespace-nowrap text-sm font-bold text-white sm:text-lg" data-i18n="brand.name">الرافدين ديجيتال</span>
+            <span class="hidden whitespace-nowrap text-[11px] font-medium tracking-wide text-gold-300/80 sm:block" dir="ltr">AL-RAFIDAIN DIGITAL</span>
+          </span>
+        </a>
+
+        <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">
+          <a href="#services" class="rounded-full px-4 py-2 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white" data-i18n="nav.services">الخدمات</a>
+          <a href="#cities" class="rounded-full px-4 py-2 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white" data-i18n="nav.cities">المحافظات</a>
+          <a href="#enterprise" class="rounded-full px-4 py-2 text-sm text-gold-300 transition hover:bg-gold-400/10" data-i18n="nav.enterprise">الشركات والحكومة</a>
+          <a href="#pricing" class="rounded-full px-4 py-2 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white" data-i18n="nav.pricing">الباقات</a>
+          <a href="#faq" class="rounded-full px-4 py-2 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white" data-i18n="nav.faq">الأسئلة الشائعة</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <div class="flex rounded-full border border-white/10 bg-white/[0.04] p-1 text-xs font-semibold sm:text-sm" role="group" aria-label="Language / زمان">
+            <button type="button" class="rounded-full px-3 py-1.5 transition" data-lang-btn="ar" lang="ar" aria-pressed="true">عربي</button>
+            <button type="button" class="rounded-full px-3 py-1.5 transition" data-lang-btn="ckb" lang="ckb" aria-pressed="false">کوردی</button>
+          </div>
+          <a href="#" class="btn-gold hidden !min-h-0 !px-5 !py-2.5 !text-sm md:inline-flex" data-wa="project" data-i18n="nav.cta">احجز استشارة</a>
+          <button type="button" class="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-white lg:hidden" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" data-i18n-attr="aria-label:a11y.menu" aria-label="القائمة">
+            <svg class="h-5 w-5" aria-hidden="true"><use href="#i-menu" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <nav id="mobile-menu" class="glass-strong mt-2 hidden p-3 lg:hidden" aria-label="Mobile">
+        <a href="#services" class="block rounded-xl px-4 py-3 text-white hover:bg-white/5" data-i18n="nav.services">الخدمات</a>
+        <a href="#cities" class="block rounded-xl px-4 py-3 text-white hover:bg-white/5" data-i18n="nav.cities">المحافظات</a>
+        <a href="#enterprise" class="block rounded-xl px-4 py-3 text-gold-300 hover:bg-white/5" data-i18n="nav.enterprise">الشركات والحكومة</a>
+        <a href="#pricing" class="block rounded-xl px-4 py-3 text-white hover:bg-white/5" data-i18n="nav.pricing">الباقات</a>
+        <a href="#faq" class="block rounded-xl px-4 py-3 text-white hover:bg-white/5" data-i18n="nav.faq">الأسئلة الشائعة</a>
+        <a href="#" class="btn-gold mt-2 w-full" data-wa="project" data-i18n="nav.cta">احجز استشارة</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============================== HERO ============================== -->
+    <section class="relative isolate overflow-hidden pb-16 pt-32 sm:pb-24 sm:pt-40" aria-labelledby="hero-title">
+      <div class="bg-grid absolute inset-0 -z-10" aria-hidden="true"></div>
+      <div class="absolute -top-40 left-1/2 -z-10 h-[38rem] w-[38rem] -translate-x-1/2 rounded-full bg-gold-500/20 blur-[140px]" aria-hidden="true"></div>
+      <div class="absolute bottom-0 end-0 -z-10 h-80 w-80 rounded-full bg-sky-500/10 blur-[120px]" aria-hidden="true"></div>
+
+      <div class="container-x grid items-center gap-14 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <p class="eyebrow reveal">
+            <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-gold-400"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-gold-400"></span></span>
+            <span data-i18n="hero.eyebrow">وكالة رقمية عراقية · 7 محافظات · دعم 24/7</span>
+          </p>
+          <h1 id="hero-title" class="reveal mt-6 text-4xl font-bold leading-[1.25] text-white sm:text-5xl lg:text-6xl" data-i18n="hero.title">
+            نبني <span class="gold-text">الحضور الرقمي</span> الذي تتصدّر به شركتك السوق العراقي
+          </h1>
+          <p class="reveal mt-6 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg" data-i18n="hero.sub">
+            مواقع مؤسسية فائقة السرعة، تطبيقات Flutter متكاملة مع زين كاش وكي كارد وفاست باي، سيو محلي وعالمي يضعك في الصفحة الأولى، ودعم فني على مدار الساعة بعقد SLA ملزم.
+          </p>
+          <div class="reveal mt-9 flex flex-col gap-3 sm:flex-row">
+            <a href="#" class="btn-wa" data-wa="project">
+              <svg class="h-5 w-5" aria-hidden="true"><use href="#i-wa" /></svg>
+              <span data-i18n="hero.cta_wa">ابدأ مشروعك عبر واتساب</span>
+            </a>
+            <a href="#estimator" class="btn-ghost">
+              <span data-i18n="hero.cta_est">احسب تكلفة مشروعك</span>
+              <svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow" /></svg>
+            </a>
+          </div>
+
+          <dl class="reveal mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div class="glass p-4">
+              <dt class="text-xs text-slate-400" data-i18n="kpi.lcp_l">زمن تحميل مستهدف</dt>
+              <dd class="mt-1 text-2xl font-bold text-white"><span class="ltr">&lt; 1.5s</span></dd>
+            </div>
+            <div class="glass p-4">
+              <dt class="text-xs text-slate-400" data-i18n="kpi.uptime_l">تشغيل مضمون بعقد SLA</dt>
+              <dd class="mt-1 text-2xl font-bold text-white"><span class="ltr">99.9%</span></dd>
+            </div>
+            <div class="glass p-4">
+              <dt class="text-xs text-slate-400" data-i18n="kpi.support_l">دعم VIP بلا توقف</dt>
+              <dd class="mt-1 text-2xl font-bold text-white"><span class="ltr">24/7/365</span></dd>
+            </div>
+            <div class="glass p-4">
+              <dt class="text-xs text-slate-400" data-i18n="kpi.resp_l">استجابة للأعطال الحرجة</dt>
+              <dd class="mt-1 text-2xl font-bold text-white" data-i18n="kpi.resp_v">15 دقيقة</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Live performance mock -->
+        <div class="reveal lg:col-span-5">
+          <div class="glass-strong relative animate-float p-6 shadow-glow">
+            <div class="flex items-center justify-between">
+              <p class="text-sm font-semibold text-white" data-i18n="mock.title">لوحة مراقبة الأداء</p>
+              <span class="chip !border-emerald-400/30 !bg-emerald-400/10 !text-emerald-300">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span><span data-i18n="mock.live">مباشر</span>
+              </span>
+            </div>
+            <p class="mt-1 text-xs text-slate-500" data-i18n="mock.note">مثال توضيحي لما تراه في تقاريرك الشهرية</p>
+
+            <div class="mt-6 grid grid-cols-3 gap-3 text-center">
+              <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-3">
+                <svg viewBox="0 0 36 36" class="mx-auto h-16 w-16 -rotate-90" aria-hidden="true"><circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="3"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="#34d399" stroke-width="3" stroke-dasharray="94 100" stroke-linecap="round"/></svg>
+                <p class="mt-2 text-lg font-bold text-white ltr">1.2s</p><p class="text-[11px] text-slate-400 ltr">LCP</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-3">
+                <svg viewBox="0 0 36 36" class="mx-auto h-16 w-16 -rotate-90" aria-hidden="true"><circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="3"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="#34d399" stroke-width="3" stroke-dasharray="90 100" stroke-linecap="round"/></svg>
+                <p class="mt-2 text-lg font-bold text-white ltr">85ms</p><p class="text-[11px] text-slate-400 ltr">INP</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-3">
+                <svg viewBox="0 0 36 36" class="mx-auto h-16 w-16 -rotate-90" aria-hidden="true"><circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="3"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="#f5b342" stroke-width="3" stroke-dasharray="98 100" stroke-linecap="round"/></svg>
+                <p class="mt-2 text-lg font-bold text-white ltr">0.02</p><p class="text-[11px] text-slate-400 ltr">CLS</p>
+              </div>
+            </div>
+
+            <div class="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <div class="flex items-center justify-between text-xs text-slate-400">
+                <span data-i18n="mock.traffic">الزيارات العضوية من جوجل</span><span class="font-semibold text-emerald-300 ltr">▲ +212%</span>
+              </div>
+              <svg viewBox="0 0 300 70" class="mt-3 h-16 w-full" preserveAspectRatio="none" aria-hidden="true">
+                <defs><linearGradient id="spark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5b342" stop-opacity=".45"/><stop offset="1" stop-color="#f5b342" stop-opacity="0"/></linearGradient></defs>
+                <path d="M0 62 L30 58 L60 60 L90 50 L120 52 L150 40 L180 36 L210 28 L240 22 L270 12 L300 6 L300 70 L0 70Z" fill="url(#spark)"/>
+                <path d="M0 62 L30 58 L60 60 L90 50 L120 52 L150 40 L180 36 L210 28 L240 22 L270 12 L300 6" fill="none" stroke="#f5b342" stroke-width="2.5"/>
+              </svg>
+            </div>
+
+            <div class="mt-4 flex items-center justify-between rounded-2xl border border-gold-400/20 bg-gold-400/[0.06] px-4 py-3 text-sm">
+              <span class="flex items-center gap-2 text-gold-200"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-shield" /></svg><span data-i18n="mock.uptime">نسبة التشغيل هذا الشهر</span></span>
+              <span class="font-bold text-white ltr">99.98%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment gateways strip -->
+      <div class="container-x mt-16">
+        <div class="glass reveal flex flex-col items-center gap-4 px-5 py-5 sm:flex-row sm:justify-between">
+          <p class="text-sm font-medium text-slate-400" data-i18n="pay.title">تكامل أصلي مع بوابات الدفع العراقية:</p>
+          <ul class="flex flex-wrap justify-center gap-2">
+            <li class="chip"><span class="h-2 w-2 rounded-full bg-fuchsia-400"></span><span data-i18n="pay.zain">زين كاش</span> <span class="ltr text-slate-500">ZainCash</span></li>
+            <li class="chip"><span class="h-2 w-2 rounded-full bg-sky-400"></span><span data-i18n="pay.qi">كي كارد</span> <span class="ltr text-slate-500">Qi Card</span></li>
+            <li class="chip"><span class="h-2 w-2 rounded-full bg-rose-400"></span><span data-i18n="pay.fast">فاست باي</span> <span class="ltr text-slate-500">FastPay</span></li>
+            <li class="chip"><span class="h-2 w-2 rounded-full bg-emerald-400"></span><span data-i18n="pay.cod">الدفع عند الاستلام</span></li>
+            <li class="chip"><span class="ltr">Visa · Mastercard</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== SERVICES ============================== -->
+    <section id="services" class="section" aria-labelledby="services-title">
+      <div class="container-x">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="eyebrow reveal" data-i18n="svc.eyebrow">منظومة الخدمات</p>
+          <h2 id="services-title" class="h2 reveal" data-i18n="svc.title">أربع ركائز… <span class="gold-text">منظومة واحدة</span> متكاملة</h2>
+          <p class="lead reveal mx-auto" data-i18n="svc.lead">نجمع التصميم والتطوير والتسويق بمحركات البحث والدعم الفني تحت سقف واحد، فتحصل على نتيجة واحدة قابلة للقياس: نمو حقيقي لأعمالك.</p>
+        </div>
+
+        <div class="mt-14 grid gap-5 md:grid-cols-2">
+          <!-- Web -->
+          <article class="glass card-hover reveal p-7 sm:p-8">
+            <div class="flex items-start gap-4">
+              <span class="icon-tile"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-code" /></svg></span>
+              <div>
+                <h3 class="text-xl font-bold" data-i18n="svc.web.t">تصميم وتطوير المواقع المؤسسية</h3>
+                <p class="mt-2 leading-7 text-slate-400" data-i18n="svc.web.d">مواقع ومنصات مخصّصة مبنية لتحويل الزائر إلى عميل: هندسة سرعة، تجربة مستخدم مدروسة، ولوحات تحكم سهلة لفريقك.</p>
+              </div>
+            </div>
+            <ul class="check-list mt-6 grid gap-3 text-sm sm:grid-cols-2">
+              <li data-i18n="svc.web.b1">Next.js وLaravel وهندسة Headless</li>
+              <li data-i18n="svc.web.b2">تصميم UI/UX مخصّص بهوية علامتك</li>
+              <li data-i18n="svc.web.b3">لوحات تحكم ثنائية اللغة (عربي/كوردي)</li>
+              <li data-i18n="svc.web.b4">تحسين معدّل التحويل (CRO)</li>
+            </ul>
+          </article>
+          <!-- Mobile -->
+          <article class="glass card-hover reveal p-7 sm:p-8">
+            <div class="flex items-start gap-4">
+              <span class="icon-tile"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-phone" /></svg></span>
+              <div>
+                <h3 class="text-xl font-bold" data-i18n="svc.app.t">تطبيقات الموبايل Flutter لـ iOS وAndroid</h3>
+                <p class="mt-2 leading-7 text-slate-400" data-i18n="svc.app.d">تطبيق واحد بأداء أصلي على المنصتين، مع تكامل مباشر لبوابات الدفع العراقية والإشعارات والخرائط.</p>
+              </div>
+            </div>
+            <ul class="check-list mt-6 grid gap-3 text-sm sm:grid-cols-2">
+              <li data-i18n="svc.app.b1">زين كاش، كي كارد، فاست باي</li>
+              <li data-i18n="svc.app.b2">النشر على App Store وGoogle Play</li>
+              <li data-i18n="svc.app.b3">تسجيل دخول برقم الهاتف (OTP)</li>
+              <li data-i18n="svc.app.b4">تتبّع الطلبات والتوصيل لحظياً</li>
+            </ul>
+          </article>
+          <!-- SEO -->
+          <article class="glass card-hover reveal p-7 sm:p-8">
+            <div class="flex items-start gap-4">
+              <span class="icon-tile"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-search" /></svg></span>
+              <div>
+                <h3 class="text-xl font-bold" data-i18n="svc.seo.t">السيطرة على نتائج البحث (SEO)</h3>
+                <p class="mt-2 leading-7 text-slate-400" data-i18n="svc.seo.d">سيو تقني ومحلي وعالمي يضعك أمام عملائك في كل محافظة، بالعربية والكوردية والإنجليزية.</p>
+              </div>
+            </div>
+            <ul class="check-list mt-6 grid gap-3 text-sm sm:grid-cols-2">
+              <li data-i18n="svc.seo.b1">Core Web Vitals بزمن أقل من 1.5 ثانية</li>
+              <li data-i18n="svc.seo.b2">Schema Markup والبيانات المنظّمة</li>
+              <li data-i18n="svc.seo.b3">تحسين Google Business لكل فرع</li>
+              <li data-i18n="svc.seo.b4">محتوى وكلمات مفتاحية بلغة السوق المحلي</li>
+            </ul>
+          </article>
+          <!-- Support -->
+          <article class="glass card-hover reveal p-7 sm:p-8">
+            <div class="flex items-start gap-4">
+              <span class="icon-tile"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-headset" /></svg></span>
+              <div>
+                <h3 class="text-xl font-bold" data-i18n="svc.sup.t">دعم VIP وصيانة بعقد SLA</h3>
+                <p class="mt-2 leading-7 text-slate-400" data-i18n="svc.sup.d">فريق مناوب 24/7/365 يراقب منصتك ويصلح الأعطال فوراً، بضمانات مكتوبة لزمن الاستجابة ونسبة التشغيل.</p>
+              </div>
+            </div>
+            <ul class="check-list mt-6 grid gap-3 text-sm sm:grid-cols-2">
+              <li data-i18n="svc.sup.b1">مراقبة على مدار الساعة وتنبيه فوري</li>
+              <li data-i18n="svc.sup.b2">نسخ احتياطي يومي واستعادة سريعة</li>
+              <li data-i18n="svc.sup.b3">تحديثات أمنية وترقيات دورية</li>
+              <li data-i18n="svc.sup.b4">تقارير أداء شهرية شفافة</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- Process -->
+        <div class="mt-20">
+          <h3 class="reveal text-center text-2xl font-bold sm:text-3xl" data-i18n="proc.title">من الفكرة إلى الإطلاق… بمنهجية واضحة</h3>
+          <ol class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            <li class="glass reveal p-5"><span class="text-sm font-bold text-gold-400 ltr">01</span><h4 class="mt-2 font-bold" data-i18n="proc.s1.t">الاكتشاف والتحليل</h4><p class="mt-2 text-sm leading-6 text-slate-400" data-i18n="proc.s1.d">ورشة عمل لفهم أهدافك وجمهورك ومنافسيك.</p></li>
+            <li class="glass reveal p-5"><span class="text-sm font-bold text-gold-400 ltr">02</span><h4 class="mt-2 font-bold" data-i18n="proc.s2.t">الهندسة والتصميم</h4><p class="mt-2 text-sm leading-6 text-slate-400" data-i18n="proc.s2.d">خريطة الموقع، النماذج الأولية، وهوية بصرية فاخرة.</p></li>
+            <li class="glass reveal p-5"><span class="text-sm font-bold text-gold-400 ltr">03</span><h4 class="mt-2 font-bold" data-i18n="proc.s3.t">التطوير والاختبار</h4><p class="mt-2 text-sm leading-6 text-slate-400" data-i18n="proc.s3.d">برمجة نظيفة، اختبارات أداء وأمان، ومراجعات أسبوعية.</p></li>
+            <li class="glass reveal p-5"><span class="text-sm font-bold text-gold-400 ltr">04</span><h4 class="mt-2 font-bold" data-i18n="proc.s4.t">الإطلاق والتحسين</h4><p class="mt-2 text-sm leading-6 text-slate-400" data-i18n="proc.s4.d">إطلاق آمن، أرشفة فورية في جوجل، وتتبّع التحويلات.</p></li>
+            <li class="glass reveal p-5"><span class="text-sm font-bold text-gold-400 ltr">05</span><h4 class="mt-2 font-bold" data-i18n="proc.s5.t">الدعم والنمو</h4><p class="mt-2 text-sm leading-6 text-slate-400" data-i18n="proc.s5.d">صيانة مستمرة، سيو شهري، وتطوير مستمر مع نمو أعمالك.</p></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== CITIES (GEO) ============================== -->
+    <section id="cities" class="section border-y border-white/5 bg-slate-900/30" aria-labelledby="cities-title">
+      <div class="container-x">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="eyebrow reveal"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-pin" /></svg><span data-i18n="geo.eyebrow">تغطية محلية في 7 محافظات</span></p>
+          <h2 id="cities-title" class="h2 reveal" data-i18n="geo.title">حلول مصمّمة <span class="gold-text">لاقتصاد كل مدينة</span></h2>
+          <p class="lead reveal mx-auto" data-i18n="geo.lead">لكل مدينة عراقية طبيعة سوق مختلفة؛ لذلك نبني لكل قطاع الحل الذي يناسبه فعلاً، بفرق تفهم السوق المحلي ولغته.</p>
+        </div>
+
+        <div class="reveal mt-12 flex gap-2 overflow-x-auto pb-2 no-scrollbar lg:justify-center" role="tablist" aria-labelledby="cities-title" data-city-tabs>
+          <button type="button" role="tab" class="city-tab" id="tab-baghdad" aria-controls="city-baghdad" aria-selected="true" data-city="baghdad" data-i18n="city.baghdad">بغداد</button>
+          <button type="button" role="tab" class="city-tab" id="tab-erbil" aria-controls="city-erbil" aria-selected="false" tabindex="-1" data-city="erbil" data-i18n="city.erbil">أربيل</button>
+          <button type="button" role="tab" class="city-tab" id="tab-sulaymaniyah" aria-controls="city-sulaymaniyah" aria-selected="false" tabindex="-1" data-city="sulaymaniyah" data-i18n="city.sulaymaniyah">السليمانية</button>
+          <button type="button" role="tab" class="city-tab" id="tab-mosul" aria-controls="city-mosul" aria-selected="false" tabindex="-1" data-city="mosul" data-i18n="city.mosul">الموصل</button>
+          <button type="button" role="tab" class="city-tab" id="tab-kirkuk" aria-controls="city-kirkuk" aria-selected="false" tabindex="-1" data-city="kirkuk" data-i18n="city.kirkuk">كركوك</button>
+          <button type="button" role="tab" class="city-tab" id="tab-najaf" aria-controls="city-najaf" aria-selected="false" tabindex="-1" data-city="najaf" data-i18n="city.najaf">النجف</button>
+          <button type="button" role="tab" class="city-tab" id="tab-karbala" aria-controls="city-karbala" aria-selected="false" tabindex="-1" data-city="karbala" data-i18n="city.karbala">كربلاء</button>
+        </div>
+
+        <div class="mt-8">
+          <!-- Baghdad -->
+          <article id="city-baghdad" role="tabpanel" aria-labelledby="tab-baghdad" class="glass-strong grid gap-8 p-6 sm:p-10 lg:grid-cols-5" data-city-panel="baghdad">
+            <div class="lg:col-span-3">
+              <p class="chip !border-gold-400/30 !text-gold-300" data-i18n="geo.baghdad.tag">التوزيع والجملة · ERP · B2B</p>
+              <h3 class="mt-5 text-2xl font-bold leading-snug sm:text-3xl" data-i18n="geo.baghdad.t">بغداد: أنظمة B2B وERP لشركات التوزيع والجملة</h3>
+              <p class="mt-4 leading-8 text-slate-400" data-i18n="geo.baghdad.d">العاصمة قلب التجارة والتوزيع في العراق. نبني بوابات طلبات B2B، وأنظمة ERP مخصّصة لإدارة المخازن والمندوبين، وتطبيقات مبيعات ميدانية تعمل حتى مع ضعف الإنترنت.</p>
+              <a href="#" class="btn-gold mt-7" data-wa="city" data-wa-city="baghdad"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-wa" /></svg><span data-i18n="geo.baghdad.cta">ناقش مشروعك في بغداد</span></a>
+            </div>
+            <ul class="grid content-start gap-3 lg:col-span-2">
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.baghdad.s1">بوابة طلبات B2B لتجّار الجملة مع أسعار مخصّصة لكل عميل</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.baghdad.s2">نظام ERP للمخازن والفواتير والديون والمندوبين</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.baghdad.s3">تطبيق مندوب مبيعات يعمل دون اتصال مع مزامنة تلقائية</span></li>
+              <li class="text-xs leading-6 text-slate-500" data-i18n="geo.baghdad.kw">تصميم مواقع في بغداد · برمجة تطبيقات بغداد · شركة سيو في بغداد</li>
+            </ul>
+          </article>
+
+          <!-- Erbil -->
+          <article id="city-erbil" role="tabpanel" aria-labelledby="tab-erbil" class="glass-strong grid gap-8 p-6 sm:p-10 lg:grid-cols-5" data-city-panel="erbil" hidden>
+            <div class="lg:col-span-3">
+              <p class="chip !border-gold-400/30 !text-gold-300" data-i18n="geo.erbil.tag">العقارات · الشركات الناشئة · الاستثمار</p>
+              <h3 class="mt-5 text-2xl font-bold leading-snug sm:text-3xl" data-i18n="geo.erbil.t">أربيل: منصات عقارية وحلول للشركات الناشئة</h3>
+              <p class="mt-4 leading-8 text-slate-400" data-i18n="geo.erbil.d">عاصمة إقليم كوردستان مركز للاستثمار العقاري وريادة الأعمال. نبني بوابات عقارية فاخرة ثنائية اللغة، ومنتجات رقمية أولية (MVP) تنطلق بسرعة نحو السوق.</p>
+              <a href="#" class="btn-gold mt-7" data-wa="city" data-wa-city="erbil"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-wa" /></svg><span data-i18n="geo.erbil.cta">ناقش مشروعك في أربيل</span></a>
+            </div>
+            <ul class="grid content-start gap-3 lg:col-span-2">
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.erbil.s1">بوابة عقارية مع جولات افتراضية وخرائط ومخطّطات الوحدات</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.erbil.s2">نظام CRM لمتابعة المشترين وأقساط الوحدات السكنية</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.erbil.s3">بناء MVP لشركتك الناشئة خلال 8–12 أسبوعاً</span></li>
+              <li class="text-xs leading-6 text-slate-500" data-i18n="geo.erbil.kw">تصميم مواقع في أربيل · تطبيقات عقارية أربيل · سيو أربيل</li>
+            </ul>
+          </article>
+
+          <!-- Sulaymaniyah -->
+          <article id="city-sulaymaniyah" role="tabpanel" aria-labelledby="tab-sulaymaniyah" class="glass-strong grid gap-8 p-6 sm:p-10 lg:grid-cols-5" data-city-panel="sulaymaniyah" hidden>
+            <div class="lg:col-span-3">
+              <p class="chip !border-gold-400/30 !text-gold-300" data-i18n="geo.sulaymaniyah.tag">العقارات · الشركات الناشئة · التجارة الإلكترونية</p>
+              <h3 class="mt-5 text-2xl font-bold leading-snug sm:text-3xl" data-i18n="geo.sulaymaniyah.t">السليمانية: نمو رقمي للمطوّرين العقاريين والشركات الناشئة</h3>
+              <p class="mt-4 leading-8 text-slate-400" data-i18n="geo.sulaymaniyah.d">مدينة الثقافة والمبادرات الشابة. نقدّم متاجر إلكترونية ومنصات عقارية ومنتجات SaaS بواجهات كوردية أصيلة تخاطب جمهورك بلغته.</p>
+              <a href="#" class="btn-gold mt-7" data-wa="city" data-wa-city="sulaymaniyah"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-wa" /></svg><span data-i18n="geo.sulaymaniyah.cta">ناقش مشروعك في السليمانية</span></a>
+            </div>
+            <ul class="grid content-start gap-3 lg:col-span-2">
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.sulaymaniyah.s1">متاجر إلكترونية بالكوردية والعربية مع الدفع عبر FastPay</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.sulaymaniyah.s2">منصات عرض المشاريع السكنية وحجز الوحدات أونلاين</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.sulaymaniyah.s3">تطوير منتجات SaaS وتطبيقات للشركات الناشئة</span></li>
+              <li class="text-xs leading-6 text-slate-500" data-i18n="geo.sulaymaniyah.kw">تصميم مواقع في السليمانية · متجر إلكتروني السليمانية · سيو السليمانية</li>
+            </ul>
+          </article>
+
+          <!-- Mosul -->
+          <article id="city-mosul" role="tabpanel" aria-labelledby="tab-mosul" class="glass-strong grid gap-8 p-6 sm:p-10 lg:grid-cols-5" data-city-panel="mosul" hidden>
+            <div class="lg:col-span-3">
+              <p class="chip !border-gold-400/30 !text-gold-300" data-i18n="geo.mosul.tag">التوزيع · التجارة · ERP · B2B</p>
+              <h3 class="mt-5 text-2xl font-bold leading-snug sm:text-3xl" data-i18n="geo.mosul.t">الموصل: منصات توزيع وتجارة لمرحلة الإعمار والنمو</h3>
+              <p class="mt-4 leading-8 text-slate-400" data-i18n="geo.mosul.d">اقتصاد الموصل ينهض بقوة في التجارة ومواد البناء والتوزيع. نوفّر أنظمة ERP وكتالوجات B2B رقمية تربط المصنع بالموزّع بالمتجر.</p>
+              <a href="#" class="btn-gold mt-7" data-wa="city" data-wa-city="mosul"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-wa" /></svg><span data-i18n="geo.mosul.cta">ناقش مشروعك في الموصل</span></a>
+            </div>
+            <ul class="grid content-start gap-3 lg:col-span-2">
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.mosul.s1">كتالوج B2B رقمي لمواد البناء والسلع مع طلبات فورية</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.mosul.s2">نظام إدارة التوزيع والأساطيل وتتبّع الشحنات</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.mosul.s3">ERP لإدارة المشتريات والمخزون والمشاريع الإنشائية</span></li>
+              <li class="text-xs leading-6 text-slate-500" data-i18n="geo.mosul.kw">تصميم مواقع في الموصل · نظام ERP الموصل · سيو الموصل</li>
+            </ul>
+          </article>
+
+          <!-- Kirkuk -->
+          <article id="city-kirkuk" role="tabpanel" aria-labelledby="tab-kirkuk" class="glass-strong grid gap-8 p-6 sm:p-10 lg:grid-cols-5" data-city-panel="kirkuk" hidden>
+            <div class="lg:col-span-3">
+              <p class="chip !border-gold-400/30 !text-gold-300" data-i18n="geo.kirkuk.tag">الصناعة · النفط والطاقة · السيارات</p>
+              <h3 class="mt-5 text-2xl font-bold leading-snug sm:text-3xl" data-i18n="geo.kirkuk.t">كركوك: منصات صناعية وحلول لقطاع السيارات</h3>
+              <p class="mt-4 leading-8 text-slate-400" data-i18n="geo.kirkuk.d">مدينة الطاقة والصناعة. نصمّم بوابات للموردين والمقاولين، وأنظمة صيانة وإدارة أصول، ومنصات لمعارض السيارات وقطع الغيار.</p>
+              <a href="#" class="btn-gold mt-7" data-wa="city" data-wa-city="kirkuk"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-wa" /></svg><span data-i18n="geo.kirkuk.cta">ناقش مشروعك في كركوك</span></a>
+            </div>
+            <ul class="grid content-start gap-3 lg:col-span-2">
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.kirkuk.s1">بوابة موردين ومناقصات للشركات الصناعية والنفطية</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.kirkuk.s2">منصة معارض سيارات وقطع غيار مع البحث برقم الشاصي</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.kirkuk.s3">نظام إدارة الصيانة والأصول وجداول التشغيل</span></li>
+              <li class="text-xs leading-6 text-slate-500" data-i18n="geo.kirkuk.kw">تصميم مواقع في كركوك · منصة سيارات كركوك · سيو كركوك</li>
+            </ul>
+          </article>
+
+          <!-- Najaf -->
+          <article id="city-najaf" role="tabpanel" aria-labelledby="tab-najaf" class="glass-strong grid gap-8 p-6 sm:p-10 lg:grid-cols-5" data-city-panel="najaf" hidden>
+            <div class="lg:col-span-3">
+              <p class="chip !border-gold-400/30 !text-gold-300" data-i18n="geo.najaf.tag">ضيافة الزائرين · السياحة العلاجية</p>
+              <h3 class="mt-5 text-2xl font-bold leading-snug sm:text-3xl" data-i18n="geo.najaf.t">النجف الأشرف: أنظمة ضيافة الزائرين والسياحة العلاجية</h3>
+              <p class="mt-4 leading-8 text-slate-400" data-i18n="geo.najaf.d">ملايين الزائرين سنوياً، ومستشفيات تستقبل المرضى من داخل العراق وخارجه. نبني أنظمة حجز فندقي متعددة اللغات وبوابات متكاملة للسياحة العلاجية.</p>
+              <a href="#" class="btn-gold mt-7" data-wa="city" data-wa-city="najaf"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-wa" /></svg><span data-i18n="geo.najaf.cta">ناقش مشروعك في النجف</span></a>
+            </div>
+            <ul class="grid content-start gap-3 lg:col-span-2">
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.najaf.s1">نظام حجز فنادق ونقل للزائرين بعدة لغات</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.najaf.s2">بوابة سياحة علاجية: حجز الأطباء والعمليات والإقامة</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.najaf.s3">تطبيق دليل الزائر مع خرائط وإرشادات فورية</span></li>
+              <li class="text-xs leading-6 text-slate-500" data-i18n="geo.najaf.kw">تصميم مواقع في النجف · نظام حجز فنادق النجف · سيو النجف</li>
+            </ul>
+          </article>
+
+          <!-- Karbala -->
+          <article id="city-karbala" role="tabpanel" aria-labelledby="tab-karbala" class="glass-strong grid gap-8 p-6 sm:p-10 lg:grid-cols-5" data-city-panel="karbala" hidden>
+            <div class="lg:col-span-3">
+              <p class="chip !border-gold-400/30 !text-gold-300" data-i18n="geo.karbala.tag">ضيافة الزائرين · المواسم المليونية · الصحة</p>
+              <h3 class="mt-5 text-2xl font-bold leading-snug sm:text-3xl" data-i18n="geo.karbala.t">كربلاء المقدسة: منصات لإدارة المواسم المليونية</h3>
+              <p class="mt-4 leading-8 text-slate-400" data-i18n="geo.karbala.d">في زيارة الأربعين والمواسم الكبرى تتضاعف الحاجة إلى أنظمة لا تتوقف تحت الضغط. نبني منصات حجز وخدمات صحية وبنية سحابية قابلة للتوسّع.</p>
+              <a href="#" class="btn-gold mt-7" data-wa="city" data-wa-city="karbala"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-wa" /></svg><span data-i18n="geo.karbala.cta">ناقش مشروعك في كربلاء</span></a>
+            </div>
+            <ul class="grid content-start gap-3 lg:col-span-2">
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.karbala.s1">منصة حجز فنادق وخدمات بأسعار موسمية ديناميكية</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.karbala.s2">بنية سحابية تتحمّل ذروة الزيارات دون توقّف</span></li>
+              <li class="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-4"><svg class="mt-1 h-4 w-4 shrink-0 text-gold-400" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="geo.karbala.s3">أنظمة للمراكز الصحية والعيادات وحجز المواعيد</span></li>
+              <li class="text-xs leading-6 text-slate-500" data-i18n="geo.karbala.kw">تصميم مواقع في كربلاء · تطبيق حجز كربلاء · سيو كربلاء</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== ENTERPRISE & GOVERNMENT ============================== -->
+    <section id="enterprise" class="section overflow-hidden" aria-labelledby="ent-title">
+      <div class="absolute inset-x-0 top-24 -z-10 mx-auto h-[30rem] max-w-5xl rounded-full bg-gold-500/15 blur-[160px]" aria-hidden="true"></div>
+      <div class="container-x">
+        <div class="glow-frame glass-strong reveal rounded-[2rem] p-6 shadow-glow sm:p-12">
+          <div class="mx-auto max-w-3xl text-center">
+            <p class="eyebrow"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-building" /></svg><span data-i18n="ent.eyebrow">قسم الشركات الكبرى والحكومية</span></p>
+            <h2 id="ent-title" class="h2" data-i18n="ent.title">شريك تقني واحد… <span class="gold-text">من الصفر إلى التشغيل</span></h2>
+            <p class="lead mx-auto" data-i18n="ent.lead">للمجموعات الصناعية والشركات الخاصة الكبرى والجهات الحكومية: تسليم مفتاح كامل، أمان بمستوى المؤسسات، مدير حساب مخصّص، ودعم ملزم بعقد SLA على مدار الساعة.</p>
+          </div>
+
+          <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="glass card-hover p-6">
+              <span class="icon-tile"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-key" /></svg></span>
+              <h3 class="mt-5 text-lg font-bold" data-i18n="ent.p1.t">تسليم مفتاح — من الصفر إلى المئة علينا</h3>
+              <p class="mt-2 text-sm leading-7 text-slate-400" data-i18n="ent.p1.d">من دراسة المتطلبات وكراسة الشروط إلى التصميم والتطوير والاستضافة والتدريب والتشغيل؛ تستلم منظومة جاهزة تعمل.</p>
+            </div>
+            <div class="glass card-hover p-6">
+              <span class="icon-tile"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-shield" /></svg></span>
+              <h3 class="mt-5 text-lg font-bold" data-i18n="ent.p2.t">أمان بمستوى المؤسسات</h3>
+              <p class="mt-2 text-sm leading-7 text-slate-400" data-i18n="ent.p2.d">تشفير شامل، صلاحيات حسب الأدوار، سجلات تدقيق، اختبارات اختراق دورية، وممارسات متوافقة مع ISO 27001 وOWASP.</p>
+            </div>
+            <div class="glass card-hover p-6">
+              <span class="icon-tile"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-user" /></svg></span>
+              <h3 class="mt-5 text-lg font-bold" data-i18n="ent.p3.t">مدير حساب مخصّص</h3>
+              <p class="mt-2 text-sm leading-7 text-slate-400" data-i18n="ent.p3.d">نقطة اتصال واحدة مسؤولة عن مشروعك، تقارير تقدّم أسبوعية، واجتماعات مراجعة دورية مع إدارتك.</p>
+            </div>
+            <div class="glass card-hover p-6">
+              <span class="icon-tile"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-clock" /></svg></span>
+              <h3 class="mt-5 text-lg font-bold" data-i18n="ent.p4.t">دعم 24/7 بعقد SLA</h3>
+              <p class="mt-2 text-sm leading-7 text-slate-400" data-i18n="ent.p4.d">زمن استجابة مضمون للأعطال الحرجة، مراقبة مستمرة، وخطة لاستمرارية الأعمال والتعافي من الكوارث.</p>
+            </div>
+          </div>
+
+          <div class="mt-10 grid gap-6 lg:grid-cols-2">
+            <ul class="check-list grid content-start gap-4 text-sm leading-7 sm:text-base">
+              <li data-i18n="ent.l1">اتفاقية عدم إفصاح (NDA) قبل أي نقاش تفصيلي</li>
+              <li data-i18n="ent.l2">استضافة داخل العراق أو سحابة عالمية حسب متطلبات الجهة</li>
+              <li data-i18n="ent.l3">وثائق فنية ومالية تناسب متطلبات المناقصات الحكومية</li>
+              <li data-i18n="ent.l4">توثيق كامل ونقل معرفة وتدريب للكوادر</li>
+              <li data-i18n="ent.l5">ملكية كاملة للشيفرة المصدرية والبيانات للجهة</li>
+            </ul>
+            <div class="overflow-hidden rounded-2xl border border-white/10">
+              <table class="w-full text-start text-sm">
+                <caption class="bg-white/[0.04] px-4 py-3 text-start font-semibold text-white" data-i18n="sla.caption">مستويات الخدمة المضمونة (SLA)</caption>
+                <thead class="bg-white/[0.02] text-xs text-slate-400">
+                  <tr>
+                    <th scope="col" class="px-4 py-3 text-start font-medium" data-i18n="sla.h1">مستوى العطل</th>
+                    <th scope="col" class="px-4 py-3 text-start font-medium" data-i18n="sla.h2">زمن الاستجابة</th>
+                    <th scope="col" class="px-4 py-3 text-start font-medium" data-i18n="sla.h3">هدف الحل</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                  <tr><th scope="row" class="px-4 py-3 text-start font-medium text-rose-300" data-i18n="sla.p1">P1 حرج</th><td class="px-4 py-3 text-white" data-i18n="sla.p1r">15 دقيقة</td><td class="px-4 py-3" data-i18n="sla.p1f">4 ساعات</td></tr>
+                  <tr><th scope="row" class="px-4 py-3 text-start font-medium text-gold-300" data-i18n="sla.p2">P2 عالٍ</th><td class="px-4 py-3 text-white" data-i18n="sla.p2r">ساعة واحدة</td><td class="px-4 py-3" data-i18n="sla.p2f">12 ساعة</td></tr>
+                  <tr><th scope="row" class="px-4 py-3 text-start font-medium text-sky-300" data-i18n="sla.p3">P3 متوسط</th><td class="px-4 py-3 text-white" data-i18n="sla.p3r">4 ساعات</td><td class="px-4 py-3" data-i18n="sla.p3f">3 أيام عمل</td></tr>
+                  <tr><th scope="row" class="px-4 py-3 text-start font-medium text-slate-300" data-i18n="sla.p4">P4 منخفض</th><td class="px-4 py-3 text-white" data-i18n="sla.p4r">يوم عمل واحد</td><td class="px-4 py-3" data-i18n="sla.p4f">الإصدار المجدول التالي</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Dual channels -->
+          <div class="mt-12 grid gap-6 lg:grid-cols-5">
+            <div class="glass flex flex-col p-6 sm:p-8 lg:col-span-2">
+              <span class="grid h-14 w-14 place-items-center rounded-2xl bg-emerald-500/15 text-emerald-400"><svg class="h-7 w-7" aria-hidden="true"><use href="#i-wa" /></svg></span>
+              <h3 class="mt-5 text-xl font-bold" data-i18n="ent.wa.t">قناة واتساب المؤسسية</h3>
+              <p class="mt-3 leading-7 text-slate-400" data-i18n="ent.wa.d">تواصل مباشر مع فريق المبيعات المؤسسية. ستُفتح محادثة برسالة جاهزة تعرّف بجهتك، وسيردّ عليك مدير حساب مختص.</p>
+              <ul class="check-list mt-5 grid gap-2 text-sm">
+                <li data-i18n="ent.wa.b1">ردّ خلال ساعات العمل في أقل من 30 دقيقة</li>
+                <li data-i18n="ent.wa.b2">اجتماع حضوري في محافظتك عند الطلب</li>
+              </ul>
+              <div class="mt-auto pt-7">
+                <a href="#" class="btn-wa w-full" data-wa="enterprise"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-wa" /></svg><span data-i18n="ent.wa.cta">تواصل عبر واتساب المؤسسي</span></a>
+                <p class="mt-3 text-center text-xs text-slate-500 ltr" data-wa-display>+964</p>
+              </div>
+            </div>
+
+            <!-- RFQ form -->
+            <div class="glass p-6 sm:p-8 lg:col-span-3">
+              <div class="flex items-center gap-3">
+                <span class="icon-tile"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-mail" /></svg></span>
+                <div>
+                  <h3 class="text-xl font-bold" data-i18n="rfq.t">طلب عرض سعر رسمي (RFQ)</h3>
+                  <p class="text-sm text-slate-400" data-i18n="rfq.d">نردّ بعرض فني ومالي مبدئي خلال يوم عمل واحد.</p>
+                </div>
+              </div>
+
+              <form id="rfq-form" class="mt-7 grid gap-5 sm:grid-cols-2" novalidate>
+                <!-- honeypot -->
+                <div class="hidden" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+
+                <div>
+                  <label class="label" for="rfq-org" data-i18n="rfq.org">اسم الجهة / الشركة *</label>
+                  <input class="input" id="rfq-org" name="organization" type="text" required autocomplete="organization" maxlength="120" />
+                </div>
+                <div>
+                  <label class="label" for="rfq-type" data-i18n="rfq.type">نوع الجهة *</label>
+                  <select class="input" id="rfq-type" name="entityType" required>
+                    <option value="" data-i18n="rfq.type0">اختر…</option>
+                    <option value="private" data-i18n="rfq.type1">شركة خاصة كبرى</option>
+                    <option value="government" data-i18n="rfq.type2">جهة حكومية</option>
+                    <option value="industrial" data-i18n="rfq.type3">مجموعة صناعية</option>
+                    <option value="ngo" data-i18n="rfq.type4">منظمة دولية / غير حكومية</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="label" for="rfq-name" data-i18n="rfq.name">الاسم الكامل *</label>
+                  <input class="input" id="rfq-name" name="fullName" type="text" required autocomplete="name" maxlength="80" />
+                </div>
+                <div>
+                  <label class="label" for="rfq-title" data-i18n="rfq.jobtitle">المنصب</label>
+                  <input class="input" id="rfq-title" name="jobTitle" type="text" autocomplete="organization-title" maxlength="80" />
+                </div>
+                <div>
+                  <label class="label" for="rfq-email" data-i18n="rfq.email">البريد الإلكتروني الرسمي *</label>
+                  <input class="input text-start" id="rfq-email" name="email" type="email" required autocomplete="email" inputmode="email" dir="ltr" placeholder="name@company.iq" maxlength="120" aria-describedby="rfq-email-hint" />
+                  <p id="rfq-email-hint" class="mt-1.5 hidden text-xs text-gold-300" data-email-hint></p>
+                </div>
+                <div>
+                  <label class="label" for="rfq-phone" data-i18n="rfq.phone">رقم الهاتف *</label>
+                  <input class="input text-start" id="rfq-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel" dir="ltr" placeholder="+964 7XX XXX XXXX" maxlength="20" />
+                </div>
+                <div>
+                  <label class="label" for="rfq-city" data-i18n="rfq.city">المحافظة</label>
+                  <select class="input" id="rfq-city" name="city">
+                    <option value="baghdad" data-i18n="city.baghdad">بغداد</option>
+                    <option value="erbil" data-i18n="city.erbil">أربيل</option>
+                    <option value="sulaymaniyah" data-i18n="city.sulaymaniyah">السليمانية</option>
+                    <option value="mosul" data-i18n="city.mosul">الموصل</option>
+                    <option value="kirkuk" data-i18n="city.kirkuk">كركوك</option>
+                    <option value="najaf" data-i18n="city.najaf">النجف</option>
+                    <option value="karbala" data-i18n="city.karbala">كربلاء</option>
+                    <option value="other" data-i18n="city.other">محافظة أخرى / خارج العراق</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="label" for="rfq-budget" data-i18n="rfq.budget">الميزانية التقديرية</label>
+                  <select class="input" id="rfq-budget" name="budget">
+                    <option value="tbd" data-i18n="rfq.b0">تُحدَّد بعد الدراسة</option>
+                    <option value="<10k" data-i18n="rfq.b1">أقل من 10,000$</option>
+                    <option value="10k-50k" data-i18n="rfq.b2">10,000$ – 50,000$</option>
+                    <option value="50k-150k" data-i18n="rfq.b3">50,000$ – 150,000$</option>
+                    <option value=">150k" data-i18n="rfq.b4">أكثر من 150,000$</option>
+                  </select>
+                </div>
+
+                <fieldset class="sm:col-span-2">
+                  <legend class="label" data-i18n="rfq.scope">نطاق المشروع (اختر كل ما ينطبق)</legend>
+                  <div class="grid gap-2 sm:grid-cols-2">
+                    <label class="option-card"><input type="checkbox" name="scope" value="web" /><span data-i18n="rfq.s1">موقع أو بوابة مؤسسية</span></label>
+                    <label class="option-card"><input type="checkbox" name="scope" value="app" /><span data-i18n="rfq.s2">تطبيق موبايل (iOS / Android)</span></label>
+                    <label class="option-card"><input type="checkbox" name="scope" value="erp" /><span data-i18n="rfq.s3">نظام ERP / CRM / حكومة إلكترونية</span></label>
+                    <label class="option-card"><input type="checkbox" name="scope" value="seo" /><span data-i18n="rfq.s4">سيو وتسويق رقمي</span></label>
+                    <label class="option-card"><input type="checkbox" name="scope" value="sla" /><span data-i18n="rfq.s5">دعم وصيانة بعقد SLA</span></label>
+                    <label class="option-card"><input type="checkbox" name="scope" value="security" /><span data-i18n="rfq.s6">تدقيق أمني واختبار اختراق</span></label>
+                  </div>
+                </fieldset>
+
+                <div>
+                  <label class="label" for="rfq-timeline" data-i18n="rfq.timeline">الإطار الزمني</label>
+                  <select class="input" id="rfq-timeline" name="timeline">
+                    <option value="urgent" data-i18n="rfq.t1">عاجل (أقل من شهر)</option>
+                    <option value="1-3m" data-i18n="rfq.t2" selected>1–3 أشهر</option>
+                    <option value="3-6m" data-i18n="rfq.t3">3–6 أشهر</option>
+                    <option value="6m+" data-i18n="rfq.t4">أكثر من 6 أشهر</option>
+                  </select>
+                </div>
+                <div class="hidden sm:block"></div>
+
+                <div class="sm:col-span-2">
+                  <label class="label" for="rfq-details" data-i18n="rfq.details">تفاصيل المشروع *</label>
+                  <textarea class="input min-h-[130px]" id="rfq-details" name="details" required maxlength="3000" data-i18n-attr="placeholder:rfq.details_ph" placeholder="صف أهداف المشروع، الأنظمة الحالية، عدد المستخدمين المتوقع، وأي متطلبات خاصة بالمناقصة…"></textarea>
+                </div>
+
+                <label class="flex items-start gap-3 text-sm text-slate-400 sm:col-span-2">
+                  <input type="checkbox" name="consent" required class="mt-1 h-4 w-4 shrink-0 accent-amber-400" />
+                  <span data-i18n="rfq.consent">أوافق على التواصل معي بخصوص هذا الطلب، وأرغب بتوقيع اتفاقية عدم إفصاح (NDA) عند الحاجة.</span>
+                </label>
+
+                <div class="sm:col-span-2">
+                  <button type="submit" class="btn-gold w-full sm:w-auto" data-rfq-submit>
+                    <span data-i18n="rfq.submit">إرسال طلب عرض السعر</span>
+                    <svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow" /></svg>
+                  </button>
+                  <p class="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+                    <svg class="h-4 w-4 text-emerald-400" aria-hidden="true"><use href="#i-shield" /></svg>
+                    <span data-i18n="rfq.secure">يُرسَل طلبك بشكل آمن ومباشر إلى:</span>
+                    <span class="ltr text-slate-300" data-rfq-email>[INSERT_EMAIL_HERE]</span>
+                  </p>
+                  <p class="mt-4 hidden rounded-xl px-4 py-3 text-sm" role="status" aria-live="polite" data-rfq-status></p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== PRICING ============================== -->
+    <section id="pricing" class="section border-t border-white/5" aria-labelledby="pricing-title">
+      <div class="container-x">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="eyebrow reveal" data-i18n="price.eyebrow">الباقات والأسعار</p>
+          <h2 id="pricing-title" class="h2 reveal" data-i18n="price.title">استثمار واضح… <span class="gold-text">بلا مفاجآت</span></h2>
+          <p class="lead reveal mx-auto" data-i18n="price.lead">أسعار تبدأ من الأرقام أدناه، ويُحدَّد السعر النهائي بعرض مكتوب بعد دراسة متطلباتك. الدفع على مراحل مرتبطة بالإنجاز.</p>
+        </div>
+
+        <div class="mt-14 grid items-stretch gap-5 lg:grid-cols-3">
+          <!-- Basic -->
+          <article class="glass card-hover reveal flex flex-col p-7 sm:p-8">
+            <h3 class="text-lg font-bold" data-i18n="pkg.basic.t">الباقة المؤسسية الأساسية</h3>
+            <p class="mt-1 text-sm text-slate-400" data-i18n="pkg.basic.d">مثالية للشركات والعيادات والمكاتب</p>
+            <p class="mt-6 flex items-baseline gap-2"><span class="text-sm text-slate-400" data-i18n="pkg.from">تبدأ من</span><span class="text-4xl font-bold text-white ltr">$1,200</span></p>
+            <ul class="check-list mt-7 grid gap-3 text-sm">
+              <li data-i18n="pkg.basic.f1">موقع تعريفي حتى 8 صفحات</li>
+              <li data-i18n="pkg.basic.f2">تصميم مخصّص متجاوب بالكامل</li>
+              <li data-i18n="pkg.basic.f3">عربي + كوردي بهندسة RTL كاملة</li>
+              <li data-i18n="pkg.basic.f4">سيو تقني أساسي وGoogle Business</li>
+              <li data-i18n="pkg.basic.f5">شهادة SSL واستضافة لمدة سنة</li>
+              <li data-i18n="pkg.basic.f6">دعم فني مجاني 3 أشهر</li>
+            </ul>
+            <p class="mt-6 text-xs text-slate-500" data-i18n="pkg.basic.time">التسليم: 2–3 أسابيع</p>
+            <button type="button" class="btn-ghost mt-6 w-full" data-pick-package="basic" data-i18n="pkg.choose">اختر هذه الباقة</button>
+          </article>
+
+          <!-- E-commerce -->
+          <article class="glass-strong reveal relative flex flex-col border-gold-400/50 p-7 shadow-glow sm:p-8 lg:-translate-y-4">
+            <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gold-400 px-4 py-1 text-xs font-bold text-slate-950" data-i18n="pkg.popular">الأكثر طلباً</span>
+            <h3 class="text-lg font-bold" data-i18n="pkg.ecom.t">باقة التجارة الإلكترونية المتقدمة</h3>
+            <p class="mt-1 text-sm text-slate-400" data-i18n="pkg.ecom.d">للمتاجر والعلامات التجارية والموزّعين</p>
+            <p class="mt-6 flex items-baseline gap-2"><span class="text-sm text-slate-400" data-i18n="pkg.from">تبدأ من</span><span class="gold-text text-4xl font-bold ltr">$3,500</span></p>
+            <ul class="check-list mt-7 grid gap-3 text-sm">
+              <li data-i18n="pkg.ecom.f1">متجر إلكتروني متكامل بلا حدود للمنتجات</li>
+              <li data-i18n="pkg.ecom.f2">تكامل زين كاش وكي كارد وفاست باي</li>
+              <li data-i18n="pkg.ecom.f3">الدفع عند الاستلام وإدارة شركات التوصيل</li>
+              <li data-i18n="pkg.ecom.f4">لوحة تحكم للطلبات والمخزون والتقارير</li>
+              <li data-i18n="pkg.ecom.f5">سيو متقدم وSchema للمنتجات</li>
+              <li data-i18n="pkg.ecom.f6">دعم فني مجاني 6 أشهر</li>
+            </ul>
+            <p class="mt-6 text-xs text-slate-500" data-i18n="pkg.ecom.time">التسليم: 4–6 أسابيع</p>
+            <button type="button" class="btn-gold mt-6 w-full" data-pick-package="ecommerce" data-i18n="pkg.choose">اختر هذه الباقة</button>
+          </article>
+
+          <!-- Enterprise -->
+          <article class="glass card-hover reveal flex flex-col p-7 sm:p-8">
+            <h3 class="text-lg font-bold" data-i18n="pkg.ent.t">باقة المؤسسات VIP</h3>
+            <p class="mt-1 text-sm text-slate-400" data-i18n="pkg.ent.d">للشركات الكبرى والجهات الحكومية</p>
+            <p class="mt-6 flex items-baseline gap-2"><span class="text-sm text-slate-400" data-i18n="pkg.from">تبدأ من</span><span class="text-4xl font-bold text-white ltr">$9,000</span></p>
+            <ul class="check-list mt-7 grid gap-3 text-sm">
+              <li data-i18n="pkg.ent.f1">منصة أو نظام مخصّص بالكامل (ERP / CRM / بوابات)</li>
+              <li data-i18n="pkg.ent.f2">تطبيق Flutter لـ iOS وAndroid</li>
+              <li data-i18n="pkg.ent.f3">تكاملات API مع الأنظمة الداخلية والمصارف</li>
+              <li data-i18n="pkg.ent.f4">أمان مؤسسي واختبار اختراق</li>
+              <li data-i18n="pkg.ent.f5">مدير حساب مخصّص</li>
+              <li data-i18n="pkg.ent.f6">دعم VIP 24/7 بعقد SLA لمدة 12 شهراً</li>
+            </ul>
+            <p class="mt-6 text-xs text-slate-500" data-i18n="pkg.ent.time">التسليم: حسب نطاق المشروع ومراحله</p>
+            <button type="button" class="btn-ghost mt-6 w-full" data-pick-package="enterprise" data-i18n="pkg.choose">اختر هذه الباقة</button>
+          </article>
+        </div>
+
+        <!-- Estimator -->
+        <div id="estimator" class="glass-strong reveal mt-16 grid gap-8 p-6 sm:p-10 lg:grid-cols-5">
+          <form class="lg:col-span-3" data-estimator>
+            <h3 class="flex items-center gap-3 text-2xl font-bold"><span class="icon-tile !h-10 !w-10"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-bolt" /></svg></span><span data-i18n="est.title">حاسبة تكلفة المشروع</span></h3>
+
+            <fieldset class="mt-8">
+              <legend class="label" data-i18n="est.step1">1. اختر الباقة الأساسية</legend>
+              <div class="grid gap-2 sm:grid-cols-3">
+                <label class="option-card"><input type="radio" name="pkg" value="basic" /><span data-i18n="est.pkg.basic">مؤسسية أساسية</span></label>
+                <label class="option-card"><input type="radio" name="pkg" value="ecommerce" checked /><span data-i18n="est.pkg.ecom">تجارة إلكترونية</span></label>
+                <label class="option-card"><input type="radio" name="pkg" value="enterprise" /><span data-i18n="est.pkg.ent">مؤسسات VIP</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="mt-7">
+              <legend class="label" data-i18n="est.step2">2. أضف ما تحتاجه</legend>
+              <div class="grid gap-2 sm:grid-cols-2">
+                <label class="option-card"><input type="checkbox" name="addon" value="flutter" /><span class="flex-1" data-i18n="est.a.flutter">تطبيق Flutter (iOS + Android)</span><span class="hidden text-xs text-gold-300" data-included data-i18n="est.included">مضمّن</span></label>
+                <label class="option-card"><input type="checkbox" name="addon" value="erp" /><span class="flex-1" data-i18n="est.a.erp">نظام ERP / لوحة إدارة مخصّصة</span><span class="hidden text-xs text-gold-300" data-included data-i18n="est.included">مضمّن</span></label>
+                <label class="option-card"><input type="checkbox" name="addon" value="zaincash" /><span class="flex-1" data-i18n="est.a.zain">بوابة زين كاش</span><span class="hidden text-xs text-gold-300" data-included data-i18n="est.included">مضمّن</span></label>
+                <label class="option-card"><input type="checkbox" name="addon" value="qicard" /><span class="flex-1" data-i18n="est.a.qi">بوابة كي كارد</span><span class="hidden text-xs text-gold-300" data-included data-i18n="est.included">مضمّن</span></label>
+                <label class="option-card"><input type="checkbox" name="addon" value="fastpay" /><span class="flex-1" data-i18n="est.a.fast">بوابة فاست باي</span><span class="hidden text-xs text-gold-300" data-included data-i18n="est.included">مضمّن</span></label>
+                <label class="option-card"><input type="checkbox" name="addon" value="content" /><span class="flex-1" data-i18n="est.a.content">كتابة محتوى وترجمة احترافية</span><span class="hidden text-xs text-gold-300" data-included data-i18n="est.included">مضمّن</span></label>
+                <label class="option-card sm:col-span-2"><input type="checkbox" name="addon" value="seo" /><span class="flex-1" data-i18n="est.a.seo">باقة سيو شهرية (محلي + عالمي)</span><span class="hidden text-xs text-gold-300" data-included data-i18n="est.included">مضمّن</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="mt-7">
+              <legend class="label" data-i18n="est.step3">3. خطة الدعم الشهرية</legend>
+              <div class="grid gap-2 sm:grid-cols-3">
+                <label class="option-card"><input type="radio" name="support" value="none" /><span class="flex-1" data-i18n="est.s.none">الدعم المجاني المضمّن</span></label>
+                <label class="option-card"><input type="radio" name="support" value="standard" checked /><span class="flex-1" data-i18n="est.s.std">قياسي — ساعات العمل</span></label>
+                <label class="option-card"><input type="radio" name="support" value="vip" /><span class="flex-1" data-i18n="est.s.vip">VIP — 24/7 مع SLA</span><span class="hidden text-xs text-gold-300" data-included data-i18n="est.included">مضمّن</span></label>
+              </div>
+            </fieldset>
+          </form>
+
+          <aside class="flex flex-col rounded-3xl border border-gold-400/30 bg-gradient-to-b from-gold-400/10 to-transparent p-6 sm:p-8 lg:col-span-2" aria-live="polite">
+            <p class="text-sm text-slate-400" data-i18n="est.once">التكلفة التقديرية للمشروع (لمرة واحدة)</p>
+            <p class="mt-2 text-3xl font-bold text-white sm:text-4xl"><span class="ltr" data-est-once>—</span></p>
+            <p class="mt-1 text-sm text-slate-400"><span class="ltr" data-est-once-iqd>—</span></p>
+
+            <div class="my-6 h-px bg-white/10"></div>
+
+            <p class="text-sm text-slate-400" data-i18n="est.monthly">الاشتراك الشهري (دعم + سيو)</p>
+            <p class="mt-2 text-2xl font-bold text-gold-300"><span class="ltr" data-est-monthly>—</span> <span class="text-base font-medium text-slate-400" data-est-permonth></span></p>
+            <p class="mt-1 text-sm text-slate-400"><span class="ltr" data-est-monthly-iqd>—</span> <span class="text-gold-300" data-est-vipnote></span></p>
+
+            <p class="mt-6 text-xs leading-6 text-slate-500" data-i18n="est.note">تقدير أولي غير ملزم لمساعدتك على التخطيط. يصلك العرض النهائي مكتوباً بعد جلسة الاكتشاف المجانية.</p>
+
+            <div class="mt-auto grid gap-3 pt-6">
+              <a href="#" class="btn-wa w-full" data-wa="estimate"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-wa" /></svg><span data-i18n="est.send">أرسل التقدير عبر واتساب</span></a>
+              <a href="#enterprise" class="btn-ghost w-full" data-i18n="est.rfq">اطلب عرضاً رسمياً</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== FAQ ============================== -->
+    <section id="faq" class="section border-t border-white/5" aria-labelledby="faq-title">
+      <div class="container-x grid gap-12 lg:grid-cols-3">
+        <div>
+          <p class="eyebrow reveal" data-i18n="faq.eyebrow">الأسئلة الشائعة</p>
+          <h2 id="faq-title" class="h2 reveal" data-i18n="faq.title">كل ما تحتاج معرفته قبل البدء</h2>
+          <p class="lead reveal" data-i18n="faq.lead">لم تجد إجابتك؟ فريقنا متاح على واتساب على مدار الساعة.</p>
+          <a href="#" class="btn-wa reveal mt-6" data-wa="general"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-wa" /></svg><span data-i18n="faq.cta">اسألنا الآن</span></a>
+        </div>
+        <div class="glass divide-y divide-white/10 px-6 sm:px-8 lg:col-span-2">
+          <details class="faq-item" open>
+            <summary data-i18n="faq.q1">كم تستغرق عملية تصميم موقع شركة؟</summary>
+            <p class="pb-6 leading-8 text-slate-400" data-i18n="faq.a1">الموقع التعريفي يُسلَّم عادة خلال 2–3 أسابيع، والمتجر الإلكتروني خلال 4–6 أسابيع، أما الأنظمة المؤسسية فيُحدَّد جدولها الزمني بعد دراسة المتطلبات مع خطة مراحل واضحة.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq.q2">هل تدعمون الدفع الإلكتروني بزين كاش وكي كارد وفاست باي؟</summary>
+            <p class="pb-6 leading-8 text-slate-400" data-i18n="faq.a2">نعم. ننفّذ تكاملاً مباشراً مع زين كاش وكي كارد وفاست باي، إضافة إلى الدفع عند الاستلام والبطاقات الدولية، داخل المواقع وتطبيقات الموبايل.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq.q3">هل يمكن أن يكون الموقع باللغتين العربية والكوردية؟</summary>
+            <p class="pb-6 leading-8 text-slate-400" data-i18n="faq.a3">بالتأكيد. نبني المواقع والتطبيقات بالعربية والكوردية السورانية مع هندسة RTL كاملة وخطوط أصلية، ويمكن إضافة الإنجليزية.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq.q4">ماذا يعني الدعم بعقد SLA؟</summary>
+            <p class="pb-6 leading-8 text-slate-400" data-i18n="faq.a4">هو التزام مكتوب بزمن الاستجابة لكل مستوى من الأعطال وبنسبة تشغيل مضمونة تصل إلى 99.9%، مع مراقبة على مدار الساعة وتقارير شهرية.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq.q5">هل تعملون مع الجهات الحكومية والشركات الكبرى؟</summary>
+            <p class="pb-6 leading-8 text-slate-400" data-i18n="faq.a5">نعم، لدينا قسم مخصّص للشركات الكبرى والجهات الحكومية يقدّم تسليم مفتاح كامل، ومدير حساب مخصّص، واتفاقيات عدم إفصاح، ووثائق فنية تناسب متطلبات المناقصات.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-i18n="faq.q6">من يملك الشيفرة المصدرية والنطاق بعد التسليم؟</summary>
+            <p class="pb-6 leading-8 text-slate-400" data-i18n="faq.a6">أنت. تُسجَّل النطاقات والحسابات باسم جهتك، وتُسلَّم الشيفرة المصدرية والتوثيق كاملاً عند الانتهاء من المشروع.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== FINAL CTA ============================== -->
+    <section class="pb-24" aria-labelledby="cta-title">
+      <div class="container-x">
+        <div class="glass-strong reveal relative overflow-hidden p-8 text-center sm:p-14">
+          <div class="absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-gold-500/25 blur-[100px]" aria-hidden="true"></div>
+          <h2 id="cta-title" class="relative text-3xl font-bold sm:text-5xl" data-i18n="cta.title">جاهز <span class="gold-text">لتتصدّر</span> سوقك؟</h2>
+          <p class="relative mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-400" data-i18n="cta.lead">احجز استشارة أولى مجانية مدتها 30 دقيقة مع خبير، واحصل على تحليل سريع لموقعك الحالي وخطة عمل واضحة.</p>
+          <div class="relative mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+            <a href="#" class="btn-wa" data-wa="project"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-wa" /></svg><span data-i18n="cta.wa">احجز عبر واتساب</span></a>
+            <a href="#enterprise" class="btn-ghost" data-i18n="cta.rfq">طلب عرض سعر للشركات</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="border-t border-white/5 bg-slate-950 pb-28 pt-16 sm:pb-16">
+    <div class="container-x grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <div class="lg:col-span-2">
+        <a href="#top" class="flex items-center gap-3">
+          <svg class="h-10 w-10" aria-hidden="true"><use href="#i-logo" /></svg>
+          <span class="text-lg font-bold text-white" data-i18n="brand.name">الرافدين ديجيتال</span>
+        </a>
+        <p class="mt-4 max-w-md text-sm leading-7 text-slate-400" data-i18n="footer.about">وكالة رقمية عراقية متخصصة في المواقع المؤسسية وتطبيقات الموبايل والسيو والدعم الفني بعقود SLA، نخدم الشركات والجهات الحكومية في جميع المحافظات.</p>
+        <div class="mt-6 flex flex-wrap gap-3 text-sm">
+          <a href="#" class="chip hover:border-emerald-400/50" data-wa="general"><svg class="h-4 w-4 text-emerald-400" aria-hidden="true"><use href="#i-wa" /></svg><span class="ltr" data-wa-display>+964</span></a>
+          <a href="#" class="chip hover:border-gold-400/50" data-mailto><svg class="h-4 w-4 text-gold-400" aria-hidden="true"><use href="#i-mail" /></svg><span class="ltr" data-rfq-email>[INSERT_EMAIL_HERE]</span></a>
+        </div>
+      </div>
+      <nav aria-labelledby="f-services">
+        <h2 id="f-services" class="text-sm font-semibold text-white" data-i18n="footer.services">الخدمات</h2>
+        <ul class="mt-4 grid gap-2 text-sm text-slate-400">
+          <li><a class="hover:text-gold-300" href="#services" data-i18n="footer.s1">تصميم المواقع المؤسسية</a></li>
+          <li><a class="hover:text-gold-300" href="#services" data-i18n="footer.s2">تطبيقات Flutter</a></li>
+          <li><a class="hover:text-gold-300" href="#services" data-i18n="footer.s3">تحسين محركات البحث</a></li>
+          <li><a class="hover:text-gold-300" href="#services" data-i18n="footer.s4">الدعم الفني والصيانة</a></li>
+          <li><a class="hover:text-gold-300" href="#enterprise" data-i18n="footer.s5">قسم الشركات والحكومة</a></li>
+        </ul>
+      </nav>
+      <nav aria-labelledby="f-cities">
+        <h2 id="f-cities" class="text-sm font-semibold text-white" data-i18n="footer.cities">نخدم في</h2>
+        <ul class="mt-4 grid grid-cols-2 gap-2 text-sm text-slate-400">
+          <li><a class="hover:text-gold-300" href="#city-baghdad" data-city-link="baghdad" data-i18n="city.baghdad">بغداد</a></li>
+          <li><a class="hover:text-gold-300" href="#city-erbil" data-city-link="erbil" data-i18n="city.erbil">أربيل</a></li>
+          <li><a class="hover:text-gold-300" href="#city-sulaymaniyah" data-city-link="sulaymaniyah" data-i18n="city.sulaymaniyah">السليمانية</a></li>
+          <li><a class="hover:text-gold-300" href="#city-mosul" data-city-link="mosul" data-i18n="city.mosul">الموصل</a></li>
+          <li><a class="hover:text-gold-300" href="#city-kirkuk" data-city-link="kirkuk" data-i18n="city.kirkuk">كركوك</a></li>
+          <li><a class="hover:text-gold-300" href="#city-najaf" data-city-link="najaf" data-i18n="city.najaf">النجف</a></li>
+          <li><a class="hover:text-gold-300" href="#city-karbala" data-city-link="karbala" data-i18n="city.karbala">كربلاء</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container-x mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/5 pt-6 text-xs text-slate-500 sm:flex-row">
+      <p>© <span data-year>2026</span> <span data-i18n="footer.rights">الرافدين ديجيتال. جميع الحقوق محفوظة.</span></p>
+      <p class="ltr">Al-Rafidain Digital · Baghdad · Erbil · Sulaymaniyah · Mosul · Kirkuk · Najaf · Karbala</p>
+    </div>
+  </footer>
+
+  <!-- ============================== FLOATING WHATSAPP VIP WIDGET ============================== -->
+  <div class="safe-bottom fixed end-4 z-[60] flex flex-col items-end gap-3 sm:end-6" data-wa-widget>
+    <div id="wa-panel" class="glass-strong w-[min(22rem,calc(100vw-2rem))] origin-bottom p-5" role="dialog" aria-modal="false" aria-labelledby="wa-panel-title" hidden>
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <span class="relative grid h-11 w-11 place-items-center rounded-full bg-emerald-500 text-white">
+            <svg class="h-6 w-6" aria-hidden="true"><use href="#i-wa" /></svg>
+            <span class="absolute -bottom-0.5 -end-0.5 h-3 w-3 rounded-full border-2 border-slate-900 bg-emerald-300"></span>
+          </span>
+          <div>
+            <p id="wa-panel-title" class="font-bold text-white" data-i18n="wa.title">دعم VIP على مدار الساعة</p>
+            <p class="text-xs text-emerald-300" data-i18n="wa.status">متاحون 24/7 · نردّ خلال دقائق</p>
+          </div>
+        </div>
+        <button type="button" class="grid h-8 w-8 place-items-center rounded-full text-slate-400 hover:bg-white/10 hover:text-white" data-wa-close data-i18n-attr="aria-label:a11y.close" aria-label="إغلاق">
+          <svg class="h-4 w-4" aria-hidden="true"><use href="#i-x" /></svg>
+        </button>
+      </div>
+      <p class="mt-4 text-sm text-slate-400" data-i18n="wa.prompt">كيف يمكننا مساعدتك؟ اختر الموضوع لنبدأ المحادثة فوراً:</p>
+      <div class="mt-3 grid gap-2">
+        <a href="#" class="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white transition hover:border-emerald-400/50" data-wa="support"><span data-i18n="wa.o1">🚨 دعم فني عاجل / عطل في موقعي</span><svg class="h-4 w-4 text-slate-500" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+        <a href="#" class="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white transition hover:border-emerald-400/50" data-wa="project"><span data-i18n="wa.o2">🚀 مشروع جديد (موقع / تطبيق)</span><svg class="h-4 w-4 text-slate-500" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+        <a href="#" class="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white transition hover:border-emerald-400/50" data-wa="pricing"><span data-i18n="wa.o3">💰 استفسار عن الأسعار والباقات</span><svg class="h-4 w-4 text-slate-500" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+        <a href="#" class="flex items-center justify-between rounded-xl border border-gold-400/30 bg-gold-400/[0.06] px-4 py-3 text-sm text-gold-200 transition hover:border-gold-400/60" data-wa="enterprise"><span data-i18n="wa.o4">🏛️ الشركات الكبرى والجهات الحكومية</span><svg class="h-4 w-4 text-gold-400" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+      </div>
+    </div>
+
+    <button type="button" class="group relative flex h-14 items-center gap-2 rounded-full bg-emerald-500 pe-5 ps-4 font-semibold text-white shadow-2xl shadow-emerald-500/40 transition hover:bg-emerald-400" data-wa-toggle aria-expanded="false" aria-controls="wa-panel">
+      <span class="absolute inset-0 -z-10 animate-pulse-ring rounded-full bg-emerald-500" aria-hidden="true"></span>
+      <svg class="h-7 w-7" aria-hidden="true"><use href="#i-wa" /></svg>
+      <span class="text-sm" data-i18n="wa.fab">دعم VIP 24/7</span>
+    </button>
+  </div>
+
+  <noscript>
+    <p style="position:fixed;bottom:0;inset-inline:0;padding:12px;background:#f5b342;color:#020617;text-align:center;z-index:99">
+      لتجربة كاملة (الحاسبة، تبديل اللغة، النماذج) يرجى تفعيل JavaScript.
+    </p>
+  </noscript>
+</body>
+</html>

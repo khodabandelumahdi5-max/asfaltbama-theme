@@ -1,0 +1,11 @@
+{
+  "name": "Al-Rafidain Digital | الرافدين ديجيتال",
+  "short_name": "Al-Rafidain",
+  "lang": "ar-IQ",
+  "dir": "rtl",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "icons": [{ "src": "assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

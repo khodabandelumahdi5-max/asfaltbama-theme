@@ -1,0 +1,15 @@
+{
+  "name": "al-rafidain-digital",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Al-Rafidain Digital — bilingual (Arabic / Kurdish Sorani) RTL agency website",
+  "scripts": {
+    "build": "tailwindcss -i ./src/styles.css -o ./assets/css/app.css --minify",
+    "dev": "tailwindcss -i ./src/styles.css -o ./assets/css/app.css --watch",
+    "check:i18n": "node scripts/check-i18n.mjs",
+    "serve": "npx --yes serve -l 4173 ."
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.19"
+  }
+}
