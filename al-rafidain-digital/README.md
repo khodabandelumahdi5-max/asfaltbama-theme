@@ -12,7 +12,7 @@ dependencies and no framework, so you deploy it by uploading the folder to any s
 | WhatsApp Business number (`9647XXXXXXXXX`) | `assets/js/config.js` → `whatsappNumber`, and `telephone` in the JSON-LD in `index.html` |
 | RFQ inbox (`[INSERT_EMAIL_HERE]`) | `assets/js/config.js` → `rfqEmail`, and `email` in the JSON-LD in `index.html` |
 | Domain (`https://www.your-domain.iq`) | `index.html` (canonical, hreflang, OG, JSON-LD), `robots.txt`, `sitemap.xml` |
-| Prices and the USD→IQD rate | `assets/js/config.js` → `pricing`, `usdToIqd` (keep the "تبدأ من" figures on the cards in sync) |
+| Prices (USD) | `assets/js/config.js` → `pricing` (keep the "تبدأ من" figures on the cards in sync) |
 | Social share image | add `assets/img/og-image.png` (1200×630) |
 
 Quick domain swap: `grep -rl your-domain.iq . | xargs sed -i 's/www.your-domain.iq/www.example.iq/g'`
@@ -47,8 +47,7 @@ scripts/check-i18n.mjs  Fails if any translatable key is missing in Kurdish (or 
 * **Enterprise & Government portal:** an animated gold glass frame, the turnkey, security,
   account-manager and SLA pillars, an SLA matrix, an enterprise WhatsApp channel and the
   formal RFQ form.
-* **Pricing:** three tiers, plus an estimator that shows one-time and monthly ranges in USD and
-  IQD. It auto-includes items already in a package and can send the estimate over WhatsApp.
+* **Pricing:** three tiers, plus an estimator that shows one-time and monthly ranges in US dollars. It auto-includes items already in a package and can send the estimate over WhatsApp.
 * **Floating VIP WhatsApp widget:** pinned to the bottom and safe-area aware on mobile, with
   four pre-filled topics in the active language.
 * **SEO:** JSON-LD for Organization/ProfessionalService (with `areaServed` for all 7 cities),

@@ -224,11 +224,6 @@
     if (!range[1]) return '$0';
     return '$' + range[0].toLocaleString('en-US') + ' – $' + range[1].toLocaleString('en-US');
   }
-  function iqd(range) {
-    if (!range[1]) return '0 ' + t('est.iqd');
-    var r = function (n) { return (Math.round((n * CFG.usdToIqd) / 1000) * 1000).toLocaleString('en-US'); };
-    return r(range[0]) + ' – ' + r(range[1]) + ' ' + t('est.iqd');
-  }
   function labelOf(input) {
     var span = input.parentElement.querySelector('[data-i18n]');
     return span ? span.textContent.trim() : input.value;
@@ -286,11 +281,9 @@
     if (!est) return;
     var e = (lastEstimate = computeEstimate());
     $('[data-est-once]').textContent = usd(e.once);
-    $('[data-est-once-iqd]').textContent = iqd(e.once);
     $('[data-est-monthly]').textContent = usd(e.monthly);
     $('[data-est-permonth]').textContent = t('est.per_month');
-    $('[data-est-monthly-iqd]').textContent = iqd(e.monthly);
-    $('[data-est-vipnote]').textContent = e.supIncluded ? '· VIP ' + t('est.included_y1') : '';
+    $('[data-est-vipnote]').textContent = e.supIncluded ? 'VIP ' + t('est.included_y1') : '';
     var link = $('[data-wa="estimate"]');
     if (link) link.href = waUrl(estimateMessage());
   }

@@ -357,7 +357,6 @@ window.RD_STRINGS = {
 
     'est.per_month': '/ شهرياً',
     'est.included_y1': 'مضمّن للسنة الأولى',
-    'est.iqd': 'د.ع',
 
     'form.invalid': 'يرجى تعبئة الحقول المطلوبة بشكل صحيح.',
     'form.email_free': 'يُفضّل استخدام بريد الجهة الرسمي (مثل name@company.iq) لتسريع معالجة الطلب.',
@@ -384,7 +383,6 @@ window.RD_STRINGS = {
 
     'est.per_month': '/ مانگانە',
     'est.included_y1': 'بۆ ساڵی یەکەم لەخۆگیراوە',
-    'est.iqd': 'د.ع',
 
     'form.invalid': 'تکایە خانە پێویستەکان بە دروستی پڕ بکەرەوە.',
     'form.email_free': 'باشترە ئیمەیڵی فەرمی دامەزراوەکە بەکاربهێنیت (وەک name@company.iq) بۆ خێراکردنی داواکارییەکە.',

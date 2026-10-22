@@ -15,9 +15,6 @@ window.RD_CONFIG = {
    */
   rfqEndpoint: '',
 
-  /* Exchange rate used by the estimator to show IQD next to USD. */
-  usdToIqd: 1310,
-
   /*
    * Price book for the estimator (USD). `once` = one-time project fee range,
    * `monthly` = recurring range. `includedIn` = packages that already contain the add-on.
