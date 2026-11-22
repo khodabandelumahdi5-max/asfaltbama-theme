@@ -70,3 +70,66 @@ add_action('template_redirect', function () {
     echo get_post_field('post_content', $id, 'raw'); // full HTML document authored by an administrator
     exit;
 }, 0);
+
+/* ---------- Studio sitemap (v1.1) ----------
+ * /studio-sitemap.xml lists every published Studio page (mc_raw) and the article
+ * categories 41 (EN) and 42 (AR), with hreflang alternates. Served without rewrite
+ * rules, added to the Rank Math sitemap index and to robots.txt. Redirect pages
+ * (mc_redirect) are removed from Rank Math's own sitemaps.
+ */
+const MC_ARTICLE_CATS = [41, 42];
+
+function mc_studio_sitemap_xml() {
+    $pages = get_posts(['post_type' => 'page', 'post_status' => 'publish', 'numberposts' => 500,
+        'meta_key' => 'mc_raw', 'meta_value' => '1']);
+    $posts = get_posts(['post_type' => 'post', 'post_status' => 'publish', 'numberposts' => 500,
+        'category__in' => MC_ARTICLE_CATS]);
+    $out = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
+         . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
+    $home = home_url('/');
+    foreach ($pages as $p) {
+        $url = get_permalink($p);
+        $path = substr($url, strlen($home) - 1);                 // e.g. /ar/studio/iraq/
+        $en = (strpos($path, '/ar/') === 0) ? home_url(substr($path, 3)) : $url;
+        $ar = (strpos($path, '/ar/') === 0) ? $url : home_url('/ar' . $path);
+        $out .= "<url><loc>" . esc_url($url) . "</loc><lastmod>" . get_post_modified_time('c', true, $p) . "</lastmod>"
+              . '<xhtml:link rel="alternate" hreflang="en" href="' . esc_url($en) . '"/>'
+              . '<xhtml:link rel="alternate" hreflang="ar" href="' . esc_url($ar) . '"/>'
+              . '<xhtml:link rel="alternate" hreflang="x-default" href="' . esc_url($en) . '"/>'
+              . "</url>\n";
+    }
+    foreach ($posts as $p) {
+        $out .= "<url><loc>" . esc_url(get_permalink($p)) . "</loc><lastmod>" . get_post_modified_time('c', true, $p) . "</lastmod>";
+        $alt = get_post_meta($p->ID, 'mc_alt', true);
+        if ($alt) {
+            $lang = mc_post_lang($p->ID);
+            $out .= '<xhtml:link rel="alternate" hreflang="' . esc_attr($lang) . '" href="' . esc_url(get_permalink($p)) . '"/>'
+                  . '<xhtml:link rel="alternate" hreflang="' . ($lang === 'ar' ? 'en' : 'ar') . '" href="' . esc_url($alt) . '"/>';
+        }
+        $out .= "</url>\n";
+    }
+    return $out . '</urlset>';
+}
+
+add_action('template_redirect', function () {
+    $path = wp_parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
+    if ($path !== '/studio-sitemap.xml' && !isset($_GET['mc_sitemap'])) return;
+    status_header(200);
+    header('Content-Type: application/xml; charset=utf-8');
+    header('X-Robots-Tag: noindex, follow');
+    echo mc_studio_sitemap_xml();
+    exit;
+}, -1);
+
+add_filter('rank_math/sitemap/index', function ($xml) {
+    return $xml . '<sitemap><loc>' . esc_url(home_url('/studio-sitemap.xml')) . '</loc><lastmod>' . esc_html(gmdate('c')) . '</lastmod></sitemap>' . "\n";
+});
+
+add_filter('robots_txt', function ($output) {
+    return rtrim($output) . "\nSitemap: " . home_url('/studio-sitemap.xml') . "\n";
+}, 99);
+
+add_filter('rank_math/sitemap/entry', function ($url, $type, $object) {
+    if ($type === 'post' && is_object($object) && !empty($object->ID) && get_post_meta($object->ID, 'mc_redirect', true)) return false;
+    return $url;
+}, 10, 3);
