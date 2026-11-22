@@ -1,0 +1,57 @@
+# Article topic backlog — MEFTACARD Studio
+
+Take the first three lines marked `[ ]`, alternating languages so each day has Arabic and English.
+When an article is written and saved as a draft, change `[ ]` to `[x]` and add the post ID and date.
+Do not write a topic that is already `[x]`. Add new topics at the bottom when fewer than 9 remain.
+
+Format: `- [ ] lang | slug | working title | focus keyword | links to (service or country page)`
+
+## Already published (do not repeat)
+- [x] ar | website-design-cost-iraq-ar | كم تكلفة تصميم موقع إلكتروني في العراق | تصميم مواقع في العراق
+- [x] ar | seo-iraq-guide-ar | السيو في العراق | السيو في العراق
+- [x] ar | google-business-profile-local-seo-iraq-ar | ملف Google التجاري | ملف Google التجاري
+- [x] ar | whatsapp-ai-bot-business-ar | بوت واتساب بالذكاء الاصطناعي | بوت واتساب بالذكاء الاصطناعي
+- [x] ar | mobile-app-development-cost-iraq-gulf-ar | تكلفة تصميم تطبيق جوال | تصميم تطبيق جوال
+- [x] en | website-design-cost-gcc-2026 | Website design cost in the GCC | website design cost in Dubai
+- [x] en | oil-and-gas-website-design | Oil and gas website design | oil and gas website design
+- [x] en | arabic-seo-hreflang-guide | Arabic SEO and hreflang | Arabic SEO
+- [x] en | whatsapp-ai-agent-business-uae-saudi | WhatsApp AI agents UAE & Saudi | WhatsApp AI agent
+- [x] en | b2b-export-website-rfq | B2B export website | B2B export website
+
+## Backlog
+- [x] ar | responsive-web-design-guide-ar | ما هو تصميم المواقع المتجاوبة ولماذا يهم عملك | تصميم مواقع متجاوبة | website-design | draft 244, 2026-11-22
+- [ ] en | landing-page-design-ads-gulf | Landing page design for Google and Instagram ads in the Gulf | landing page design | website-design
+- [ ] ar | ecommerce-website-iraq-payments-ar | تصميم متجر إلكتروني في العراق مع زين كاش وكي كارد | تصميم متجر إلكتروني في العراق | iraq
+- [ ] en | website-maintenance-checklist | Website maintenance checklist for business owners | website maintenance | website-support
+- [ ] ar | choose-web-design-company-ar | كيف تختار شركة تصميم مواقع: 10 أسئلة قبل التعاقد | شركة تصميم مواقع | website-design
+- [ ] en | local-seo-dubai-google-maps | Local SEO in Dubai: how to rank in Google Maps | local SEO Dubai | uae
+- [ ] ar | website-speed-mobile-ar | لماذا موقعك بطيء على الجوال وكيف تصلحه | تحسين سرعة الموقع | website-support
+- [ ] en | arabic-website-design-rtl | Arabic website design: RTL mistakes that cost you customers | Arabic website design | website-design
+- [ ] ar | seo-saudi-arabia-guide-ar | السيو في السعودية: دليل الشركات لتصدر Google | شركة سيو في السعودية | saudi-arabia
+- [ ] en | ai-chatbot-customer-service-arabic | AI chatbot for customer service in Arabic | Arabic AI chatbot | ai-agents
+- [ ] ar | wordpress-vs-custom-website-ar | ووردبريس أم موقع مخصص؟ أيهما يناسب شركتك | تصميم مواقع ووردبريس | website-design
+- [ ] en | website-design-bahrain-guide | Website design in Bahrain: what businesses need in 2026 | website design Bahrain | bahrain
+- [ ] ar | website-security-hacked-ar | تعرض موقعي للاختراق: ماذا أفعل الآن | حماية المواقع | website-support
+- [ ] en | seo-vs-google-ads | SEO vs Google Ads: where should a small business start | SEO vs Google Ads | seo-services
+- [ ] ar | landing-page-ar | صفحة الهبوط: كيف تحول زوار الإعلانات إلى عملاء | تصميم صفحات هبوط | website-design
+- [ ] en | web-design-oman-guide | Web design and SEO in Oman | web design Oman | oman
+- [ ] ar | ai-agents-for-business-ar | وكلاء الذكاء الاصطناعي للشركات: ماذا يمكنهم أن يفعلوا | وكلاء الذكاء الاصطناعي | ai-agents
+- [ ] en | ecommerce-website-kuwait-knet | E-commerce website in Kuwait with KNET payments | ecommerce website Kuwait | kuwait
+- [ ] ar | seo-content-writing-ar | كتابة محتوى سيو: كيف تكتب صفحات يجدها Google | كتابة محتوى سيو | seo-services
+- [ ] en | website-design-lebanon-trilingual | Website design in Lebanon: Arabic, English and French | website design Lebanon | lebanon
+- [ ] ar | website-design-erbil-ar | تصميم مواقع في أربيل وإقليم كردستان | تصميم مواقع في أربيل | iraq
+- [ ] en | ux-design-arabic-users | UX design for Arabic-speaking users | UX design Arabic | website-design
+- [ ] ar | pay-website-usdt-ar | الدفع بعملة تيثر لخدمات تصميم المواقع: المزايا والخطوات | الدفع بعملة تيثر | website-design
+- [ ] en | pay-web-design-usdt | Paying for web design with USDT (Tether): how it works | pay with USDT | website-design
+- [ ] ar | website-design-basra-ar | تصميم مواقع في البصرة للشركات والمحلات | تصميم مواقع في البصرة | iraq
+- [ ] en | app-design-delivery-business | Designing a delivery app for a Gulf business | delivery app design | app-design
+- [ ] ar | google-ads-vs-seo-ar | إعلانات Google أم السيو: من أين تبدأ | إعلانات جوجل | seo-services
+- [ ] en | website-redesign-without-losing-seo | Website redesign without losing Google rankings | website redesign SEO | website-design
+- [ ] ar | whatsapp-business-api-ar | واتساب للأعمال API: الدليل العملي للشركات | واتساب للأعمال API | ai-agents
+- [ ] en | qatar-business-website-guide | Corporate website design in Qatar | website design Qatar | qatar
+- [ ] ar | website-design-baghdad-ar | تصميم مواقع في بغداد: الأسعار والمراحل | تصميم مواقع في بغداد | iraq
+- [ ] en | field-service-app-industrial | Field service apps for industrial maintenance teams | field service app | app-design
+- [ ] ar | technical-seo-checklist-ar | قائمة فحص السيو التقني لموقعك | السيو التقني | seo-services
+- [ ] en | website-cost-saudi-arabia | How much does a website cost in Saudi Arabia | website cost Saudi Arabia | saudi-arabia
+- [ ] ar | online-store-mistakes-ar | 7 أخطاء تقتل مبيعات المتجر الإلكتروني | تصميم متاجر إلكترونية | website-design
+- [ ] en | google-business-profile-gulf | Google Business Profile guide for Gulf businesses | Google Business Profile | seo-services
