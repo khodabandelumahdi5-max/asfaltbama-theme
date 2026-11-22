@@ -12,8 +12,8 @@ const ROOT = path.resolve(__dirname, '..');
 const SRC = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const BASE = 'https://meftacard.com';
 const FONTS = {
-  en: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap',
-  ar: 'https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap',
+  en: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
+  ar: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@500;600&display=swap',
 };
 
 function out(rel, html) {
@@ -45,6 +45,7 @@ function out(rel, html) {
         });
         document.querySelectorAll('[data-aria-ar]').forEach((el) => el.setAttribute('aria-label', el.dataset.ariaAr));
         document.querySelectorAll('[data-href-ar]').forEach((el) => el.setAttribute('href', el.dataset.hrefAr));
+        document.querySelectorAll('[data-alt-ar]').forEach((el) => el.setAttribute('alt', el.dataset.altAr));
         document.querySelectorAll('.flip').forEach((p) => p.setAttribute('d', 'M13 4l-6 6 6 6'));
         document.title = META.title;
         $('meta[name=description]').content = META.desc;
@@ -78,6 +79,7 @@ function out(rel, html) {
       // strip build-only attributes
       document.querySelectorAll('[data-aria-ar]').forEach((el) => el.removeAttribute('data-aria-ar'));
       document.querySelectorAll('[data-href-ar]').forEach((el) => el.removeAttribute('data-href-ar'));
+      document.querySelectorAll('[data-alt-ar]').forEach((el) => el.removeAttribute('data-alt-ar'));
       document.querySelectorAll('[data-i18n]').forEach((el) => el.removeAttribute('data-i18n'));
       return { html: document.documentElement.outerHTML, miss };
     }, { lang, AR, META, BASE, FONTS });
@@ -88,10 +90,11 @@ function out(rel, html) {
 
   // OG image 1200x630
   const og = await browser.newPage({ viewport: { width: 1200, height: 630 } });
-  await og.setContent(`<html><head><link href="${FONTS.en}" rel="stylesheet"></head><body style="margin:0;width:1200px;height:630px;background:radial-gradient(700px 400px at 85% 10%,rgba(212,155,53,.18),transparent 70%),#07090C;color:#F5F7FA;font-family:Inter,sans-serif;display:flex;flex-direction:column;justify-content:center;padding:0 88px;box-sizing:border-box">
-    <div style="display:flex;align-items:center;gap:14px;font-weight:700;letter-spacing:.06em;font-size:22px"><span style="width:40px;height:40px;border-radius:10px;background:#D49B35;color:#1A1205;display:grid;place-items:center">M</span>MEFTACARD <span style="color:#8B95A5;font-weight:500">STUDIO</span></div>
-    <div style="font-size:68px;font-weight:600;letter-spacing:-.03em;line-height:1.05;margin-top:40px;max-width:950px">Digital infrastructure for the companies that <span style="color:#D49B35">run the region.</span></div>
-    <div style="margin-top:36px;font-size:24px;color:#8B95A5">Web · Mobile · AI agents · SEO · 24/7 SLA — EN / AR</div></body></html>`, { waitUntil: 'networkidle' });
+  await og.setContent(`<html><head><link href="${FONTS.en}" rel="stylesheet"></head><body style="margin:0;width:1200px;height:630px;background:#FAFAF8;color:#16171A;font-family:Inter,sans-serif;display:flex;flex-direction:column;justify-content:center;padding:0 88px;box-sizing:border-box">
+    <div style="font-weight:700;font-size:24px;letter-spacing:-.01em">MEFTACARD <span style="font-weight:400;color:#5C5F66">Studio</span></div>
+    <div style="font-size:66px;font-weight:600;letter-spacing:-.035em;line-height:1.05;margin-top:36px;max-width:980px">Websites, apps and AI agents for businesses in Iraq and the Gulf.</div>
+    <div style="margin-top:36px;font-size:24px;color:#5C5F66">From $1,250 · Arabic &amp; English · Paid in USDT</div>
+    <div style="position:absolute;left:88px;bottom:0;width:120px;height:8px;background:#C2410C"></div></body></html>`, { waitUntil: 'networkidle' });
   fs.mkdirSync(path.join(ROOT, 'dist/studio'), { recursive: true });
   await og.screenshot({ path: path.join(ROOT, 'dist/studio/og.png') });
   console.log('wrote dist/studio/og.png');

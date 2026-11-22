@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shatt Logistics app — concept</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#E9EEF2;--ink:#0D1B24;--ink2:#5E6E7A;--lime:#C8F04A;--teal:#0E6B73}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--ink);font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:auto;padding:0 48px;display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;min-height:900px}
+.logo{font-weight:700;font-size:20px;letter-spacing:-.02em;margin-bottom:80px;display:flex;gap:8px;align-items:center}.logo i{width:22px;height:22px;background:var(--ink);border-radius:6px;display:inline-block;position:relative}.logo i::after{content:"";position:absolute;width:8px;height:8px;background:var(--lime);border-radius:50%;top:7px;left:7px}
+h1{font-size:64px;line-height:1.02;letter-spacing:-.04em;font-weight:600}.p{font-size:18px;color:var(--ink2);line-height:1.55;margin-top:22px;max-width:42ch}
+.stores{display:flex;gap:12px;margin-top:34px}.stores a{background:var(--ink);color:#fff;border-radius:12px;padding:12px 18px;font-size:13px;line-height:1.2}.stores b{display:block;font-size:16px}
+.phones{position:relative;height:760px}
+.ph{position:absolute;width:320px;height:660px;background:#fff;border-radius:46px;border:10px solid #0D1B24;overflow:hidden;box-shadow:0 40px 80px rgba(13,27,36,.25)}
+.ph1{right:200px;top:20px}.ph2{right:0;top:90px;transform:rotate(4deg)}
+.bar{height:44px;display:flex;justify-content:space-between;padding:14px 22px 0;font-size:12px;font-weight:600}
+.map{height:330px;background:#DCE6E4;position:relative}
+.sheet{padding:18px 20px}.sheet small{color:var(--ink2);font-size:12px}.sheet h4{font-size:20px;margin:4px 0 14px}
+.step{display:grid;grid-template-columns:16px 1fr auto;gap:10px;font-size:13px;padding:7px 0;align-items:center}.dot{width:10px;height:10px;border-radius:50%;background:var(--teal)}.off{background:#C9D3D8}
+.eta{background:var(--lime);border-radius:14px;padding:12px 14px;margin-top:12px;font-weight:600;font-size:14px;display:flex;justify-content:space-between}
+.list{padding:8px 18px}.it{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid #EEF2F4;font-size:13px}.it b{display:block;font-size:14px;margin-bottom:3px}.tag{font-size:11px;padding:4px 8px;border-radius:20px;background:#E6F4EA;color:#1D7A44;height:fit-content}
+</style></head><body>
+<div class="wrap">
+  <div>
+    <div class="logo"><i></i>Shatt</div>
+    <h1>Every container from Umm Qasr to your door, live.</h1>
+    <p class="p">Book trucks, track shipments and clear documents from one app, in Arabic and English, for importers across Iraq.</p>
+    <div class="stores"><a>Download on the<b>App Store</b></a><a>Get it on<b>Google Play</b></a></div>
+  </div>
+  <div class="phones">
+    <div class="ph ph1"><div class="bar"><span>9:41</span><span>●●●</span></div>
+      <div class="map"><svg viewBox="0 0 300 330" width="100%" height="100%"><path d="M0 250 C60 230 80 160 140 150 S240 90 300 70" stroke="#fff" stroke-width="16" fill="none"/><path d="M40 330 L120 0" stroke="#fff" stroke-width="10"/><path d="M30 262 C80 240 100 170 150 160 S220 112 250 98" stroke="#0E6B73" stroke-width="4" fill="none" stroke-dasharray="1 0"/><circle cx="30" cy="262" r="8" fill="#0D1B24"/><circle cx="250" cy="98" r="10" fill="#C8F04A" stroke="#0D1B24" stroke-width="3"/><rect x="138" y="146" width="26" height="16" rx="4" fill="#0D1B24"/></svg></div>
+      <div class="sheet"><small>Container MSKU 284 1937</small><h4>On the way to Baghdad</h4>
+        <div class="step"><span class="dot"></span>Released, Umm Qasr<span>08:10</span></div><div class="step"><span class="dot"></span>Customs cleared<span>10:42</span></div><div class="step"><span class="dot off"></span>Delivery, Al-Jadriya<span>—</span></div>
+        <div class="eta"><span>Arrives</span><span>Today 18:30</span></div></div></div>
+    <div class="ph ph2"><div class="bar"><span>9:41</span><span>●●●</span></div>
+      <div class="sheet"><small>Shipments</small><h4>Active (3)</h4></div>
+      <div class="list"><div class="it"><div><b>MSKU 284 1937</b>Umm Qasr → Baghdad</div><span class="tag">On time</span></div><div class="it"><div><b>TGHU 771 0264</b>Umm Qasr → Erbil</div><span class="tag">On time</span></div><div class="it"><div><b>CMAU 903 5518</b>Customs, Basra</div><span class="tag" style="background:#FFF4D6;color:#8A5A00">Docs needed</span></div></div></div>
+  </div>
+</div></body></html>
