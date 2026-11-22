@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MEFTACARD Studio — Digital Architecture & Growth Engineering for MENA</title>
-<meta name="description" content="Enterprise web platforms, mobile apps, AI agents, SEO and 24/7 SLA support for oil, gas, industrial and trade companies across the GCC and Iraq. EN/AR. Wire or USDT settlement.">
+<meta name="description" content="Enterprise web platforms, mobile apps, AI agents, SEO and 24/7 SLA support for oil, gas, industrial and trade companies across the GCC and Iraq. EN/AR. Payment in USDT (Tether). In-person support on Trade and Enterprise tracks.">
 <link rel="canonical" href="https://meftacard.com/studio/">
 <link rel="alternate" hreflang="en" href="https://meftacard.com/studio/">
 <link rel="alternate" hreflang="ar" href="https://meftacard.com/ar/studio/">
@@ -28,7 +28,8 @@
   "description": "Digital architecture and growth engineering: web platforms, mobile apps, AI agents, SEO and SLA support for enterprise, trade and local businesses in the Middle East.",
   "areaServed": ["AE","SA","QA","OM","KW","IQ"],
   "availableLanguage": ["en","ar"],
-  "paymentAccepted": "Bank wire transfer, USDT",
+  "paymentAccepted": "USDT (Tether)",
+  "sameAs": ["https://t.me/meftacard"],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Growth tracks",
@@ -46,7 +47,8 @@
   "@type": "FAQPage",
   "mainEntity": [
     {"@type": "Question", "name": "Do you build in Arabic and English?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every track ships natively in English (LTR) and Arabic (RTL) with correct hreflang, typography and search setup for each market."}},
-    {"@type": "Question", "name": "How can we pay?", "acceptedAnswer": {"@type": "Answer", "text": "International bank wire or USDT. Enterprise engagements are invoiced by milestone."}},
+    {"@type": "Question", "name": "How can we pay?", "acceptedAnswer": {"@type": "Answer", "text": "All payments are settled in USDT (Tether) on TRC-20 or ERC-20. Enterprise engagements are paid by signed-off milestone."}},
+    {"@type": "Question", "name": "Do you offer in-person support?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The Trade & Export ($2,250) and Enterprise ($25,000+) tracks include in-person support: on-site kickoff, team training and support visits. The Local track is supported remotely."}},
     {"@type": "Question", "name": "Who owns the code and accounts?", "acceptedAnswer": {"@type": "Answer", "text": "You do. Source code, domains, hosting, analytics and ad accounts are registered to your company from day one."}}
   ]
 }
@@ -247,8 +249,11 @@ footer{border-top:1px solid var(--line);padding-block:40px;color:var(--ink-3);fo
 footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
 
 /* Floating WhatsApp */
-.wa-float{position:fixed;inset-block-end:20px;inset-inline-end:20px;z-index:45;width:56px;height:56px;border-radius:50%;background:#25d366;color:#08240f;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.4)}
-.wa-float svg{width:28px;height:28px}
+.floats{position:fixed;inset-block-end:20px;inset-inline-end:20px;z-index:45;display:grid;gap:12px}
+.float-wa{background:#25D366;color:#08240f}
+.float-tg{background:#229ED9;color:#fff}
+.float{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.float svg{width:28px;height:28px}
 
 /* Modal */
 dialog{margin:auto;border:1px solid var(--line-2);border-radius:var(--radius-card);background:var(--bg-surface-elevated);color:var(--ink);width:min(640px,calc(100% - 32px));max-height:calc(100dvh - 32px);padding:0}
@@ -267,6 +272,12 @@ form.consult{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:24px 28
 .consult .btn{grid-column:1/-1;width:100%;margin-top:6px}
 .fine{grid-column:1/-1;font-size:12px;color:var(--ink-3);text-align:center}
 @media (max-width:560px){form.consult{grid-template-columns:1fr}}
+
+.terms{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.term{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-2);border:1px solid var(--line);background:var(--bg-surface);border-radius:var(--radius-badge);padding:7px 14px}
+.term b{color:var(--accent-amber);font-weight:600}
+ul.stack li.onsite{color:var(--text-primary);font-weight:500}
+ul.stack li.onsite::before{background-color:var(--accent-emerald-soft)}
 
 /* Keep numbers/prices LTR inside Arabic */
 .metric b,.price b,.spot-price b{direction:ltr;unicode-bidi:isolate}
@@ -357,6 +368,11 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
       <p class="eyebrow" data-i18n="tr_eyebrow">Three tracks</p>
       <h2 data-i18n="tr_h2">Choose the track that matches your scale.</h2>
       <p class="lead" data-i18n="tr_lead">Fixed scope, fixed price, fixed timeline. Every track is bilingual, mobile-first and built on the same engineering standard.</p>
+      <div class="terms">
+        <span class="term"><b>₮</b><span data-i18n="term_pay">All payments in USDT (Tether)</span></span>
+        <span class="term"><b>●</b><span data-i18n="term_onsite">In-person support on the $2,250 and $25,000+ tracks</span></span>
+        <span class="term"><b>✈</b><span data-i18n="term_tg">Tap any package to message us on Telegram</span></span>
+      </div>
     </div>
 
     <div class="tiers">
@@ -364,7 +380,7 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
       <article class="tier">
         <p class="track" data-i18n="t1_track">Track 01 · Local</p>
         <h3 data-i18n="t1_name">Local Growth Engine</h3>
-        <div class="price"><b>$1,250</b><span data-i18n="once">one-time</span></div>
+        <div class="price"><b>$1,250</b><span data-i18n="once">one-time · USDT</span></div>
         <p class="for" data-i18n="t1_for">For specialty retail, auto and industrial parts workshops, technical service centers and local businesses.</p>
         <p class="promise" data-i18n="t1_promise">Stop losing high-intent local buyers on Google Maps and search to competitors.</p>
         <ul class="stack">
@@ -376,14 +392,14 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
           <li data-i18n="t1_d6">30 days of support after launch</li>
         </ul>
         <p class="guarantee" data-i18n="t1_g">Live in 14 days. If we miss the date, your next month of support is free.</p>
-        <button class="btn btn-ghost" type="button" data-open-consult="local" data-i18n="t1_cta">Start the Local track</button>
+        <a class="btn btn-ghost js-tg" href="https://t.me/meftacard" data-tg-msg="local" target="_blank" rel="noopener" data-i18n="t1_cta">Start the Local track</a>
       </article>
 
       <!-- TIER 2 -->
       <article class="tier">
         <p class="track" data-i18n="t2_track">Track 02 · Trade &amp; Export</p>
         <h3 data-i18n="t2_name">Trade &amp; Export Engine</h3>
-        <div class="price"><b>$2,250</b><span data-i18n="once">one-time</span></div>
+        <div class="price"><b>$2,250</b><span data-i18n="once">one-time · USDT</span></div>
         <p class="for" data-i18n="t2_for">For distributors, manufacturers, traders and exporters selling across borders.</p>
         <p class="promise" data-i18n="t2_promise">Turn international search traffic into qualified RFQs from buyers in the Gulf and beyond.</p>
         <ul class="stack">
@@ -393,9 +409,10 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
           <li data-i18n="t2_d4">International technical SEO: hreflang, 25 export keywords</li>
           <li data-i18n="t2_d5">CRM or WhatsApp Business integration</li>
           <li data-i18n="t2_d6">60 days of support and two optimization sprints</li>
+          <li class="onsite" data-i18n="t2_d7">In-person support: on-site kickoff and team training</li>
         </ul>
         <p class="guarantee" data-i18n="t2_g">Live in 30 days. If we miss the date, your next month of support is free.</p>
-        <button class="btn btn-ghost" type="button" data-open-consult="trade" data-i18n="t2_cta">Start the Trade track</button>
+        <a class="btn btn-ghost js-tg" href="https://t.me/meftacard" data-tg-msg="trade" target="_blank" rel="noopener" data-i18n="t2_cta">Start the Trade track</a>
       </article>
 
       <!-- TIER 3 -->
@@ -403,7 +420,7 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
         <span class="badge" data-i18n="t3_badge">Flagship</span>
         <p class="track" data-i18n="t3_track">Track 03 · Enterprise</p>
         <h3 data-i18n="t3_name">Enterprise Turnkey Ecosystem</h3>
-        <div class="price"><b>$25,000+</b><span data-i18n="t3_unit">by milestone</span></div>
+        <div class="price"><b>$25,000+</b><span data-i18n="t3_unit">by milestone · USDT</span></div>
         <p class="for" data-i18n="t3_for">For oil, gas, petrochemical, industrial and group-level companies.</p>
         <p class="promise" data-i18n="t3_promise">Your entire digital estate, designed, built and operated as one system, from zero to one hundred.</p>
         <ul class="stack">
@@ -413,15 +430,16 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
           <li data-i18n="t3_d4">Multi-market enterprise SEO</li>
           <li data-i18n="t3_d5">24/7 SLA support with 99.9% uptime</li>
           <li data-i18n="t3_d6">Full 0-to-100 execution and PMO</li>
+          <li class="onsite" data-i18n="t3_d7">Dedicated in-person support team and on-site executive workshops</li>
         </ul>
         <p class="guarantee" data-i18n="t3_g">Milestone billing: you pay for each phase only after you sign it off.</p>
-        <button class="btn btn-gold" type="button" data-open-consult="enterprise" data-i18n="t3_cta">Request an executive briefing</button>
+        <a class="btn btn-gold js-tg" href="https://t.me/meftacard" data-tg-msg="enterprise" target="_blank" rel="noopener" data-i18n="t3_cta">Request an executive briefing</a>
       </article>
     </div>
 
     <div class="continuity">
       <p data-i18n="cont_p"><strong>Continuity: Care &amp; Growth retainer.</strong> After launch on any track, keep a monthly team for updates, security, content and SEO. Scoped to your site, cancel any month.</p>
-      <button class="btn btn-ghost" type="button" data-open-consult="retainer" data-i18n="cont_cta">Ask about the retainer</button>
+      <a class="btn btn-ghost js-tg" href="https://t.me/meftacard" data-tg-msg="retainer" target="_blank" rel="noopener" data-i18n="cont_cta">Ask about the retainer</a>
     </div>
   </div>
 </section>
@@ -437,7 +455,7 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
       </div>
       <div class="spot-price">
         <b>$25,000+</b>
-        <span data-i18n="sp_price">Typical engagement: 12 to 16 weeks to launch, then ongoing SLA. Invoiced by signed-off milestone, via bank wire or USDT.</span>
+        <span data-i18n="sp_price">Typical engagement: 12 to 16 weeks to launch, then ongoing SLA. Paid by signed-off milestone in USDT (Tether), with in-person support throughout.</span>
       </div>
     </div>
 
@@ -470,7 +488,7 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3 data-i18n="m5_h">24/7 SLA support</h3>
         <p data-i18n="m5_p">Contracted response times, monitoring and security, around the clock.</p>
-        <ul><li data-i18n="m5_a">99.9% uptime commitment</li><li data-i18n="m5_b">15-minute critical response</li><li data-i18n="m5_c">Backups, patching, security monitoring</li></ul>
+        <ul><li data-i18n="m5_a">99.9% uptime commitment</li><li data-i18n="m5_b">15-minute critical response</li><li data-i18n="m5_c">Backups, patching, security monitoring</li><li data-i18n="m5_d">In-person support visits at your site</li></ul>
       </article>
       <article class="module">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 18l5-5 4 4 7-8"/><path d="M15 9h5v5"/></svg></div>
@@ -488,8 +506,8 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
     </div>
 
     <div class="spot-cta">
-      <button class="btn btn-gold" type="button" data-open-consult="enterprise" data-i18n="sp_cta">Request an executive briefing</button>
-      <a class="btn btn-ghost js-wa" href="#" data-wa-msg="enterprise" target="_blank" rel="noopener" data-i18n="sp_wa">Message us on WhatsApp</a>
+      <a class="btn btn-gold js-tg" href="https://t.me/meftacard" data-tg-msg="enterprise" target="_blank" rel="noopener" data-i18n="sp_cta">Request an executive briefing</a>
+      <a class="btn btn-ghost js-tg" href="https://t.me/meftacard" data-tg-msg="enterprise" target="_blank" rel="noopener" data-i18n="sp_wa">Message @meftacard on Telegram</a>
     </div>
   </div>
 </section>
@@ -503,7 +521,7 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
     </div>
     <div class="guards">
       <div class="guard"><h3 data-i18n="g1_h">Fixed scope, fixed price</h3><p data-i18n="g1_p">The price on the statement of work is the price you pay. Changes are quoted in writing before any work starts.</p></div>
-      <div class="guard"><h3 data-i18n="g2_h">Pay on sign-off</h3><p data-i18n="g2_p">Enterprise milestones are invoiced only after your team signs them off. Local and Trade tracks: 50% to start, 50% at launch.</p></div>
+      <div class="guard"><h3 data-i18n="g2_h">Pay on sign-off</h3><p data-i18n="g2_p">Enterprise milestones are invoiced only after your team signs them off. Local and Trade tracks: 50% to start, 50% at launch. All in USDT.</p></div>
       <div class="guard"><h3 data-i18n="g3_h">You own everything</h3><p data-i18n="g3_p">Code, design files, domains and accounts are yours. If you ever leave, you take it all, with documentation.</p></div>
     </div>
   </div>
@@ -518,8 +536,9 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
     </div>
     <div class="faq">
       <details><summary data-i18n="q1">Do you build in Arabic and English?</summary><p data-i18n="a1">Yes. Every track ships natively in English (LTR) and Arabic (RTL), with correct typography, hreflang and search setup for each market. Not a translation plugin.</p></details>
-      <details><summary data-i18n="q2">How can we pay?</summary><p data-i18n="a2">International bank wire or USDT. Enterprise engagements are invoiced by signed-off milestone.</p></details>
-      <details><summary data-i18n="q3">Which countries do you serve?</summary><p data-i18n="a3">The UAE, Saudi Arabia, Qatar, Oman, Kuwait and Iraq, with remote delivery and in-person workshops for Enterprise engagements.</p></details>
+      <details><summary data-i18n="q2">How can we pay?</summary><p data-i18n="a2">All payments are settled in USDT (Tether) on TRC-20 or ERC-20. Enterprise engagements are paid by signed-off milestone.</p></details>
+      <details><summary data-i18n="q6">Do you offer in-person support?</summary><p data-i18n="a6">Yes. The Trade &amp; Export ($2,250) and Enterprise ($25,000+) tracks include in-person support: on-site kickoff, team training and support visits. The Local track is supported remotely.</p></details>
+      <details><summary data-i18n="q3">Which countries do you serve?</summary><p data-i18n="a3">The UAE, Saudi Arabia, Qatar, Oman, Kuwait and Iraq, with remote delivery for every track and in-person support on the Trade and Enterprise tracks.</p></details>
       <details><summary data-i18n="q4">Can we start with one track and upgrade later?</summary><p data-i18n="a4">Yes. Local and Trade builds use the same architecture as Enterprise, so nothing is thrown away when you scale up.</p></details>
       <details><summary data-i18n="q5">Who owns the code and the accounts?</summary><p data-i18n="a5">You do. Source code, domains, hosting, analytics and ad accounts are registered to your company from day one.</p></details>
     </div>
@@ -536,12 +555,13 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
     </div>
     <div class="hero-cta">
       <button class="btn btn-gold" type="button" data-open-consult="enterprise" data-i18n="fc_cta">Book an executive consultation</button>
-      <a class="btn btn-ghost js-wa" href="#" data-wa-msg="general" target="_blank" rel="noopener" data-i18n="fc_wa">WhatsApp us directly</a>
+      <a class="btn btn-ghost js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener" data-i18n="fc_wa">Telegram: @meftacard</a>
+      <a class="btn btn-ghost js-wa" href="#" data-wa-msg="general" data-i18n="fc_wa2">Message us on WhatsApp</a>
     </div>
     <div class="settle" aria-label="Settlement options">
-      <span class="chip" data-i18n="st_1">Bank wire (USD / AED / SAR)</span>
-      <span class="chip" data-i18n="st_2">USDT (TRC-20 / ERC-20)</span>
-      <span class="chip" data-i18n="st_3">Milestone invoicing</span>
+      <span class="chip" data-i18n="st_1">Payment in USDT (Tether) · TRC-20 / ERC-20</span>
+      <span class="chip" data-i18n="st_2">In-person support · $2,250 &amp; $25,000+</span>
+      <span class="chip" data-i18n="st_3">Telegram @meftacard · WhatsApp</span>
     </div>
   </div>
 </section>
@@ -555,16 +575,21 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
   </div>
 </footer>
 
-<a class="wa-float js-wa" href="#" data-wa-msg="general" target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.9 11.9 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.2-1.2c-.1-.1-.3-.2-.5-.3z"/></svg>
+<div class="floats">
+  <a class="float float-wa js-wa" href="#" data-wa-msg="general" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.9 11.9 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.2-1.2c-.1-.1-.3-.2-.5-.3z"/></svg>
+  </a>
+  <a class="float float-tg js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener" aria-label="Telegram @meftacard">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3l-3.2 15.2c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.1l-4.8-1.5c-1-.3-1.1-1 .2-1.5L20.5 2.9c.9-.3 1.6.2 1.4 1.4z"/></svg>
 </a>
+</div>
 
 <!-- CONSULTATION MODAL -->
 <dialog id="consult" aria-labelledby="consult-title">
   <div class="m-head">
     <div>
       <h2 id="consult-title" data-i18n="md_h">Executive consultation</h2>
-      <p data-i18n="md_p">Thirty minutes with a principal. Your request goes straight to our team on WhatsApp.</p>
+      <p data-i18n="md_p">Thirty minutes with a principal. Your request goes straight to our team on Telegram or WhatsApp.</p>
     </div>
     <button class="x" type="button" data-close aria-label="Close">×</button>
   </div>
@@ -591,22 +616,19 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
         <option value="retainer" data-i18n="o_ret">Care &amp; Growth retainer</option>
       </select>
     </div>
-    <div class="field"><label for="f-pay" data-i18n="fl_pay">Preferred settlement</label>
-      <select id="f-pay" name="pay">
-        <option data-i18n="o_wire">Bank wire</option>
-        <option data-i18n="o_usdt">USDT</option>
-        <option data-i18n="o_undecided">Not decided</option>
-      </select>
-    </div>
+    <div class="field"><label data-i18n="fl_pay">Settlement</label><input value="USDT (Tether)" readonly aria-readonly="true" tabindex="-1" data-i18n-skip></div>
     <div class="field full"><label for="f-msg" data-i18n="fl_msg">What do you need to achieve?</label><textarea id="f-msg" name="msg"></textarea></div>
-    <button class="btn btn-gold" type="submit" data-i18n="fl_submit">Send via WhatsApp</button>
+    <button class="btn btn-gold" type="submit" value="tg" data-i18n="fl_submit">Send via Telegram</button>
+    <button class="btn btn-ghost" type="submit" value="wa" data-i18n="fl_submit_wa">Send via WhatsApp</button>
     <p class="fine" data-i18n="fl_fine">We reply within one business day. Your details are used only to respond to this request.</p>
   </form>
 </dialog>
 
 <script>
 /* ========= CONFIG — set before going live ========= */
-const WHATSAPP_NUMBER = ""; // international format, digits only, e.g. "9647XXXXXXXXX". Empty = WhatsApp asks the visitor to pick a contact.
+const TELEGRAM_USER = "meftacard";
+// WhatsApp number is assembled at click time so it never appears in the page text or link hover.
+const WA_PARTS = ["98","919","129","9559"];
 
 /* ========= ARABIC COPY (English is read from the HTML) ========= */
 const AR = {
@@ -625,7 +647,8 @@ const AR = {
   p3_h:"نتائج مقاسة لا وعود", p3_p:"كل مشروع يأتي بلوحة متابعة مباشرة: السرعة والترتيب والعملاء المحتملون ووقت التشغيل، بتقرير أسبوعي للراعي التنفيذي.",
   tr_eyebrow:"ثلاثة مسارات", tr_h2:"اختر المسار الذي يناسب حجم أعمالك.",
   tr_lead:"نطاق ثابت وسعر ثابت وجدول زمني ثابت. كل المسارات ثنائية اللغة، مصممة للجوال أولاً، ومبنية بالمعيار الهندسي نفسه.",
-  once:"دفعة واحدة",
+  once:"دفعة واحدة · USDT",
+  term_pay:"جميع المدفوعات بـ USDT (تيثر)", term_onsite:"دعم حضوري لمسار 2,250$ ومسار المؤسسات (من 25,000$)", term_tg:"اضغط على أي باقة لمراسلتنا على تيليغرام",
   t1_track:"المسار 01 · محلي", t1_name:"محرك النمو المحلي",
   t1_for:"لمتاجر التجزئة المتخصصة، وورش قطع غيار السيارات والمعدات، ومراكز الخدمة الفنية، والأعمال المحلية.",
   t1_promise:"توقّف عن خسارة العملاء الجاهزين للشراء لصالح منافسيك على خرائط Google ونتائج البحث.",
@@ -636,19 +659,19 @@ const AR = {
   t2_for:"للموزعين والمصنّعين والتجار والمصدّرين الذين يبيعون عبر الحدود.",
   t2_promise:"حوّل زيارات البحث الدولية إلى طلبات عروض أسعار مؤهلة من مشترين في الخليج وخارجه.",
   t2_d1:"موقع كتالوج متعدد اللغات (عربي/إنجليزي ولغة إضافية)", t2_d2:"كتالوج منتجات ومواصفات مع نشرات فنية قابلة للتنزيل", t2_d3:"مسار طلب عرض سعر للشركات يصل إلى واتساب والبريد",
-  t2_d4:"سيو تقني دولي: hreflang و25 كلمة مفتاحية للتصدير", t2_d5:"ربط مع نظام إدارة العملاء أو واتساب للأعمال", t2_d6:"60 يوماً من الدعم ودورتا تحسين",
+  t2_d4:"سيو تقني دولي: hreflang و25 كلمة مفتاحية للتصدير", t2_d5:"ربط مع نظام إدارة العملاء أو واتساب للأعمال", t2_d6:"60 يوماً من الدعم ودورتا تحسين", t2_d7:"دعم حضوري: انطلاق المشروع في موقعكم وتدريب الفريق",
   t2_g:"الإطلاق خلال 30 يوماً. إن تأخرنا، يكون الشهر التالي من الدعم مجاناً.", t2_cta:"ابدأ مسار التجارة",
-  t3_badge:"الباقة الرائدة", t3_track:"المسار 03 · المؤسسات", t3_name:"منظومة المؤسسات المتكاملة", t3_unit:"حسب المراحل",
+  t3_badge:"الباقة الرائدة", t3_track:"المسار 03 · المؤسسات", t3_name:"منظومة المؤسسات المتكاملة", t3_unit:"حسب المراحل · USDT",
   t3_for:"لشركات النفط والغاز والبتروكيماويات والصناعة والمجموعات الكبرى.",
   t3_promise:"منظومتك الرقمية بالكامل، تصميماً وبناءً وتشغيلاً كنظام واحد، من الصفر إلى المئة.",
   t3_d1:"منصة ويب مؤسسية وبوابات", t3_d2:"تطبيق iOS وAndroid", t3_d3:"وكلاء ذكاء اصطناعي ثنائيو اللغة على بياناتك الخاصة",
-  t3_d4:"سيو مؤسسي متعدد الأسواق", t3_d5:"دعم على مدار الساعة مع ضمان تشغيل 99.9%", t3_d6:"تنفيذ كامل من الصفر إلى المئة مع مكتب إدارة مشاريع",
+  t3_d4:"سيو مؤسسي متعدد الأسواق", t3_d5:"دعم على مدار الساعة مع ضمان تشغيل 99.9%", t3_d6:"تنفيذ كامل من الصفر إلى المئة مع مكتب إدارة مشاريع", t3_d7:"فريق دعم حضوري مخصص وورش عمل تنفيذية في موقعكم",
   t3_g:"الدفع حسب المراحل: تدفع مقابل كل مرحلة فقط بعد اعتمادها.", t3_cta:"اطلب إحاطة تنفيذية",
   cont_p:"<strong>الاستمرارية: باقة الرعاية والنمو.</strong> بعد الإطلاق في أي مسار، احتفظ بفريق شهري للتحديثات والأمان والمحتوى والسيو. حسب نطاق موقعك، ويمكن الإلغاء في أي شهر.",
   cont_cta:"اسأل عن الباقة الشهرية",
   sp_eyebrow:"الباقة الرائدة · منظومة المؤسسات المتكاملة", sp_h2:"ستة أنظمة. عقد واحد. بلا تسليم بين الجهات.",
   sp_lead:"للشركات التي يكلّفها الموقع البطيء أو طلب العرض الضائع أو تحديث التطبيق الفاشل خسارة حقيقية. نصمم المنظومة كاملة ونبنيها ونشغّلها، ونبقى مسؤولين عن النتيجة.",
-  sp_price:"المدة المعتادة: من 12 إلى 16 أسبوعاً حتى الإطلاق، ثم دعم مستمر بموجب اتفاقية مستوى الخدمة. الفوترة حسب المراحل المعتمدة، بتحويل بنكي أو USDT.",
+  sp_price:"المدة المعتادة: من 12 إلى 16 أسبوعاً حتى الإطلاق، ثم دعم مستمر بموجب اتفاقية مستوى الخدمة. الدفع حسب المراحل المعتمدة بعملة USDT (تيثر)، مع دعم حضوري طوال المشروع.",
   m1_h:"منصة ويب مؤسسية", m1_p:"موقع مؤسسي وبوابات تصمد أمام تدقيق المشتريات والمستثمرين والجهات الرقابية.",
   m1_a:"أقسام الشركة والمستثمرين والصحة والسلامة والبيئة", m1_b:"بوابة الموردين والمناقصات", m1_c:"نظام إدارة محتوى مرن مع خيار استضافة داخل المنطقة",
   m2_h:"تطبيق الجوال", m2_p:"تطبيقات iOS وAndroid بجودة أصلية لفرق العمل الميدانية أو الموزعين أو العملاء.",
@@ -658,44 +681,52 @@ const AR = {
   m4_h:"سيو المؤسسات", m4_p:"ظهور في Google وفي إجابات الذكاء الاصطناعي في كل سوق تبيع فيه.",
   m4_a:"بنية hreflang متعددة الأسواق", m4_b:"تقسيم موضوعي وتحسين الكيانات", m4_c:"برنامج تحريري شهري ثنائي اللغة",
   m5_h:"دعم على مدار الساعة", m5_p:"أزمنة استجابة تعاقدية ومراقبة وأمان طوال الوقت.",
-  m5_a:"التزام بوقت تشغيل 99.9%", m5_b:"استجابة خلال 15 دقيقة للأعطال الحرجة", m5_c:"نسخ احتياطي وتحديثات ومراقبة أمنية",
+  m5_a:"التزام بوقت تشغيل 99.9%", m5_b:"استجابة خلال 15 دقيقة للأعطال الحرجة", m5_c:"نسخ احتياطي وتحديثات ومراقبة أمنية", m5_d:"زيارات دعم حضورية في موقعكم",
   m6_h:"تنفيذ من الصفر إلى المئة", m6_p:"من الاكتشاف إلى الإطلاق إلى التوسع، بإدارة مكتب مشاريع مخصص يرفع تقاريره إلى الراعي التنفيذي.",
   m6_a:"اكتشاف ومخطط معماري", m6_b:"تقارير تنفيذية أسبوعية", m6_c:"تدريب وتسليم موثق",
   ph1_w:"الأسبوع 1–2", ph1_b:"التشخيص", ph1_s:"تدقيق، أصحاب المصلحة، المخطط",
   ph2_w:"الأسبوع 3–5", ph2_b:"التصميم المعماري", ph2_s:"تجربة المستخدم، نموذج البيانات، خطة المحتوى",
   ph3_w:"الأسبوع 6–14", ph3_b:"البناء", ph3_s:"الويب والتطبيق والوكلاء على دفعات",
   ph4_w:"من الأسبوع 15", ph4_b:"التشغيل والتوسع", ph4_s:"اتفاقية الخدمة، السيو، نمو مستمر",
-  sp_cta:"اطلب إحاطة تنفيذية", sp_wa:"راسلنا على واتساب",
+  sp_cta:"اطلب إحاطة تنفيذية", sp_wa:"راسل @meftacard على تيليغرام",
   g_eyebrow:"عكس المخاطر", g_h2:"نحن نتحمل مخاطر التنفيذ، لا أنت.",
   g1_h:"نطاق ثابت وسعر ثابت", g1_p:"السعر المكتوب في نطاق العمل هو ما تدفعه. أي تغيير يُسعَّر كتابياً قبل بدء العمل.",
-  g2_h:"الدفع بعد الاعتماد", g2_p:"مراحل المؤسسات تُفوتر فقط بعد اعتماد فريقك. المساران المحلي والتجاري: 50% عند البدء و50% عند الإطلاق.",
+  g2_h:"الدفع بعد الاعتماد", g2_p:"مراحل المؤسسات تُفوتر فقط بعد اعتماد فريقك. المساران المحلي والتجاري: 50% عند البدء و50% عند الإطلاق. الدفع كله بـ USDT.",
   g3_h:"كل شيء ملكك", g3_p:"الكود وملفات التصميم والنطاقات والحسابات ملكك. إن قررت المغادرة، تأخذ كل شيء مع التوثيق.",
   f_eyebrow:"الأسئلة", f_h2:"قبل أن تحجز.",
   q1:"هل تبنون بالعربية والإنجليزية؟", a1:"نعم. كل المسارات تُسلَّم أصلاً بالإنجليزية (من اليسار لليمين) والعربية (من اليمين لليسار)، مع طباعة صحيحة وhreflang وإعداد بحث لكل سوق. ليست إضافة ترجمة.",
-  q2:"كيف يمكننا الدفع؟", a2:"تحويل بنكي دولي أو USDT. مشاريع المؤسسات تُفوتر حسب المراحل المعتمدة.",
-  q3:"ما الدول التي تخدمونها؟", a3:"الإمارات والسعودية وقطر وعُمان والكويت والعراق، بتنفيذ عن بُعد وورش عمل حضورية لمشاريع المؤسسات.",
+  q2:"كيف يمكننا الدفع؟", a2:"جميع المدفوعات بعملة USDT (تيثر) عبر شبكة TRC-20 أو ERC-20. مشاريع المؤسسات تُدفع حسب المراحل المعتمدة.",
+  q6:"هل تقدمون دعماً حضورياً؟", a6:"نعم. مسار التجارة والتصدير (2,250$) ومسار المؤسسات (من 25,000$) يشملان دعماً حضورياً: انطلاق المشروع في موقعكم، وتدريب الفريق، وزيارات دعم. المسار المحلي يُدعم عن بُعد.",
+  q3:"ما الدول التي تخدمونها؟", a3:"الإمارات والسعودية وقطر وعُمان والكويت والعراق، بتنفيذ عن بُعد لكل المسارات ودعم حضوري لمساري التجارة والمؤسسات.",
   q4:"هل يمكن البدء بمسار ثم الترقية لاحقاً؟", a4:"نعم. المساران المحلي والتجاري يستخدمان بنية المؤسسات نفسها، فلا يضيع شيء عند التوسع.",
   q5:"من يملك الكود والحسابات؟", a5:"أنت. الكود والنطاقات والاستضافة والتحليلات وحسابات الإعلانات مسجلة باسم شركتك من اليوم الأول.",
   fc_eyebrow:"الخطوة التالية", fc_h2:"إحاطة مدتها 30 دقيقة. وخطة مكتوبة خلال 72 ساعة.",
   fc_lead:"أخبرنا أين أنت الآن وإلى أين تريد الوصول. سنعود إليك بالنطاق والجدول الزمني وسعر ثابت، سواء عملت معنا أم لا.",
-  fc_cta:"احجز استشارة تنفيذية", fc_wa:"راسلنا مباشرة على واتساب",
-  st_1:"تحويل بنكي (دولار / درهم / ريال)", st_2:"USDT (TRC-20 / ERC-20)", st_3:"فوترة حسب المراحل",
+  fc_cta:"احجز استشارة تنفيذية", fc_wa:"تيليغرام: @meftacard", fc_wa2:"راسلنا على واتساب",
+  st_1:"الدفع بـ USDT (تيثر) · TRC-20 / ERC-20", st_2:"دعم حضوري · مسار 2,250$ ومسار المؤسسات", st_3:"تيليغرام @meftacard · واتساب",
   ft_1:"© 2026 MEFTACARD Studio · إحدى شركات MEFTACARD", ft_2:"الإمارات · السعودية · قطر · عُمان · الكويت · العراق",
-  md_h:"استشارة تنفيذية", md_p:"ثلاثون دقيقة مع أحد الشركاء. يصل طلبك مباشرة إلى فريقنا على واتساب.",
-  fl_name:"الاسم الكامل", fl_role:"المنصب", fl_company:"الشركة", fl_country:"الدولة", fl_track:"المسار", fl_pay:"طريقة التسوية المفضلة",
+  md_h:"استشارة تنفيذية", md_p:"ثلاثون دقيقة مع أحد الشركاء. يصل طلبك مباشرة إلى فريقنا على تيليغرام أو واتساب.",
+  fl_name:"الاسم الكامل", fl_role:"المنصب", fl_company:"الشركة", fl_country:"الدولة", fl_track:"المسار", fl_pay:"طريقة الدفع",
   c_ae:"الإمارات العربية المتحدة", c_sa:"المملكة العربية السعودية", c_qa:"قطر", c_om:"عُمان", c_kw:"الكويت", c_iq:"العراق", c_ot:"أخرى",
   o_ent:"منظومة المؤسسات (من 25,000$)", o_trade:"التجارة والتصدير (2,250$)", o_local:"النمو المحلي (1,250$)", o_ret:"باقة الرعاية والنمو",
-  o_wire:"تحويل بنكي", o_usdt:"USDT", o_undecided:"لم أقرر بعد",
-  fl_msg:"ما الذي تريد تحقيقه؟", fl_submit:"أرسل عبر واتساب", fl_fine:"نرد خلال يوم عمل واحد. تُستخدم بياناتك فقط للرد على هذا الطلب."
+  fl_msg:"ما الذي تريد تحقيقه؟", fl_submit:"أرسل عبر تيليغرام", fl_submit_wa:"أرسل عبر واتساب", fl_fine:"نرد خلال يوم عمل واحد. تُستخدم بياناتك فقط للرد على هذا الطلب."
 };
-const WA_MSG = {
-  en:{general:"Hello MEFTACARD Studio, I'd like to discuss a project.", enterprise:"Hello MEFTACARD Studio, I'd like an executive briefing on the Enterprise Turnkey Ecosystem."},
-  ar:{general:"مرحباً MEFTACARD Studio، أود مناقشة مشروع.", enterprise:"مرحباً MEFTACARD Studio، أود حجز إحاطة تنفيذية حول منظومة المؤسسات المتكاملة."}
+const MSG = {
+  en:{general:"Hello MEFTACARD Studio, I'd like to discuss a project.",
+      local:"Hello MEFTACARD Studio, I'd like to start the Local Growth Engine ($1,250).",
+      trade:"Hello MEFTACARD Studio, I'd like to start the Trade & Export Engine ($2,250).",
+      enterprise:"Hello MEFTACARD Studio, I'd like an executive briefing on the Enterprise Turnkey Ecosystem ($25,000+).",
+      retainer:"Hello MEFTACARD Studio, I'd like details on the Care & Growth retainer."},
+  ar:{general:"مرحباً MEFTACARD Studio، أود مناقشة مشروع.",
+      local:"مرحباً MEFTACARD Studio، أود البدء بباقة محرك النمو المحلي (1,250$).",
+      trade:"مرحباً MEFTACARD Studio، أود البدء بباقة محرك التجارة والتصدير (2,250$).",
+      enterprise:"مرحباً MEFTACARD Studio، أود حجز إحاطة تنفيذية حول منظومة المؤسسات المتكاملة (من 25,000$).",
+      retainer:"مرحباً MEFTACARD Studio، أود معرفة تفاصيل باقة الرعاية والنمو الشهرية."}
 };
 const TITLES = {
   en:{title:document.title, desc:document.querySelector('meta[name=description]').content},
   ar:{title:"MEFTACARD Studio — هندسة رقمية ونمو للشركات في الخليج والعراق",
-      desc:"منصات ويب وتطبيقات ووكلاء ذكاء اصطناعي وسيو ودعم على مدار الساعة لشركات النفط والغاز والصناعة والتجارة في الخليج والعراق. تحويل بنكي أو USDT."}
+      desc:"منصات ويب وتطبيقات ووكلاء ذكاء اصطناعي وسيو ودعم على مدار الساعة لشركات النفط والغاز والصناعة والتجارة في الخليج والعراق. الدفع بـ USDT ودعم حضوري لمساري التجارة والمؤسسات."}
 };
 
 /* ========= i18n ========= */
@@ -703,9 +734,11 @@ const EN = {};
 document.querySelectorAll('[data-i18n]').forEach(el => { EN[el.dataset.i18n] = el.innerHTML; });
 let lang = 'en';
 
-function waLink(text){
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-}
+function tgLink(text){ return `https://t.me/${TELEGRAM_USER}?text=${encodeURIComponent(text)}`; }
+function openWA(text){ window.open(`https://wa.me/${WA_PARTS.join('')}?text=${encodeURIComponent(text)}`, '_blank', 'noopener'); }
+document.querySelectorAll('.js-wa').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault(); openWA(MSG[lang][a.dataset.waMsg] || MSG[lang].general);
+}));
 function setLang(next){
   lang = next === 'ar' ? 'ar' : 'en';
   const dict = lang === 'ar' ? AR : EN;
@@ -717,7 +750,7 @@ function setLang(next){
   document.title = TITLES[lang].title;
   document.querySelector('meta[name=description]').content = TITLES[lang].desc;
   document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
-  document.querySelectorAll('.js-wa').forEach(a => { a.href = waLink(WA_MSG[lang][a.dataset.waMsg] || WA_MSG[lang].general); });
+  document.querySelectorAll('.js-tg').forEach(a => { a.href = tgLink(MSG[lang][a.dataset.tgMsg] || MSG[lang].general); });
   document.querySelectorAll('.flip').forEach(p => p.setAttribute('d', lang === 'ar' ? 'M13 4l-6 6 6 6' : 'M7 4l6 6-6 6'));
   const url = new URL(location.href); url.searchParams.set('lang', lang);
   try { history.replaceState(null, '', url); localStorage.setItem('ms_lang', lang); } catch(e){}
@@ -747,8 +780,8 @@ form.addEventListener('submit', e => {
   if (missing) { missing.focus(); missing.style.borderColor = '#d9705f'; return; }
   const sel = s => s.options[s.selectedIndex].text;
   const L = lang === 'ar'
-    ? ['طلب استشارة — MEFTACARD Studio','الاسم','المنصب','الشركة','الدولة','المسار','التسوية','الهدف']
-    : ['Consultation request — MEFTACARD Studio','Name','Role','Company','Country','Track','Settlement','Goal'];
+    ? ['طلب استشارة — MEFTACARD Studio','الاسم','المنصب','الشركة','الدولة','المسار','الدفع','الهدف']
+    : ['Consultation request — MEFTACARD Studio','Name','Role','Company','Country','Track','Payment','Goal'];
   const lines = [
     L[0], '',
     `${L[1]}: ${form.name.value.trim()}`,
@@ -756,10 +789,12 @@ form.addEventListener('submit', e => {
     `${L[3]}: ${form.company.value.trim()}`,
     `${L[4]}: ${sel(form.country)}`,
     `${L[5]}: ${sel(form.track)}`,
-    `${L[6]}: ${sel(form.pay)}`,
+    `${L[6]}: USDT (Tether)`,
     `${L[7]}: ${form.msg.value.trim() || '-'}`
   ];
-  window.open(waLink(lines.join('\n')), '_blank', 'noopener');
+  const text = lines.join('\n');
+  if (e.submitter && e.submitter.value === 'wa') openWA(text);
+  else window.open(tgLink(text), '_blank', 'noopener');
   dlg.close();
 });
 </script>
