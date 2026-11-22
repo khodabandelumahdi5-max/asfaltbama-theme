@@ -273,7 +273,7 @@ ${ld.map((j)=>`<script type="application/ld+json">${JSON.stringify(j)}</script>`
 
 <section id="services" style="padding-top:24px"><div class="wrap">
   <h2 style="font-size:clamp(26px,2.6vw,34px)">${t.svH}</h2>
-  <div class="svc5">${t.sv.map(([h,p])=>`<div><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join('')}</div>
+  <div class="svc5">${t.sv.map(([h,p],i)=>`<div><h3><a href="${t.studio}${['website-design','seo-services','website-support','ai-agents','app-design'][i]}/" style="border-bottom:1px solid var(--line-2)">${esc(h)}</a></h3><p>${esc(p)}</p></div>`).join('')}</div>
 </div></section>
 
 <section id="faq" style="padding-top:24px"><div class="wrap qa">
