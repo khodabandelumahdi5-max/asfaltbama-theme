@@ -19,7 +19,7 @@ Format: `- [ ] lang | slug | working title | focus keyword | links to (service o
 - [x] en | b2b-export-website-rfq | B2B export website | B2B export website
 
 ## Backlog
-- [x] ar | responsive-web-design-guide-ar | ما هو تصميم المواقع المتجاوبة ولماذا يهم عملك | تصميم مواقع متجاوبة | website-design | draft 244, 2026-11-22
+- [x] ar | responsive-web-design-guide-ar | ما هو تصميم المواقع المتجاوبة ولماذا يهم عملك | تصميم مواقع متجاوبة | website-design | published 244, 2026-11-22
 - [ ] en | landing-page-design-ads-gulf | Landing page design for Google and Instagram ads in the Gulf | landing page design | website-design
 - [ ] ar | ecommerce-website-iraq-payments-ar | تصميم متجر إلكتروني في العراق مع زين كاش وكي كارد | تصميم متجر إلكتروني في العراق | iraq
 - [ ] en | website-maintenance-checklist | Website maintenance checklist for business owners | website maintenance | website-support
