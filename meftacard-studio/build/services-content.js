@@ -6,7 +6,7 @@ module.exports = [
   read: { en: ['website-design-cost-gcc-2026', 'b2b-export-website-rfq', 'oil-and-gas-website-design'], ar: ['website-design-cost-iraq-ar', 'seo-iraq-guide-ar'] },
   en: {
     kw: 'website design', title: 'Website Design Company for Iraq & the Gulf | MEFTACARD Studio',
-    desc: 'Buy professional website design in Arabic and English. Fast, mobile-first business websites, catalogs and online stores from $1,250. Fully online, paid in Tether (USDT).',
+    desc: 'Buy professional website design in Arabic and English: fast, mobile-first business sites and online stores from $1,250. Fully online, paid in Tether.',
     h1: 'Website design that turns visitors into customers',
     intro: [
       'A website is usually the first place a customer checks before calling you. If it loads slowly, looks dated or is hard to use on a phone, they leave and call a competitor instead. We design business websites, product catalogs and online stores that are fast, clear and built to bring in enquiries.',
@@ -31,7 +31,7 @@ module.exports = [
   },
   ar: {
     kw: 'تصميم مواقع', title: 'شركة تصميم مواقع في العراق والخليج | MEFTACARD Studio',
-    desc: 'شراء خدمة تصميم مواقع احترافية بالعربية والإنجليزية: مواقع شركات وكتالوجات ومتاجر إلكترونية سريعة ومصممة للجوال، تبدأ من 1,250 دولاراً. أونلاين بالكامل، والدفع بعملة تيثر.',
+    desc: 'شراء تصميم مواقع احترافية بالعربية والإنجليزية: مواقع شركات ومتاجر إلكترونية سريعة ومصممة للجوال من 1,250 دولاراً، أونلاين والدفع بعملة تيثر.',
     h1: 'تصميم مواقع يحوّل الزوار إلى عملاء',
     intro: [
       'الموقع هو أول مكان يتحقق منه العميل عادة قبل أن يتصل بك. إذا كان بطيئاً أو قديم المظهر أو صعب الاستخدام على الجوال، يغادر ويتصل بمنافسك. نصمم مواقع الشركات وكتالوجات المنتجات والمتاجر الإلكترونية لتكون سريعة وواضحة ومبنية لجلب الطلبات.',
@@ -59,8 +59,8 @@ module.exports = [
   slug: 'seo-services', img: 'dijla', pk: 'all packages',
   read: { en: ['arabic-seo-hreflang-guide', 'website-design-cost-gcc-2026'], ar: ['seo-iraq-guide-ar', 'google-business-profile-local-seo-iraq-ar'] },
   en: {
-    kw: 'SEO services', title: 'SEO Services in Arabic & English | Buy SEO Packages | MEFTACARD Studio',
-    desc: 'Buy SEO services for Iraq and the Gulf: technical SEO, Arabic and English keyword research, content and local SEO for Google Maps. Fixed packages, paid in Tether (USDT).',
+    kw: 'SEO services', title: 'SEO Services in Arabic & English | MEFTACARD Studio',
+    desc: 'Buy SEO services for Iraq and the Gulf: technical SEO, Arabic and English keywords, content and local SEO for Google Maps. Paid in Tether (USDT).',
     h1: 'SEO services that bring customers from Google',
     intro: [
       'When someone searches for what you sell, the first three results get most of the clicks. SEO, search engine optimisation, is the work that moves your site into those positions and keeps it there. We do it in Arabic and English, for local searches and for buyers in other countries.',
@@ -84,7 +84,7 @@ module.exports = [
     faq: [['How long does SEO take to show results?', 'Small improvements can appear within weeks in low-competition markets, but stable rankings usually take three to six months of consistent work.'], ['Can you guarantee first place on Google?', 'No honest agency can. We guarantee the work, the reporting and transparency, and we set realistic targets based on your market.'], ['Do you do Arabic SEO?', 'Yes. Arabic keyword research and content are a core part of our work, including the technical setup bilingual sites need.'], ['Do you buy backlinks?', 'No. Bought links can get a site penalised. We build genuine mentions from directories, partners and relevant publications.'], ['Can I buy SEO for an existing site?', 'Yes. We start with an audit of your current site and fix what holds it back, without rebuilding it unless that is necessary.'], ['What do monthly reports include?', 'Rankings for your target keywords, visits from Google, enquiries from search and the work done that month.']]
   },
   ar: {
-    kw: 'خدمات سيو', title: 'خدمات سيو بالعربية والإنجليزية | شراء باقة سيو | MEFTACARD Studio',
+    kw: 'خدمات سيو', title: 'خدمات سيو بالعربية والإنجليزية | MEFTACARD Studio',
     desc: 'شراء خدمات سيو للعراق والخليج: سيو تقني، وبحث كلمات مفتاحية بالعربية والإنجليزية، ومحتوى، وسيو محلي لخرائط Google. باقات بأسعار ثابتة، والدفع بعملة تيثر.',
     h1: 'خدمات سيو تجلب العملاء من Google',
     intro: [
@@ -114,7 +114,7 @@ module.exports = [
   read: { en: ['website-design-cost-gcc-2026', 'arabic-seo-hreflang-guide'], ar: ['website-design-cost-iraq-ar', 'seo-iraq-guide-ar'] },
   en: {
     kw: 'website support', title: 'Website Support & Maintenance Services | MEFTACARD Studio',
-    desc: 'Website support and maintenance for businesses in Iraq and the Gulf: updates, backups, security, speed and content changes. Monthly plans, fully online, paid in Tether (USDT).',
+    desc: 'Website support and maintenance in Iraq and the Gulf: updates, backups, security, speed and content changes. Monthly plans, paid in Tether (USDT).',
     h1: 'Website support and maintenance, so your site keeps working',
     intro: [
       'A website is not finished on launch day. Plugins need updates, security holes appear, content goes out of date and pages slow down over time. When nobody looks after it, the site eventually breaks, gets hacked or quietly drops in Google.',
@@ -168,7 +168,7 @@ module.exports = [
   read: { en: ['whatsapp-ai-agent-business-uae-saudi', 'oil-and-gas-website-design'], ar: ['whatsapp-ai-bot-business-ar', 'mobile-app-development-cost-iraq-gulf-ar'] },
   en: {
     kw: 'AI agent development', title: 'AI Agent Development & Support on WhatsApp | MEFTACARD Studio',
-    desc: 'AI agent development and support for businesses in Iraq and the Gulf: WhatsApp and website agents that answer in Arabic dialect and English, qualify leads and book appointments. Paid in Tether (USDT).',
+    desc: 'AI agent development and support: WhatsApp and website agents that answer in Arabic dialect and English, qualify leads and book appointments.',
     h1: 'AI agents that answer your customers, day and night',
     intro: [
       'In the Gulf and Iraq, customers send a WhatsApp message, often late at night and often in dialect, and expect a quick reply. A business that answers the next morning has usually lost the sale. An AI agent answers immediately, in Arabic or English, from your own information.',
@@ -192,8 +192,8 @@ module.exports = [
     faq: [['What is the difference between a chatbot and an AI agent?', 'A chatbot follows fixed menus. An AI agent understands free text, answers from your information and can take actions like booking or saving a lead.'], ['Does it understand Iraqi and Gulf dialects?', 'Modern models handle dialect far better than old chatbots. We test with your real customer messages before launch.'], ['Will it say wrong things to customers?', 'We limit it to your knowledge base and instruct it to hand over to a person when it is not sure.'], ['Do I need the WhatsApp Business API?', 'Yes, automation at scale needs the WhatsApp Business Platform. We help you set it up.'], ['Where is our data stored?', 'We agree storage and access rules with you, and can use in-region hosting where your policy requires it.'], ['What does support after launch include?', 'Conversation reviews, knowledge updates when your prices or policies change, and monthly improvements.']]
   },
   ar: {
-    kw: 'وكلاء الذكاء الاصطناعي', title: 'تطوير ودعم وكلاء الذكاء الاصطناعي على واتساب | MEFTACARD Studio',
-    desc: 'تطوير ودعم وكلاء الذكاء الاصطناعي للشركات في العراق والخليج: وكلاء على واتساب والموقع يجيبون باللهجة العربية والإنجليزية، ويؤهلون العملاء ويحجزون المواعيد. الدفع بعملة تيثر.',
+    kw: 'وكلاء الذكاء الاصطناعي', title: 'تطوير ودعم وكلاء الذكاء الاصطناعي | MEFTACARD Studio',
+    desc: 'تطوير ودعم وكلاء الذكاء الاصطناعي: وكلاء على واتساب والموقع يجيبون باللهجة والإنجليزية، ويؤهلون العملاء ويحجزون المواعيد. الدفع بعملة تيثر.',
     h1: 'وكلاء ذكاء اصطناعي يجيبون عملاءك ليلاً ونهاراً',
     intro: [
       'في الخليج والعراق يرسل العميل رسالة واتساب، كثيراً في وقت متأخر وكثيراً باللهجة، وينتظر رداً سريعاً. والشركة التي ترد صباح اليوم التالي تكون غالباً قد خسرت البيع. وكيل الذكاء الاصطناعي يرد فوراً، بالعربية أو الإنجليزية، من معلوماتك أنت.',
@@ -221,8 +221,8 @@ module.exports = [
   slug: 'app-design', img: 'shatt', pk: 'Enterprise, or as a standalone project',
   read: { en: ['b2b-export-website-rfq', 'whatsapp-ai-agent-business-uae-saudi'], ar: ['mobile-app-development-cost-iraq-gulf-ar', 'whatsapp-ai-bot-business-ar'] },
   en: {
-    kw: 'app design', title: 'Mobile App Design & Development for iOS and Android | MEFTACARD Studio',
-    desc: 'Mobile app design and development for businesses in Iraq and the Gulf: iOS and Android apps in Arabic and English for customers, dealers and field teams. Fully online, paid in Tether (USDT).',
+    kw: 'app design', title: 'App Design for iOS & Android | MEFTACARD Studio',
+    desc: 'Mobile app design for iOS and Android in Arabic and English, for customers, dealers and field teams in Iraq and the Gulf. Paid in Tether (USDT).',
     h1: 'App design for iOS and Android, in Arabic and English',
     intro: [
       'An app earns its place when customers or staff use it often: ordering and tracking, bookings, loyalty or daily field work. For everything else, a fast website is often the better investment, and we will tell you so honestly.',
@@ -247,7 +247,7 @@ module.exports = [
   },
   ar: {
     kw: 'تصميم تطبيقات', title: 'تصميم تطبيقات الجوال iOS وAndroid | MEFTACARD Studio',
-    desc: 'تصميم وبرمجة تطبيقات الجوال للشركات في العراق والخليج: تطبيقات iOS وAndroid بالعربية والإنجليزية للعملاء والوكلاء والفرق الميدانية. أونلاين بالكامل، والدفع بعملة تيثر (USDT).',
+    desc: 'تصميم تطبيقات iOS وAndroid بالعربية والإنجليزية للعملاء والوكلاء والفرق الميدانية في العراق والخليج. أونلاين والدفع بعملة تيثر.',
     h1: 'تصميم تطبيقات iOS وAndroid بالعربية والإنجليزية',
     intro: [
       'التطبيق يستحق مكانه عندما يستخدمه العملاء أو الموظفون كثيراً: الطلب والتتبع، والحجوزات، وبرامج الولاء، والعمل الميداني اليومي. وفي غير ذلك يكون الموقع السريع غالباً استثماراً أفضل، وسنخبرك بذلك بصراحة.',

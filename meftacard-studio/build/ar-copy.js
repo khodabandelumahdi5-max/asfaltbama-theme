@@ -89,6 +89,6 @@ module.exports.AR = {
   ft_1:"© 2026 MEFTACARD Studio", ft_home:"MEFTACARD", ft_about:"من نحن", ft_contact:"اتصل بنا", ft_privacy:"الخصوصية",
 };
 module.exports.META = {
-  title: "تصميم مواقع وخدمات سيو ودعم المواقع والوكلاء الذكية | MEFTACARD Studio",
+  title: "تصميم مواقع وخدمات سيو ودعم المواقع | MEFTACARD Studio",
   desc: "شراء تصميم مواقع وخدمات سيو ودعم المواقع ووكلاء الذكاء الاصطناعي لشركتك في العراق والخليج. باقات بأسعار ثابتة تبدأ من 1,250 دولاراً، والدفع بـ USDT."
 };

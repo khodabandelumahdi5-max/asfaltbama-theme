@@ -9,6 +9,8 @@ const ROOT = path.resolve(__dirname, '..');
 const BASE = 'https://meftacard.com';
 const CSS = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').match(/<style>([\s\S]*?)<\/style>/)[1];
 const OG = `${BASE}/wp-content/uploads/2026/11/meftacard-studio-og.png`;
+const MEDIA = JSON.parse(fs.readFileSync(path.join(ROOT, 'work/img/media.json'), 'utf8'));
+const CIMG = { iraq:'qalaa', uae:'nahrain', 'saudi-arabia':'dijla', qatar:'nahrain', kuwait:'shatt', oman:'shatt', bahrain:'sanad', lebanon:'asfaltbama-desktop' };
 
 const C = [
   { slug:'iraq', code:'IQ',
@@ -164,7 +166,7 @@ const T = {
     studio:'/ar/studio/', home:'الاستوديو', other:'EN', skip:'تخطَّ إلى المحتوى', nav:['الباقات','الخدمات','تواصل معنا'],
     h1:(c)=>`تصميم مواقع وخدمات سيو ${c.in}`,
     title:(c)=>`تصميم مواقع وخدمات سيو ${c.in} | MEFTACARD Studio`,
-    desc:(c)=>`شراء تصميم مواقع وسيو ودعم المواقع ووكلاء الذكاء الاصطناعي ${c.in}. العمل كله أونلاين دون حاجة للحضور. الدفع بعملة تيثر (USDT)، وأسعار ثابتة تبدأ من 1,250 دولاراً.`,
+    desc:(c)=>`شراء تصميم مواقع وسيو ودعم المواقع ووكلاء الذكاء الاصطناعي ${c.in}، أونلاين دون حاجة للحضور. الدفع بعملة تيثر وأسعار تبدأ من 1,250$.`,
     lead:(c)=>`نصمم المواقع ونعمل على السيو وندعم موقعك ووكلاء الذكاء الاصطناعي للشركات في ${c.cities}. كل العمل يتم أونلاين، فلا حاجة للقائنا حضورياً.`,
     onH:'تصميم أونلاين بالكامل، دون حاجة للحضور.', on:['مكالمة فيديو لفهم عملك وأهدافك.','نشارك التصاميم وسير العمل أونلاين لتبدي رأيك في كل مرحلة.','الإطلاق والتدريب والدعم عن بُعد. والزيارات الحضورية اختيارية في المشاريع الأكبر.'],
     pkH:'الباقات', pkSub:'الأسعار ثابتة في كل الدول. اضغط على الباقة لتتحدث معنا على تيليغرام.',
@@ -266,6 +268,7 @@ ${ld.map((j)=>`<script type="application/ld+json">${JSON.stringify(j)}</script>`
 <section style="padding-top:24px"><div class="wrap">
   <h2 style="font-size:clamp(26px,2.6vw,34px)">${esc(t.locH(d))}</h2>
   <p class="sub">${esc(d.local)}</p>
+  <div class="browser" style="margin-top:28px"><div class="bar"><i></i><i></i><i></i></div><img src="${MEDIA[CIMG[c.slug]]}" width="1440" height="900" loading="lazy" alt="${esc(t.h1(d))} — MEFTACARD Studio"></div>
   <div class="facts-tbl"><div class="tbl" style="border-top:0"><table><tbody>
     ${t.loc.map((k,i)=>`<tr><th>${esc(k)}</th><td>${esc(facts[i]).replace(/(\.[a-z]{2,3}\b)/g,'<bdi dir="ltr">$1</bdi>')}</td></tr>`).join('')}
   </tbody></table></div></div>

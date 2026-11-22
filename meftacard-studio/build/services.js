@@ -6,12 +6,24 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const BASE = 'https://meftacard.com';
 const S = require('./services-content');
+const MORE = require('./services-more');
+const PROC_IMG = fs.existsSync(path.join(ROOT,'work/svcimg/media.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT,'work/svcimg/media.json'),'utf8')) : {};
 const CSS = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').match(/<style>([\s\S]*?)<\/style>/)[1];
 const MEDIA = JSON.parse(fs.readFileSync(path.join(ROOT, 'work/img/media.json'), 'utf8'));
 const OG = `${BASE}/wp-content/uploads/2026/11/meftacard-studio-og.png`;
 const MARK = fs.readFileSync(path.join(ROOT, 'brand/mark.svg'), 'utf8').split('\n').filter((l) => l.includes('<path')).join('');
 
 const COUNTRIES = [['iraq','Iraq','العراق'],['uae','UAE','الإمارات'],['saudi-arabia','Saudi Arabia','السعودية'],['qatar','Qatar','قطر'],['kuwait','Kuwait','الكويت'],['oman','Oman','عُمان'],['bahrain','Bahrain','البحرين'],['lebanon','Lebanon','لبنان']];
+const LOC = {
+  iraq:{en:['Iraq','Baghdad, Basra, Erbil and Najaf','ZainCash, FastPay and Qi Card'],ar:['العراق','بغداد والبصرة وأربيل والنجف','زين كاش وFastPay وكي كارد']},
+  uae:{en:['the UAE','Dubai, Abu Dhabi and Sharjah','cards, Apple Pay, Tabby and Tamara'],ar:['الإمارات','دبي وأبوظبي والشارقة','البطاقات وApple Pay وتابي وتمارا']},
+  'saudi-arabia':{en:['Saudi Arabia','Riyadh, Jeddah and Dammam','Mada, STC Pay and Apple Pay'],ar:['السعودية','الرياض وجدة والدمام','مدى وSTC Pay وApple Pay']},
+  qatar:{en:['Qatar','Doha, Lusail and Al Wakrah','cards, Apple Pay and NAPS'],ar:['قطر','الدوحة ولوسيل والوكرة','البطاقات وApple Pay ونابس']},
+  kuwait:{en:['Kuwait','Kuwait City, Hawalli and Salmiya','KNET, cards and Apple Pay'],ar:['الكويت','مدينة الكويت وحولي والسالمية','كي نت والبطاقات وApple Pay']},
+  oman:{en:['Oman','Muscat, Salalah and Sohar','cards, Apple Pay and local bank gateways'],ar:['عُمان','مسقط وصلالة وصحار','البطاقات وApple Pay وبوابات البنوك المحلية']},
+  bahrain:{en:['Bahrain','Manama, Muharraq and Riffa','BenefitPay, cards and Apple Pay'],ar:['البحرين','المنامة والمحرق والرفاع','BenefitPay والبطاقات وApple Pay']},
+  lebanon:{en:['Lebanon','Beirut, Tripoli and Jounieh','cash on delivery, OMT and Whish Money'],ar:['لبنان','بيروت وطرابلس وجونيه','الدفع عند الاستلام وOMT وWhish Money']},
+};
 const ART = {
   'website-design-cost-gcc-2026':'How much does a website cost in the GCC?', 'oil-and-gas-website-design':'Oil and gas website design', 'arabic-seo-hreflang-guide':'Arabic SEO for bilingual websites', 'whatsapp-ai-agent-business-uae-saudi':'WhatsApp AI agents for business', 'b2b-export-website-rfq':'The B2B export website',
   'website-design-cost-iraq-ar':'كم تكلفة تصميم موقع في العراق؟', 'seo-iraq-guide-ar':'السيو في العراق: دليل الشركات', 'google-business-profile-local-seo-iraq-ar':'ملف Google التجاري والظهور في الخرائط', 'whatsapp-ai-bot-business-ar':'بوت واتساب بالذكاء الاصطناعي للشركات', 'mobile-app-development-cost-iraq-gulf-ar':'تكلفة تصميم تطبيق جوال',
@@ -23,12 +35,16 @@ const L = {
     nav:['Services','Packages','Contact'], tg:'Message us on Telegram', pk:'See packages', whoH:'Who it is for', pkH:'Packages', whyH:'Why MEFTACARD Studio',
     why:[['Fully online','From the first call to launch and support, no visit is needed. In-person support is optional on larger packages.'],['Pay in Tether (USDT)','No international bank transfer or foreign card. Payment arrives in minutes and the dollar price is the same in every country.'],['Fixed price, written scope','Scope, price and launch date are agreed in writing before we start.'],['You own everything','Code, designs, domain, hosting and accounts are registered to your company.']],
     p:[['Local','$1,250','one-time, USDT'],['Trade & Export','$2,250','one-time, USDT'],['Enterprise','$25,000+','by milestone, USDT']], cmp:'Compare packages',
+    cmpH:'MEFTACARD Studio, a freelancer or a large agency?', cmpCols:['MEFTACARD Studio','Freelancer','Large agency'],
+    cmpRows:[['Price','Fixed, in writing','Low, but often changes','High, often hourly'],['Arabic quality','Native, separate pages','Often machine-translated','Varies'],['Who owns the site','You, from day one','Often unclear','Usually you'],['Support after launch','Included, plus care plans','Rarely','Paid contract'],['Payment','Tether (USDT)','Cash or transfer','Bank transfer'],['Process','Fully online','Varies','Often in-person meetings']],
     workH:'From our work', faqH:'Questions', otherH:'Other services', ctyH:'By country', readH:'Further reading', ctH:'Tell us what you need', ctSub:'We reply within one business day with a scope, timeline and fixed price.',
     msg:(n)=>`Hello MEFTACARD Studio, I'm interested in ${n.toLowerCase()}.`, svc:(c)=>`Website design and SEO in ${c}`, copy:'© 2026 MEFTACARD Studio', wa:'Opens a chat' },
   ar:{ dir:'rtl', font:'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@500;600&display=swap', studio:'/ar/studio/', other:'EN', skip:'تخطَّ إلى المحتوى',
     nav:['الخدمات','الباقات','تواصل معنا'], tg:'راسلنا على تيليغرام', pk:'اطّلع على الباقات', whoH:'لمن هذه الخدمة', pkH:'الباقات', whyH:'لماذا MEFTACARD Studio',
     why:[['أونلاين بالكامل','من أول مكالمة حتى الإطلاق والدعم، لا حاجة للحضور. والدعم الحضوري اختياري في الباقات الأكبر.'],['الدفع بعملة تيثر (USDT)','لا حاجة لتحويل بنكي دولي أو بطاقة أجنبية. يصل الدفع خلال دقائق، والسعر بالدولار نفسه في كل الدول.'],['سعر ثابت ونطاق مكتوب','نتفق كتابياً على النطاق والسعر وموعد الإطلاق قبل البدء.'],['كل شيء ملكك','الكود والتصاميم والدومين والاستضافة والحسابات مسجلة باسم شركتك.']],
     p:[['المحلية','$1,250','دفعة واحدة، USDT'],['التجارة والتصدير','$2,250','دفعة واحدة، USDT'],['المؤسسات','$25,000+','حسب المراحل، USDT']], cmp:'قارن الباقات',
+    cmpH:'MEFTACARD Studio أم مستقل أم وكالة كبيرة؟', cmpCols:['MEFTACARD Studio','مستقل','وكالة كبيرة'],
+    cmpRows:[['السعر','ثابت ومكتوب','منخفض لكنه يتغير غالباً','مرتفع، وغالباً بالساعة'],['جودة العربية','أصلية بصفحات منفصلة','مترجمة آلياً غالباً','متفاوتة'],['ملكية الموقع','لك من اليوم الأول','غير واضحة غالباً','لك عادة'],['الدعم بعد الإطلاق','مشمول مع خطط رعاية','نادراً','بعقد مدفوع'],['الدفع','تيثر (USDT)','نقداً أو تحويل','تحويل بنكي'],['طريقة العمل','أونلاين بالكامل','متفاوتة','اجتماعات حضورية غالباً']],
     workH:'من أعمالنا', faqH:'الأسئلة', otherH:'خدمات أخرى', ctyH:'حسب الدولة', readH:'اقرأ أيضاً', ctH:'أخبرنا بما تحتاجه', ctSub:'نرد خلال يوم عمل واحد بنطاق وجدول زمني وسعر ثابت.',
     msg:(n)=>`مرحباً MEFTACARD Studio، أنا مهتم بخدمة ${n}.`, svc:(c)=>`تصميم مواقع وسيو في ${c}`, copy:'© 2026 MEFTACARD Studio', wa:'يفتح محادثة' },
 };
@@ -39,7 +55,8 @@ const WA = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><pat
 const TG = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3l-3.2 15.2c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.1l-4.8-1.5c-1-.3-1.1-1 .2-1.5L20.5 2.9c.9-.3 1.6.2 1.4 1.4z"/></svg>`;
 
 function page(s, lang) {
-  const t = L[lang], d = s[lang], other = lang === 'ar' ? 'en' : 'ar', self = url(lang, s.slug), name = NAMES[s.slug][lang === 'ar' ? 1 : 0];
+  const m = MORE[s.slug][lang];
+  const t = L[lang], d = { ...s[lang], faq: [...s[lang].faq, ...MORE[s.slug][lang].faq] }, other = lang === 'ar' ? 'en' : 'ar', self = url(lang, s.slug), name = NAMES[s.slug][lang === 'ar' ? 1 : 0];
   const ld = [
     { '@context':'https://schema.org', '@type':'Service', '@id':self+'#service', name, serviceType:NAMES[s.slug][0], url:self, inLanguage:lang, description:d.desc, image:OG,
       provider:{ '@type':'ProfessionalService', name:'MEFTACARD Studio', url:BASE+'/studio/', logo:OG, sameAs:['https://t.me/meftacard'] },
@@ -98,14 +115,27 @@ ${ld.map((j)=>`<script type="application/ld+json">${JSON.stringify(j)}</script>`
   <div class="inc">${d.inc.map(([h,p])=>`<div><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join('')}</div>
 </div></section>
 
+<section style="padding-top:16px"><div class="wrap">
+  <h2 style="font-size:clamp(26px,2.8vw,36px)">${esc(m.typesH)}</h2>
+  <div class="inc">${m.types.map(([h,p])=>`<div><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join('')}</div>
+</div></section>
+
 <section style="padding-top:16px"><div class="wrap two">
   <div><h2 style="font-size:clamp(24px,2.4vw,30px)">${esc(d.whoH)}</h2><ul class="who">${d.who.map((w)=>`<li>${esc(w)}</li>`).join('')}</ul></div>
   <div><h2 style="font-size:clamp(24px,2.4vw,30px)">${esc(d.procH)}</h2><ol class="steps">${d.proc.map(([h,p])=>`<li><b>${esc(h)}</b><p>${esc(p)}</p></li>`).join('')}</ol></div>
 </div></section>
 
+${PROC_IMG[s.slug+'-'+lang] ? `<section style="padding-top:8px"><div class="wrap"><img src="${PROC_IMG[s.slug+'-'+lang]}" width="1200" height="675" loading="lazy" alt="${esc(d.procH)}" style="border-radius:16px;border:1px solid var(--line)"></div></section>` : ''}
+
+<section style="padding-top:16px"><div class="wrap">
+  <h2 style="font-size:clamp(26px,2.8vw,36px)">${esc(m.mistH)}</h2>
+  <div class="inc">${m.mist.map(([h,p])=>`<div><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join('')}</div>
+</div></section>
+
 <section id="packages" style="padding-top:16px"><div class="wrap">
   <h2 style="font-size:clamp(26px,2.8vw,36px)">${esc(d.priceH)}</h2>
   <p class="sub">${esc(d.price)}</p>
+  <h3 style="font-size:19px;margin-top:28px">${esc(m.factH)}</h3><ul class="who">${m.fact.map((x)=>`<li>${esc(x)}</li>`).join('')}</ul>
   <div class="cards" style="margin-top:28px">${t.p.map((p,i)=>`<article class="card${i===2?' big':''}"><h3>${esc(p[0])}</h3><div><div class="price num">${p[1]}</div><div class="unit">${esc(p[2])}</div></div><a class="btn ${i===0?'btn-line':'btn-dark'}" href="${tg(t.msg(name)+' ('+p[0]+')')}" target="_blank" rel="noopener">${esc(p[0])}</a></article>`).join('')}</div>
   <p class="pk-note"><a class="more" href="${t.studio}#packages">${t.cmp} →</a></p>
 </div></section>
@@ -116,8 +146,18 @@ ${ld.map((j)=>`<script type="application/ld+json">${JSON.stringify(j)}</script>`
 </div></section>
 
 <section style="padding-top:24px"><div class="wrap">
+  <h2 style="font-size:clamp(24px,2.4vw,30px)">${t.cmpH}</h2>
+  <div class="compare" style="margin-top:20px"><div class="tbl" style="border-top:0"><table><thead><tr><th></th>${t.cmpCols.map((c)=>`<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${t.cmpRows.map((r)=>`<tr><th>${esc(r[0])}</th>${r.slice(1).map((c,i)=>`<td${i===0?' style="font-weight:600;color:var(--ink)"':''}>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>
+</div></section>
+
+<section style="padding-top:24px"><div class="wrap">
   <h2 style="font-size:clamp(24px,2.4vw,30px)">${t.whyH}</h2>
   <div class="why">${t.why.map(([h,p])=>`<div><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join('')}</div>
+</div></section>
+
+<section style="padding-top:24px"><div class="wrap">
+  <h2 style="font-size:clamp(24px,2.4vw,30px)">${lang==='ar'?`${esc(name)} حسب الدولة`:`${esc(name)} by country`}</h2>
+  <div class="inc">${Object.entries(LOC).map(([slug,v])=>{const [c,cities,pay]=v[lang];return `<div><h3><a href="${t.studio}${slug}/" style="border-bottom:1px solid var(--line-2)">${esc(lang==='ar'?`${name} في ${c}`:`${name} in ${c}`)}</a></h3><p>${esc(lang==='ar'?`نخدم الشركات في ${cities} أونلاين بالكامل، مع صفحات بالعربية والإنجليزية وربط طرق الدفع المحلية مثل ${pay}، والدفع لنا بعملة تيثر.`:`We work with businesses in ${cities}, fully online, with Arabic and English pages and local payment methods such as ${pay}. You pay us in Tether (USDT).`)}</p></div>`}).join('')}</div>
 </div></section>
 
 <section id="faq" style="padding-top:24px"><div class="wrap qa">

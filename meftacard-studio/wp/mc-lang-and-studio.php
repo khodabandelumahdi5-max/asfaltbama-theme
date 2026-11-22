@@ -133,3 +133,20 @@ add_filter('rank_math/sitemap/entry', function ($url, $type, $object) {
     if ($type === 'post' && is_object($object) && !empty($object->ID) && get_post_meta($object->ID, 'mc_redirect', true)) return false;
     return $url;
 }, 10, 3);
+
+/* ---------- v1.2: real <h1> on single posts ----------
+ * The theme prints the post title as <h2><a>…</a></h2>, so articles have no H1.
+ * On single posts we turn that first heading into a proper <h1>.
+ */
+add_action('template_redirect', function () {
+    if (!is_singular('post')) return;
+    ob_start(function ($html) {
+        return preg_replace('#<article>\s*<h2>\s*<a href="[^"]*">(.*?)</a>\s*</h2>#s',
+            '<article><h1 class="entry-title">$1</h1>', $html, 1);
+    });
+}, 1);
+
+add_action('wp_head', function () {
+    if (!is_singular('post')) return;
+    echo '<style>article>h1.entry-title{font-size:clamp(28px,4.2vw,44px);line-height:1.25;margin:0 0 18px;font-weight:700}</style>' . "\n";
+}, 50);
