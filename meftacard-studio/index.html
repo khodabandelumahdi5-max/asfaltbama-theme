@@ -13,7 +13,16 @@
 <meta property="og:title" content="MEFTACARD Studio — Digital Architecture for MENA Enterprise">
 <meta property="og:description" content="Web, mobile, AI agents, enterprise SEO and 24/7 SLA support. One accountable team, zero to one hundred.">
 <meta property="og:url" content="https://meftacard.com/studio/">
+<meta property="og:image" content="https://meftacard.com/studio/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:site_name" content="MEFTACARD Studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#07090C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23D49B35'/%3E%3Ctext x='32' y='44' font-family='Arial' font-weight='800' font-size='34' text-anchor='middle' fill='%231A1205'%3EM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,8 +31,11 @@
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": "https://meftacard.com/studio/#service",
   "name": "MEFTACARD Studio",
   "url": "https://meftacard.com/studio/",
+  "inLanguage": "en",
+  "image": "https://meftacard.com/studio/og.png",
   "parentOrganization": {"@type": "Organization", "name": "MEFTACARD", "url": "https://meftacard.com"},
   "description": "Digital architecture and growth engineering: web platforms, mobile apps, AI agents, SEO and SLA support for enterprise, trade and local businesses in the Middle East.",
   "areaServed": ["AE","SA","QA","OM","KW","IQ"],
@@ -39,18 +51,6 @@
       {"@type": "Offer", "name": "Enterprise Turnkey Ecosystem", "priceSpecification": {"@type": "PriceSpecification", "minPrice": "25000", "priceCurrency": "USD"}}
     ]
   }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {"@type": "Question", "name": "Do you build in Arabic and English?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every track ships natively in English (LTR) and Arabic (RTL) with correct hreflang, typography and search setup for each market."}},
-    {"@type": "Question", "name": "How can we pay?", "acceptedAnswer": {"@type": "Answer", "text": "All payments are settled in USDT (Tether) on TRC-20 or ERC-20. Enterprise engagements are paid by signed-off milestone."}},
-    {"@type": "Question", "name": "Do you offer in-person support?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The Trade & Export ($2,250) and Enterprise ($25,000+) tracks include in-person support: on-site kickoff, team training and support visits. The Local track is supported remotely."}},
-    {"@type": "Question", "name": "Who owns the code and accounts?", "acceptedAnswer": {"@type": "Answer", "text": "You do. Source code, domains, hosting, analytics and ad accounts are registered to your company from day one."}}
-  ]
 }
 </script>
 
@@ -89,7 +89,7 @@
   /* ---- Component aliases (map page styles onto the tokens above) ---- */
   --bg:var(--bg-canvas); --bg-2:var(--bg-surface); --panel:var(--bg-surface);
   --line:var(--border-subtle); --line-2:var(--border-hover);
-  --ink:var(--text-primary); --ink-2:var(--text-secondary); --ink-3:var(--text-muted);
+  --ink:var(--text-primary); --ink-2:var(--text-secondary); --ink-3:#7C8696; /* text-muted (#5A6475) is 3.4:1 on canvas, below WCAG AA for small text */
   --gold:var(--accent-amber); --gold-2:#E3B25A; --gold-ink:#1A1205;
   --ok:var(--accent-emerald);
   --radius:var(--radius-card); --wrap:var(--max-width);
@@ -107,6 +107,8 @@ img,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;inset-inline-start:16px;top:-60px;z-index:100;background:var(--gold);color:var(--gold-ink);padding:10px 16px;border-radius:var(--radius-btn);font-weight:600}
+.skip:focus{top:12px}
 .wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:24px}
 @media (max-width:640px){.wrap{padding-inline:16px}}
 .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600}
@@ -137,8 +139,9 @@ nav.links{display:flex;gap:28px;margin-inline-start:auto;font-size:14px;color:va
 nav.links a:hover{color:var(--ink)}
 .top-actions{display:flex;align-items:center;gap:10px}
 .lang{display:inline-flex;border:1px solid var(--line-2);border-radius:var(--radius-badge);padding:3px;font-size:13px;font-weight:600}
-.lang button{padding:6px 12px;border-radius:var(--radius-badge);color:var(--ink-3)}
-.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.lang a{padding:6px 12px;border-radius:var(--radius-badge);color:var(--ink-2)}
+.lang a:hover{color:var(--ink)}
+.lang a[aria-current="page"]{background:var(--ink);color:var(--bg)}
 .top .btn{height:40px;padding-inline:18px;font-size:14px}
 @media (max-width:920px){nav.links{display:none}.top-actions{margin-inline-start:auto}}
 @media (max-width:520px){.top .btn-gold{display:none}}
@@ -239,6 +242,14 @@ ul.stack li::before{content:"";width:16px;height:16px;margin-top:3px;border-radi
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq details p{color:var(--ink-2);padding-bottom:22px;max-width:70ch}
 
+/* Insights */
+.posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.post{display:grid;gap:10px;align-content:start;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-surface);transition:border-color .2s,background .2s}
+.post:hover{border-color:var(--border-hover);background:var(--bg-surface-elevated)}
+.post small{color:var(--gold);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.12em}
+html[lang="ar"] .post small{letter-spacing:0}
+.post b{font-weight:600;font-size:16px;line-height:1.4}
+
 /* Final CTA */
 .final{text-align:center}
 .final .sec-head{margin-inline:auto;justify-items:center}
@@ -246,7 +257,9 @@ ul.stack li::before{content:"";width:16px;height:16px;margin-top:3px;border-radi
 .settle{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:28px}
 .final .hero-cta{justify-content:center}
 footer{border-top:1px solid var(--line);padding-block:40px;color:var(--ink-3);font-size:13px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+.flinks{display:flex;flex-wrap:wrap;gap:18px}
+.flinks a:hover{color:var(--ink)}
 
 /* Floating WhatsApp */
 .floats{position:fixed;inset-block-end:20px;inset-inline-end:20px;z-index:45;display:grid;gap:12px}
@@ -282,35 +295,37 @@ ul.stack li.onsite::before{background-color:var(--accent-emerald-soft)}
 /* Keep numbers/prices LTR inside Arabic */
 .metric b,.price b,.spot-price b{direction:ltr;unicode-bidi:isolate}
 html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
+html[dir="rtl"] .metric b.mtxt{direction:rtl}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="MEFTACARD Studio">
+    <a class="brand" href="#main" aria-label="MEFTACARD Studio">
       <span class="brand-mark" aria-hidden="true">M</span>
       <span>MEFTACARD<small>STUDIO</small></span>
     </a>
-    <nav class="links" aria-label="Primary">
+    <nav class="links" aria-label="Primary" data-aria-ar="القائمة الرئيسية">
       <a href="#authority" data-i18n="nav_approach">Approach</a>
       <a href="#tracks" data-i18n="nav_tracks">Tracks</a>
       <a href="#enterprise" data-i18n="nav_enterprise">Enterprise</a>
       <a href="#faq" data-i18n="nav_faq">FAQ</a>
     </nav>
     <div class="top-actions">
-      <div class="lang" role="group" aria-label="Language">
-        <button type="button" data-lang="en" aria-pressed="true">EN</button>
-        <button type="button" data-lang="ar" aria-pressed="false">ع</button>
-      </div>
+      <nav class="lang" aria-label="Language" data-aria-ar="اللغة">
+        <a href="/studio/" hreflang="en" lang="en" data-lang="en" aria-current="page">EN</a>
+        <a href="/ar/studio/" hreflang="ar" lang="ar" data-lang="ar">ع</a>
+      </nav>
       <button class="btn btn-gold" type="button" data-open-consult="enterprise" data-i18n="nav_cta">Executive consultation</button>
     </div>
   </div>
 </header>
 
-<main id="top">
+<main id="main">
 
 <!-- HERO -->
 <section class="hero">
@@ -326,7 +341,7 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
         </button>
         <a class="btn btn-ghost" href="#tracks" data-i18n="hero_cta2">See the three tracks</a>
       </div>
-      <div class="sectors" aria-label="Sectors">
+      <div class="sectors" aria-label="Sectors" data-aria-ar="القطاعات">
         <span class="chip" data-i18n="sec_1">Oil &amp; Gas</span>
         <span class="chip" data-i18n="sec_2">Petrochemicals</span>
         <span class="chip" data-i18n="sec_3">Heavy Industry</span>
@@ -338,7 +353,7 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
     <div class="telemetry" role="list">
       <div class="metric" role="listitem"><b>&lt;1.8s</b><span data-i18n="tm_1">LCP target on mobile, every build</span></div>
       <div class="metric" role="listitem"><b>99.9%</b><span data-i18n="tm_2">Uptime SLA on Enterprise</span></div>
-      <div class="metric" role="listitem"><b>15 min</b><span data-i18n="tm_3">Critical-incident response</span></div>
+      <div class="metric" role="listitem"><b class="mtxt" data-i18n="tm_v3">15 min</b><span data-i18n="tm_3">Critical-incident response</span></div>
       <div class="metric" role="listitem"><b>EN · AR</b><span data-i18n="tm_4">Native bilingual, six markets</span></div>
     </div>
     <p class="tele-note" data-i18n="tm_note">Engineering standards we contract to, written into every statement of work.</p>
@@ -545,6 +560,23 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
   </div>
 </section>
 
+<!-- INSIGHTS -->
+<section id="insights">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-i18n="in_eyebrow">Insights</p>
+      <h2 data-i18n="in_h2">Field notes for decision-makers.</h2>
+    </div>
+    <div class="posts">
+      <a class="post" href="https://meftacard.com/website-design-cost-gcc-2026/" data-href-ar="https://meftacard.com/website-design-cost-iraq-ar/"><small data-i18n="in1_k">Pricing</small><b data-i18n="in1_t">How much does a website cost in the GCC in 2026?</b></a>
+      <a class="post" href="https://meftacard.com/oil-and-gas-website-design/" data-href-ar="https://meftacard.com/seo-iraq-guide-ar/"><small data-i18n="in2_k">Industrial</small><b data-i18n="in2_t">Oil and gas website design: what energy buyers check first</b></a>
+      <a class="post" href="https://meftacard.com/arabic-seo-hreflang-guide/" data-href-ar="https://meftacard.com/google-business-profile-local-seo-iraq-ar/"><small data-i18n="in3_k">SEO</small><b data-i18n="in3_t">Arabic SEO: ranking in Arabic and English without splitting your authority</b></a>
+      <a class="post" href="https://meftacard.com/whatsapp-ai-agent-business-uae-saudi/" data-href-ar="https://meftacard.com/whatsapp-ai-bot-business-ar/"><small data-i18n="in4_k">AI agents</small><b data-i18n="in4_t">WhatsApp AI agents for businesses in the UAE and Saudi Arabia</b></a>
+      <a class="post" href="https://meftacard.com/b2b-export-website-rfq/" data-href-ar="https://meftacard.com/mobile-app-development-cost-iraq-gulf-ar/"><small data-i18n="in5_k">Export</small><b data-i18n="in5_t">The B2B export website: turning international search into RFQs</b></a>
+    </div>
+  </div>
+</section>
+
 <!-- FINAL CTA -->
 <section class="final">
   <div class="wrap">
@@ -558,7 +590,7 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
       <a class="btn btn-ghost js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener" data-i18n="fc_wa">Telegram: @meftacard</a>
       <a class="btn btn-ghost js-wa" href="#" data-wa-msg="general" data-i18n="fc_wa2">Message us on WhatsApp</a>
     </div>
-    <div class="settle" aria-label="Settlement options">
+    <div class="settle" aria-label="Payment and support" data-aria-ar="الدفع والدعم">
       <span class="chip" data-i18n="st_1">Payment in USDT (Tether) · TRC-20 / ERC-20</span>
       <span class="chip" data-i18n="st_2">In-person support · $2,250 &amp; $25,000+</span>
       <span class="chip" data-i18n="st_3">Telegram @meftacard · WhatsApp</span>
@@ -571,15 +603,21 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
 <footer>
   <div class="wrap">
     <span data-i18n="ft_1">© 2026 MEFTACARD Studio · a MEFTACARD company</span>
+    <nav class="flinks" aria-label="Footer" data-aria-ar="روابط">
+      <a href="https://meftacard.com/" data-i18n="ft_home">MEFTACARD</a>
+      <a href="https://meftacard.com/about/" data-i18n="ft_about">About</a>
+      <a href="https://meftacard.com/contact/" data-i18n="ft_contact">Contact</a>
+      <a href="https://meftacard.com/privacy-policy/" data-i18n="ft_privacy">Privacy</a>
+    </nav>
     <span data-i18n="ft_2">UAE · Saudi Arabia · Qatar · Oman · Kuwait · Iraq</span>
   </div>
 </footer>
 
 <div class="floats">
-  <a class="float float-wa js-wa" href="#" data-wa-msg="general" aria-label="WhatsApp">
+  <a class="float float-wa js-wa" href="#" data-wa-msg="general" aria-label="WhatsApp" data-aria-ar="واتساب">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.9 11.9 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.2-1.2c-.1-.1-.3-.2-.5-.3z"/></svg>
   </a>
-  <a class="float float-tg js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener" aria-label="Telegram @meftacard">
+  <a class="float float-tg js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener" aria-label="Telegram @meftacard" data-aria-ar="تيليغرام @meftacard">
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3l-3.2 15.2c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.1l-4.8-1.5c-1-.3-1.1-1 .2-1.5L20.5 2.9c.9-.3 1.6.2 1.4 1.4z"/></svg>
 </a>
 </div>
@@ -591,7 +629,7 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
       <h2 id="consult-title" data-i18n="md_h">Executive consultation</h2>
       <p data-i18n="md_p">Thirty minutes with a principal. Your request goes straight to our team on Telegram or WhatsApp.</p>
     </div>
-    <button class="x" type="button" data-close aria-label="Close">×</button>
+    <button class="x" type="button" data-close aria-label="Close" data-aria-ar="إغلاق">×</button>
   </div>
   <form class="consult" id="consult-form" novalidate>
     <div class="field"><label for="f-name" data-i18n="fl_name">Full name</label><input id="f-name" name="name" required autocomplete="name"></div>
@@ -616,7 +654,7 @@ html[dir="rtl"] .metric b,html[dir="rtl"] .spot-price b{text-align:right}
         <option value="retainer" data-i18n="o_ret">Care &amp; Growth retainer</option>
       </select>
     </div>
-    <div class="field"><label data-i18n="fl_pay">Settlement</label><input value="USDT (Tether)" readonly aria-readonly="true" tabindex="-1" data-i18n-skip></div>
+    <div class="field"><label for="f-pay" data-i18n="fl_pay">Settlement</label><input id="f-pay" value="USDT (Tether)" readonly aria-readonly="true" tabindex="-1" data-i18n-skip></div>
     <div class="field full"><label for="f-msg" data-i18n="fl_msg">What do you need to achieve?</label><textarea id="f-msg" name="msg"></textarea></div>
     <button class="btn btn-gold" type="submit" value="tg" data-i18n="fl_submit">Send via Telegram</button>
     <button class="btn btn-ghost" type="submit" value="wa" data-i18n="fl_submit_wa">Send via WhatsApp</button>
@@ -630,87 +668,6 @@ const TELEGRAM_USER = "meftacard";
 // WhatsApp number is assembled at click time so it never appears in the page text or link hover.
 const WA_PARTS = ["98","919","129","9559"];
 
-/* ========= ARABIC COPY (English is read from the HTML) ========= */
-const AR = {
-  nav_approach:"منهجيتنا", nav_tracks:"المسارات", nav_enterprise:"المؤسسات", nav_faq:"الأسئلة", nav_cta:"استشارة تنفيذية",
-  hero_eyebrow:"هندسة رقمية ونمو · الخليج والعراق",
-  hero_h1:"بنية رقمية للشركات التي <em>تقود المنطقة.</em>",
-  hero_lead:"منصات ويب، تطبيقات جوال، وكلاء ذكاء اصطناعي، سيو للمؤسسات ودعم على مدار الساعة بموجب اتفاقية مستوى خدمة، يبنيها فريق واحد مسؤول. مصممة أصلاً بالعربية والإنجليزية لقادة قطاعات النفط والغاز والبتروكيماويات والصناعة والتجارة.",
-  hero_cta1:"احجز استشارة تنفيذية", hero_cta2:"اطّلع على المسارات الثلاثة",
-  sec_1:"النفط والغاز", sec_2:"البتروكيماويات", sec_3:"الصناعات الثقيلة", sec_4:"الخدمات اللوجستية والتصدير", sec_5:"التجزئة المتخصصة",
-  tm_1:"هدف سرعة التحميل على الجوال في كل مشروع", tm_2:"ضمان وقت التشغيل في باقة المؤسسات", tm_3:"زمن الاستجابة للأعطال الحرجة", tm_4:"ثنائي اللغة أصلاً، ستة أسواق",
-  tm_note:"معايير هندسية نلتزم بها تعاقدياً ونكتبها في كل نطاق عمل.",
-  au_eyebrow:"كيف نعمل", au_h2:"مبني بالمعايير التي يتوقعها مجلس إدارتك والجهات الرقابية وعملاؤك.",
-  au_lead:"الشركات الصناعية لا تحتاج وكالة أخرى. تحتاج شريكاً هندسياً يتعامل مع الموقع والتطبيق ووكيل الذكاء الاصطناعي كبنية تحتية حيوية.",
-  p1_h:"السيادة أولاً", p1_p:"الكود والنطاقات والبيانات والحسابات مسجلة باسم شركتك من اليوم الأول. استضافة داخل المنطقة عند الطلب. بلا احتكار.",
-  p2_h:"فريق واحد مسؤول", p2_p:"الاستراتيجية والتصميم والتطوير والسيو والدعم ضمن عقد واحد وجهة مسؤولة واحدة. بلا سلسلة مقاولين من الباطن.",
-  p3_h:"نتائج مقاسة لا وعود", p3_p:"كل مشروع يأتي بلوحة متابعة مباشرة: السرعة والترتيب والعملاء المحتملون ووقت التشغيل، بتقرير أسبوعي للراعي التنفيذي.",
-  tr_eyebrow:"ثلاثة مسارات", tr_h2:"اختر المسار الذي يناسب حجم أعمالك.",
-  tr_lead:"نطاق ثابت وسعر ثابت وجدول زمني ثابت. كل المسارات ثنائية اللغة، مصممة للجوال أولاً، ومبنية بالمعيار الهندسي نفسه.",
-  once:"دفعة واحدة · USDT",
-  term_pay:"جميع المدفوعات بـ USDT (تيثر)", term_onsite:"دعم حضوري لمسار 2,250$ ومسار المؤسسات (من 25,000$)", term_tg:"اضغط على أي باقة لمراسلتنا على تيليغرام",
-  t1_track:"المسار 01 · محلي", t1_name:"محرك النمو المحلي",
-  t1_for:"لمتاجر التجزئة المتخصصة، وورش قطع غيار السيارات والمعدات، ومراكز الخدمة الفنية، والأعمال المحلية.",
-  t1_promise:"توقّف عن خسارة العملاء الجاهزين للشراء لصالح منافسيك على خرائط Google ونتائج البحث.",
-  t1_d1:"موقع سريع للتحويل مصمم للجوال أولاً (حتى 6 صفحات، عربي/إنجليزي)", t1_d2:"إعداد وتحسين ملف Google التجاري", t1_d3:"سيو محلي لـ 10 كلمات مفتاحية أساسية والظهور في الخرائط",
-  t1_d4:"أزرار واتساب واتصال واتجاهات بلمسة واحدة", t1_d5:"البيانات المنظمة وSearch Console والتحليلات", t1_d6:"30 يوماً من الدعم بعد الإطلاق",
-  t1_g:"الإطلاق خلال 14 يوماً. إن تأخرنا، يكون الشهر التالي من الدعم مجاناً.", t1_cta:"ابدأ المسار المحلي",
-  t2_track:"المسار 02 · التجارة والتصدير", t2_name:"محرك التجارة والتصدير",
-  t2_for:"للموزعين والمصنّعين والتجار والمصدّرين الذين يبيعون عبر الحدود.",
-  t2_promise:"حوّل زيارات البحث الدولية إلى طلبات عروض أسعار مؤهلة من مشترين في الخليج وخارجه.",
-  t2_d1:"موقع كتالوج متعدد اللغات (عربي/إنجليزي ولغة إضافية)", t2_d2:"كتالوج منتجات ومواصفات مع نشرات فنية قابلة للتنزيل", t2_d3:"مسار طلب عرض سعر للشركات يصل إلى واتساب والبريد",
-  t2_d4:"سيو تقني دولي: hreflang و25 كلمة مفتاحية للتصدير", t2_d5:"ربط مع نظام إدارة العملاء أو واتساب للأعمال", t2_d6:"60 يوماً من الدعم ودورتا تحسين", t2_d7:"دعم حضوري: انطلاق المشروع في موقعكم وتدريب الفريق",
-  t2_g:"الإطلاق خلال 30 يوماً. إن تأخرنا، يكون الشهر التالي من الدعم مجاناً.", t2_cta:"ابدأ مسار التجارة",
-  t3_badge:"الباقة الرائدة", t3_track:"المسار 03 · المؤسسات", t3_name:"منظومة المؤسسات المتكاملة", t3_unit:"حسب المراحل · USDT",
-  t3_for:"لشركات النفط والغاز والبتروكيماويات والصناعة والمجموعات الكبرى.",
-  t3_promise:"منظومتك الرقمية بالكامل، تصميماً وبناءً وتشغيلاً كنظام واحد، من الصفر إلى المئة.",
-  t3_d1:"منصة ويب مؤسسية وبوابات", t3_d2:"تطبيق iOS وAndroid", t3_d3:"وكلاء ذكاء اصطناعي ثنائيو اللغة على بياناتك الخاصة",
-  t3_d4:"سيو مؤسسي متعدد الأسواق", t3_d5:"دعم على مدار الساعة مع ضمان تشغيل 99.9%", t3_d6:"تنفيذ كامل من الصفر إلى المئة مع مكتب إدارة مشاريع", t3_d7:"فريق دعم حضوري مخصص وورش عمل تنفيذية في موقعكم",
-  t3_g:"الدفع حسب المراحل: تدفع مقابل كل مرحلة فقط بعد اعتمادها.", t3_cta:"اطلب إحاطة تنفيذية",
-  cont_p:"<strong>الاستمرارية: باقة الرعاية والنمو.</strong> بعد الإطلاق في أي مسار، احتفظ بفريق شهري للتحديثات والأمان والمحتوى والسيو. حسب نطاق موقعك، ويمكن الإلغاء في أي شهر.",
-  cont_cta:"اسأل عن الباقة الشهرية",
-  sp_eyebrow:"الباقة الرائدة · منظومة المؤسسات المتكاملة", sp_h2:"ستة أنظمة. عقد واحد. بلا تسليم بين الجهات.",
-  sp_lead:"للشركات التي يكلّفها الموقع البطيء أو طلب العرض الضائع أو تحديث التطبيق الفاشل خسارة حقيقية. نصمم المنظومة كاملة ونبنيها ونشغّلها، ونبقى مسؤولين عن النتيجة.",
-  sp_price:"المدة المعتادة: من 12 إلى 16 أسبوعاً حتى الإطلاق، ثم دعم مستمر بموجب اتفاقية مستوى الخدمة. الدفع حسب المراحل المعتمدة بعملة USDT (تيثر)، مع دعم حضوري طوال المشروع.",
-  m1_h:"منصة ويب مؤسسية", m1_p:"موقع مؤسسي وبوابات تصمد أمام تدقيق المشتريات والمستثمرين والجهات الرقابية.",
-  m1_a:"أقسام الشركة والمستثمرين والصحة والسلامة والبيئة", m1_b:"بوابة الموردين والمناقصات", m1_c:"نظام إدارة محتوى مرن مع خيار استضافة داخل المنطقة",
-  m2_h:"تطبيق الجوال", m2_p:"تطبيقات iOS وAndroid بجودة أصلية لفرق العمل الميدانية أو الموزعين أو العملاء.",
-  m2_a:"العمليات الميدانية والتفتيش", m2_b:"طلبات الوكلاء وتتبعها", m2_c:"يعمل دون اتصال، بواجهة ثنائية اللغة",
-  m3_h:"وكلاء الذكاء الاصطناعي", m3_p:"وكلاء بالعربية والإنجليزية يجيبون ويؤهلون العملاء وينفذون المهام على مستنداتك وأنظمتك.",
-  m3_a:"مساعد طلبات العروض والمشتريات", m3_b:"بحث في المستندات الفنية", m3_c:"تشغيل عبر واتساب والموقع",
-  m4_h:"سيو المؤسسات", m4_p:"ظهور في Google وفي إجابات الذكاء الاصطناعي في كل سوق تبيع فيه.",
-  m4_a:"بنية hreflang متعددة الأسواق", m4_b:"تقسيم موضوعي وتحسين الكيانات", m4_c:"برنامج تحريري شهري ثنائي اللغة",
-  m5_h:"دعم على مدار الساعة", m5_p:"أزمنة استجابة تعاقدية ومراقبة وأمان طوال الوقت.",
-  m5_a:"التزام بوقت تشغيل 99.9%", m5_b:"استجابة خلال 15 دقيقة للأعطال الحرجة", m5_c:"نسخ احتياطي وتحديثات ومراقبة أمنية", m5_d:"زيارات دعم حضورية في موقعكم",
-  m6_h:"تنفيذ من الصفر إلى المئة", m6_p:"من الاكتشاف إلى الإطلاق إلى التوسع، بإدارة مكتب مشاريع مخصص يرفع تقاريره إلى الراعي التنفيذي.",
-  m6_a:"اكتشاف ومخطط معماري", m6_b:"تقارير تنفيذية أسبوعية", m6_c:"تدريب وتسليم موثق",
-  ph1_w:"الأسبوع 1–2", ph1_b:"التشخيص", ph1_s:"تدقيق، أصحاب المصلحة، المخطط",
-  ph2_w:"الأسبوع 3–5", ph2_b:"التصميم المعماري", ph2_s:"تجربة المستخدم، نموذج البيانات، خطة المحتوى",
-  ph3_w:"الأسبوع 6–14", ph3_b:"البناء", ph3_s:"الويب والتطبيق والوكلاء على دفعات",
-  ph4_w:"من الأسبوع 15", ph4_b:"التشغيل والتوسع", ph4_s:"اتفاقية الخدمة، السيو، نمو مستمر",
-  sp_cta:"اطلب إحاطة تنفيذية", sp_wa:"راسل @meftacard على تيليغرام",
-  g_eyebrow:"عكس المخاطر", g_h2:"نحن نتحمل مخاطر التنفيذ، لا أنت.",
-  g1_h:"نطاق ثابت وسعر ثابت", g1_p:"السعر المكتوب في نطاق العمل هو ما تدفعه. أي تغيير يُسعَّر كتابياً قبل بدء العمل.",
-  g2_h:"الدفع بعد الاعتماد", g2_p:"مراحل المؤسسات تُفوتر فقط بعد اعتماد فريقك. المساران المحلي والتجاري: 50% عند البدء و50% عند الإطلاق. الدفع كله بـ USDT.",
-  g3_h:"كل شيء ملكك", g3_p:"الكود وملفات التصميم والنطاقات والحسابات ملكك. إن قررت المغادرة، تأخذ كل شيء مع التوثيق.",
-  f_eyebrow:"الأسئلة", f_h2:"قبل أن تحجز.",
-  q1:"هل تبنون بالعربية والإنجليزية؟", a1:"نعم. كل المسارات تُسلَّم أصلاً بالإنجليزية (من اليسار لليمين) والعربية (من اليمين لليسار)، مع طباعة صحيحة وhreflang وإعداد بحث لكل سوق. ليست إضافة ترجمة.",
-  q2:"كيف يمكننا الدفع؟", a2:"جميع المدفوعات بعملة USDT (تيثر) عبر شبكة TRC-20 أو ERC-20. مشاريع المؤسسات تُدفع حسب المراحل المعتمدة.",
-  q6:"هل تقدمون دعماً حضورياً؟", a6:"نعم. مسار التجارة والتصدير (2,250$) ومسار المؤسسات (من 25,000$) يشملان دعماً حضورياً: انطلاق المشروع في موقعكم، وتدريب الفريق، وزيارات دعم. المسار المحلي يُدعم عن بُعد.",
-  q3:"ما الدول التي تخدمونها؟", a3:"الإمارات والسعودية وقطر وعُمان والكويت والعراق، بتنفيذ عن بُعد لكل المسارات ودعم حضوري لمساري التجارة والمؤسسات.",
-  q4:"هل يمكن البدء بمسار ثم الترقية لاحقاً؟", a4:"نعم. المساران المحلي والتجاري يستخدمان بنية المؤسسات نفسها، فلا يضيع شيء عند التوسع.",
-  q5:"من يملك الكود والحسابات؟", a5:"أنت. الكود والنطاقات والاستضافة والتحليلات وحسابات الإعلانات مسجلة باسم شركتك من اليوم الأول.",
-  fc_eyebrow:"الخطوة التالية", fc_h2:"إحاطة مدتها 30 دقيقة. وخطة مكتوبة خلال 72 ساعة.",
-  fc_lead:"أخبرنا أين أنت الآن وإلى أين تريد الوصول. سنعود إليك بالنطاق والجدول الزمني وسعر ثابت، سواء عملت معنا أم لا.",
-  fc_cta:"احجز استشارة تنفيذية", fc_wa:"تيليغرام: @meftacard", fc_wa2:"راسلنا على واتساب",
-  st_1:"الدفع بـ USDT (تيثر) · TRC-20 / ERC-20", st_2:"دعم حضوري · مسار 2,250$ ومسار المؤسسات", st_3:"تيليغرام @meftacard · واتساب",
-  ft_1:"© 2026 MEFTACARD Studio · إحدى شركات MEFTACARD", ft_2:"الإمارات · السعودية · قطر · عُمان · الكويت · العراق",
-  md_h:"استشارة تنفيذية", md_p:"ثلاثون دقيقة مع أحد الشركاء. يصل طلبك مباشرة إلى فريقنا على تيليغرام أو واتساب.",
-  fl_name:"الاسم الكامل", fl_role:"المنصب", fl_company:"الشركة", fl_country:"الدولة", fl_track:"المسار", fl_pay:"طريقة الدفع",
-  c_ae:"الإمارات العربية المتحدة", c_sa:"المملكة العربية السعودية", c_qa:"قطر", c_om:"عُمان", c_kw:"الكويت", c_iq:"العراق", c_ot:"أخرى",
-  o_ent:"منظومة المؤسسات (من 25,000$)", o_trade:"التجارة والتصدير (2,250$)", o_local:"النمو المحلي (1,250$)", o_ret:"باقة الرعاية والنمو",
-  fl_msg:"ما الذي تريد تحقيقه؟", fl_submit:"أرسل عبر تيليغرام", fl_submit_wa:"أرسل عبر واتساب", fl_fine:"نرد خلال يوم عمل واحد. تُستخدم بياناتك فقط للرد على هذا الطلب."
-};
 const MSG = {
   en:{general:"Hello MEFTACARD Studio, I'd like to discuss a project.",
       local:"Hello MEFTACARD Studio, I'd like to start the Local Growth Engine ($1,250).",
@@ -723,44 +680,15 @@ const MSG = {
       enterprise:"مرحباً MEFTACARD Studio، أود حجز إحاطة تنفيذية حول منظومة المؤسسات المتكاملة (من 25,000$).",
       retainer:"مرحباً MEFTACARD Studio، أود معرفة تفاصيل باقة الرعاية والنمو الشهرية."}
 };
-const TITLES = {
-  en:{title:document.title, desc:document.querySelector('meta[name=description]').content},
-  ar:{title:"MEFTACARD Studio — هندسة رقمية ونمو للشركات في الخليج والعراق",
-      desc:"منصات ويب وتطبيقات ووكلاء ذكاء اصطناعي وسيو ودعم على مدار الساعة لشركات النفط والغاز والصناعة والتجارة في الخليج والعراق. الدفع بـ USDT ودعم حضوري لمساري التجارة والمؤسسات."}
-};
 
-/* ========= i18n ========= */
-const EN = {};
-document.querySelectorAll('[data-i18n]').forEach(el => { EN[el.dataset.i18n] = el.innerHTML; });
-let lang = 'en';
-
+/* ========= Contact links (language comes from <html lang>) ========= */
+const lang = document.documentElement.lang === 'ar' ? 'ar' : 'en';
 function tgLink(text){ return `https://t.me/${TELEGRAM_USER}?text=${encodeURIComponent(text)}`; }
 function openWA(text){ window.open(`https://wa.me/${WA_PARTS.join('')}?text=${encodeURIComponent(text)}`, '_blank', 'noopener'); }
+document.querySelectorAll('.js-tg').forEach(a => { a.href = tgLink(MSG[lang][a.dataset.tgMsg] || MSG[lang].general); });
 document.querySelectorAll('.js-wa').forEach(a => a.addEventListener('click', e => {
   e.preventDefault(); openWA(MSG[lang][a.dataset.waMsg] || MSG[lang].general);
 }));
-function setLang(next){
-  lang = next === 'ar' ? 'ar' : 'en';
-  const dict = lang === 'ar' ? AR : EN;
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const v = dict[el.dataset.i18n]; if (v !== undefined) el.innerHTML = v;
-  });
-  document.title = TITLES[lang].title;
-  document.querySelector('meta[name=description]').content = TITLES[lang].desc;
-  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
-  document.querySelectorAll('.js-tg').forEach(a => { a.href = tgLink(MSG[lang][a.dataset.tgMsg] || MSG[lang].general); });
-  document.querySelectorAll('.flip').forEach(p => p.setAttribute('d', lang === 'ar' ? 'M13 4l-6 6 6 6' : 'M7 4l6 6-6 6'));
-  const url = new URL(location.href); url.searchParams.set('lang', lang);
-  try { history.replaceState(null, '', url); localStorage.setItem('ms_lang', lang); } catch(e){}
-}
-document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
-
-let initial = new URLSearchParams(location.search).get('lang');
-if (!initial) { try { initial = localStorage.getItem('ms_lang'); } catch(e){} }
-if (!initial) initial = (navigator.language || '').toLowerCase().startsWith('ar') ? 'ar' : 'en';
-setLang(initial);
 
 /* ========= Consultation modal ========= */
 const dlg = document.getElementById('consult');
