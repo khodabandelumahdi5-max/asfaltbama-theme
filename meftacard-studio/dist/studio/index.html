@@ -53,7 +53,9 @@
     "SA",
     "QA",
     "OM",
-    "KW"
+    "KW",
+    "BH",
+    "LB"
   ],
   "availableLanguage": [
     "ar",
@@ -124,7 +126,15 @@
       "name": "Which countries do you work in?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Iraq, the UAE, Saudi Arabia, Qatar, Oman and Kuwait."
+        "text": "Iraq, the UAE, Saudi Arabia, Qatar, Kuwait, Oman, Bahrain and Lebanon. Because we work online, the country doesn't limit what we can do."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do we need to meet in person?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Everything, from the first call to design reviews, launch and support, is done online. In-person support is available on the Trade & Export and Enterprise packages if you want it."
       }
     },
     {
@@ -231,6 +241,13 @@ thead th{font-size:14px;color:var(--ink-2);font-weight:500;background:var(--sunk
 tbody th{font-weight:400;color:var(--ink-2);width:30%}
 tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 td.no{color:var(--line-2)}
+.usdt{margin-top:20px;display:grid;grid-template-columns:1fr 1.4fr;gap:28px;align-items:center;background:#ECF6F2;border:1px solid #CBE7DC;border-radius:20px;padding:28px}
+.usdt-h{display:flex;gap:16px;align-items:center}
+.usdt-mark{flex:none;width:52px;height:52px;border-radius:50%;background:#26A17B;color:#fff;display:grid;place-items:center;font-size:28px;font-weight:700}
+.usdt h3{font-size:21px;letter-spacing:-.01em}.usdt p{color:var(--ink-2);font-size:15px;margin-top:4px}
+.usdt ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;font-size:15px}
+.usdt li{padding-inline-start:22px;position:relative}.usdt li::before{content:"✓";position:absolute;inset-inline-start:0;color:#1A7F5E;font-weight:700}
+@media (max-width:900px){.usdt{grid-template-columns:1fr}.usdt ul{grid-template-columns:1fr}}
 .pk-note{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:20px;font-size:15px;color:var(--ink-2)}
 .pk-note b{color:var(--ink);font-weight:500}
 
@@ -374,9 +391,11 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
       <a class="btn btn-line js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener">Message us on Telegram</a>
     </div>
     <div class="facts">
+      <span>Pay in Tether (USDT)</span>
       <span>Arabic and English, built in from day one</span>
       <span>You own the code, domain and accounts</span>
-      <span>Iraq, UAE, Saudi Arabia, Qatar, Oman, Kuwait</span>
+      <span>Fully online, no visit needed</span>
+      <span>Iraq, the Gulf and Lebanon</span>
     </div>
   </div>
 </section>
@@ -429,8 +448,16 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
         </table>
       </div>
     </details>
+    <div class="usdt">
+      <div class="usdt-h"><span class="usdt-mark num">₮</span><div><h3>Pay in Tether (USDT)</h3><p>Pay for any package with the Tether digital currency, from any country.</p></div></div>
+      <ul>
+        <li>No international bank transfer or foreign card needed</li>
+        <li>Payment arrives in minutes, so work starts sooner</li>
+        <li>Same dollar price in every country</li>
+        <li>Low network fees on TRC-20, or ERC-20 if you prefer</li>
+      </ul>
+    </div>
     <div class="pk-note">
-      <span><b>Payment:</b> USDT (Tether) on TRC-20 or ERC-20.</span>
       <span><b>After launch:</b> optional monthly care plan for updates, security and SEO.</span>
     </div>
   </div>
@@ -558,13 +585,27 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
         <a href="https://meftacard.com/website-design-cost-gcc-2026/">How much does a website cost in the GCC?</a>
         <a href="https://meftacard.com/whatsapp-ai-agent-business-uae-saudi/">WhatsApp AI agents for business</a>
         <a href="https://meftacard.com/arabic-seo-hreflang-guide/">Arabic SEO for bilingual websites</a>
+        <a href="https://meftacard.com/oil-and-gas-website-design/">Oil and gas website design</a>
+        <a href="https://meftacard.com/b2b-export-website-rfq/">The B2B export website</a>
+      </div>
+      <div class="reading">
+        <h3>By country</h3>
+        <a href="/studio/iraq/">Website design and SEO services in Iraq</a>
+        <a href="/studio/uae/">Website design and SEO services in the UAE</a>
+        <a href="/studio/saudi-arabia/">Website design and SEO services in Saudi Arabia</a>
+        <a href="/studio/qatar/">Website design and SEO services in Qatar</a>
+        <a href="/studio/kuwait/">Website design and SEO services in Kuwait</a>
+        <a href="/studio/oman/">Website design and SEO services in Oman</a>
+        <a href="/studio/bahrain/">Website design and SEO services in Bahrain</a>
+        <a href="/studio/lebanon/">Website design and SEO services in Lebanon</a>
       </div>
     </div>
     <div class="faq">
       <details><summary>Do you build in Arabic and English?</summary><p>Yes. Every package ships in both, with right-to-left Arabic design, separate pages for each language and the search setup Google needs to show the right one.</p></details>
       <details><summary>How do we pay?</summary><p>In USDT (Tether), on TRC-20 or ERC-20. Local and Trade are paid half at the start and half at launch; Enterprise is paid per approved milestone.</p></details>
       <details><summary>Do you offer in-person support?</summary><p>Yes, on the Trade &amp; Export and Enterprise packages: an on-site kickoff, team training and support visits. The Local package is supported remotely.</p></details>
-      <details><summary>Which countries do you work in?</summary><p>Iraq, the UAE, Saudi Arabia, Qatar, Oman and Kuwait.</p></details>
+      <details><summary>Which countries do you work in?</summary><p>Iraq, the UAE, Saudi Arabia, Qatar, Kuwait, Oman, Bahrain and Lebanon. Because we work online, the country doesn't limit what we can do.</p></details>
+      <details><summary>Do we need to meet in person?</summary><p>No. Everything, from the first call to design reviews, launch and support, is done online. In-person support is available on the Trade &amp; Export and Enterprise packages if you want it.</p></details>
       <details><summary>Can we start small and grow later?</summary><p>Yes. Local and Trade sites are built on the same foundation as Enterprise, so nothing is thrown away when you upgrade.</p></details>
       <details><summary>Who owns the site when it's finished?</summary><p>You do, from day one: code, domain, hosting, analytics and ad accounts.</p></details>
     </div>
@@ -578,7 +619,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
       <h2>Tell us what you're building.</h2>
       <p class="sub">We reply within one business day with a scope, a timeline and a fixed price.</p>
       <div class="direct">
-        <a class="js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener"><span>Telegram</span><small>@meftacard</small></a>
+        <a class="js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener"><span>Telegram</span><small dir="ltr">@meftacard</small></a>
         <a class="js-wa" href="#" data-wa-msg="general"><span>WhatsApp</span><small>Opens a chat</small></a>
       </div>
     </div>
@@ -588,7 +629,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
       <div class="field"><label for="f-country">Country</label>
         <select id="f-country" name="country">
           <option>Iraq</option><option>United Arab Emirates</option><option>Saudi Arabia</option>
-          <option>Qatar</option><option>Oman</option><option>Kuwait</option><option>Other</option>
+          <option>Qatar</option><option>Oman</option><option>Kuwait</option><option>Bahrain</option><option>Lebanon</option><option>Other</option>
         </select></div>
       <div class="field"><label for="f-track">Package</label>
         <select id="f-track" name="track">

@@ -53,7 +53,9 @@
     "SA",
     "QA",
     "OM",
-    "KW"
+    "KW",
+    "BH",
+    "LB"
   ],
   "availableLanguage": [
     "ar",
@@ -124,7 +126,15 @@
       "name": "في أي دول تعملون؟",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "العراق والإمارات والسعودية وقطر وعُمان والكويت."
+        "text": "العراق والإمارات والسعودية وقطر والكويت وعُمان والبحرين ولبنان. ولأننا نعمل أونلاين، لا يحدّ البلد مما يمكننا فعله."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "هل نحتاج إلى لقاء حضوري؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "لا. كل شيء، من أول مكالمة ومراجعة التصاميم حتى الإطلاق والدعم، يتم أونلاين. والدعم الحضوري متاح في باقتي التجارة والتصدير والمؤسسات إن رغبتم."
       }
     },
     {
@@ -231,6 +241,13 @@ thead th{font-size:14px;color:var(--ink-2);font-weight:500;background:var(--sunk
 tbody th{font-weight:400;color:var(--ink-2);width:30%}
 tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 td.no{color:var(--line-2)}
+.usdt{margin-top:20px;display:grid;grid-template-columns:1fr 1.4fr;gap:28px;align-items:center;background:#ECF6F2;border:1px solid #CBE7DC;border-radius:20px;padding:28px}
+.usdt-h{display:flex;gap:16px;align-items:center}
+.usdt-mark{flex:none;width:52px;height:52px;border-radius:50%;background:#26A17B;color:#fff;display:grid;place-items:center;font-size:28px;font-weight:700}
+.usdt h3{font-size:21px;letter-spacing:-.01em}.usdt p{color:var(--ink-2);font-size:15px;margin-top:4px}
+.usdt ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;font-size:15px}
+.usdt li{padding-inline-start:22px;position:relative}.usdt li::before{content:"✓";position:absolute;inset-inline-start:0;color:#1A7F5E;font-weight:700}
+@media (max-width:900px){.usdt{grid-template-columns:1fr}.usdt ul{grid-template-columns:1fr}}
 .pk-note{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:20px;font-size:15px;color:var(--ink-2)}
 .pk-note b{color:var(--ink);font-weight:500}
 
@@ -374,9 +391,11 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
       <a class="btn btn-line js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener">راسلنا على تيليغرام</a>
     </div>
     <div class="facts">
+      <span>الدفع بعملة تيثر (USDT)</span>
       <span>العربية والإنجليزية من اليوم الأول</span>
       <span>الكود والدومين والحسابات ملكك</span>
-      <span>العراق، الإمارات، السعودية، قطر، عُمان، الكويت</span>
+      <span>أونلاين بالكامل، دون حاجة للحضور</span>
+      <span>العراق والخليج ولبنان</span>
     </div>
   </div>
 </section>
@@ -429,8 +448,16 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
         </table>
       </div>
     </details>
+    <div class="usdt">
+      <div class="usdt-h"><span class="usdt-mark num">₮</span><div><h3>الدفع بعملة تيثر (USDT)</h3><p>ادفع ثمن أي باقة بعملة تيثر الرقمية، من أي دولة.</p></div></div>
+      <ul>
+        <li>لا حاجة لتحويل بنكي دولي أو بطاقة أجنبية</li>
+        <li>يصل الدفع خلال دقائق، فيبدأ العمل أسرع</li>
+        <li>السعر نفسه بالدولار في كل الدول</li>
+        <li>رسوم شبكة منخفضة عبر TRC-20، أو ERC-20 إن فضّلت</li>
+      </ul>
+    </div>
     <div class="pk-note">
-      <span><b>الدفع:</b> USDT (تيثر) عبر TRC-20 أو ERC-20.</span>
       <span><b>بعد الإطلاق:</b> خطة رعاية شهرية اختيارية للتحديثات والأمان والسيو.</span>
     </div>
   </div>
@@ -558,13 +585,27 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
         <a href="https://meftacard.com/website-design-cost-iraq-ar/">كم تكلفة تصميم موقع في العراق؟</a>
         <a href="https://meftacard.com/whatsapp-ai-bot-business-ar/">بوت واتساب بالذكاء الاصطناعي للشركات</a>
         <a href="https://meftacard.com/seo-iraq-guide-ar/">السيو في العراق: دليل الشركات</a>
+        <a href="https://meftacard.com/google-business-profile-local-seo-iraq-ar/">ملف Google التجاري والظهور في الخرائط</a>
+        <a href="https://meftacard.com/mobile-app-development-cost-iraq-gulf-ar/">تكلفة تصميم تطبيق جوال</a>
+      </div>
+      <div class="reading">
+        <h3>حسب الدولة</h3>
+        <a href="/ar/studio/iraq/">تصميم مواقع وخدمات سيو في العراق</a>
+        <a href="/ar/studio/uae/">تصميم مواقع وخدمات سيو في الإمارات</a>
+        <a href="/ar/studio/saudi-arabia/">تصميم مواقع وخدمات سيو في السعودية</a>
+        <a href="/ar/studio/qatar/">تصميم مواقع وخدمات سيو في قطر</a>
+        <a href="/ar/studio/kuwait/">تصميم مواقع وخدمات سيو في الكويت</a>
+        <a href="/ar/studio/oman/">تصميم مواقع وخدمات سيو في عُمان</a>
+        <a href="/ar/studio/bahrain/">تصميم مواقع وخدمات سيو في البحرين</a>
+        <a href="/ar/studio/lebanon/">تصميم مواقع وخدمات سيو في لبنان</a>
       </div>
     </div>
     <div class="faq">
       <details><summary>هل تبنون بالعربية والإنجليزية؟</summary><p>نعم. كل باقة تُسلَّم باللغتين، بتصميم عربي من اليمين إلى اليسار، وصفحات منفصلة لكل لغة، وإعدادات البحث التي يحتاجها Google لعرض النسخة الصحيحة.</p></details>
       <details><summary>كيف ندفع؟</summary><p>بعملة USDT (تيثر) عبر TRC-20 أو ERC-20. الباقتان المحلية والتجارية: نصف عند البدء ونصف عند الإطلاق، وباقة المؤسسات حسب المراحل المعتمدة.</p></details>
       <details><summary>هل تقدمون دعماً حضورياً؟</summary><p>نعم، في باقتي التجارة والتصدير والمؤسسات: انطلاق المشروع في موقعكم، وتدريب الفريق، وزيارات دعم. الباقة المحلية تُدعم عن بُعد.</p></details>
-      <details><summary>في أي دول تعملون؟</summary><p>العراق والإمارات والسعودية وقطر وعُمان والكويت.</p></details>
+      <details><summary>في أي دول تعملون؟</summary><p>العراق والإمارات والسعودية وقطر والكويت وعُمان والبحرين ولبنان. ولأننا نعمل أونلاين، لا يحدّ البلد مما يمكننا فعله.</p></details>
+      <details><summary>هل نحتاج إلى لقاء حضوري؟</summary><p>لا. كل شيء، من أول مكالمة ومراجعة التصاميم حتى الإطلاق والدعم، يتم أونلاين. والدعم الحضوري متاح في باقتي التجارة والتصدير والمؤسسات إن رغبتم.</p></details>
       <details><summary>هل يمكن البدء صغاراً ثم التوسع؟</summary><p>نعم. مواقع الباقتين المحلية والتجارية مبنية على أساس باقة المؤسسات نفسه، فلا يضيع شيء عند الترقية.</p></details>
       <details><summary>لمن يعود الموقع بعد الانتهاء؟</summary><p>لكم، من اليوم الأول: الكود والدومين والاستضافة والتحليلات وحسابات الإعلانات.</p></details>
     </div>
@@ -578,7 +619,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
       <h2>أخبرنا ماذا تبني.</h2>
       <p class="sub">نرد خلال يوم عمل واحد بنطاق وجدول زمني وسعر ثابت.</p>
       <div class="direct">
-        <a class="js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener"><span>Telegram</span><small>@meftacard</small></a>
+        <a class="js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener"><span>Telegram</span><small dir="ltr">@meftacard</small></a>
         <a class="js-wa" href="#" data-wa-msg="general"><span>WhatsApp</span><small>يفتح محادثة</small></a>
       </div>
     </div>
@@ -588,7 +629,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
       <div class="field"><label for="f-country">الدولة</label>
         <select id="f-country" name="country">
           <option>العراق</option><option>الإمارات العربية المتحدة</option><option>المملكة العربية السعودية</option>
-          <option>قطر</option><option>عُمان</option><option>الكويت</option><option>أخرى</option>
+          <option>قطر</option><option>عُمان</option><option>الكويت</option><option>البحرين</option><option>لبنان</option><option>أخرى</option>
         </select></div>
       <div class="field"><label for="f-track">الباقة</label>
         <select id="f-track" name="track">

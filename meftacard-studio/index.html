@@ -39,7 +39,7 @@
   "parentOrganization": {"@type": "Organization", "name": "MEFTACARD", "url": "https://meftacard.com"},
   "description": "Website design, SEO services, website support and maintenance, AI agent development and support, and app design for businesses in Iraq and the Gulf.",
   "serviceType": ["Website design","SEO services","Website support and maintenance","AI agent development and support","Mobile app design"],
-  "areaServed": ["IQ","AE","SA","QA","OM","KW"],
+  "areaServed": ["IQ","AE","SA","QA","OM","KW","BH","LB"],
   "availableLanguage": ["ar","en"],
   "paymentAccepted": "USDT (Tether)",
   "sameAs": ["https://t.me/meftacard"],
@@ -140,6 +140,13 @@ thead th{font-size:14px;color:var(--ink-2);font-weight:500;background:var(--sunk
 tbody th{font-weight:400;color:var(--ink-2);width:30%}
 tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 td.no{color:var(--line-2)}
+.usdt{margin-top:20px;display:grid;grid-template-columns:1fr 1.4fr;gap:28px;align-items:center;background:#ECF6F2;border:1px solid #CBE7DC;border-radius:20px;padding:28px}
+.usdt-h{display:flex;gap:16px;align-items:center}
+.usdt-mark{flex:none;width:52px;height:52px;border-radius:50%;background:#26A17B;color:#fff;display:grid;place-items:center;font-size:28px;font-weight:700}
+.usdt h3{font-size:21px;letter-spacing:-.01em}.usdt p{color:var(--ink-2);font-size:15px;margin-top:4px}
+.usdt ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;font-size:15px}
+.usdt li{padding-inline-start:22px;position:relative}.usdt li::before{content:"✓";position:absolute;inset-inline-start:0;color:#1A7F5E;font-weight:700}
+@media (max-width:900px){.usdt{grid-template-columns:1fr}.usdt ul{grid-template-columns:1fr}}
 .pk-note{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:20px;font-size:15px;color:var(--ink-2)}
 .pk-note b{color:var(--ink);font-weight:500}
 
@@ -283,9 +290,11 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
       <a class="btn btn-line js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener" data-i18n="hero_cta2">Message us on Telegram</a>
     </div>
     <div class="facts">
+      <span data-i18n="fact_0">Pay in Tether (USDT)</span>
       <span data-i18n="fact_1">Arabic and English, built in from day one</span>
       <span data-i18n="fact_2">You own the code, domain and accounts</span>
-      <span data-i18n="fact_3">Iraq, UAE, Saudi Arabia, Qatar, Oman, Kuwait</span>
+      <span data-i18n="fact_3">Fully online, no visit needed</span>
+      <span data-i18n="fact_4">Iraq, the Gulf and Lebanon</span>
     </div>
   </div>
 </section>
@@ -338,8 +347,16 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
         </table>
       </div>
     </details>
+    <div class="usdt">
+      <div class="usdt-h"><span class="usdt-mark num">₮</span><div><h3 data-i18n="ut_h">Pay in Tether (USDT)</h3><p data-i18n="ut_p">Pay for any package with the Tether digital currency, from any country.</p></div></div>
+      <ul>
+        <li data-i18n="ut_1">No international bank transfer or foreign card needed</li>
+        <li data-i18n="ut_2">Payment arrives in minutes, so work starts sooner</li>
+        <li data-i18n="ut_3">Same dollar price in every country</li>
+        <li data-i18n="ut_4">Low network fees on TRC-20, or ERC-20 if you prefer</li>
+      </ul>
+    </div>
     <div class="pk-note">
-      <span data-i18n="note_1"><b>Payment:</b> USDT (Tether) on TRC-20 or ERC-20.</span>
       <span data-i18n="note_2"><b>After launch:</b> optional monthly care plan for updates, security and SEO.</span>
     </div>
   </div>
@@ -467,13 +484,27 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
         <a href="https://meftacard.com/website-design-cost-gcc-2026/" data-href-ar="https://meftacard.com/website-design-cost-iraq-ar/" data-i18n="rd1">How much does a website cost in the GCC?</a>
         <a href="https://meftacard.com/whatsapp-ai-agent-business-uae-saudi/" data-href-ar="https://meftacard.com/whatsapp-ai-bot-business-ar/" data-i18n="rd2">WhatsApp AI agents for business</a>
         <a href="https://meftacard.com/arabic-seo-hreflang-guide/" data-href-ar="https://meftacard.com/seo-iraq-guide-ar/" data-i18n="rd3">Arabic SEO for bilingual websites</a>
+        <a href="https://meftacard.com/oil-and-gas-website-design/" data-href-ar="https://meftacard.com/google-business-profile-local-seo-iraq-ar/" data-i18n="rd4">Oil and gas website design</a>
+        <a href="https://meftacard.com/b2b-export-website-rfq/" data-href-ar="https://meftacard.com/mobile-app-development-cost-iraq-gulf-ar/" data-i18n="rd5">The B2B export website</a>
+      </div>
+      <div class="reading">
+        <h3 data-i18n="cty_h">By country</h3>
+        <a href="/studio/iraq/" data-href-ar="/ar/studio/iraq/" data-i18n="cty_iraq">Website design and SEO services in Iraq</a>
+        <a href="/studio/uae/" data-href-ar="/ar/studio/uae/" data-i18n="cty_uae">Website design and SEO services in the UAE</a>
+        <a href="/studio/saudi-arabia/" data-href-ar="/ar/studio/saudi-arabia/" data-i18n="cty_saudi_arabia">Website design and SEO services in Saudi Arabia</a>
+        <a href="/studio/qatar/" data-href-ar="/ar/studio/qatar/" data-i18n="cty_qatar">Website design and SEO services in Qatar</a>
+        <a href="/studio/kuwait/" data-href-ar="/ar/studio/kuwait/" data-i18n="cty_kuwait">Website design and SEO services in Kuwait</a>
+        <a href="/studio/oman/" data-href-ar="/ar/studio/oman/" data-i18n="cty_oman">Website design and SEO services in Oman</a>
+        <a href="/studio/bahrain/" data-href-ar="/ar/studio/bahrain/" data-i18n="cty_bahrain">Website design and SEO services in Bahrain</a>
+        <a href="/studio/lebanon/" data-href-ar="/ar/studio/lebanon/" data-i18n="cty_lebanon">Website design and SEO services in Lebanon</a>
       </div>
     </div>
     <div class="faq">
       <details><summary data-i18n="q1">Do you build in Arabic and English?</summary><p data-i18n="a1">Yes. Every package ships in both, with right-to-left Arabic design, separate pages for each language and the search setup Google needs to show the right one.</p></details>
       <details><summary data-i18n="q2">How do we pay?</summary><p data-i18n="a2">In USDT (Tether), on TRC-20 or ERC-20. Local and Trade are paid half at the start and half at launch; Enterprise is paid per approved milestone.</p></details>
       <details><summary data-i18n="q3">Do you offer in-person support?</summary><p data-i18n="a3">Yes, on the Trade &amp; Export and Enterprise packages: an on-site kickoff, team training and support visits. The Local package is supported remotely.</p></details>
-      <details><summary data-i18n="q4">Which countries do you work in?</summary><p data-i18n="a4">Iraq, the UAE, Saudi Arabia, Qatar, Oman and Kuwait.</p></details>
+      <details><summary data-i18n="q4">Which countries do you work in?</summary><p data-i18n="a4">Iraq, the UAE, Saudi Arabia, Qatar, Kuwait, Oman, Bahrain and Lebanon. Because we work online, the country doesn't limit what we can do.</p></details>
+      <details><summary data-i18n="q7">Do we need to meet in person?</summary><p data-i18n="a7">No. Everything, from the first call to design reviews, launch and support, is done online. In-person support is available on the Trade &amp; Export and Enterprise packages if you want it.</p></details>
       <details><summary data-i18n="q5">Can we start small and grow later?</summary><p data-i18n="a5">Yes. Local and Trade sites are built on the same foundation as Enterprise, so nothing is thrown away when you upgrade.</p></details>
       <details><summary data-i18n="q6">Who owns the site when it's finished?</summary><p data-i18n="a6">You do, from day one: code, domain, hosting, analytics and ad accounts.</p></details>
     </div>
@@ -487,7 +518,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
       <h2 data-i18n="ct_h2">Tell us what you're building.</h2>
       <p class="sub" data-i18n="ct_sub">We reply within one business day with a scope, a timeline and a fixed price.</p>
       <div class="direct">
-        <a class="js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener"><span>Telegram</span><small>@meftacard</small></a>
+        <a class="js-tg" href="https://t.me/meftacard" data-tg-msg="general" target="_blank" rel="noopener"><span>Telegram</span><small dir="ltr">@meftacard</small></a>
         <a class="js-wa" href="#" data-wa-msg="general"><span>WhatsApp</span><small data-i18n="ct_wa">Opens a chat</small></a>
       </div>
     </div>
@@ -497,7 +528,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
       <div class="field"><label for="f-country" data-i18n="fl_country">Country</label>
         <select id="f-country" name="country">
           <option data-i18n="c_iq">Iraq</option><option data-i18n="c_ae">United Arab Emirates</option><option data-i18n="c_sa">Saudi Arabia</option>
-          <option data-i18n="c_qa">Qatar</option><option data-i18n="c_om">Oman</option><option data-i18n="c_kw">Kuwait</option><option data-i18n="c_ot">Other</option>
+          <option data-i18n="c_qa">Qatar</option><option data-i18n="c_om">Oman</option><option data-i18n="c_kw">Kuwait</option><option data-i18n="c_bh">Bahrain</option><option data-i18n="c_lb">Lebanon</option><option data-i18n="c_ot">Other</option>
         </select></div>
       <div class="field"><label for="f-track" data-i18n="fl_track">Package</label>
         <select id="f-track" name="track">
