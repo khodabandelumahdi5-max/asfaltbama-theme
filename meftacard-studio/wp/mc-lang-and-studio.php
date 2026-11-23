@@ -184,6 +184,7 @@ add_action('admin_menu', function () {
             $token = trim(sanitize_text_field(wp_unslash($_POST['mc_tg_token'] ?? '')));
             if ($token !== '') update_option('mc_tg_token', $token, false);
             update_option('mc_tg_chat', trim(sanitize_text_field(wp_unslash($_POST['mc_tg_chat'] ?? '@meftacardchannel'))), false);
+            update_option('mc_tg_auto', empty($_POST['mc_tg_auto']) ? '0' : '1', false);
             echo '<div class="updated"><p>Saved.</p></div>';
         }
         $has = get_option('mc_tg_token') ? 'saved (hidden)' : 'not set';
@@ -191,7 +192,8 @@ add_action('admin_menu', function () {
         echo '<div class="wrap"><h1>MEFTACARD Telegram</h1><form method="post">';
         wp_nonce_field('mc_tg_save');
         echo '<table class="form-table"><tr><th>Bot token</th><td><input type="password" name="mc_tg_token" class="regular-text" autocomplete="off" placeholder="' . esc_attr($has) . '"><p class="description">From @BotFather. Leave empty to keep the saved token.</p></td></tr>';
-        echo '<tr><th>Channel</th><td><input name="mc_tg_chat" class="regular-text" value="' . $chat . '"><p class="description">e.g. @meftacardchannel. Add the bot to the channel as an administrator with permission to post.</p></td></tr></table>';
+        echo '<tr><th>Channel</th><td><input name="mc_tg_chat" class="regular-text" value="' . $chat . '"><p class="description">e.g. @meftacardchannel. Add the bot to the channel as an administrator with permission to post.</p></td></tr>';
+        echo '<tr><th>Auto-post</th><td><label><input type="checkbox" name="mc_tg_auto" value="1" ' . checked(get_option('mc_tg_auto', '1'), '1', false) . '> Post new articles to the channel when they are published</label><p class="description">Only posts in the Studio article categories, only once per article.</p></td></tr></table>';
         echo '<p><button class="button button-primary" name="mc_tg_save" value="1">Save</button></p></form></div>';
     });
 });
@@ -217,7 +219,8 @@ add_action('rest_api_init', function () {
         $member = is_wp_error($c) ? $c : mc_tg_call('getChatMember', ['chat_id' => $chat, 'user_id' => $me['id']]);
         return ['token' => true, 'bot' => '@' . $me['username'], 'chat' => $chat,
                 'chat_ok' => !is_wp_error($c), 'bot_status' => is_wp_error($member) ? $member->get_error_message() : ($member['status'] ?? ''),
-                'can_post' => !is_wp_error($member) && (($member['status'] ?? '') === 'creator' || !empty($member['can_post_messages']))];
+                'can_post' => !is_wp_error($member) && (($member['status'] ?? '') === 'creator' || !empty($member['can_post_messages'])),
+                'auto_post' => get_option('mc_tg_auto', '1') === '1'];
     }]);
     register_rest_route('mc/v1', '/telegram', ['methods' => 'POST', 'permission_callback' => $admin, 'callback' => function (WP_REST_Request $req) {
         $text = (string) $req->get_param('text');
@@ -250,3 +253,78 @@ add_filter('language_attributes', function ($output) {
     $output = preg_replace('/\s*(dir|lang)="[^"]*"/', '', $output);
     return trim('dir="' . $dir . '" lang="' . esc_attr($code) . '" ' . $output);
 }, 100);
+
+/* ---------- v1.5: auto-post new Studio articles to the Telegram channel ----------
+ * Fires once, when a post in MC_ARTICLE_CATS becomes published for the first time.
+ * Runs after the response is sent (no delay for the editor), retries twice on error,
+ * and never posts the same article twice (meta mc_tg_posted).
+ */
+add_action('init', function () {
+    $auth = function () { return current_user_can('edit_posts'); };
+    register_post_meta('post', 'mc_tg_posted', ['type' => 'string', 'single' => true, 'show_in_rest' => true, 'auth_callback' => $auth]);
+    register_post_meta('post', 'mc_tg_error', ['type' => 'string', 'single' => true, 'show_in_rest' => true, 'auth_callback' => $auth]);
+});
+
+function mc_tg_article_text($id) {
+    $ar    = has_category(MC_AR_CATS, $id);
+    $title = trim(html_entity_decode(wp_strip_all_tags(get_the_title($id)), ENT_QUOTES, 'UTF-8'));
+    $p     = get_post($id);
+    $ex    = $p->post_excerpt !== '' ? $p->post_excerpt : wp_trim_words(wp_strip_all_tags(strip_shortcodes($p->post_content)), 40, '…');
+    $ex    = trim(html_entity_decode(wp_strip_all_tags($ex), ENT_QUOTES, 'UTF-8'));
+    if (mb_strlen($ex) > 320) $ex = rtrim(mb_substr($ex, 0, 317)) . '…';
+    $link  = get_permalink($id);
+    return $ar
+        ? "🔹 {$title}\n\n{$ex}\n\n📖 اقرأ المقال:\n{$link}\n\n🇮🇶 العراق · 🇦🇪 دبي · 🇸🇦 السعودية · 🇴🇲 عُمان\n💬 للاستشارة: @meftacard"
+        : "🔹 {$title}\n\n{$ex}\n\n📖 Read the article:\n{$link}\n\n🇮🇶 Iraq · 🇦🇪 Dubai · 🇸🇦 Saudi Arabia · 🇴🇲 Oman\n💬 @meftacard";
+}
+
+function mc_tg_autopost($id) {
+    $id = (int) $id;
+    if (get_option('mc_tg_auto', '1') !== '1' || !get_option('mc_tg_token')) return;
+    $p = get_post($id);
+    if (!$p || $p->post_type !== 'post' || $p->post_status !== 'publish') return;
+    if (!has_category(MC_ARTICLE_CATS, $id) || get_post_meta($id, 'mc_tg_posted', true)) return;
+    if (get_transient('mc_tg_lock_' . $id)) return;                 // another request is already posting it
+    set_transient('mc_tg_lock_' . $id, 1, 120);
+    $res = mc_tg_call('sendMessage', ['chat_id' => get_option('mc_tg_chat', '@meftacardchannel'),
+                                       'text' => mc_tg_article_text($id), 'disable_web_page_preview' => 'false']);
+    if (is_wp_error($res)) {
+        $n = (int) get_post_meta($id, 'mc_tg_tries', true) + 1;
+        update_post_meta($id, 'mc_tg_tries', $n);
+        update_post_meta($id, 'mc_tg_error', $res->get_error_message());
+        delete_transient('mc_tg_lock_' . $id);
+        if ($n < 3) wp_schedule_single_event(time() + 600 * $n, 'mc_tg_autopost_retry', [$id]);
+        return;
+    }
+    update_post_meta($id, 'mc_tg_posted', (string) $res['message_id']);
+    delete_post_meta($id, 'mc_tg_error');
+    delete_post_meta($id, 'mc_tg_tries');
+}
+add_action('mc_tg_autopost_retry', 'mc_tg_autopost');
+
+add_action('wp_after_insert_post', function ($post_id, $post, $update, $post_before) {
+    if (!$post || $post->post_type !== 'post' || $post->post_status !== 'publish') return;
+    if ($post_before && $post_before->post_status === 'publish') return;   // edits of published posts never post
+    if (wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) return;
+    $GLOBALS['mc_tg_queue'][] = (int) $post_id;
+}, 10, 4);
+
+add_action('shutdown', function () {
+    if (empty($GLOBALS['mc_tg_queue'])) return;
+    $ids = array_unique($GLOBALS['mc_tg_queue']);
+    $GLOBALS['mc_tg_queue'] = [];
+    if (function_exists('fastcgi_finish_request')) fastcgi_finish_request();   // editor gets its response first
+    foreach ($ids as $id) mc_tg_autopost($id);
+});
+
+// Preview the text that would be posted, without sending anything.
+add_action('rest_api_init', function () {
+    register_rest_route('mc/v1', '/telegram/preview/(?P<id>\d+)', ['methods' => 'GET',
+        'permission_callback' => function () { return current_user_can('manage_options'); },
+        'callback' => function (WP_REST_Request $r) {
+            $id = (int) $r['id'];
+            if (!get_post($id)) return new WP_Error('mc_tg_nopost', 'No such post', ['status' => 404]);
+            return ['id' => $id, 'eligible' => has_category(MC_ARTICLE_CATS, $id), 'already_posted' => get_post_meta($id, 'mc_tg_posted', true),
+                    'error' => get_post_meta($id, 'mc_tg_error', true), 'text' => mc_tg_article_text($id)];
+        }]);
+});
