@@ -7,6 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const BASE = 'https://meftacard.com';
+const MARK = fs.readFileSync(path.join(ROOT, 'brand/mark.svg'), 'utf8').split('\n').filter((l) => l.includes('<path')).join('');
 const CSS = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').match(/<style>([\s\S]*?)<\/style>/)[1];
 const OG = `${BASE}/wp-content/uploads/2026/11/meftacard-studio-og.png`;
 const MEDIA = JSON.parse(fs.readFileSync(path.join(ROOT, 'work/img/media.json'), 'utf8'));
@@ -220,7 +221,7 @@ function page(c, lang) {
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(t.title(d))}"><meta property="og:description" content="${esc(t.desc(d))}">
 <meta property="og:url" content="${self}"><meta property="og:image" content="${OG}"><meta property="og:locale" content="${lang === 'ar' ? 'ar_AR' : 'en_US'}">
 <meta name="twitter:card" content="summary_large_image"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#FAFAF8">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316171A'/%3E%3Ctext x='32' y='44' font-family='Arial' font-weight='800' font-size='34' text-anchor='middle' fill='%23FAFAF8'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='-6 -14 112 112'><rect x='-6' y='-14' width='112' height='112' rx='24' fill='#0E0F11'/><g fill='#2BD4A4'>${MARK.replace(/"/g, "'")}</g></svg>`)}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="${t.font}" rel="stylesheet">
 ${ld.map((j)=>`<script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n')}
@@ -240,7 +241,7 @@ ${ld.map((j)=>`<script type="application/ld+json">${JSON.stringify(j)}</script>`
 <body>
 <a class="skip" href="#main">${t.skip}</a>
 <header class="top"><div class="wrap">
-  <a class="brand" href="${t.studio}">MEFTACARD <span>Studio</span></a>
+  <a class="brand" href="${t.studio}" aria-label="MEFTACARD Studio"><svg class="brand-logo" viewBox="0 4 100 64" aria-hidden="true" focusable="false">${MARK}</svg>MEFTACARD <span>Studio</span></a>
   <nav class="links"><a href="#packages">${t.nav[0]}</a><a href="#services">${t.nav[1]}</a><a href="#contact">${t.nav[2]}</a></nav>
   <nav class="lang"><a href="${t.studio}${c.slug}/" aria-current="page">${lang === 'ar' ? 'عربي' : 'EN'}</a><a href="${url(other, c.slug).replace(BASE,'')}" hreflang="${other}" lang="${other}">${t.other}</a></nav>
   <a class="btn btn-dark" href="#contact">${t.nav[2]}</a>

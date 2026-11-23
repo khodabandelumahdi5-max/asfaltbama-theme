@@ -97,7 +97,7 @@ ${ld.map((j)=>`<script type="application/ld+json">${JSON.stringify(j)}</script>`
 <body>
 <a class="skip" href="#main">${t.skip}</a>
 <header class="top"><div class="wrap">
-  <a class="brand" href="${t.studio}">MEFTACARD <span>Studio</span></a>
+  <a class="brand" href="${t.studio}" aria-label="MEFTACARD Studio"><svg class="brand-logo" viewBox="0 4 100 64" aria-hidden="true" focusable="false">${MARK}</svg>MEFTACARD <span>Studio</span></a>
   <nav class="links"><a href="#included">${t.nav[0]}</a><a href="#packages">${t.nav[1]}</a><a href="#contact">${t.nav[2]}</a></nav>
   <nav class="lang"><a href="${t.studio}${s.slug}/" aria-current="page">${lang === 'ar' ? 'عربي' : 'EN'}</a><a href="${url(other, s.slug).replace(BASE,'')}" hreflang="${other}" lang="${other}">${t.other}</a></nav>
   <a class="btn btn-dark" href="#contact">${t.nav[2]}</a>

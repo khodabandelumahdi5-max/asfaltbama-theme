@@ -121,7 +121,7 @@ def issues(f, lang):
     elif f.get('arabic_text') and not (f.get('rtl') or f.get('lang', '').lower().startswith(('ar', 'fa', 'ku', 'ckb', 'ur'))):
         add(12, ('Arabic content not marked as Arabic', 'The page language/direction is wrong, so Google may not show it for Arabic searches.', 'Set lang="ar" and dir="rtl" on Arabic pages.'),
                 ('المحتوى العربي غير معرّف كعربي', 'لغة الصفحة أو اتجاهها خاطئ، فقد لا يعرضها Google في البحث العربي.', 'ضبط lang="ar" وdir="rtl" في الصفحات العربية.'))
-    if not f.get('title') or len(f.get('title', '')) < 15:
+    if not f.get('title') or len(f.get('title', '')) < 15 or re.search(r'(^|\|\s*)(home|homepage|welcome|index)\s*($|\|)|my website|coming soon|untitled|^one moment', f.get('title', ''), re.I):
         add(15, ('Missing or weak page title', 'The title is the main line shown in Google results.', 'Write a clear title with your service and city.'),
                 ('عنوان الصفحة مفقود أو ضعيف', 'العنوان هو السطر الرئيسي الذي يظهر في نتائج Google.', 'كتابة عنوان واضح يتضمن الخدمة والمدينة.'))
     if not f.get('desc'):
@@ -169,9 +169,20 @@ def report(f, lang):
         L += ['## ' + ('ما هو جيد في موقعك' if ar else 'What is already good'), '', '، '.join(good) if ar else ', '.join(good), '']
     if not iss:
         L += ['موقعك في حالة جيدة. ننصح فقط بالاستمرار في نشر المحتوى وجمع التقييمات.' if ar else 'Your site is in good shape. Keep publishing content and collecting reviews.', '']
-    L += ['---', 'إذا أردت أن ننفذ هذه الإصلاحات، نرسل لك سعراً ثابتاً. العمل أونلاين بالكامل والدفع بعملة تيثر (USDT).' if ar else
-          'If you would like us to make these fixes, we will send a fixed price. Fully online, paid in Tether (USDT).',
-          'MEFTACARD Studio · https://meftacard.com/studio/ · Telegram @meftacard']
+    if ar:
+        L += ['## الخطوة التالية', '',
+              'يمكنكم تنفيذ هذه الإصلاحات بأنفسكم أو مع أي فريق. وإذا أردتم أن نتولاها نحن بالكامل:',
+              '- ردّوا على رسالتنا بكلمة «تنفيذ»، ونرسل لكم خلال 24 ساعة خطة بسعر ثابت ومدة تسليم واضحة.',
+              '- العمل أونلاين بالكامل، ولا نحتاج منكم إلا الموافقة.',
+              '- الدفع بعملة تيثر (USDT).', '',
+              '---', 'MEFTACARD Studio · https://meftacard.com/ar/studio/ · Telegram @meftacard']
+    else:
+        L += ['## Next step', '',
+              'You can apply these fixes yourselves or with any team. If you would rather we handle all of it:',
+              '- Reply to our message with "go", and within 24 hours we send a fixed-price plan with a clear delivery date.',
+              '- Everything is done online; all we need from you is approval.',
+              '- Payment in Tether (USDT).', '',
+              '---', 'MEFTACARD Studio · https://meftacard.com/studio/ · Telegram @meftacard']
     return '\n'.join(L), score, iss
 
 

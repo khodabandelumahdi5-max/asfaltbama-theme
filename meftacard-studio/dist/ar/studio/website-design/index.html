@@ -51,8 +51,10 @@ html[dir="rtl"] .num{text-align:right}
 
 header.top{position:sticky;top:0;z-index:40;background:rgba(250,250,248,.86);backdrop-filter:saturate(1.6) blur(16px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:28px;height:60px}
-.brand{font-weight:700;font-size:16px;letter-spacing:-.01em;white-space:nowrap}
+.brand{direction:ltr;unicode-bidi:isolate;display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:16px;letter-spacing:-.01em;white-space:nowrap}
+.brand-logo{width:34px;height:22px;fill:currentColor;flex:none}
 .brand span{font-weight:400;color:var(--ink-2)}
+@media(max-width:480px){.brand span{display:none}.brand{gap:7px}.brand-logo{width:28px;height:18px}}
 nav.links{display:flex;gap:26px;margin-inline-start:auto;font-size:14.5px;color:var(--ink-2)}
 nav.links a:hover{color:var(--ink)}
 .lang{display:flex;gap:2px;font-size:14px}
@@ -234,7 +236,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
 <body>
 <a class="skip" href="#main">تخطَّ إلى المحتوى</a>
 <header class="top"><div class="wrap">
-  <a class="brand" href="/ar/studio/">MEFTACARD <span>Studio</span></a>
+  <a class="brand" href="/ar/studio/" aria-label="MEFTACARD Studio"><svg class="brand-logo" viewBox="0 4 100 64" aria-hidden="true" focusable="false">  <path fill-rule="evenodd" d="M22 4a22 22 0 1 1 0 44a22 22 0 1 1 0-44zm0 9a13 13 0 1 0 0 26a13 13 0 1 0 0-26z"/>  <path fill-rule="evenodd" d="M42 21.5H100V68H91V45.5L79 61.5L67 45.5V68H58V30.5H42Z M67 30.5L79 46.5L91 30.5Z"/></svg>MEFTACARD <span>Studio</span></a>
   <nav class="links"><a href="#included">الخدمات</a><a href="#packages">الباقات</a><a href="#contact">تواصل معنا</a></nav>
   <nav class="lang"><a href="/ar/studio/website-design/" aria-current="page">عربي</a><a href="/studio/website-design/" hreflang="en" lang="en">EN</a></nav>
   <a class="btn btn-dark" href="#contact">تواصل معنا</a>
