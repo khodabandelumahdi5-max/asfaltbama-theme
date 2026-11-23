@@ -21,9 +21,9 @@ COUNTRY = {"964": "العراق", "968": "عُمان", "971": "الإمارات"
 # Arabic phrasing of each issue the scorer reports (subject: "موقعكم").
 ISSUE_AR = [
     (r"No HTTPS", "أن الموقع لا يعمل بقفل الأمان HTTPS، فيظهر للزائر تحذير «غير آمن» في المتصفح"),
-    (r"Very slow on mobile \(([\d.]+)s\)", "أن الموقع يحتاج نحو {0} ثانية ليفتح على الجوال، وأغلب الزوار يغادرون قبل ذلك"),
-    (r"Slow on mobile \(([\d.]+)s\)", "أن الموقع يحتاج نحو {0} ثانية ليفتح على الجوال"),
-    (r"No one-tap WhatsApp", "أنه لا يوجد زر واتساب أو اتصال بلمسة واحدة، والعميل في المنطقة يفضّل واتساب"),
+    (r"Very slow on mobile \(([\d.]+)s\)", "أن الصفحة الرئيسية احتاجت في اختبارنا نحو {0} ثانية لتفتح على الجوال، وكثير من الزوار يغادرون قبل ذلك"),
+    (r"Slow on mobile \(([\d.]+)s\)", "أن الصفحة الرئيسية احتاجت في اختبارنا نحو {0} ثانية لتفتح على الجوال"),
+    (r"No one-tap WhatsApp", "أن الصفحة الرئيسية لا تحتوي زر واتساب أو اتصال بلمسة واحدة، والعميل في المنطقة يفضّل التواصل عبر واتساب"),
     (r"No Arabic version", "أنه لا توجد نسخة عربية من الموقع، فيصعب ظهوركم لمن يبحث بالعربية"),
     (r"Arabic content not marked", "أن المحتوى العربي غير معرّف كعربي في كود الصفحة، فقد لا يعرضه Google في البحث العربي"),
     (r"Not mobile friendly|overflow|horizontal", "أن الصفحة لا تتناسب مع شاشة الجوال"),
@@ -61,6 +61,8 @@ def norm_phone(raw, cc):
         d = cc + d[1:]
     if cc and len(d) <= 9 and not d.startswith(cc):
         d = cc + d
+    if re.search(r"1234567|0000000|(\d)\1{6}", d):
+        return None
     return d if 10 <= len(d) <= 15 and d[:3] in COUNTRY else None
 
 
@@ -97,9 +99,11 @@ def contacts(domain):
     return wa, phones, emails[:2]
 
 
-def issues_ar(raw):
+def issues_ar(raw, has_wa=False):
     out = []
     for part in [p.strip() for p in raw.split(";")]:
+        if has_wa and 'WhatsApp' in part:
+            continue
         for pat, ar in ISSUE_AR:
             m = re.search(pat, part, re.I)
             if m:
@@ -149,7 +153,7 @@ def main():
         if not (wa or phones or emails):
             continue
         name = names.get(domain, domain.split(".")[0].replace("-", " ").title())
-        iss = issues_ar(raw)
+        iss = issues_ar(raw, has_wa=bool(wa))
         msg = message(name, domain, iss)
         target = wa[0] if wa else next((p for p in phones if is_mobile(p)), None)
         leads.append(dict(src=src or cc_for(domain), score=score, domain=domain, name=name, issues_en=raw, issues_ar=iss,
