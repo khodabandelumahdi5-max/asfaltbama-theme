@@ -6,7 +6,7 @@ module.exports = {
     typesH: 'Types of websites we design',
     types: [
       ['Corporate website design', 'A company website that presents who you are, what you do and why buyers should trust you, with clear service pages, team, certifications and contact routes. Built for procurement teams, partners and investors as much as for customers.'],
-      ['Responsive web design', 'Every site we build adapts to phones, tablets and desktops. We design the mobile layout first, because most visitors in Iraq and the Gulf arrive on a phone, then expand it for larger screens.'],
+      ['Responsive web design', 'Every site we build adapts to phones, tablets and desktops. We design the mobile layout first, because most visitors in Iraq, Dubai, Saudi Arabia and Oman arrive on a phone, then expand it for larger screens.'],
       ['E-commerce website design', 'Online stores with product pages, search, cart and checkout, connected to local payment methods such as Mada, KNET, BenefitPay, ZainCash or card payments, plus WhatsApp ordering where customers prefer it.'],
       ['Landing page design', 'Focused single pages for a campaign, product launch or advertising, with one clear goal and a short form or WhatsApp button. Ideal when you run Google or Instagram ads and need a page that converts.'],
       ['UI/UX design', 'User research, user flows, wireframes and interface design for portals, dashboards and web apps, tested with real users before development starts.']
@@ -27,7 +27,7 @@ module.exports = {
     typesH: 'أنواع المواقع التي نصممها',
     types: [
       ['تصميم مواقع الشركات', 'موقع شركة يعرض من أنتم وماذا تقدمون ولماذا يثق بكم المشتري، بصفحات خدمات واضحة وفريق العمل والشهادات وطرق التواصل. مبني لفرق المشتريات والشركاء والمستثمرين بقدر ما هو للعملاء.'],
-      ['تصميم مواقع متجاوبة', 'كل موقع نبنيه يتكيف مع الجوال والتابلت والحاسوب. نصمم نسخة الجوال أولاً لأن أغلب الزوار في العراق والخليج يصلون من الجوال، ثم نوسعها للشاشات الأكبر.'],
+      ['تصميم مواقع متجاوبة', 'كل موقع نبنيه يتكيف مع الجوال والتابلت والحاسوب. نصمم نسخة الجوال أولاً لأن أغلب الزوار في العراق ودبي والسعودية وعُمان يصلون من الجوال، ثم نوسعها للشاشات الأكبر.'],
       ['تصميم متاجر إلكترونية', 'متاجر بصفحات منتجات وبحث وسلة ودفع، مربوطة بطرق الدفع المحلية مثل مدى وكي نت وBenefitPay وزين كاش أو البطاقات، مع الطلب عبر واتساب حيث يفضّله العملاء.'],
       ['تصميم صفحات هبوط', 'صفحات مركّزة لحملة أو إطلاق منتج أو إعلان، بهدف واحد واضح ونموذج قصير أو زر واتساب. مثالية عندما تعلن على Google أو إنستغرام وتحتاج صفحة تحوّل الزوار إلى عملاء.'],
       ['تصميم واجهات وتجربة المستخدم UI/UX', 'بحث المستخدمين ومسارات الاستخدام والنماذج الأولية وتصميم الواجهات للبوابات ولوحات التحكم وتطبيقات الويب، مع اختبارها على مستخدمين حقيقيين قبل البرمجة.']

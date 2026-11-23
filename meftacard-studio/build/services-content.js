@@ -5,7 +5,7 @@ module.exports = [
   slug: 'website-design', img: 'asfaltbama-desktop', pk: 'Local, Trade & Export and Enterprise',
   read: { en: ['website-design-cost-gcc-2026', 'b2b-export-website-rfq', 'oil-and-gas-website-design'], ar: ['website-design-cost-iraq-ar', 'seo-iraq-guide-ar'] },
   en: {
-    kw: 'website design', title: 'Website Design Company for Iraq & the Gulf | MEFTACARD Studio',
+    kw: 'website design', title: 'Website Design Company: Iraq, Dubai, Saudi | MEFTACARD Studio',
     desc: 'Buy professional website design in Arabic and English: fast, mobile-first business sites and online stores from $1,250. Fully online, paid in Tether.',
     h1: 'Website design that turns visitors into customers',
     intro: [
@@ -30,7 +30,7 @@ module.exports = [
     faq: [['How long does it take to design a website?', 'A local business site usually launches in about 14 days, a catalog site in about 30 days, and an enterprise platform in 12 to 16 weeks, depending on content and approvals.'], ['Do I need to provide the content?', 'You provide the facts about your business, prices and photos where you have them. We write and structure the page text, and can arrange photography or illustrations if needed.'], ['Will I be able to edit the site myself?', 'Yes. We build on an easy content system and train your team to update text, images and products.'], ['Do you redesign existing websites?', 'Yes. We can redesign your current site while keeping your existing Google rankings, by carrying over important pages and setting up redirects.'], ['Can you build an online store?', 'Yes. Online stores are part of the Trade & Export and Enterprise packages, with local payment methods for your country.'], ['Who owns the website?', 'You do, from day one: code, design files, domain, hosting and analytics are registered to your company.']]
   },
   ar: {
-    kw: 'تصميم مواقع', title: 'شركة تصميم مواقع في العراق والخليج | MEFTACARD Studio',
+    kw: 'تصميم مواقع', title: 'شركة تصميم مواقع في العراق ودبي والسعودية | MEFTACARD Studio',
     desc: 'شراء تصميم مواقع احترافية بالعربية والإنجليزية: مواقع شركات ومتاجر إلكترونية سريعة ومصممة للجوال من 1,250 دولاراً، أونلاين والدفع بعملة تيثر.',
     h1: 'تصميم مواقع يحوّل الزوار إلى عملاء',
     intro: [
@@ -114,7 +114,7 @@ module.exports = [
   read: { en: ['website-design-cost-gcc-2026', 'arabic-seo-hreflang-guide'], ar: ['website-design-cost-iraq-ar', 'seo-iraq-guide-ar'] },
   en: {
     kw: 'website support', title: 'Website Support & Maintenance Services | MEFTACARD Studio',
-    desc: 'Website support and maintenance in Iraq and the Gulf: updates, backups, security, speed and content changes. Monthly plans, paid in Tether (USDT).',
+    desc: 'Website support and maintenance in Iraq, Dubai, Saudi Arabia and Oman: updates, backups, security, speed and content changes. Paid in Tether (USDT).',
     h1: 'Website support and maintenance, so your site keeps working',
     intro: [
       'A website is not finished on launch day. Plugins need updates, security holes appear, content goes out of date and pages slow down over time. When nobody looks after it, the site eventually breaks, gets hacked or quietly drops in Google.',
@@ -139,7 +139,7 @@ module.exports = [
   },
   ar: {
     kw: 'دعم المواقع', title: 'دعم المواقع وصيانتها | خطط شهرية | MEFTACARD Studio',
-    desc: 'دعم وصيانة المواقع للشركات في العراق والخليج: تحديثات ونسخ احتياطي وأمان وسرعة وتعديل المحتوى. خطط شهرية، أونلاين بالكامل، والدفع بعملة تيثر (USDT).',
+    desc: 'دعم وصيانة المواقع للشركات في العراق ودبي والسعودية وعُمان: تحديثات ونسخ احتياطي وأمان وسرعة وتعديل المحتوى. خطط شهرية، أونلاين بالكامل، والدفع بعملة تيثر (USDT).',
     h1: 'دعم المواقع وصيانتها، ليبقى موقعك يعمل',
     intro: [
       'الموقع لا ينتهي يوم إطلاقه. الإضافات تحتاج تحديثاً، وتظهر ثغرات أمنية، ويصبح المحتوى قديماً، وتبطئ الصفحات مع الوقت. وعندما لا يهتم به أحد، يتعطل الموقع في النهاية أو يُخترق أو يتراجع بصمت في Google.',
@@ -222,7 +222,7 @@ module.exports = [
   read: { en: ['b2b-export-website-rfq', 'whatsapp-ai-agent-business-uae-saudi'], ar: ['mobile-app-development-cost-iraq-gulf-ar', 'whatsapp-ai-bot-business-ar'] },
   en: {
     kw: 'app design', title: 'App Design for iOS & Android | MEFTACARD Studio',
-    desc: 'Mobile app design for iOS and Android in Arabic and English, for customers, dealers and field teams in Iraq and the Gulf. Paid in Tether (USDT).',
+    desc: 'Mobile app design for iOS and Android in Arabic and English, for customers, dealers and field teams in Iraq, Dubai, Saudi Arabia and Oman. Paid in Tether (USDT).',
     h1: 'App design for iOS and Android, in Arabic and English',
     intro: [
       'An app earns its place when customers or staff use it often: ordering and tracking, bookings, loyalty or daily field work. For everything else, a fast website is often the better investment, and we will tell you so honestly.',
@@ -247,7 +247,7 @@ module.exports = [
   },
   ar: {
     kw: 'تصميم تطبيقات', title: 'تصميم تطبيقات الجوال iOS وAndroid | MEFTACARD Studio',
-    desc: 'تصميم تطبيقات iOS وAndroid بالعربية والإنجليزية للعملاء والوكلاء والفرق الميدانية في العراق والخليج. أونلاين والدفع بعملة تيثر.',
+    desc: 'تصميم تطبيقات iOS وAndroid بالعربية والإنجليزية للعملاء والوكلاء والفرق الميدانية في العراق ودبي والسعودية وعُمان. أونلاين والدفع بعملة تيثر.',
     h1: 'تصميم تطبيقات iOS وAndroid بالعربية والإنجليزية',
     intro: [
       'التطبيق يستحق مكانه عندما يستخدمه العملاء أو الموظفون كثيراً: الطلب والتتبع، والحجوزات، وبرامج الولاء، والعمل الميداني اليومي. وفي غير ذلك يكون الموقع السريع غالباً استثماراً أفضل، وسنخبرك بذلك بصراحة.',

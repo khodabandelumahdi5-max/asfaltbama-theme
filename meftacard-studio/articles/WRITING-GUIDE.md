@@ -25,6 +25,7 @@ Then the body in Markdown, starting with `# <title>`.
 - Focus keyword in the H1, the first paragraph and one H2. No keyword stuffing.
 - Structure: short intro that answers the question → 4–7 H2 sections → a table or checklist where it helps → "أسئلة شائعة" / "Frequently asked questions" with 3–4 Q&As → a closing CTA line to Telegram: `[راسلنا على تيليغرام](https://t.me/meftacard)` / `[Message us on Telegram](https://t.me/meftacard)`.
 - **No invented statistics, client names, testimonials or results.** Prices or figures from the web must be linked to their source and labelled as estimates. Never claim years of experience.
+- Target markets, name them explicitly where relevant: Iraq, Dubai and the UAE, Saudi Arabia, Oman, Qatar, Kuwait, Bahrain and Lebanon (العراق، دبي والإمارات، السعودية، عُمان، قطر، الكويت، البحرين، لبنان).
 - Mention where relevant: fully online (no visit needed), payment in Tether (USDT), fixed prices (Local $1,250, Trade & Export $2,250, Enterprise from $25,000), in-person support on Trade & Enterprise.
 
 ## Internal links (at least 3)
