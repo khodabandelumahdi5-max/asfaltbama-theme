@@ -171,6 +171,8 @@ ${PROC_IMG[s.slug+'-'+lang] ? `<section style="padding-top:8px"><div class="wrap
   <div><h3>${t.readH}</h3>${s.read[lang].map((a)=>`<a href="${BASE}/${a}/">${esc(ART[a])}</a>`).join('')}</div>
 </div></section>
 
+<section style="padding-top:8px"><div class="wrap"><div class="freeband"><div><b>${lang==='ar'?'احصل على مراجعة مجانية لموقعك خلال 48 ساعة':'Get a free website review in 48 hours'}</b><p>${lang==='ar'?'نرسل لك أهم خمسة إصلاحات، مجاناً ودون أي التزام.':'We send you the five most important fixes. Free, no obligation.'}</p></div><a class="btn btn-dark" href="${lang==='ar'?'/ar':''}/studio/free-website-review/">${lang==='ar'?'أريد مراجعتي المجانية':'Get my free review'}</a></div></div></section>
+
 <section id="contact"><div class="wrap ct">
   <div><h2>${t.ctH}</h2><p class="sub">${t.ctSub}</p></div>
   <div class="direct" style="margin-top:0"><a href="${tg(t.msg(name))}" target="_blank" rel="noopener"><span>Telegram</span><small dir="ltr">@meftacard</small></a><a class="js-wa" href="#"><span>WhatsApp</span><small>${t.wa}</small></a></div>
