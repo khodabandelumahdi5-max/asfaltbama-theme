@@ -175,6 +175,12 @@ def report(f, lang):
               '- ردّوا على رسالتنا بكلمة «تنفيذ»، ونرسل لكم خلال 24 ساعة خطة بسعر ثابت ومدة تسليم واضحة.',
               '- العمل أونلاين بالكامل، ولا نحتاج منكم إلا الموافقة.',
               '- الدفع بعملة تيثر (USDT).', '',
+              '## من نحن وكيف نعمل', '',
+              '- **من أعمالنا:** asfaltbama.com (مشروع عميل حقيقي يعمل الآن)، وباقي التصاميم في meftacard.com/ar/studio/#work',
+              '- **الباقات:** المحلية 1,250$ (إطلاق خلال 14 يوماً) · التجارة والتصدير 2,250$ (30 يوماً) · المؤسسات من 25,000$.',
+              '- **الدفع:** تيثر (USDT) على TRC-20 أو ERC-20 — المحلية والتجارة: نصف عند البدء ونصف عند الإطلاق؛ المؤسسات: دفعة لكل مرحلة.',
+              '- **بعد التسليم:** الموقع والدومين والاستضافة ملككم ومسجّلة باسمكم، مع دعم مجاني بعد الإطلاق وخطة رعاية شهرية اختيارية.',
+              '- **للتواصل:** واتساب \u200e+98 919 129 9559 · تيليغرام @meftacard · meftacard.com/ar/studio', '',
               '---', 'MEFTACARD Studio · https://meftacard.com/ar/studio/ · Telegram @meftacard']
     else:
         L += ['## Next step', '',
@@ -182,6 +188,12 @@ def report(f, lang):
               '- Reply to our message with "go", and within 24 hours we send a fixed-price plan with a clear delivery date.',
               '- Everything is done online; all we need from you is approval.',
               '- Payment in Tether (USDT).', '',
+              '## Who we are and how we work', '',
+              '- **Our work:** asfaltbama.com (a real client project, live now), plus more at meftacard.com/studio/#work',
+              '- **Packages:** Local $1,250 (launch in 14 days) · Trade & Export $2,250 (30 days) · Enterprise from $25,000.',
+              '- **Payment:** Tether (USDT) on TRC-20 or ERC-20. Local and Trade: half at the start, half at launch; Enterprise: per milestone.',
+              '- **After launch:** the site, domain and hosting are yours and registered to you, with free support after launch and an optional monthly care plan.',
+              '- **Contact:** WhatsApp \u200e+98 919 129 9559 · Telegram @meftacard · meftacard.com/studio', '',
               '---', 'MEFTACARD Studio · https://meftacard.com/studio/ · Telegram @meftacard']
     return '\n'.join(L), score, iss
 
