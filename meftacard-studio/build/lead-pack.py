@@ -14,8 +14,8 @@ import argparse, json, os, re, subprocess, sys
 from urllib.parse import quote
 
 UA = "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 Chrome/126 Mobile Safari/537.36"
-CC = {".iq": "964", ".om": "968", ".ae": "971", ".sa": "966", ".qa": "974", ".kw": "965", ".bh": "973", ".lb": "961"}
-COUNTRY = {"964": "العراق", "968": "عُمان", "971": "الإمارات", "966": "السعودية", "974": "قطر",
+CC = {".af": "93", ".iq": "964", ".om": "968", ".ae": "971", ".sa": "966", ".qa": "974", ".kw": "965", ".bh": "973", ".lb": "961"}
+COUNTRY = {"93": "أفغانستان", "964": "العراق", "968": "عُمان", "971": "الإمارات", "966": "السعودية", "974": "قطر",
            "965": "الكويت", "973": "البحرين", "961": "لبنان"}
 
 # Arabic phrasing of each issue the scorer reports (subject: "موقعكم").
@@ -63,11 +63,11 @@ def norm_phone(raw, cc):
         d = cc + d
     if re.search(r"1234567|0000000|(\d)\1{6}", d):
         return None
-    return d if 10 <= len(d) <= 15 and d[:3] in COUNTRY else None
+    return d if 10 <= len(d) <= 15 and any(d.startswith(k) for k in COUNTRY) else None
 
 
 def is_mobile(d):
-    rules = {"964": r"^9647\d{9}$", "968": r"^968[79]\d{7}$", "971": r"^9715\d{8}$", "966": r"^9665\d{8}$",
+    rules = {"93": r"^937\d{8}$", "964": r"^9647\d{9}$", "968": r"^968[79]\d{7}$", "971": r"^9715\d{8}$", "966": r"^9665\d{8}$",
              "974": r"^974[3567]\d{7}$", "965": r"^965[569]\d{7}$", "973": r"^973[36]\d{7}$", "961": r"^961(3|7[016-9]|81)\d{6}$"}
     return any(re.match(p, d) for p in rules.values())
 
@@ -86,7 +86,7 @@ def contacts(domain):
         p = norm_phone(m, cc)
         if p and p not in wa:
             wa.append(p)
-    for m in re.findall(r'tel:([+\d\s()-]{7,20})', html) + re.findall(r'(?<![\d/=.])(\+?(?:00)?9[67]\d[\d\s-]{7,13})(?!\d)', html):
+    for m in re.findall(r'tel:([+\d\s()-]{7,20})', html) + re.findall(r'(?<![\d/=.])(\+?(?:00)?9(?:[67]\d|3)[\d\s-]{7,13})(?!\d)', html):
         p = norm_phone(m, cc)
         if p and p not in phones and p not in wa:
             phones.append(p)
@@ -142,7 +142,7 @@ def main():
         for line in open(f, encoding="utf-8", errors="ignore"):
             m = re.match(r"\s*(\d+)\s*\|\s*([^|]+?)\s*\|\s*(.*)", line)
             if m and int(m.group(1)) < a.threshold and not SKIP.search(m.group(2)):
-                src = "964" if os.path.basename(f).startswith("iq") else "968" if os.path.basename(f).startswith("om") else None
+                b = os.path.basename(f); src = "964" if b.startswith("iq") else "968" if b.startswith("om") else "93" if b.startswith("af") else None
                 rows.append((int(m.group(1)), m.group(2), m.group(3), src))
     seen, leads = set(), []
     for score, domain, raw, src in sorted(rows):

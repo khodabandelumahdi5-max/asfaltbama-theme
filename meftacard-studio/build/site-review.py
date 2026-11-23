@@ -121,7 +121,7 @@ def issues(f, lang):
     elif f.get('arabic_text') and not (f.get('rtl') or f.get('lang', '').lower().startswith(('ar', 'fa', 'ku', 'ckb', 'ur'))):
         add(12, ('Arabic content not marked as Arabic', 'The page language/direction is wrong, so Google may not show it for Arabic searches.', 'Set lang="ar" and dir="rtl" on Arabic pages.'),
                 ('المحتوى العربي غير معرّف كعربي', 'لغة الصفحة أو اتجاهها خاطئ، فقد لا يعرضها Google في البحث العربي.', 'ضبط lang="ar" وdir="rtl" في الصفحات العربية.'))
-    if not f.get('title') or len(f.get('title', '')) < 15 or re.search(r'(^|\|\s*)(home|homepage|welcome|index)\s*($|\|)|my website|coming soon|untitled|^one moment', f.get('title', ''), re.I):
+    if not f.get('title') or len(f.get('title', '')) < 15 or re.search(r'(^|\|\s*)(home|homepage|welcome|index)\s*($|\||-|–|:)|my website|storefront|just another|coming soon|untitled|^one moment', f.get('title', ''), re.I):
         add(15, ('Missing or weak page title', 'The title is the main line shown in Google results.', 'Write a clear title with your service and city.'),
                 ('عنوان الصفحة مفقود أو ضعيف', 'العنوان هو السطر الرئيسي الذي يظهر في نتائج Google.', 'كتابة عنوان واضح يتضمن الخدمة والمدينة.'))
     if not f.get('desc'):
