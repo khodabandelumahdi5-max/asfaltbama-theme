@@ -59,7 +59,7 @@ function page(s, lang) {
   const t = L[lang], d = { ...s[lang], faq: [...s[lang].faq, ...MORE[s.slug][lang].faq] }, other = lang === 'ar' ? 'en' : 'ar', self = url(lang, s.slug), name = NAMES[s.slug][lang === 'ar' ? 1 : 0];
   const ld = [
     { '@context':'https://schema.org', '@type':'Service', '@id':self+'#service', name, serviceType:NAMES[s.slug][0], url:self, inLanguage:lang, description:d.desc, image:OG,
-      provider:{ '@type':'ProfessionalService', name:'MEFTACARD Studio', url:BASE+'/studio/', logo:OG, sameAs:['https://t.me/meftacard'] },
+      provider:{ '@type':'ProfessionalService', name:'MEFTACARD Studio', url:BASE+'/studio/', logo:OG, sameAs:['https://t.me/meftacard','https://t.me/meftacardchannel'] },
       areaServed:COUNTRIES.map((c)=>({ '@type':'Country', name:c[1] })),
       offers:{ '@type':'AggregateOffer', priceCurrency:'USD', lowPrice:'1250', acceptedPaymentMethod:'USDT (Tether)' } },
     { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement:[{ '@type':'ListItem', position:1, name:'MEFTACARD Studio', item:BASE+t.studio },{ '@type':'ListItem', position:2, name, item:self }] },
@@ -176,7 +176,7 @@ ${PROC_IMG[s.slug+'-'+lang] ? `<section style="padding-top:8px"><div class="wrap
   <div class="direct" style="margin-top:0"><a href="${tg(t.msg(name))}" target="_blank" rel="noopener"><span>Telegram</span><small dir="ltr">@meftacard</small></a><a class="js-wa" href="#"><span>WhatsApp</span><small>${t.wa}</small></a></div>
 </div></section>
 </main>
-<footer><div class="wrap"><span>${t.copy}</span><nav class="flinks"><a href="${t.studio}">MEFTACARD Studio</a><a href="${BASE}/contact/">${lang==='ar'?'اتصل بنا':'Contact'}</a><a href="${BASE}/privacy-policy/">${lang==='ar'?'الخصوصية':'Privacy'}</a></nav></div></footer>
+<footer><div class="wrap"><span>${t.copy}</span><nav class="flinks"><a href="${t.studio}">MEFTACARD Studio</a><a href="${BASE}/contact/">${lang==='ar'?'اتصل بنا':'Contact'}</a><a href="${BASE}/privacy-policy/">${lang==='ar'?'الخصوصية':'Privacy'}</a><a href="https://t.me/meftacardchannel" target="_blank" rel="noopener">${lang==='ar'?'قناتنا على تيليغرام':'Telegram channel'}</a></nav></div></footer>
 <div class="floats"><a class="float float-wa js-wa" href="#" aria-label="WhatsApp">${WA}</a><a class="float float-tg" href="${tg(t.msg(name))}" target="_blank" rel="noopener" aria-label="Telegram @meftacard">${TG}</a></div>
 <script>const WA_PARTS=["98","919","129","9559"];const WA_MSG=${JSON.stringify(t.msg(name))};document.querySelectorAll('.js-wa').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();window.open('https://wa.me/'+WA_PARTS.join('')+'?text='+encodeURIComponent(WA_MSG),'_blank','noopener');}));</script>
 </body>

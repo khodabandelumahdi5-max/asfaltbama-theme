@@ -199,7 +199,7 @@ function page(c, lang) {
     { '@context':'https://schema.org', '@type':'ProfessionalService', '@id':self+'#service', name:'MEFTACARD Studio', url:self, inLanguage:lang,
       image:OG, description:t.desc(d), areaServed:{ '@type':'Country', name:c.en.name.replace(/^the /,'').replace(/^Dubai and the /,'') },
       serviceType:['Website design','SEO services','Website support and maintenance','AI agent development and support','Mobile app design'],
-      paymentAccepted:'USDT (Tether)', sameAs:['https://t.me/meftacard'], parentOrganization:{ '@type':'Organization', name:'MEFTACARD', url:BASE } },
+      paymentAccepted:'USDT (Tether)', sameAs:['https://t.me/meftacard','https://t.me/meftacardchannel'], parentOrganization:{ '@type':'Organization', name:'MEFTACARD', url:BASE } },
     { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement:[
       { '@type':'ListItem', position:1, name:'MEFTACARD Studio', item:BASE+t.studio },
       { '@type':'ListItem', position:2, name:d.name.replace(/^the /,''), item:self } ] },
@@ -297,7 +297,7 @@ ${ld.map((j)=>`<script type="application/ld+json">${JSON.stringify(j)}</script>`
   </div>
 </div></section>
 </main>
-<footer><div class="wrap"><span>${t.copy}</span><nav class="flinks"><a href="${t.studio}">MEFTACARD Studio</a><a href="${BASE}/contact/">${lang === 'ar' ? 'اتصل بنا' : 'Contact'}</a><a href="${BASE}/privacy-policy/">${lang === 'ar' ? 'الخصوصية' : 'Privacy'}</a></nav></div></footer>
+<footer><div class="wrap"><span>${t.copy}</span><nav class="flinks"><a href="${t.studio}">MEFTACARD Studio</a><a href="${BASE}/contact/">${lang === 'ar' ? 'اتصل بنا' : 'Contact'}</a><a href="${BASE}/privacy-policy/">${lang === 'ar' ? 'الخصوصية' : 'Privacy'}</a><a href="https://t.me/meftacardchannel" target="_blank" rel="noopener">${lang==='ar'?'قناتنا على تيليغرام':'Telegram channel'}</a></nav></div></footer>
 <div class="floats">
   <a class="float float-wa js-wa" href="#" aria-label="WhatsApp">${WA}</a>
   <a class="float float-tg" href="${tg(t.msg(d))}" target="_blank" rel="noopener" aria-label="Telegram @meftacard">${TG}</a>

@@ -37,3 +37,9 @@ Then the body in Markdown, starting with `# <title>`.
 ## After writing
 Run `python3 meftacard-studio/build/publish-draft.py meftacard-studio/articles/<lang>/<slug>.md` for each file.
 It creates the cover image, uploads it with alt text, saves the WordPress draft (category, Rank Math title/description/keyword, cover at the top, country links at the end) and prints the post ID.
+
+## Telegram post for each article
+For every draft, also prepare a ready-to-paste post for the channel https://t.me/meftacardchannel, in the article's language:
+a hook line with 🔹, two sentences, three ✅ bullets, `📖` + the article URL (https://meftacard.com/<slug>/), the market flags line
+(🇮🇶 العراق · 🇦🇪 دبي · 🇸🇦 السعودية · 🇴🇲 عُمان for Arabic, 🇮🇶 Iraq · 🇦🇪 Dubai · 🇸🇦 Saudi Arabia · 🇴🇲 Oman for English) and `💬 @meftacard`.
+Include these posts in the final report so the owner can post them after publishing the article.

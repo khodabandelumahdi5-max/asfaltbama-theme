@@ -100,9 +100,9 @@ def main(path):
     body_html = body_html.replace('<table>', '<figure class="wp-block-table"><table>').replace('</table>', '</table></figure>')
     pre = '/ar' if lang == 'ar' else ''
     links = ' · '.join(f'<a href="https://meftacard.com{pre}/studio/{s}/">{n}</a>' for s, n in COUNTRIES[lang])
-    block = (f'<h2>خدماتنا حسب الدولة</h2>\n<p>تصميم مواقع وسيو ودعم المواقع ووكلاء الذكاء الاصطناعي، أونلاين بالكامل ودون حاجة للحضور، والدفع بعملة تيثر (USDT): {links}.</p>'
+    block = (f'<h2>خدماتنا حسب الدولة</h2>\n<p>تصميم مواقع وسيو ودعم المواقع ووكلاء الذكاء الاصطناعي، أونلاين بالكامل ودون حاجة للحضور، والدفع بعملة تيثر (USDT): {links}.</p>\n<p>تابع <a href="https://t.me/meftacardchannel">قناتنا على تيليغرام</a> لأحدث المقالات.</p>'
              if lang == 'ar' else
-             f'<h2>Our services by country</h2>\n<p>Website design, SEO, website support and AI agents, fully online with no visit needed, paid in Tether (USDT): {links}.</p>')
+             f'<h2>Our services by country</h2>\n<p>Website design, SEO, website support and AI agents, fully online with no visit needed, paid in Tether (USDT): {links}.</p>\n<p>Follow our <a href="https://t.me/meftacardchannel">Telegram channel</a> for new guides.</p>')
     fig = f'<!--mc-cover--><figure class="wp-block-image size-large"><img src="{media["source_url"]}" alt="{html.escape(meta["title"])}" width="1200" height="630" decoding="async" fetchpriority="high"/></figure><!--/mc-cover-->'
     content = f'<div lang="{lang}" dir="{"rtl" if lang == "ar" else "ltr"}">\n{fig}\n{body_html}\n<!--mc-countries-->\n{block}\n</div>'
 
