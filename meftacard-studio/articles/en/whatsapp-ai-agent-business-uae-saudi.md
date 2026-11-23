@@ -4,8 +4,8 @@ slug: whatsapp-ai-agent-business-uae-saudi
 title: "WhatsApp AI Agents for Businesses in the UAE and Saudi Arabia: A Practical Guide"
 seo_title: "WhatsApp AI Agent for Business: UAE & Saudi Guide 2026"
 meta_description: "What a WhatsApp AI agent can do for a Gulf business, how it differs from a chatbot, running costs, and the Arabic-dialect and data questions to settle first."
-focus_keyword: "WhatsApp AI agent"
-secondary_keywords: ["WhatsApp AI agent UAE", "WhatsApp chatbot Saudi Arabia", "Arabic AI chatbot", "AI agent for business Dubai", "WhatsApp Business API"]
+focus_keyword: "WhatsApp AI agents"
+secondary_keywords: ["WhatsApp AI agent UAE", "WhatsApp chatbot Saudi Arabia", "Arabic AI chatbot"]
 hreflang_pair: whatsapp-ai-bot-business-ar
 cta: https://meftacard.com/studio/
 ---

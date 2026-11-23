@@ -4,8 +4,8 @@ slug: website-design-cost-gcc-2026
 title: "How Much Does a Website Cost in the GCC in 2026? A Buyer's Breakdown"
 seo_title: "Website Design Cost in Dubai, Riyadh & the GCC (2026 Guide)"
 meta_description: "What a business website really costs in the UAE, Saudi Arabia and the GCC in 2026: price ranges, what drives them, hidden costs and comparing quotes."
-focus_keyword: "website design cost in Dubai"
-secondary_keywords: ["website design cost Dubai", "website cost UAE", "web design cost Saudi Arabia", "website development cost GCC", "how much does a website cost"]
+focus_keyword: "website cost GCC"
+secondary_keywords: ["website design cost in Dubai", "website cost UAE", "web design cost Saudi Arabia"]
 hreflang_pair: website-design-cost-iraq-ar
 cta: https://meftacard.com/studio/
 ---
