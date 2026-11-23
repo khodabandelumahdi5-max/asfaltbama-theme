@@ -20,9 +20,9 @@ Format: `- [ ] lang | slug | working title | focus keyword | links to (service o
 
 ## Backlog
 - [x] ar | responsive-web-design-guide-ar | ما هو تصميم المواقع المتجاوبة ولماذا يهم عملك | تصميم مواقع متجاوبة | website-design | published 244, 2026-11-22
-- [ ] en | landing-page-design-ads-gulf | Landing page design for Google and Instagram ads in the Gulf | landing page design | website-design
-- [ ] ar | ecommerce-website-iraq-payments-ar | تصميم متجر إلكتروني في العراق مع زين كاش وكي كارد | تصميم متجر إلكتروني في العراق | iraq
-- [ ] en | website-maintenance-checklist | Website maintenance checklist for business owners | website maintenance | website-support
+- [x] en | landing-page-design-ads-gulf | Landing page design for Google and Instagram ads in the Gulf | landing page design | website-design | draft 247, 2026-11-23
+- [x] ar | ecommerce-website-iraq-payments-ar | تصميم متجر إلكتروني في العراق مع زين كاش وكي كارد | تصميم متجر إلكتروني في العراق | iraq | draft 249, 2026-11-23
+- [x] en | website-maintenance-checklist | Website maintenance checklist for business owners | website maintenance | website-support | draft 251, 2026-11-23
 - [ ] ar | choose-web-design-company-ar | كيف تختار شركة تصميم مواقع: 10 أسئلة قبل التعاقد | شركة تصميم مواقع | website-design
 - [ ] en | local-seo-dubai-google-maps | Local SEO in Dubai: how to rank in Google Maps | local SEO Dubai | uae
 - [ ] ar | website-speed-mobile-ar | لماذا موقعك بطيء على الجوال وكيف تصلحه | تحسين سرعة الموقع | website-support
