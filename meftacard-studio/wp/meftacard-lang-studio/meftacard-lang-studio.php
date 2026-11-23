@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MEFTACARD Lang & Studio
  * Description: Correct html lang/dir per post language, hreflang for translated posts, full-HTML Studio landing pages, and a Studio sitemap (/studio-sitemap.xml).
- * Version: 1.6.0
+ * Version: 1.6.1
  * Author: MEFTACARD
  * Requires PHP: 7.4
  */
@@ -350,7 +350,7 @@ add_action('template_redirect', function () {
         if (stripos($html, 'brand-mark') === false) return $html;
         $svg = '<svg class="mc-key" viewBox="0 4 100 64" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M22 4a22 22 0 1 1 0 44a22 22 0 1 1 0-44zm0 9a13 13 0 1 0 0 26a13 13 0 1 0 0-26z"/><path fill-rule="evenodd" d="M42 21.5H100V68H91V45.5L79 61.5L67 45.5V68H58V30.5H42Z M67 30.5L79 46.5L91 30.5Z"/></svg>';
         $html = preg_replace('~<span class="brand-mark">\s*M\s*</span>~', '<span class="brand-mark mc-logo">' . $svg . '</span>', $html, 1);
-        $head = '<style>.brand-mark.mc-logo{background:none!important;border:0!important;box-shadow:none!important;width:auto!important;height:auto!important;padding:0!important;display:inline-flex;align-items:center}.brand-mark.mc-logo .mc-key{width:34px;height:22px;fill:currentColor;display:block}</style>';
+        $head = '<style>.brand-mark.mc-logo{color:inherit!important;background:none!important;border:0!important;box-shadow:none!important;width:auto!important;height:auto!important;padding:0!important;display:inline-flex;align-items:center}.brand-mark.mc-logo .mc-key{width:34px;height:22px;fill:currentColor;display:block}</style>';
         if (stripos($html, 'rel="icon"') === false && function_exists('get_site_icon_url') && get_site_icon_url()) {
             $head .= '<link rel="icon" href="' . esc_url(get_site_icon_url(32)) . '" sizes="32x32" />'
                    . '<link rel="icon" href="' . esc_url(get_site_icon_url(192)) . '" sizes="192x192" />'
