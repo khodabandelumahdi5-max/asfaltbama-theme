@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MEFTACARD Lang & Studio
  * Description: Correct html lang/dir per post language, hreflang for translated posts, full-HTML Studio landing pages, and a Studio sitemap (/studio-sitemap.xml).
- * Version: 1.3.0
+ * Version: 1.4.0
  * Author: MEFTACARD
  * Requires PHP: 7.4
  */
@@ -75,6 +75,8 @@ add_action('template_redirect', function () {
     if ($redirect) { wp_redirect(esc_url_raw($redirect), 301); exit; }
     if (!get_post_meta($id, 'mc_raw', true)) return;
     if (get_post_status($id) !== 'publish' && !current_user_can('edit_post', $id)) return;
+    $canon = redirect_canonical(null, false);   // v1.4: keep www/slash/case/https redirects
+    if ($canon) { wp_safe_redirect($canon, 301); exit; }
     header('Content-Type: text/html; charset=utf-8');
     echo get_post_field('post_content', $id, 'raw'); // full HTML document authored by an administrator
     exit;
@@ -139,7 +141,12 @@ add_filter('robots_txt', function ($output) {
 }, 99);
 
 add_filter('rank_math/sitemap/entry', function ($url, $type, $object) {
-    if ($type === 'post' && is_object($object) && !empty($object->ID) && get_post_meta($object->ID, 'mc_redirect', true)) return false;
+    if ($type === 'post' && is_object($object) && !empty($object->ID)) {
+        if (get_post_meta($object->ID, 'mc_redirect', true)) return false;
+        if (function_exists('wc_get_page_id')) {                       // v1.4: cart/checkout/account are noindex
+            foreach (['cart', 'checkout', 'myaccount'] as $p) if ((int) wc_get_page_id($p) === (int) $object->ID) return false;
+        }
+    }
     return $url;
 }, 10, 3);
 
@@ -148,16 +155,29 @@ add_filter('rank_math/sitemap/entry', function ($url, $type, $object) {
  * On single posts we turn that first heading into a proper <h1>.
  */
 add_action('template_redirect', function () {
-    if (!is_singular('post')) return;
-    ob_start(function ($html) {
-        return preg_replace('#<article>\s*<h2>\s*<a href="[^"]*">(.*?)</a>\s*</h2>#s',
-            '<article><h1 class="entry-title">$1</h1>', $html, 1);
+    if (is_admin() || is_feed() || is_robots()) return;
+    $cat = is_category() ? get_queried_object() : null;
+    $singular = is_singular();
+    ob_start(function ($html) use ($cat, $singular) {
+        if (stripos($html, '<html') === false) return $html;             // only touch HTML documents
+        // header logo: give the image a real alt text (v1.4)
+        $html = preg_replace('#(<a class="brand"[^>]*>\s*<img[^>]*?)alt=""#', '$1alt="MEFTACARD"', $html, 1);
+        if ($singular) {
+            $html = preg_replace('#<article>\s*<h2>\s*<a href="[^"]*">(.*?)</a>\s*</h2>#s',
+                '<article><h1 class="entry-title">$1</h1>', $html, 1);
+        } elseif ($cat) {
+            $desc = trim(strip_tags(term_description($cat->term_id)));
+            $head = '<header class="mc-archive"><h1 class="entry-title">' . esc_html($cat->name) . '</h1>'
+                  . ($desc ? '<p class="mc-archive-desc">' . esc_html($desc) . '</p>' : '') . '</header>';
+            $html = preg_replace('#<main>#', '<main>' . $head, $html, 1);
+        }
+        return $html;
     });
 }, 1);
 
 add_action('wp_head', function () {
-    if (!is_singular('post')) return;
-    echo '<style>article>h1.entry-title{font-size:clamp(28px,4.2vw,44px);line-height:1.25;margin:0 0 18px;font-weight:700}</style>' . "\n";
+    if (!is_singular() && !is_category()) return;
+    echo '<style>.mc-archive{margin:0 0 24px}.mc-archive-desc{opacity:.8;max-width:70ch}article>h1.entry-title,.mc-archive h1.entry-title{font-size:clamp(28px,4.2vw,44px);line-height:1.25;margin:0 0 18px;font-weight:700}</style>' . "\n";
 }, 50);
 
 /* ---------- v1.3: post to the Telegram channel ----------
@@ -221,3 +241,21 @@ add_action('rest_api_init', function () {
         return ['ok' => true, 'message_id' => $res['message_id'], 'link' => 'https://t.me/' . ltrim($chat, '@') . '/' . $res['message_id']];
     }]);
 });
+
+/* ---------- v1.4: language on category archives and regular pages ---------- */
+add_filter('language_attributes', function ($output) {
+    if (is_admin()) return $output;
+    $lang = '';
+    if (is_category()) {
+        $id = get_queried_object_id();
+        $lang = in_array($id, MC_AR_CATS, true) ? 'ar' : (in_array($id, MC_FA_CATS, true) ? 'fa' : 'en');
+    } elseif (is_page() && !get_post_meta(get_queried_object_id(), 'mc_lang', true)
+              && !(function_exists('is_woocommerce') && (is_cart() || is_checkout() || is_account_page()))) {
+        $lang = 'en';
+    }
+    if (!$lang) return $output;
+    $dir  = in_array($lang, ['ar', 'fa'], true) ? 'rtl' : 'ltr';
+    $code = $lang === 'fa' ? 'fa-IR' : $lang;
+    $output = preg_replace('/\s*(dir|lang)="[^"]*"/', '', $output);
+    return trim('dir="' . $dir . '" lang="' . esc_attr($code) . '" ' . $output);
+}, 100);
