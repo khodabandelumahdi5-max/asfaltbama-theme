@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MEFTACARD Lang & Studio
  * Description: Correct html lang/dir per post language, hreflang for translated posts, full-HTML Studio landing pages, and a Studio sitemap (/studio-sitemap.xml).
- * Version: 1.6.1
+ * Version: 1.7.0
  * Author: MEFTACARD
  * Requires PHP: 7.4
  */
@@ -374,3 +374,43 @@ add_action('template_redirect', function () {
         return preg_replace('~</head>~i', $head . '</head>', $html, 1);
     });
 }, -100);
+
+/* ---------- v1.7: safe HTTP -> HTTPS redirect ----------
+ * The site answers on plain http:// too, so Google sees two copies of every page.
+ * The redirect stays OFF until the scheme check below has been verified, then it is switched on
+ * with POST /wp-json/mc/v1/https {"enable":true} (admins only). A request that already looks like
+ * HTTPS from any signal (is_ssl, port 443, X-Forwarded-Proto/SSL, CF-Visitor) is never redirected,
+ * so a proxy in front of the site cannot cause a redirect loop.
+ */
+function mc_request_is_https() {
+    if (is_ssl()) return true;
+    $s = $_SERVER;
+    if (($s['SERVER_PORT'] ?? '') == '443') return true;
+    if (strtolower($s['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https') return true;
+    if (strtolower($s['HTTP_X_FORWARDED_SSL'] ?? '') === 'on') return true;
+    if (strpos($s['HTTP_CF_VISITOR'] ?? '', 'https') !== false) return true;
+    if (strtolower($s['REQUEST_SCHEME'] ?? '') === 'https') return true;
+    return false;
+}
+add_action('init', function () {
+    if (!get_option('mc_force_https') || wp_doing_cron() || (defined('WP_CLI') && WP_CLI) || php_sapi_name() === 'cli') return;
+    if (mc_request_is_https()) return;
+    $host = strtolower(preg_replace('~:\d+$~', '', $_SERVER['HTTP_HOST'] ?? ''));
+    if ($host !== 'meftacard.com' && $host !== 'www.meftacard.com') return;
+    wp_safe_redirect('https://meftacard.com' . ($_SERVER['REQUEST_URI'] ?? '/'), 301);
+    exit;
+}, 0);
+add_action('rest_api_init', function () {
+    register_rest_route('mc/v1', '/scheme', [
+        'methods' => 'GET', 'permission_callback' => '__return_true',
+        'callback' => function () {
+            $s = $_SERVER;
+            return ['looks_https' => mc_request_is_https(), 'is_ssl' => is_ssl(), 'port' => $s['SERVER_PORT'] ?? null,
+                    'xfp' => $s['HTTP_X_FORWARDED_PROTO'] ?? null, 'xfssl' => $s['HTTP_X_FORWARDED_SSL'] ?? null,
+                    'cf' => $s['HTTP_CF_VISITOR'] ?? null, 'scheme' => $s['REQUEST_SCHEME'] ?? null,
+                    'force_https' => (bool) get_option('mc_force_https')];
+        }]);
+    register_rest_route('mc/v1', '/https', [
+        'methods' => 'POST', 'permission_callback' => function () { return current_user_can('manage_options'); },
+        'callback' => function ($r) { update_option('mc_force_https', !empty($r['enable']) ? 1 : 0); return ['force_https' => (bool) get_option('mc_force_https')]; }]);
+});
