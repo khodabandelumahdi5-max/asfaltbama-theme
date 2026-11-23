@@ -356,6 +356,21 @@ add_action('template_redirect', function () {
                    . '<link rel="icon" href="' . esc_url(get_site_icon_url(192)) . '" sizes="192x192" />'
                    . '<link rel="apple-touch-icon" href="' . esc_url(get_site_icon_url(180)) . '" />';
         }
+        // Homepage title was 78 characters (Google cuts at ~60) and there were no social preview tags.
+        if (preg_match('~<title>([^<]*)</title>~i', $html, $tm) && mb_strlen(html_entity_decode($tm[1])) > 60) {
+            $html = str_replace($tm[0], '<title>MEFTACARD — AI, Virtual Cards &amp; Non-VoIP SIMs (USDT)</title>', $html);
+        }
+        if (stripos($html, 'property="og:') === false) {
+            $t = 'MEFTACARD — AI, Virtual Cards & Non-VoIP SIMs (USDT)';
+            $d = preg_match('~<meta name="description" content="([^"]*)"~i', $html, $dm) ? html_entity_decode($dm[1]) : '';
+            $img = function_exists('get_site_icon_url') ? get_site_icon_url(512) : '';
+            $head .= '<meta property="og:type" content="website" /><meta property="og:site_name" content="MEFTACARD" />'
+                   . '<meta property="og:url" content="' . esc_url(home_url('/')) . '" />'
+                   . '<meta property="og:title" content="' . esc_attr($t) . '" />'
+                   . '<meta property="og:description" content="' . esc_attr($d) . '" />'
+                   . ($img ? '<meta property="og:image" content="' . esc_url($img) . '" />' : '')
+                   . '<meta name="twitter:card" content="summary" />';
+        }
         return preg_replace('~</head>~i', $head . '</head>', $html, 1);
     });
 }, -100);

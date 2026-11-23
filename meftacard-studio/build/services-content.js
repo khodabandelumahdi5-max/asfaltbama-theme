@@ -5,7 +5,7 @@ module.exports = [
   slug: 'website-design', img: 'asfaltbama-desktop', pk: 'Local, Trade & Export and Enterprise',
   read: { en: ['website-design-cost-gcc-2026', 'b2b-export-website-rfq', 'oil-and-gas-website-design'], ar: ['website-design-cost-iraq-ar', 'seo-iraq-guide-ar'] },
   en: {
-    kw: 'website design', title: 'Website Design Company: Iraq, Dubai, Saudi | MEFTACARD Studio',
+    kw: 'website design', title: 'Web Design Company: Iraq, Dubai, Saudi | MEFTACARD Studio',
     desc: 'Buy professional website design in Arabic and English: fast, mobile-first business sites and online stores from $1,250. Fully online, paid in Tether.',
     h1: 'Website design that turns visitors into customers',
     intro: [
@@ -167,7 +167,7 @@ module.exports = [
   slug: 'ai-agents', img: 'sanad', pk: 'Enterprise, or as a standalone project',
   read: { en: ['whatsapp-ai-agent-business-uae-saudi', 'oil-and-gas-website-design'], ar: ['whatsapp-ai-bot-business-ar', 'mobile-app-development-cost-iraq-gulf-ar'] },
   en: {
-    kw: 'AI agent development', title: 'AI Agent Development & Support on WhatsApp | MEFTACARD Studio',
+    kw: 'AI agent development', title: 'AI Agent Development on WhatsApp & Web | MEFTACARD Studio',
     desc: 'AI agent development and support: WhatsApp and website agents that answer in Arabic dialect and English, qualify leads and book appointments.',
     h1: 'AI agents that answer your customers, day and night',
     intro: [
