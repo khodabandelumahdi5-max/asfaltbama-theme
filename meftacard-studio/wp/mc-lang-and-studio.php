@@ -150,3 +150,65 @@ add_action('wp_head', function () {
     if (!is_singular('post')) return;
     echo '<style>article>h1.entry-title{font-size:clamp(28px,4.2vw,44px);line-height:1.25;margin:0 0 18px;font-weight:700}</style>' . "\n";
 }, 50);
+
+/* ---------- v1.3: post to the Telegram channel ----------
+ * Settings → MEFTACARD Telegram: the owner stores the bot token and channel here
+ * (never in code or chat). Administrators can then post through
+ * POST /wp-json/mc/v1/telegram  {text, photo?}   and check setup with
+ * GET  /wp-json/mc/v1/telegram/status  (never returns the token).
+ */
+add_action('admin_menu', function () {
+    add_options_page('MEFTACARD Telegram', 'MEFTACARD Telegram', 'manage_options', 'mc-telegram', function () {
+        if (!current_user_can('manage_options')) return;
+        if (isset($_POST['mc_tg_save']) && check_admin_referer('mc_tg_save')) {
+            $token = trim(sanitize_text_field(wp_unslash($_POST['mc_tg_token'] ?? '')));
+            if ($token !== '') update_option('mc_tg_token', $token, false);
+            update_option('mc_tg_chat', trim(sanitize_text_field(wp_unslash($_POST['mc_tg_chat'] ?? '@meftacardchannel'))), false);
+            echo '<div class="updated"><p>Saved.</p></div>';
+        }
+        $has = get_option('mc_tg_token') ? 'saved (hidden)' : 'not set';
+        $chat = esc_attr(get_option('mc_tg_chat', '@meftacardchannel'));
+        echo '<div class="wrap"><h1>MEFTACARD Telegram</h1><form method="post">';
+        wp_nonce_field('mc_tg_save');
+        echo '<table class="form-table"><tr><th>Bot token</th><td><input type="password" name="mc_tg_token" class="regular-text" autocomplete="off" placeholder="' . esc_attr($has) . '"><p class="description">From @BotFather. Leave empty to keep the saved token.</p></td></tr>';
+        echo '<tr><th>Channel</th><td><input name="mc_tg_chat" class="regular-text" value="' . $chat . '"><p class="description">e.g. @meftacardchannel. Add the bot to the channel as an administrator with permission to post.</p></td></tr></table>';
+        echo '<p><button class="button button-primary" name="mc_tg_save" value="1">Save</button></p></form></div>';
+    });
+});
+
+function mc_tg_call($method, $args) {
+    $token = get_option('mc_tg_token');
+    if (!$token) return new WP_Error('mc_tg_no_token', 'Telegram bot token is not set (Settings → MEFTACARD Telegram).', ['status' => 400]);
+    $r = wp_remote_post('https://api.telegram.org/bot' . $token . '/' . $method, ['timeout' => 25, 'body' => $args]);
+    if (is_wp_error($r)) return new WP_Error('mc_tg_http', $r->get_error_message(), ['status' => 502]);
+    $body = json_decode(wp_remote_retrieve_body($r), true);
+    if (empty($body['ok'])) return new WP_Error('mc_tg_api', $body['description'] ?? 'Telegram error', ['status' => 502]);
+    return $body['result'];
+}
+
+add_action('rest_api_init', function () {
+    $admin = function () { return current_user_can('manage_options'); };
+    register_rest_route('mc/v1', '/telegram/status', ['methods' => 'GET', 'permission_callback' => $admin, 'callback' => function () {
+        $chat = get_option('mc_tg_chat', '@meftacardchannel');
+        if (!get_option('mc_tg_token')) return ['token' => false, 'chat' => $chat];
+        $me = mc_tg_call('getMe', []);
+        if (is_wp_error($me)) return $me;
+        $c = mc_tg_call('getChat', ['chat_id' => $chat]);
+        $member = is_wp_error($c) ? $c : mc_tg_call('getChatMember', ['chat_id' => $chat, 'user_id' => $me['id']]);
+        return ['token' => true, 'bot' => '@' . $me['username'], 'chat' => $chat,
+                'chat_ok' => !is_wp_error($c), 'bot_status' => is_wp_error($member) ? $member->get_error_message() : ($member['status'] ?? ''),
+                'can_post' => !is_wp_error($member) && (($member['status'] ?? '') === 'creator' || !empty($member['can_post_messages']))];
+    }]);
+    register_rest_route('mc/v1', '/telegram', ['methods' => 'POST', 'permission_callback' => $admin, 'callback' => function (WP_REST_Request $req) {
+        $text = (string) $req->get_param('text');
+        if (trim($text) === '') return new WP_Error('mc_tg_empty', 'text is required', ['status' => 400]);
+        $chat = get_option('mc_tg_chat', '@meftacardchannel');
+        $photo = (string) $req->get_param('photo');
+        $res = $photo
+            ? mc_tg_call('sendPhoto', ['chat_id' => $chat, 'photo' => esc_url_raw($photo), 'caption' => mb_substr($text, 0, 1024)])
+            : mc_tg_call('sendMessage', ['chat_id' => $chat, 'text' => $text, 'disable_web_page_preview' => 'false']);
+        if (is_wp_error($res)) return $res;
+        if ($req->get_param('pin')) mc_tg_call('pinChatMessage', ['chat_id' => $chat, 'message_id' => $res['message_id'], 'disable_notification' => 'true']);
+        return ['ok' => true, 'message_id' => $res['message_id'], 'link' => 'https://t.me/' . ltrim($chat, '@') . '/' . $res['message_id']];
+    }]);
+});
