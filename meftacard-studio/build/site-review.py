@@ -172,7 +172,7 @@ def report(f, lang):
     if ar:
         L += ['## الخطوة التالية', '',
               'يمكنكم تنفيذ هذه الإصلاحات بأنفسكم أو مع أي فريق. وإذا أردتم أن نتولاها نحن بالكامل:',
-              '- ردّوا على رسالتنا بكلمة «تنفيذ»، ونرسل لكم خلال 24 ساعة خطة بسعر ثابت ومدة تسليم واضحة.',
+              '- يكفي أن تردّوا على رسالتنا، ونرسل لكم خلال 24 ساعة خطة بسعر ثابت وموعد تسليم واضح.',
               '- العمل أونلاين بالكامل، ولا نحتاج منكم إلا الموافقة.',
               '- الدفع بعملة تيثر (USDT).', '',
               '## من نحن وكيف نعمل', '',
@@ -185,7 +185,7 @@ def report(f, lang):
     else:
         L += ['## Next step', '',
               'You can apply these fixes yourselves or with any team. If you would rather we handle all of it:',
-              '- Reply to our message with "go", and within 24 hours we send a fixed-price plan with a clear delivery date.',
+              '- Just reply to our message, and within 24 hours we send a fixed-price plan with a clear delivery date.',
               '- Everything is done online; all we need from you is approval.',
               '- Payment in Tether (USDT).', '',
               '## Who we are and how we work', '',
