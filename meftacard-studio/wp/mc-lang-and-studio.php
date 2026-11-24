@@ -89,16 +89,23 @@ function mc_studio_sitemap_xml() {
     $out = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
          . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
     $home = home_url('/');
+    // v1.8: every raw Studio page lists the language versions that actually exist (en, ar, fa).
+    $paths = [];
+    foreach ($pages as $p) $paths[substr(get_permalink($p), strlen($home) - 1)] = true;
     foreach ($pages as $p) {
-        $url = get_permalink($p);
-        $path = substr($url, strlen($home) - 1);                 // e.g. /ar/studio/iraq/
-        $en = (strpos($path, '/ar/') === 0) ? home_url(substr($path, 3)) : $url;
-        $ar = (strpos($path, '/ar/') === 0) ? $url : home_url('/ar' . $path);
-        $out .= "<url><loc>" . esc_url($url) . "</loc><lastmod>" . get_post_modified_time('c', true, $p) . "</lastmod>"
-              . '<xhtml:link rel="alternate" hreflang="en" href="' . esc_url($en) . '"/>'
-              . '<xhtml:link rel="alternate" hreflang="ar" href="' . esc_url($ar) . '"/>'
-              . '<xhtml:link rel="alternate" hreflang="x-default" href="' . esc_url($en) . '"/>'
-              . "</url>\n";
+        $url  = get_permalink($p);
+        $path = substr($url, strlen($home) - 1);                 // e.g. /ar/studio/iraq/ or /fa/studio/
+        $base = preg_replace('~^/(ar|fa)(?=/)~', '', $path);     // /studio/iraq/
+        $alts = [];
+        foreach (['en' => $base, 'ar' => '/ar' . $base, 'fa' => '/fa' . $base] as $lg => $pp) {
+            if (isset($paths[$pp])) $alts[$lg] = home_url($pp);
+        }
+        $out .= "<url><loc>" . esc_url($url) . "</loc><lastmod>" . get_post_modified_time('c', true, $p) . "</lastmod>";
+        if (count($alts) > 1) {
+            foreach ($alts as $lg => $u) $out .= '<xhtml:link rel="alternate" hreflang="' . $lg . '" href="' . esc_url($u) . '"/>';
+            $out .= '<xhtml:link rel="alternate" hreflang="x-default" href="' . esc_url($alts['en'] ?? $url) . '"/>';
+        }
+        $out .= "</url>\n";
     }
     foreach ($posts as $p) {
         $out .= "<url><loc>" . esc_url(get_permalink($p)) . "</loc><lastmod>" . get_post_modified_time('c', true, $p) . "</lastmod>";

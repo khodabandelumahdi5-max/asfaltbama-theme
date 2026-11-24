@@ -73,7 +73,7 @@ function page(s, lang) {
 <title>${esc(d.title)}</title>
 <meta name="description" content="${esc(d.desc)}">
 <link rel="canonical" href="${self}">
-<link rel="alternate" hreflang="${lang}" href="${self}"><link rel="alternate" hreflang="${other}" href="${url(other, s.slug)}"><link rel="alternate" hreflang="x-default" href="${url('en', s.slug)}">
+<link rel="alternate" hreflang="${lang}" href="${self}"><link rel="alternate" hreflang="${other}" href="${url(other, s.slug)}"><link rel="alternate" hreflang="fa" href="${BASE}/fa/studio/${s.slug}/"><link rel="alternate" hreflang="x-default" href="${url('en', s.slug)}">
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(d.title)}"><meta property="og:description" content="${esc(d.desc)}"><meta property="og:url" content="${self}"><meta property="og:image" content="${OG}"><meta property="og:locale" content="${lang === 'ar' ? 'ar_AR' : 'en_US'}">
 <meta name="twitter:card" content="summary_large_image"><meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#FAFAF8">
 <link rel="icon" href="data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='-6 -14 112 112'><rect x='-6' y='-14' width='112' height='112' rx='24' fill='#0E0F11'/><g fill='#2BD4A4'>${MARK.replace(/"/g,"'")}</g></svg>`)}">
@@ -99,7 +99,7 @@ ${ld.map((j)=>`<script type="application/ld+json">${JSON.stringify(j)}</script>`
 <header class="top"><div class="wrap">
   <a class="brand" href="${t.studio}" aria-label="MEFTACARD Studio"><svg class="brand-logo" viewBox="0 4 100 64" aria-hidden="true" focusable="false">${MARK}</svg>MEFTACARD <span>Studio</span></a>
   <nav class="links"><a href="#included">${t.nav[0]}</a><a href="#packages">${t.nav[1]}</a><a href="#contact">${t.nav[2]}</a></nav>
-  <nav class="lang"><a href="${t.studio}${s.slug}/" aria-current="page">${lang === 'ar' ? 'عربي' : 'EN'}</a><a href="${url(other, s.slug).replace(BASE,'')}" hreflang="${other}" lang="${other}">${t.other}</a></nav>
+  <nav class="lang"><a href="${t.studio}${s.slug}/" aria-current="page">${lang === 'ar' ? 'عربي' : 'EN'}</a><a href="${url(other, s.slug).replace(BASE,'')}" hreflang="${other}" lang="${other}">${t.other}</a><a href="/fa/studio/${s.slug}/" hreflang="fa" lang="fa">فارسی</a></nav>
   <a class="btn btn-dark" href="#contact">${t.nav[2]}</a>
 </div></header>
 <main id="main">
