@@ -22,8 +22,8 @@ Format: `- [ ] lang | slug | working title | focus keyword | links to (service o
 Rewrite the existing .md in place (same slug, same language): expand to ≥ 2,500 useful words, add key_points, FAQ,
 service links and an external source, run check-article.py until PASS, then `publish-draft.py --upgrade <file>`.
 Mark `[x]` with the date when done. The published version is only replaced when the gate passes.
-- [ ] ar | website-design-cost-iraq-ar
-- [ ] en | website-design-cost-gcc-2026
+- [x] ar | website-design-cost-iraq-ar | upgraded 87, 2026-11-24
+- [x] en | website-design-cost-gcc-2026 | upgraded 92, 2026-11-24
 - [ ] ar | seo-iraq-guide-ar
 - [ ] ar | google-business-profile-local-seo-iraq-ar
 - [ ] ar | whatsapp-ai-bot-business-ar
@@ -38,10 +38,10 @@ Mark `[x]` with the date when done. The published version is only replaced when 
 - [ ] en | website-maintenance-checklist     (source .md missing: rebuild from the live post text)
 
 ## PRIORITY — Iraq and Oman (write these first, 2 of every 3 articles)
-- [ ] ar | website-design-baghdad-ar | تصميم مواقع في بغداد: الأسعار والمراحل ودليل اختيار الشركة | تصميم مواقع في بغداد | iraq
+- [x] ar | website-design-baghdad-ar | تصميم مواقع في بغداد: الأسعار والمراحل ودليل اختيار الشركة | تصميم مواقع في بغداد | iraq | published 481, 2026-11-24
 - [x] en | web-design-oman-guide | Web Design and SEO in Oman: A Complete Guide for Businesses | web design Oman | oman | published 340, 2026-11-23 (full standard: 2,520 words, video, key points)
-- [ ] ar | website-design-oman-ar | تصميم مواقع في عُمان: دليل الشركات في مسقط وصلالة وصحار | تصميم مواقع في عمان | oman
-- [ ] ar | seo-iraq-companies-ar | شركة سيو في العراق: كيف تختار خدمات السيو المناسبة | شركة سيو في العراق | iraq
+- [x] ar | website-design-oman-ar | تصميم مواقع في عُمان: دليل الشركات في مسقط وصلالة وصحار | تصميم مواقع في عمان | oman | published 486, 2026-11-24
+- [x] ar | seo-iraq-companies-ar | شركة سيو في العراق: كيف تختار خدمات السيو المناسبة | شركة سيو في العراق | iraq | published 491, 2026-11-24
 - [ ] en | website-design-iraq-guide | Website Design in Iraq: Costs, Payments and What Works | website design Iraq | iraq
 - [ ] ar | seo-oman-ar | خدمات السيو في عُمان: كيف تتصدر Google في مسقط | خدمات سيو في عمان | oman
 - [ ] ar | website-design-erbil-ar | تصميم مواقع في أربيل وإقليم كردستان | تصميم مواقع في أربيل | iraq
