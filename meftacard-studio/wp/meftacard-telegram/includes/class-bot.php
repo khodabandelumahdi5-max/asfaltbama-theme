@@ -133,12 +133,15 @@ final class Mefta_TG_Bot {
 	}
 
 	private static function menu( $lang ) {
+		$rows = array(
+			array( array( 'text' => self::t( $lang, 'products' ) ), array( 'text' => self::t( $lang, 'track' ) ) ),
+			array( array( 'text' => self::t( $lang, 'howto' ) ), array( 'text' => self::t( $lang, 'support' ) ) ),
+			array( array( 'text' => self::t( $lang, 'site' ) ) ),
+		);
+		/** Extensions (e.g. MEFTACARD Gifts) can add menu rows. */
+		$rows = (array) apply_filters( 'mefta_tg_menu_rows', $rows, $lang );
 		return array(
-			'keyboard'        => array(
-				array( array( 'text' => self::t( $lang, 'products' ) ), array( 'text' => self::t( $lang, 'track' ) ) ),
-				array( array( 'text' => self::t( $lang, 'howto' ) ), array( 'text' => self::t( $lang, 'support' ) ) ),
-				array( array( 'text' => self::t( $lang, 'site' ) ) ),
-			),
+			'keyboard'        => $rows,
 			'resize_keyboard' => true,
 			'is_persistent'   => true,
 		);
@@ -365,6 +368,11 @@ final class Mefta_TG_Bot {
 			return;
 		}
 
+		/** Extensions get the message before the default handling; return true when handled. */
+		if ( apply_filters( 'mefta_tg_handle_message', false, $m, $lang, $admin ) ) {
+			return;
+		}
+
 		// Any other /command from a customer → show the menu (don't forward commands to support).
 		if ( '' !== $text && '/' === $text[0] && ! $admin ) {
 			self::state( $chat, '' );
@@ -512,6 +520,7 @@ final class Mefta_TG_Bot {
 		if ( 'tolerance' === self::om( $id, 'match' ) ) {
 			$txt .= "\n⚠️ مبلغ دقیق نبود (مبلغ نزدیک) — قبل از تحویل چک کنید.";
 		}
+		$txt = (string) apply_filters( 'mefta_tg_admin_card_text', $txt, $id );
 		$tx = self::om( $id, 'tx' );
 		$rows = array();
 		if ( 'paid' === $st ) {
@@ -595,6 +604,10 @@ final class Mefta_TG_Bot {
 	private static function on_callback( $cb ) {
 		$chat = $cb['message']['chat']['id'] ?? 0;
 		$data = (string) ( $cb['data'] ?? '' );
+		/** Extensions handle their own callback data (return true when handled). */
+		if ( apply_filters( 'mefta_tg_handle_callback', false, $cb, self::lang( $chat ), self::is_admin_chat( $chat ) ) ) {
+			return;
+		}
 		if ( preg_match( '/^lang:(en|fa|ar)$/', $data, $lm ) ) {
 			self::set_lang( $chat, $lm[1] );
 			self::api( 'answerCallbackQuery', array( 'callback_query_id' => $cb['id'], 'text' => '✓' ), false );
@@ -664,7 +677,8 @@ final class Mefta_TG_Bot {
 			return;
 		}
 		$lang = self::om( $id, 'tg_lang' ) ?: 'en';
-		self::say( $c, sprintf( self::t( $lang, $key ), esc_html( self::om( $id, 'order_id' ) ) ) );
+		$text = (string) apply_filters( 'mefta_tg_customer_text', sprintf( self::t( $lang, $key ), esc_html( self::om( $id, 'order_id' ) ) ), $id, $key, $lang );
+		self::say( $c, $text );
 	}
 
 	/* ================================================================ webhook setup */

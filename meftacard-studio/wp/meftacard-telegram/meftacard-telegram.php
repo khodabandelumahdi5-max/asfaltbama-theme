@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Meftacard Telegram Bot
  * Description: ربات تلگرام Meftacard: منوی مشتری، پیگیری سفارش، پشتیبانی، و مدیریت سفارش‌ها (تحویل، رد، آمار) + اعلان‌ها.
- * Version:     2.2.0
+ * Version:     2.3.0
  * Author:      MEFTACARD
  * Requires PHP: 7.4
  * Text Domain: meftacard-telegram
