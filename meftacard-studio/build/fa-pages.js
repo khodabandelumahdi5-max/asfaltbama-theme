@@ -133,6 +133,9 @@ const out = [];
 const write = (rel, html) => { const f = path.join(ROOT, 'dist', rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html);
   const words = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length; out.push({ rel, words }); };
 write('fa/studio/index.html', hubPage());
-for (const s of C.pages) write(`fa/studio/${s.slug}/index.html`, servicePage(s));
+// Afghanistan page speaks Dari: ویب‌سایت / دالر, and declares fa-AF.
+const dari = (html) => html.replace(/(>[^<]*<)/g, (seg) => seg.replace(/(^|[^\u200c\u0600-\u06FF])سایت/g, '$1ویب‌سایت').replace(/دلار/g, 'دالر'))
+  .replace('<html lang="fa" dir="rtl">', '<html lang="fa-AF" dir="rtl">').replace('content="fa_IR"', 'content="fa_AF"');
+for (const s of C.pages) write(`fa/studio/${s.slug}/index.html`, s.slug === 'afghanistan' ? dari(servicePage(s)) : servicePage(s));
 console.table(out);
 for (const s of [C.hub, ...C.pages]) { if (s.title.length > 60) console.warn('TITLE >60:', s.title.length, s.title); if (s.desc.length > 158 || s.desc.length < 110) console.warn('DESC length', s.desc.length, s.slug); }
