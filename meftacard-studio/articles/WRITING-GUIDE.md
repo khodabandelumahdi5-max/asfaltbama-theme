@@ -52,3 +52,12 @@ Include these posts in the final report so the owner can post them after publish
 
 ## Upgrading earlier articles
 Earlier articles are brought up to the same standard from the UPGRADE QUEUE in TOPICS.md: same slug and language, expanded to ≥ 2,500 useful words with key_points, FAQ, service links and a source. Run the gate until PASS, then `publish-draft.py --upgrade <file>`. The live version is replaced only when the gate passes.
+
+## Marketing skills (installed 2026-11-24)
+This repo ships the marketingskills library in `.claude/skills/` (53 skills) and the shared context in `.agents/product-marketing.md`.
+For every article and page:
+1. Read `.agents/product-marketing.md` first (positioning, packages, voice, hard rules, learnings).
+2. Draft with the `copywriting` skill; then run the `copy-editing` skill to remove AI tells ("it's not X, it's Y", "no X, no Y, no Z", trailing comma clauses).
+3. Apply `ai-seo` for answer-ready sections (clear question headings, direct first sentences, citable facts with sources) and `schema` for JSON-LD.
+4. Outreach copy uses `cold-email` (email first; WhatsApp only for people who replied — see Learnings in the context doc).
+These add to, and never override, the quality gate (check-article.py) and the hard rules above.
