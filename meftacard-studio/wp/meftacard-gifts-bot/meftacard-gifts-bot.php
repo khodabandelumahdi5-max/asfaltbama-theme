@@ -2,13 +2,13 @@
 /**
  * Plugin Name: MEFTACARD Gifts Bot
  * Description: Telegram bot that sells Telegram gifts (NFTs) from MRKT with a fixed markup, takes payment in USDT (BEP20) with automatic on-chain confirmation, and notifies admins to deliver. Settings → MEFTACARD Gifts Bot.
- * Version: 0.1.0
+ * Version: 0.1.1
  * Author: MEFTACARD
  * Requires PHP: 7.4
  */
 if (!defined('ABSPATH')) exit;
 
-const MGB_VER = '0.1.0';
+const MGB_VER = '0.1.1';
 const MGB_USDT_BSC = '0x55d398326f99059ff775485246999027b3197955';
 const MGB_TRANSFER_TOPIC = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef';
 const MGB_RPC = ['https://bsc-rpc.publicnode.com', 'https://bsc-dataseed.binance.org', 'https://bsc.drpc.org'];
@@ -377,6 +377,25 @@ add_action('rest_api_init', function () {
     }, 'callback' => function ($r) { mgb_handle((array) $r->get_json_params()); return ['ok' => true]; }]);
     register_rest_route('mgb/v1', '/status', ['methods' => 'GET', 'permission_callback' => function () { return current_user_can('manage_options'); },
         'callback' => 'mgb_status']);
+    /* TEMPORARY (0.1.1): read-only source of the existing bot + payment plugins, for merging the gift shop into the main bot.
+       Administrators only, two whitelisted folders, no writes. Removed in the next version. */
+    register_rest_route('mgb/v1', '/source', ['methods' => 'GET', 'permission_callback' => function () { return current_user_can('manage_options'); },
+        'args' => ['plugin' => ['required' => true, 'enum' => ['meftacard-telegram', 'meftacard-direct-pay']]],
+        'callback' => function ($r) {
+            $root = realpath(WP_PLUGIN_DIR . '/' . $r['plugin']);
+            if (!$root || strpos($root, realpath(WP_PLUGIN_DIR)) !== 0) return new WP_Error('nf', 'not found', ['status' => 404]);
+            $out = []; $total = 0;
+            $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS));
+            foreach ($it as $f) {
+                if (!$f->isFile() || !preg_match('/\.(php|js|css|json|txt|md|html)$/i', $f->getFilename())) continue;
+                $rel = substr($f->getPathname(), strlen($root) + 1);
+                $size = $f->getSize();
+                if ($size > 400000 || $total + $size > 4000000) { $out[] = ['path' => $rel, 'size' => $size, 'skipped' => true]; continue; }
+                $total += $size;
+                $out[] = ['path' => $rel, 'size' => $size, 'content' => file_get_contents($f->getPathname())];
+            }
+            return ['plugin' => $r['plugin'], 'files' => $out];
+        }]);
 });
 
 function mgb_state($chat, $v = null) {
