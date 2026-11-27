@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MEFTACARD Lang & Studio
  * Description: Correct html lang/dir per post language, hreflang for translated posts, full-HTML Studio landing pages, and a Studio sitemap (/studio-sitemap.xml).
- * Version: 1.9.0
+ * Version: 1.9.1
  * Author: MEFTACARD
  * Requires PHP: 7.4
  */
@@ -624,7 +624,7 @@ add_action('wp_head', function () {
     . '.mc-offer-t,.mc-end-t{font-size:clamp(26px,3.6vw,34px);font-weight:700;line-height:1.25;letter-spacing:-.02em;margin:0 0 12px!important;color:var(--t1)}[dir=rtl] .mc-offer-t,[dir=rtl] .mc-end-t{line-height:1.5;letter-spacing:0}'
     . '.mc-offer-p,.mc-end-p{font-size:17px;color:var(--t2);max-width:52ch;margin:0 auto 28px!important;line-height:1.7}'
     . '.mc-pks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:start}'
-    . '.mc-pk{position:relative;background:#fff;border-radius:20px;padding:26px 22px 22px;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 24px rgba(0,0,0,.05)}'
+    . '.mc-pk{position:relative;background:#fff;border-radius:20px;padding:26px 22px 22px;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 24px rgba(0,0,0,.05);transform:perspective(1000px) rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg)) translateZ(var(--tz,0px));transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}.mc-pk:hover{box-shadow:0 2px 4px rgba(0,0,0,.05),0 36px 60px -28px rgba(0,0,0,.35)}.mc-pk::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.5),transparent 55%);opacity:0;transition:opacity .35s}.mc-pk:hover::after{opacity:1}'
     . '.mc-pk-pop{box-shadow:0 0 0 2px var(--btn),0 10px 30px rgba(0,113,227,.12)}.mc-pk-badge{position:absolute;top:-11px;inset-inline-start:22px;background:var(--btn);color:#fff;font-size:12px;font-weight:600;border-radius:20px;padding:3px 10px}'
     . '.mc-pk h3{margin:0 0 4px!important;font-size:19px;font-weight:700}.mc-pk-for{font-size:14px;color:var(--t2);margin:0 0 16px!important;line-height:1.5;min-height:42px}'
     . '.mc-pk-price{font-size:32px;font-weight:700;letter-spacing:-.02em;margin:0 0 16px!important;line-height:1}'
@@ -648,3 +648,8 @@ add_action('wp_head', function () {
     . '@media (max-width:420px){.mc-hnav .mc-hcta{display:none}.mc-f-grid{grid-template-columns:1fr}}'
     . '</style>' . "\n";
 }, 60);
+
+add_action('wp_footer', function () {
+    if (!mc_is_studio_article()) return;
+    echo "<script>(()=>{if(!matchMedia('(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)').matches)return;document.querySelectorAll('.mc-pk').forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;el.style.setProperty('--tx',((.5-y)*10)+'deg');el.style.setProperty('--ty',((x-.5)*10)+'deg');el.style.setProperty('--tz','8px');el.style.setProperty('--gx',x*100+'%');el.style.setProperty('--gy',y*100+'%')});el.addEventListener('pointerleave',()=>['--tx','--ty','--tz','--gx','--gy'].forEach(v=>el.style.removeProperty(v)))})})();</script>\n";
+}, 50);
