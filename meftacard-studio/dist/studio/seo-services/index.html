@@ -220,6 +220,32 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
+/* ---- 3D ---- */
+.hero .wrap.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center}
+.hero-3d{perspective:1500px;position:relative}
+.scene{--rx:9deg;--ry:-17deg;position:relative;aspect-ratio:1.12;transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .5s cubic-bezier(.2,.7,.2,1);will-change:transform}
+html[dir="rtl"] .scene{--ry:17deg}
+.hero-3d::after{content:"";position:absolute;inset:auto 10% -2% 10%;height:40px;background:radial-gradient(ellipse at center,rgba(22,23,26,.22),transparent 70%);filter:blur(10px);z-index:-1}
+.layer{position:absolute;transform-style:preserve-3d}
+.l-browser{top:8%;inset-inline-start:0;width:86%;transform:translateZ(0)}
+.l-browser .browser{box-shadow:0 2px 4px rgba(22,23,26,.06),0 50px 90px -35px rgba(22,23,26,.5)}
+.l-phone{bottom:0;inset-inline-end:2%;width:27%;transform:translateZ(110px)}
+.phone3d{border:7px solid #16171A;border-radius:28px;overflow:hidden;background:#000;box-shadow:0 40px 70px -25px rgba(22,23,26,.6),inset 0 0 0 1px #333}
+.chip{position:absolute;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-weight:600;font-size:14px;white-space:nowrap;box-shadow:0 24px 40px -18px rgba(22,23,26,.35);transform:translateZ(170px);animation:fl 6s ease-in-out infinite;direction:ltr}
+.chip b{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;font-size:13px}
+.chip.c1{top:0;inset-inline-start:12%}.chip.c2{top:44%;inset-inline-start:-6%;animation-delay:-2s;transform:translateZ(140px)}.chip.c3{bottom:10%;inset-inline-start:26%;animation-delay:-4s;transform:translateZ(200px)}
+.chip.c3 b{background:var(--accent)}
+@keyframes fl{50%{translate:0 -10px}}
+.card{position:relative;transform:perspective(1000px) rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg)) translateZ(var(--tz,0px));transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s;box-shadow:0 1px 2px rgba(22,23,26,.04),0 14px 34px -22px rgba(22,23,26,.3);transform-style:preserve-3d}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.35),transparent 55%);opacity:0;transition:opacity .35s}
+.card:hover{box-shadow:0 2px 4px rgba(22,23,26,.05),0 40px 70px -30px rgba(22,23,26,.45)}.card:hover::after{opacity:1}
+.card.big::after{background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.14),transparent 55%)}
+.feature .shot{perspective:1600px}.feature .shot>.browser,.feature .shot>.phone{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.feature .shot>.browser{transform:rotateY(var(--sy,-7deg)) rotateX(var(--sx,4deg))}html[dir="rtl"] .feature .shot>.browser{--sy:7deg}
+.feature .shot>.phone{transform:translateZ(60px) rotateY(var(--sy,-7deg)) rotateX(var(--sx,4deg))}html[dir="rtl"] .feature .shot>.phone{--sy:7deg}
+@media (max-width:900px){.hero .wrap.hero-grid{grid-template-columns:1fr;gap:40px}.hero-3d{max-width:520px;width:100%;margin-inline:auto}.chip{font-size:12.5px;padding:8px 11px}.chip.c2{inset-inline-start:0}}
+@media (prefers-reduced-motion:reduce){.chip{animation:none}.scene,.card,.feature .shot>*{transition:none}}
+
 .crumb{font-size:14px;color:var(--ink-2);margin-bottom:22px}.crumb a{color:var(--ink-2)}
 .intro p{color:var(--ink-2);font-size:clamp(17px,1.5vw,19px);max-width:62ch;margin-top:16px}
 .inc{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:32px;border-top:1px solid var(--ink)}
@@ -243,12 +269,18 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
   <a class="btn btn-dark" href="#contact">Contact</a>
 </div></header>
 <main id="main">
-<section class="hero"><div class="wrap intro">
+<section class="hero"><div class="wrap intro hero-grid"><div class="hero-copy">
   <p class="crumb"><a href="/studio/">MEFTACARD Studio</a> / SEO services</p>
   <h1>SEO services that bring customers from Google</h1>
   <p>When someone searches for what you sell, the first three results get most of the clicks. SEO, search engine optimisation, is the work that moves your site into those positions and keeps it there. We do it in Arabic and English, for local searches and for buyers in other countries.</p><p>Competition in Arabic search is still far lighter than in English, especially in Iraq and outside the big Gulf cities. A site that is technically sound and publishes useful Arabic content can climb quickly. We tell you honestly what is achievable, and we report results every month.</p>
   <div class="actions"><a class="btn btn-dark" href="https://t.me/meftacard?text=Hello%20MEFTACARD%20Studio%2C%20I'm%20interested%20in%20seo%20services." target="_blank" rel="noopener">Message us on Telegram</a><a class="btn btn-line" href="#packages">See packages</a></div>
-</div></section>
+</div><div class="hero-3d" aria-hidden="true"><div class="scene">
+<div class="layer l-browser"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="https://meftacard.com/wp-content/uploads/2026/11/studio-work-asfaltbama-desktop.webp" width="1440" height="900" alt="" fetchpriority="high"></div></div>
+<div class="layer l-phone"><div class="phone3d"><img src="https://meftacard.com/wp-content/uploads/2026/11/studio-work-asfaltbama-mobile.webp" width="390" height="844" alt="" loading="lazy"></div></div>
+<div class="chip c1"><b>G</b>Google · Maps</div>
+<div class="chip c2"><b>ع</b>AR · EN</div>
+<div class="chip c3"><b>⌘</b>hreflang · Schema</div>
+</div></div></div></section>
 
 <section id="included" style="padding-top:8px"><div class="wrap">
   <h2 style="font-size:clamp(26px,2.8vw,36px)">What our SEO services include</h2>
@@ -321,5 +353,5 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-bet
 <footer><div class="wrap"><span>© 2026 MEFTACARD Studio</span><nav class="flinks"><a href="/studio/">MEFTACARD Studio</a><a href="https://meftacard.com/contact/">Contact</a><a href="https://meftacard.com/privacy-policy/">Privacy</a><a href="https://t.me/meftacardchannel" target="_blank" rel="noopener">Telegram channel</a></nav></div></footer>
 <div class="floats"><a class="float float-wa js-wa" href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.9 11.9 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.2-1.2c-.1-.1-.3-.2-.5-.3z"/></svg></a><a class="float float-tg" href="https://t.me/meftacard?text=Hello%20MEFTACARD%20Studio%2C%20I'm%20interested%20in%20seo%20services." target="_blank" rel="noopener" aria-label="Telegram @meftacard"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3l-3.2 15.2c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.1l-4.8-1.5c-1-.3-1.1-1 .2-1.5L20.5 2.9c.9-.3 1.6.2 1.4 1.4z"/></svg></a></div>
 <script>const WA_PARTS=["98","919","129","9559"];const WA_MSG="Hello MEFTACARD Studio, I'm interested in seo services.";document.querySelectorAll('.js-wa').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();window.open('https://wa.me/'+WA_PARTS.join('')+'?text='+encodeURIComponent(WA_MSG),'_blank','noopener');}));</script>
-</body>
+<script>(()=>{if(!matchMedia('(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)').matches)return;const rtl=document.documentElement.dir==='rtl';const hero=document.querySelector('.hero'),sc=document.querySelector('.scene');if(hero&&sc){hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;sc.style.setProperty('--ry',((rtl?17:-17)+x*14)+'deg');sc.style.setProperty('--rx',(9-y*10)+'deg')});hero.addEventListener('pointerleave',()=>{sc.style.removeProperty('--ry');sc.style.removeProperty('--rx')})}document.querySelectorAll('.card').forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;el.style.setProperty('--tx',((.5-y)*9)+'deg');el.style.setProperty('--ty',((x-.5)*9)+'deg');el.style.setProperty('--tz','8px');el.style.setProperty('--gx',x*100+'%');el.style.setProperty('--gy',y*100+'%')});el.addEventListener('pointerleave',()=>['--tx','--ty','--tz','--gx','--gy'].forEach(v=>el.style.removeProperty(v)))})})();</script></body>
 </html>
