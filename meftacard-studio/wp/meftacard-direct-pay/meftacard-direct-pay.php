@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Meftacard Direct Pay (USDT BEP20)
  * Description: پرداخت مستقیم USDT روی شبکه BEP20 به کیف پول شما، بدون درگاه واسط. هر سفارش مبلغ یکتا دارد و پرداخت به‌صورت خودکار روی بلاکچین BSC تأیید می‌شود.
- * Version:     1.3.1
+ * Version:     1.3.2
  * Author:      MEFTACARD
  * Requires PHP: 7.4
  */

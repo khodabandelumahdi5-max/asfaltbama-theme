@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MEFTACARD Lang & Studio
  * Description: Correct html lang/dir per post language, hreflang for translated posts, full-HTML Studio landing pages, and a Studio sitemap (/studio-sitemap.xml).
- * Version: 1.9.1
+ * Version: 1.9.2
  * Author: MEFTACARD
  * Requires PHP: 7.4
  */
@@ -355,6 +355,38 @@ add_action('template_redirect', function () {
     if ($path !== '' && !is_front_page() && !is_home()) return;
     ob_start(function ($html) {
         if (stripos($html, 'brand-mark') === false) return $html;
+        // v1.9.2: honest homepage copy (no unverified stats, no real-looking card number,
+        // no "holographic/laser", AI products sold as prepaid cards for the customer's own account).
+        $html = strtr($html, [
+            '13 Global Corridors · Native USDT Settlement · 98.6% OTP Delivery' => '13 country versions · Pay in USDT (BEP20) · Support on Telegram',
+            'AI Subscriptions, Holographic Virtual Cards &amp; Non-VoIP SIMs.' => 'Virtual Cards for AI Subscriptions &amp; Non-VoIP Numbers.',
+            '4532  8910  4421  9088' => '••••  ••••  ••••  9088',
+            'LASER ENGRAVED HOLDER' => 'CARD HOLDER',
+            'Buy ChatGPT Plus, Claude Pro, Gemini API keys, and crypto-funded Visa cards settled instantly in USDT across 13 localized corridors.' => 'Prepaid virtual Visa cards, funded with USDT, to pay ChatGPT Plus, Claude Pro, Gemini or OpenRouter on your own account. Plus real Non-VoIP numbers for SMS verification.',
+            'data-i18n="heroCta1">Buy AI Access Now<' => 'data-i18n="heroCta1">Get a Card for AI<',
+            'placeholder="Live laser engrave (e.g. MEFTA-01)"' => 'placeholder="Name on card (e.g. MEFTA-01)"',
+            '<span class="badge-ok tabular" id="simRateBadge">98.6% Success</span>' => '<span class="badge-ok tabular" id="simRateBadge">Non-VoIP</span>',
+            '<span class="tabular" id="simSpeedBadge">Avg 14s</span>' => '<span class="tabular" id="simSpeedBadge">Real SIM</span>',
+            '<div class="about-stat-num tabular">98.6%</div>' => '<div class="about-stat-num tabular">SIM</div>',
+            'data-i18n="stat2Lbl">OTP Delivery Rate<' => 'data-i18n="stat2Lbl">Real carrier numbers<',
+            // AI products: prepaid virtual Visa cards the customer uses on their own account
+            '<span class="ai-tag">● Instant Vault Delivery</span>' => '<span class="ai-tag">● Prepaid virtual Visa</span>',
+            '<h3>ChatGPT Plus / Pro</h3>' => '<h3>Card for ChatGPT Plus</h3>',
+            '<p>Full GPT-5 / o3 / voice &amp; file access funded via USDT with zero Western bank card required.</p>' => '<p>A virtual Visa loaded with $20 to pay ChatGPT Plus on your own account. No Western bank card needed.</p>',
+            'data-product="ChatGPT Plus Subscription"' => 'data-product="Virtual card for ChatGPT Plus ($20 load)"',
+            '<span class="ai-tag">● Priority Access</span>' => '<span class="ai-tag">● Prepaid virtual Visa</span>',
+            '<h3>Claude Pro / Max</h3>' => '<h3>Card for Claude Pro</h3>',
+            '<p>Anthropic Claude Sonnet &amp; Opus access with clean provisioning and IP hygiene guidelines.</p>' => '<p>A virtual Visa loaded with $20 to pay Claude Pro on your own account. Your login and chats stay yours.</p>',
+            'data-product="Claude Pro Subscription"' => 'data-product="Virtual card for Claude Pro ($20 load)"',
+            '<span class="ai-tag">● Hard-Capped API Key</span>' => '<span class="ai-tag">● Prepaid virtual Visa</span>',
+            '<h3>Gemini &amp; OpenRouter API</h3>' => '<h3>Card for Gemini &amp; OpenRouter credits</h3>',
+            '<p>One unified key for Gemini, Claude &amp; OpenAI models with strict dollar credit caps.</p>' => '<p>Top up your own Gemini or OpenRouter account with a virtual Visa of the amount you choose.</p>',
+            'data-product="Gemini &amp; OpenRouter API ($25 Credit)"' => 'data-product="Virtual card for API credits ($25)"',
+            '<h3>Cursor Pro AI IDE</h3>' => '<h3>Card for Cursor Pro</h3>',
+            '<p>Fast agentic coding subscription settled monthly via USDT for global developers &amp; teams.</p>' => '<p>A virtual Visa loaded with $20 to pay Cursor Pro on your own account.</p>',
+            'data-product="Cursor Pro Subscription"' => 'data-product="Virtual card for Cursor Pro ($20 load)"',
+            'Instant USDT marketplace for ChatGPT Plus, Claude Pro, Gemini &amp; OpenRouter API keys, 3D Secure virtual cards, and Non-VoIP virtual phone numbers across 13 global corridors.' => 'Prepaid virtual Visa cards funded with USDT to pay ChatGPT Plus, Claude Pro, Gemini or OpenRouter on your own account, plus real Non-VoIP numbers for SMS codes.',
+        ]);
         $svg = '<svg class="mc-key" viewBox="0 4 100 64" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M22 4a22 22 0 1 1 0 44a22 22 0 1 1 0-44zm0 9a13 13 0 1 0 0 26a13 13 0 1 0 0-26z"/><path fill-rule="evenodd" d="M42 21.5H100V68H91V45.5L79 61.5L67 45.5V68H58V30.5H42Z M67 30.5L79 46.5L91 30.5Z"/></svg>';
         $html = preg_replace('~<span class="brand-mark">\s*M\s*</span>~', '<span class="brand-mark mc-logo">' . $svg . '</span>', $html, 1);
         $head = '<style>.brand-mark.mc-logo{color:inherit!important;background:none!important;border:0!important;box-shadow:none!important;width:auto!important;height:auto!important;padding:0!important;display:inline-flex;align-items:center}.brand-mark.mc-logo .mc-key{width:34px;height:22px;fill:currentColor;display:block}</style>';

@@ -36,12 +36,12 @@
   const CORRIDORS = Array.isArray(CFG.corridors) && CFG.corridors.length ? CFG.corridors : DEFAULT_CORRIDORS;
   const sp = CFG.simPrices || {};
   const SIM_SERVICES = {
-    openai:   { name: "OpenAI / ChatGPT",      base: parseFloat(sp.openai)   || 1.40, rate: "98.6%", speed: "14s" },
-    claude:   { name: "Claude AI (Anthropic)", base: parseFloat(sp.claude)   || 1.60, rate: "98.2%", speed: "16s" },
+    openai:   { name: "OpenAI / ChatGPT",      base: parseFloat(sp.openai)   || 1.40 },
+    claude:   { name: "Claude AI (Anthropic)", base: parseFloat(sp.claude)   || 1.60 },
     telegram: { name: "Telegram",              base: parseFloat(sp.telegram) || 0.95, rate: "99.1%", speed: "9s"  },
-    whatsapp: { name: "WhatsApp Business",     base: parseFloat(sp.whatsapp) || 1.25, rate: "97.8%", speed: "12s" },
-    google:   { name: "Google / Gemini",       base: parseFloat(sp.google)   || 1.10, rate: "98.4%", speed: "11s" },
-    cursor:   { name: "Cursor / AWS / GitHub", base: parseFloat(sp.cursor)   || 1.50, rate: "98.9%", speed: "13s" }
+    whatsapp: { name: "WhatsApp Business",     base: parseFloat(sp.whatsapp) || 1.25 },
+    google:   { name: "Google / Gemini",       base: parseFloat(sp.google)   || 1.10 },
+    cursor:   { name: "Cursor / AWS / GitHub", base: parseFloat(sp.cursor)   || 1.50 }
   };
 
   const I18N = {
@@ -49,15 +49,15 @@
       dir: "ltr",
       navAI: "AI & APIs", navSIM: "Virtual SIMs", navCorridors: "13 Corridors", navArticles: "Articles", navAbout: "About Us",
       ctaTop: "Verify & Checkout",
-      liveBadge: "13 Global Corridors · Native USDT Settlement · 98.6% OTP Delivery",
-      heroTitle: "AI Subscriptions, Holographic Virtual Cards & Non-VoIP SIMs.",
-      heroLead: "Buy ChatGPT Plus, Claude Pro, Gemini API keys, and crypto-funded Visa cards settled instantly in USDT across 13 localized corridors.",
-      heroCta1: "Buy AI Access Now", heroCta2: "Issue Virtual Card",
+      liveBadge: "13 country versions · Pay in USDT (BEP20) · Support on Telegram",
+      heroTitle: "Virtual Cards for AI Subscriptions & Non-VoIP Numbers.",
+      heroLead: "Prepaid virtual Visa cards, funded with USDT, to pay ChatGPT Plus, Claude Pro, Gemini or OpenRouter on your own account. Plus real Non-VoIP numbers for SMS verification.",
+      heroCta1: "Get a Card for AI", heroCta2: "Issue Virtual Card",
       mCorridor: "Active Corridor", mPrefix: "Telecom Prefix", mRate: "1 USDT Live Rate",
       flipBtn: "Flip 180°",
       aiEyebrow: "Row 1 · Priority Digital Access",
-      aiTitle: "AI Accounts & Pay-As-You-Go API Credits",
-      aiSub: "Instant automated delivery via encrypted vault or live OpenRouter/Gemini API key provisioning.",
+      aiTitle: "Virtual Cards for AI Subscriptions & API Credits",
+      aiSub: "Each card is loaded with the amount the service costs. You subscribe on your own account, so your login and data stay yours.",
       tabAll: "All", tabSub: "Subscriptions", tabApi: "API Credits", tabDev: "Dev Tools",
       buyUsdt: "Buy with USDT",
       bentoEyebrow: "Global Carrier & Settlement Layer",
@@ -78,7 +78,7 @@
       aboutP2: "Every order is backed by transparent live pricing across 13 corridors, automated OxaPay USDT confirmation, and a strict 10-minute 100% automatic refund guarantee on SMS verifications.",
       aboutCta1: "Contact Support", aboutCta2: "Telegram Desk",
       stat1Lbl: "Localized Corridors", stat1Sub: "Real-time FX & telecom prefixes",
-      stat2Lbl: "OTP Delivery Rate", stat2Sub: "Verified Non-VoIP real SIMs",
+      stat2Lbl: "Real carrier numbers", stat2Sub: "Verified Non-VoIP real SIMs",
       stat3Lbl: "Ledger Speed", stat3Sub: "$0 gas fee on internal balance",
       stat4Lbl: "Auto-Refund SLA", stat4Sub: "Instant credit on 10m SMS timeout",
       trust1T: "0-Second Auto-Refund SLA", trust1D: "No SMS within 10 minutes? 100% credited back to your USDT ledger instantly.",
@@ -89,15 +89,15 @@
       dir: "ltr",
       navAI: "KI & APIs", navSIM: "Virtuelle SIMs", navCorridors: "13 Korridore", navArticles: "Artikel", navAbout: "Über uns",
       ctaTop: "Verifizieren & Kaufen",
-      liveBadge: "13 Globale Korridore · USDT-Abwicklung · 98,6% OTP-Quote",
-      heroTitle: "KI-Abos, holografische virtuelle Karten & Non-VoIP SIMs.",
-      heroLead: "Kaufen Sie ChatGPT Plus, Claude Pro, Gemini API-Guthaben und krypto-finanzierte Visa-Karten sofort mit USDT in 13 Korridoren.",
-      heroCta1: "KI-Zugang kaufen", heroCta2: "Virtuelle Karte ausstellen",
+      liveBadge: "13 Länderversionen · Zahlung in USDT (BEP20) · Support über Telegram",
+      heroTitle: "Virtuelle Karten für KI-Abos & Non-VoIP-Nummern.",
+      heroLead: "Prepaid-Visa-Karten, mit USDT aufgeladen, um ChatGPT Plus, Claude Pro, Gemini oder OpenRouter mit Ihrem eigenen Konto zu bezahlen. Dazu echte Non-VoIP-Nummern für die SMS-Verifizierung.",
+      heroCta1: "Karte für KI holen", heroCta2: "Virtuelle Karte ausstellen",
       mCorridor: "Aktiver Korridor", mPrefix: "Vorwahl", mRate: "1 USDT Live-Kurs",
       flipBtn: "180° drehen",
       aiEyebrow: "Reihe 1 · Priorisierter KI-Zugang",
-      aiTitle: "KI-Konten & API-Guthaben sofort per USDT",
-      aiSub: "Sofortige Auslieferung für ChatGPT Plus, Claude Pro, Cursor Pro und Gemini/OpenRouter API-Keys.",
+      aiTitle: "Virtuelle Karten für KI-Abos & API-Guthaben",
+      aiSub: "Jede Karte ist mit dem Betrag des Dienstes aufgeladen. Sie abonnieren mit Ihrem eigenen Konto; Login und Daten bleiben bei Ihnen.",
       tabAll: "Alle", tabSub: "Abos", tabApi: "API-Guthaben", tabDev: "Entwickler",
       buyUsdt: "Mit USDT kaufen",
       bentoEyebrow: "Carrier- & Zahlungsinfrastruktur",
@@ -118,7 +118,7 @@
       aboutP2: "Jede Bestellung profitiert von Live-Wechselkursen in 13 Korridoren, automatischer OxaPay-Bestätigung und 100% automatischer Rückerstattung bei SMS-Timeout.",
       aboutCta1: "Support kontaktieren", aboutCta2: "Telegram-Support",
       stat1Lbl: "Lokalisierte Korridore", stat1Sub: "Live-Kurse & Vorwahlen",
-      stat2Lbl: "OTP-Erfolgsquote", stat2Sub: "Echte Non-VoIP SIM-Karten",
+      stat2Lbl: "Echte Mobilfunknummern", stat2Sub: "Echte Non-VoIP SIM-Karten",
       stat3Lbl: "Ledger-Tempo", stat3Sub: "0$ Gas-Gebühr im Guthaben",
       stat4Lbl: "Auto-Refund SLA", stat4Sub: "Sofort-Gutschrift nach 10 Min.",
       trust1T: "Automatische Rückerstattung", trust1D: "Kein SMS-Code in 10 Min.? 100% sofort zurück auf Ihr USDT-Guthaben.",
@@ -129,15 +129,15 @@
       dir: "ltr",
       navAI: "IA & APIs", navSIM: "SIM Virtuelles", navCorridors: "13 Corridors", navArticles: "Articles", navAbout: "À propos",
       ctaTop: "Vérifier & Commander",
-      liveBadge: "13 Corridors Mondiaux · Règlement USDT · 98,6% OTP",
-      heroTitle: "Abonnements IA, Cartes Virtuelles Holographiques & SIM Non-VoIP.",
-      heroLead: "Achetez ChatGPT Plus, Claude Pro, clés API Gemini et cartes Visa financées en USDT dans 13 corridors localisés.",
-      heroCta1: "Accès IA instantané", heroCta2: "Émettre une carte",
+      liveBadge: "13 versions pays · Paiement en USDT (BEP20) · Support sur Telegram",
+      heroTitle: "Cartes virtuelles pour abonnements IA & numéros Non-VoIP.",
+      heroLead: "Cartes Visa virtuelles prépayées, rechargées en USDT, pour payer ChatGPT Plus, Claude Pro, Gemini ou OpenRouter sur votre propre compte. Et de vrais numéros Non-VoIP pour la vérification par SMS.",
+      heroCta1: "Carte pour l'IA", heroCta2: "Émettre une carte",
       mCorridor: "Corridor actif", mPrefix: "Indicatif", mRate: "Taux 1 USDT",
       flipBtn: "Retourner 180°",
       aiEyebrow: "Rangée 1 · Accès IA Prioritaire",
-      aiTitle: "Comptes IA & Crédits API Pay-As-You-Go",
-      aiSub: "Livraison automatisée instantanée par coffre chiffré ou clé API OpenRouter/Gemini.",
+      aiTitle: "Cartes virtuelles pour abonnements IA & crédits API",
+      aiSub: "Chaque carte est chargée du montant du service. Vous vous abonnez avec votre propre compte : vos identifiants et vos données restent à vous.",
       tabAll: "Tout", tabSub: "Abonnements", tabApi: "Crédits API", tabDev: "Outils Dev",
       buyUsdt: "Acheter en USDT",
       bentoEyebrow: "Réseau Opérateur & Paiement",
@@ -158,7 +158,7 @@
       aboutP2: "Chaque commande bénéficie de taux en direct sur 13 corridors, d'une confirmation OxaPay automatisée et d'un remboursement automatique à 100%.",
       aboutCta1: "Contacter le support", aboutCta2: "Support Telegram",
       stat1Lbl: "Corridors localisés", stat1Sub: "Devises & indicatifs en direct",
-      stat2Lbl: "Taux de succès OTP", stat2Sub: "Vraies cartes SIM Non-VoIP",
+      stat2Lbl: "Vrais numéros opérateur", stat2Sub: "Vraies cartes SIM Non-VoIP",
       stat3Lbl: "Vitesse interne", stat3Sub: "0$ de frais de gaz",
       stat4Lbl: "Remboursement Auto", stat4Sub: "Crédit instantané après 10 min",
       trust1T: "Remboursement Auto Instantané", trust1D: "Aucun SMS reçu sous 10 min ? 100% recrédité immédiatement.",
@@ -169,15 +169,15 @@
       dir: "ltr",
       navAI: "Yapay Zeka", navSIM: "Sanal SIM", navCorridors: "13 Koridor", navArticles: "Makaleler", navAbout: "Hakkımızda",
       ctaTop: "Doğrula ve Öde",
-      liveBadge: "13 Küresel Koridor · Anında USDT · %98,6 OTP Başarısı",
-      heroTitle: "Yapay Zeka Hesapları, Holografik Sanal Kartlar & Non-VoIP SIM.",
-      heroLead: "ChatGPT Plus, Claude Pro, Gemini API kredileri ve kripto destekli Visa kartlarını 13 koridorda USDT ile anında satın alın.",
-      heroCta1: "AI Erişimi Al", heroCta2: "Sanal Kart Oluştur",
+      liveBadge: "13 ülke sürümü · USDT (BEP20) ile ödeme · Telegram desteği",
+      heroTitle: "Yapay Zeka Abonelikleri için Sanal Kartlar & Non-VoIP Numaralar.",
+      heroLead: "USDT ile yüklenen ön ödemeli sanal Visa kartlarla ChatGPT Plus, Claude Pro, Gemini veya OpenRouter'ı kendi hesabınızdan ödeyin. SMS doğrulaması için gerçek Non-VoIP numaralar da var.",
+      heroCta1: "Yapay Zeka Kartı Al", heroCta2: "Sanal Kart Oluştur",
       mCorridor: "Aktif Koridor", mPrefix: "Ülke Kodu", mRate: "1 USDT Kuru",
       flipBtn: "180° Çevir",
       aiEyebrow: "1. Sıra · Öncelikli AI Erişimi",
-      aiTitle: "Yapay Zeka Abonelikleri ve API Kredileri",
-      aiSub: "Şifreli kasa veya anında OpenRouter/Gemini API anahtarı ile otomatik teslimat.",
+      aiTitle: "Yapay Zeka Abonelikleri ve API Kredisi için Sanal Kartlar",
+      aiSub: "Her kart hizmetin tutarı kadar yüklenir. Aboneliği kendi hesabınızla yaparsınız; giriş bilgileriniz ve verileriniz sizde kalır.",
       tabAll: "Tümü", tabSub: "Abonelikler", tabApi: "API Kredisi", tabDev: "Geliştirici",
       buyUsdt: "USDT ile Satın Al",
       bentoEyebrow: "Operatör ve Ödeme Altyapısı",
@@ -198,7 +198,7 @@
       aboutP2: "13 koridorda canlı döviz kuru, otomatik OxaPay onayı ve 10 dakikada SMS gelmezse %100 otomatik iade garantisi sunuyoruz.",
       aboutCta1: "Destek ile İletişim", aboutCta2: "Telegram Destek",
       stat1Lbl: "Yerel Koridor", stat1Sub: "Canlı döviz ve telefon kodu",
-      stat2Lbl: "OTP Başarı Oranı", stat2Sub: "Gerçek Non-VoIP operatörler",
+      stat2Lbl: "Gerçek operatör numaraları", stat2Sub: "Gerçek Non-VoIP operatörler",
       stat3Lbl: "Bakiye Hızı", stat3Sub: "Dahili bakiyede 0$ gaz ücreti",
       stat4Lbl: "Otomatik İade", stat4Sub: "10 dk SMS zaman aşımında anında",
       trust1T: "Sıfır Saniye Otomatik İade", trust1D: "10 dakikada SMS gelmezse %100 anında bakiyenize iade edilir.",
@@ -209,15 +209,15 @@
       dir: "rtl",
       navAI: "الذكاء الاصطناعي", navSIM: "أرقام Non-VoIP", navCorridors: "13 ممراً", navArticles: "المقالات", navAbout: "من نحن",
       ctaTop: "تحقق وابدأ",
-      liveBadge: "13 ممراً عالمياً · تسوية فورية عبر USDT · نسبة وصول 98.6%",
-      heroTitle: "اشتراكات الذكاء الاصطناعي، بطاقات افتراضية ثلاثية الأبعاد وأرقام Non-VoIP.",
-      heroLead: "اشترِ ChatGPT Plus وClaude Pro ومفاتيح Gemini API وبطاقات فيزا مشحونة بالكريبتو فوراً عبر USDT في 13 دولة.",
-      heroCta1: "شراء حسابات AI الآن", heroCta2: "إصدار بطاقة افتراضية",
+      liveBadge: "13 دولة · الدفع بعملة USDT (BEP20) · دعم عبر تيليغرام",
+      heroTitle: "بطاقات افتراضية لاشتراكات الذكاء الاصطناعي وأرقام Non-VoIP.",
+      heroLead: "بطاقات فيزا افتراضية مسبقة الدفع تُشحن بعملة USDT لتدفع اشتراك ChatGPT Plus أو Claude Pro أو Gemini أو OpenRouter من حسابك الخاص، مع أرقام Non-VoIP حقيقية لاستقبال رموز التحقق.",
+      heroCta1: "اطلب بطاقة للذكاء الاصطناعي", heroCta2: "إصدار بطاقة افتراضية",
       mCorridor: "الممر النشط", mPrefix: "رمز الاتصال", mRate: "سعر 1 USDT المباشر",
       flipBtn: "اقلب البطاقة 180°",
       aiEyebrow: "الصف الأول · أولوية الذكاء الاصطناعي",
-      aiTitle: "اشتراكات الذكاء الاصطناعي ورصيد API الفوري",
-      aiSub: "تسليم آلي فوري عبر خزنة مشفرة أو توليد مباشر لمفاتيح Gemini وOpenRouter عبر USDT.",
+      aiTitle: "بطاقات افتراضية لاشتراكات الذكاء الاصطناعي ورصيد API",
+      aiSub: "كل بطاقة مشحونة بقيمة الخدمة. تشترك من حسابك الخاص، فتبقى بيانات الدخول والمعلومات ملكك.",
       tabAll: "الكل", tabSub: "الاشتراكات", tabApi: "رصيد API", tabDev: "أدوات المطورين",
       buyUsdt: "شراء عبر USDT",
       bentoEyebrow: "البنية التحتية للاتصالات والدفع",
@@ -238,7 +238,7 @@
       aboutP2: "كل طلب محمي بأسعار صرف محدثة لحظياً في 13 دولة، وتأكيد تلقائي على البلوكشين، وضمان استرداد فوري 100% خلال 10 دقائق.",
       aboutCta1: "تواصل مع الدعم", aboutCta2: "دعم تلغرام",
       stat1Lbl: "ممراً دولياً", stat1Sub: "أسعار صرف حية ورموز اتصال",
-      stat2Lbl: "نسبة وصول OTP", stat2Sub: "شرائح Non-VoIP حقيقية",
+      stat2Lbl: "أرقام شبكات حقيقية", stat2Sub: "شرائح Non-VoIP حقيقية",
       stat3Lbl: "سرعة الرصيد الداخلي", stat3Sub: "0$ رسوم شبكة عند الشراء",
       stat4Lbl: "استرداد تلقائي", stat4Sub: "فوري عند انتهاء مهلة 10 دقائق",
       trust1T: "استرداد تلقائي فوري", trust1D: "لم يصلك رمز SMS خلال 10 دقائق؟ يُعاد المبلغ 100% لرصيدك فوراً.",
@@ -249,15 +249,15 @@
       dir: "rtl",
       navAI: "اکانت و API هوش مصنوعی", navSIM: "سیم‌کارت مجازی", navCorridors: "۱۳ کریدور", navArticles: "مقالات", navAbout: "درباره ما",
       ctaTop: "احراز و خرید آنی",
-      liveBadge: "۱۳ کریدور بین‌المللی · درگاه خودکار تتر · نرخ تحویل ۹۸.۶٪",
-      heroTitle: "اکانت‌های هوش مصنوعی، کارت مجازی سه‌بعدی و سیم‌کارت Non-VoIP.",
-      heroLead: "خرید فوری ChatGPT Plus، Claude Pro، کلید API جمنای و کارت ویزای شارژشده با تتر در ۱۳ کریدور بین‌المللی با نرخ آنلاین و تحویل خودکار.",
-      heroCta1: "خرید اکانت هوش مصنوعی", heroCta2: "صدور کارت مجازی",
+      liveBadge: "۱۳ کشور · پرداخت با تتر (BEP20) · پشتیبانی در تلگرام",
+      heroTitle: "کارت مجازی برای اشتراک هوش مصنوعی و شماره مجازی Non-VoIP.",
+      heroLead: "کارت ویزای مجازی پیش‌پرداخت که با تتر شارژ می‌شود تا اشتراک ChatGPT Plus، Claude Pro، Gemini یا OpenRouter را با حساب خودتان پرداخت کنید؛ همراه با شماره واقعی Non-VoIP برای دریافت کد تأیید.",
+      heroCta1: "خرید کارت برای هوش مصنوعی", heroCta2: "صدور کارت مجازی",
       mCorridor: "کریدور فعال", mPrefix: "پیش‌شماره", mRate: "نرخ آنلاین ۱ تتر",
       flipBtn: "چرخش ۱۸۰ درجه",
       aiEyebrow: "ردیف اول · دسترسی مستقیم به هوش مصنوعی",
-      aiTitle: "فروش اکانت‌های هوش مصنوعی و اعتبار API",
-      aiSub: "تحویل آنی از مخزن رمزنگاری‌شده یا صدور خودکار کلید API با سقف اعتبار دلخواه و تسویه تتر.",
+      aiTitle: "کارت مجازی برای اشتراک هوش مصنوعی و اعتبار API",
+      aiSub: "هر کارت به مبلغ همان سرویس شارژ می‌شود. اشتراک را با حساب خودتان می‌خرید، پس رمز و اطلاعاتتان دست خودتان می‌ماند.",
       tabAll: "همه", tabSub: "اشتراک‌ها", tabApi: "اعتبار API", tabDev: "ابزار برنامه‌نویسی",
       buyUsdt: "خرید آنی با تتر",
       bentoEyebrow: "زیرساخت مخابراتی و پرداخت کریپتو",
@@ -278,7 +278,7 @@
       aboutP2: "تمامی سفارش‌ها با نرخ ارز آنلاین در ۱۳ کریدور، تایید خودکار تراکنش روی بلاکچین و تضمین ریفاند خودکار ۱۰۰ درصدی در صورت عدم دریافت پیامک ظرف ۱۰ دقیقه پشتیبانی می‌شوند.",
       aboutCta1: "تماس با پشتیبانی", aboutCta2: "پشتیبانی تلگرام",
       stat1Lbl: "کریدور بین‌المللی", stat1Sub: "نرخ آنلاین ارز و پیش‌شماره بومی",
-      stat2Lbl: "نرخ تحویل OTP", stat2Sub: "شماره‌های واقعی Non-VoIP",
+      stat2Lbl: "شماره اپراتور واقعی", stat2Sub: "شماره‌های واقعی Non-VoIP",
       stat3Lbl: "سرعت کیف پول داخلی", stat3Sub: "صفر دلار کارمزد شبکه",
       stat4Lbl: "تضمین ریفاند خودکار", stat4Sub: "برگشت آنی در صورت نرسیدن کد",
       trust1T: "ریفاند خودکار ۰ ثانیه‌ای", trust1D: "کد پیامک ظرف ۱۰ دقیقه نرسید؟ ۱۰۰٪ مبلغ آنی به کیف پول داخلی برمی‌گردد.",
@@ -405,7 +405,7 @@
   corridorSelect.addEventListener("change", e => setCorridor(e.target.value, true));
   langSelect.addEventListener("change", e => applyLanguage(e.target.value));
 
-  // 3D Holographic Card Physics + 180° Flip
+  // 3D card tilt + 180° flip
   const tiltWrap = document.getElementById("cardTiltWrap");
   const flipper = document.getElementById("cardFlipper");
   const cardFront = document.getElementById("cardFront");
@@ -486,7 +486,7 @@
       const priceEl = document.getElementById("apiPriceUsdt");
       priceEl.textContent = `$${tierVal.toFixed(2)} USDT`;
       priceEl.setAttribute("data-usdt-price", tierVal.toFixed(2));
-      document.getElementById("apiBuyBtn").setAttribute("data-product", `Gemini & OpenRouter API ($${tierVal} Credit)`);
+      document.getElementById("apiBuyBtn").setAttribute("data-product", `Virtual card for API credits ($${tierVal})`);
       document.getElementById("apiBuyBtn").setAttribute("data-amount", tierVal.toFixed(2));
       refreshPrices();
     });
@@ -500,8 +500,8 @@
     const svc = SIM_SERVICES[simServiceEl.value] || SIM_SERVICES.openai;
     const countryMult = parseFloat(simCountryEl.value) || 1.0;
     const finalPrice = +(svc.base * countryMult).toFixed(2);
-    document.getElementById("simRateBadge").textContent = `${svc.rate} Success`;
-    document.getElementById("simSpeedBadge").textContent = `Avg ${svc.speed}`;
+    document.getElementById("simRateBadge").textContent = "Non-VoIP";
+    document.getElementById("simSpeedBadge").textContent = "Real SIM";
     document.getElementById("simPriceUsdt").textContent = `$${finalPrice.toFixed(2)} USDT`;
     document.getElementById("simPriceLocal").textContent = fmtLocal(finalPrice);
     const buyBtn = document.getElementById("simBuyBtn");
@@ -682,7 +682,7 @@
     const fee = parseFloat(CFG.cardFee) || 0;
     const total = +(selectedCardLoad + fee).toFixed(2);
     const feeTxt = fee > 0 ? ` + $${fee.toFixed(2)} Fee` : "";
-    openCheckout(`Holographic Virtual Card ($${selectedCardLoad}${feeTxt} · ${net})`, total);
+    openCheckout(`Virtual Card ($${selectedCardLoad}${feeTxt} · ${net})`, total);
   });
 
   document.getElementById("topAuthBtn").addEventListener("click", () => {
